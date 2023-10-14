@@ -6,6 +6,8 @@ Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli
 
 Este projeto está configurado com o `docker`. Para roda-lo é necessário ter instalado o docker
 
+Execute `npm install` para instalar todas as dependências necessárias.
+
 Execute `docker-compose -f docker-compose.yml up` e espere pela mensagem `** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **`
 
 Navegue até `http://localhost:4200/`. A aplicação será recarregada automaticamente se você alterar qualquer um dos arquivos de origem.
