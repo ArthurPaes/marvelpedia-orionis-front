@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'boilerplate-frontend-orion-bootcamp';
+
+    public valorRecebidoInput:string = '';
+  
+    public receberValorInput(palavra:string) {
+          this.valorRecebidoInput = palavra;
+    }
+
 }
