@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -6,18 +6,20 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent {
+
+  @Output() valueChange = new EventEmitter<string>;
+  @Input() placeHolder: string = '';
+  @Input() inputType: string = '';
+  @Input() fieldsetLabel:string = '';
+  @Input() iconName = '';
+  @Input() inputWidth:string = '';
+  @Input() inputBorderColor:string = '#2C85D8';
   
-  public inputValue:string = '';
-  @Output() public inputModificado = new EventEmitter<string>;
-  @Input() public placeHolder: string = '';
-
-  // ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    
-  // }
-
-  public enviarValorDigitado() {
-    this.inputModificado.emit(this.inputValue)
+  value:string = '';
+  showPassword:boolean = false;
+  
+  sendData(inputData:Event) {
+    this.value = (inputData.target as HTMLInputElement).value.trim();
+    this.valueChange.emit(this.value);
   }
 }

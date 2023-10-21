@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-    public valorRecebidoInput:string = '';
+  inputDataReceived:string = '';
   
-    public receberValorInput(palavra:string) {
-          this.valorRecebidoInput = palavra;
-    }
+  getInputValue(dataReceived:string) {
+        this.inputDataReceived = dataReceived;
+  }
 
 }
