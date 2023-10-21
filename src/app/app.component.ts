@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'boilerplate-frontend-orion-bootcamp';
+  isModalActive = true;
+
+  showModal(event:boolean) {
+    this.isModalActive = event;
+  }
 }
