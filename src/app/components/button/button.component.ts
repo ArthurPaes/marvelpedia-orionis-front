@@ -15,11 +15,11 @@ export class ButtonComponent {
   
   @Output() btnClick = new EventEmitter();
   
-  /**
+ /**
  * onClick
  * 
  * Função responsável por emitir o evento de click para o componente pai.
-*/
+ */
  	onClick() {
 		this.btnClick.emit();
   }	
