@@ -1,7 +1,3 @@
-//onClick
-//
-//Função responsável por emitir o evento de click para o componente pai.
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -19,6 +15,11 @@ export class ButtonComponent {
   
   @Output() btnClick = new EventEmitter();
   
+  /**
+ * onClick
+ * 
+ * Função responsável por emitir o evento de click para o componente pai.
+*/
  	onClick() {
 		this.btnClick.emit();
   }	
