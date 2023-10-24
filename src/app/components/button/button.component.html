@@ -1,5 +1,7 @@
-<button [ngClass]="styled">
-    <ng-content></ng-content>
+<button
+    [ngClass]="buttonType"
+    (click)="onClick()"
+	[disabled]="isDisabled"
+	[style]="custonStyle">
+	<span>{{ buttonLabel }}</span>
 </button>
-
-

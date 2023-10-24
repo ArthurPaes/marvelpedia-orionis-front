@@ -1,11 +1,8 @@
 
 button {
-
-    margin: 0.5rem; // RETIRAR PROP
-
     display: flex;
     width:fit-content;
-    height: 54px;
+    height: 55.5px;
     padding: 10px 40px;
     justify-content: center;
     align-items: center;
@@ -18,45 +15,32 @@ button {
     letter-spacing: 1.25px;
     text-transform: uppercase;
 
+    background-color: var(--color-primary);
     color: var(--color-white);
     border: none;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer;   
 }
-
-
-.default-disabled {
-    color:var(--color-text-disable);
-    background-color: var(--color-disable);
-    cursor:not-allowed;
-    
-}
-.default-enabled {
-    background-color: var(--color-primary);
+.default{
     &:hover {background-color: var(--color-primary-hover)};
+    &:disabled{
+        color:var(--color-text-disable);
+        background-color: var(--color-disable);
+        cursor:not-allowed;
+    }
 }
-
-// Button Login
-.login-disabled {
-    width: 96px;
-    padding: 10px 8px;     
-    color:var(--color-text-disable);
-    background-color: var(--color-disable);
-    cursor:not-allowed;    
-}
-.login-enabled {
+.small{
     width: 96px;
     padding: 10px 8px;     
     background-color: var(--color-primary);
     &:hover {background-color: var(--color-primary-hover)};
+    &:disabled{
+        color:var(--color-text-disable);
+        background-color: var(--color-disable);
+        cursor:not-allowed;
+    }   
 }
-.large-disabled {
-    width: 522px;
-    color:var(--color-text-disable);
-    background-color: var(--color-disable);
-    cursor:not-allowed;    
-}
-.large-enabled {
+.large {
     width: 522px;
     background-color: var(--color-primary);
     &:hover {background-color: var(--color-primary-hover)};
@@ -73,9 +57,10 @@ button {
     height: 36px;   
 }
 .bt-card {
+    color: var(--color-primary);
     width: 349px;
     padding: 6px 6px 6px 8px;
+    background-color:transparent;
     font-weight: 500;
-    color: var(--color-primary);
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--color-gray);
 }
