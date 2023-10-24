@@ -44,6 +44,11 @@ button {
     width: 522px;
     background-color: var(--color-primary);
     &:hover {background-color: var(--color-primary-hover)};
+    &:disabled{
+        color:var(--color-text-disable);
+        background-color: var(--color-disable);
+        cursor:not-allowed;
+    }
 }
 .cancel {
     width: 522px;
