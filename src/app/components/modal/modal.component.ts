@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Event } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -10,11 +9,17 @@ export class ModalComponent {
 
   @Input() width:string = '360px';
   @Input() height:string = '321px';
-  @Input() mensagem:string = '';
+  @Input() message:string = '';
   @Input() isModalActive:boolean = false;
   @Output() emitEventClose = new EventEmitter();
 
-  closeModal() {
+  /**
+   * closeModal
+   * 
+   * Emit an event to parent component in order to close the modal. 
+   */
+
+  closeModal():void {
     this.emitEventClose.emit(false);
   }
 

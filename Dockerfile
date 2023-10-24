@@ -5,7 +5,7 @@ COPY package.json /app/package.json
 COPY . /app/
 
 RUN npm install -g @angular/cli@16.2.6 @angular-devkit/build-angular && npm install
-EXPOSE 4200 49153
-# EXPOSE 9876
+EXPOSE 4200 
+EXPOSE 9876
 
 CMD [ "npm", "run", "start"]

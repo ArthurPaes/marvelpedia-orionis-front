@@ -1,3 +1,5 @@
+$words-color: #000000;
+
 .main-container {
     font-family: 'Roboto', sans-serif;
     display: flex;
@@ -6,11 +8,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid black;
-    background-color: #FFFFFF
+    border: 1px solid $words-color;
+    background-color: #FFFFFF;
+    z-index: 100;
 }
 
 #btn-close {
+    color: $words-color;
     position: absolute;
     top: 0.6rem;
     right: 0.2rem;
@@ -25,6 +29,7 @@
 }
 
 .inner-container mat-icon {
+    color: $words-color;
     width: 69px;
     height: 69px;
     font-weight: 400;
@@ -32,6 +37,7 @@
 }
 
 .inner-container h1 {
+    color: $words-color;
     font-weight: 700;
     font-size: 24px;
     line-height: 28.13px;
@@ -40,6 +46,7 @@
 }
 
 .inner-container p {
+    color: $words-color;
     font-weight: 500;
     font-size: 12px;
     line-height: 14.06px;
