@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  inputDataReceived:string = '';
-  
-  getInputValue(dataReceived:string) {
-        this.inputDataReceived = dataReceived;
-  }
-
 }

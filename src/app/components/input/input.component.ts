@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -15,10 +15,15 @@ export class InputComponent {
   @Input() inputWidth:string = '';
   @Input() inputBorderColor:string = '#2C85D8';
   
-  value:string = '';
-  showPassword:boolean = false;
+  public value:string = '';
+  public showPassword:boolean = false;
   
-  sendData(inputData:Event) {
+/**
+ * This function allows you send input typed word to parent component.
+ * @param inputData Each letter typed in input component
+ */
+
+  sendData(inputData:Event):void {
     this.value = (inputData.target as HTMLInputElement).value.trim();
     this.valueChange.emit(this.value);
   }

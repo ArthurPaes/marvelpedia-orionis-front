@@ -1,10 +1,22 @@
-<!--Input relacionado a tela de login-->
-<div *ngIf="inputType == 'inputLogin' && value.length == 0" [ngStyle]="{'width': inputWidth}" class="container-input-not-filled">
+<!--Input E-mail relacionado a tela de login, cadastro e recuperação de senha-->
+<div *ngIf="inputType == 'inputEmail' && value.length == 0" [ngStyle]="{'width': inputWidth}" class="container-input-not-filled">
+    <input type="text" class="input-not-filled" [placeholder]="placeHolder" [(ngModel)]="value" (input)="sendData($event)">
+</div>
+
+<div *ngIf="inputType == 'inputEmail' && value.length > 0" [ngStyle]="{'width': inputWidth}" class="container-input-filled">
+    <fieldset class="input-fieldset" [ngStyle]="{'border-color': inputBorderColor}">
+        <legend class="input-legend">{{ fieldsetLabel }}</legend>
+        <input type="text" class="input-filled" [(ngModel)]="value" (input)="sendData($event)">
+    </fieldset>
+</div>
+
+<!--Input senha relacionado a tela de login, cadastro e recuperação de senha-->
+<div *ngIf="inputType == 'inputPassword' && value.length == 0" [ngStyle]="{'width': inputWidth}" class="container-input-not-filled">
     <mat-icon (click)="showPassword = !showPassword" class="icon-not-filled">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
     <input [type]="showPassword ? 'text' : 'password'" class="input-not-filled" [placeholder]="placeHolder" [(ngModel)]="value" (input)="sendData($event)">
 </div>
 
-<div *ngIf="inputType == 'inputLogin' && value.length > 0" [ngStyle]="{'width': inputWidth}" class="container-input-filled">
+<div *ngIf="inputType == 'inputPassword' && value.length > 0" [ngStyle]="{'width': inputWidth}" class="container-input-filled">
     <fieldset class="input-fieldset" [ngStyle]="{'border-color': inputBorderColor}">
         <mat-icon (click)="showPassword = !showPassword" class="icon-filled">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
         <legend class="input-legend">{{ fieldsetLabel }}</legend>
