@@ -10,6 +10,10 @@ export class CheckboxComponent {
   checked: boolean = false;
   @Output() checkedChange = new EventEmitter<boolean>();
 
+  /**
+   * Manipula a alteração do estado do checkbox.
+   * @param event O evento de alteração do checkbox.
+   */
   onCheckboxChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.checked = checkbox.checked;
