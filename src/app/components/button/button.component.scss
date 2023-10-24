@@ -1,0 +1,71 @@
+
+button {
+    display: flex;
+    width:fit-content;
+    height: 55.5px;
+    padding: 10px 40px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    font-style: normal;
+    font-size: 0.875 rem;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;   
+}
+.default{
+    &:hover {background-color: var(--color-primary-hover)};
+    &:disabled{
+        color:var(--color-text-disable);
+        background-color: var(--color-disable);
+        cursor:not-allowed;
+    }
+}
+.small{
+    width: 96px;
+    padding: 10px 8px;     
+    background-color: var(--color-primary);
+    &:hover {background-color: var(--color-primary-hover)};
+    &:disabled{
+        color:var(--color-text-disable);
+        background-color: var(--color-disable);
+        cursor:not-allowed;
+    }   
+}
+.large {
+    width: 522px;
+    background-color: var(--color-primary);
+    &:hover {background-color: var(--color-primary-hover)};
+    &:disabled{
+        color:var(--color-text-disable);
+        background-color: var(--color-disable);
+        cursor:not-allowed;
+    }
+}
+.cancel {
+    width: 522px;
+    background-color:transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-gray);    
+}
+.bt-char {
+    background: rgba(0, 152, 238, 0.25);
+    width: 204px;
+    height: 36px;   
+}
+.bt-card {
+    color: var(--color-primary);
+    width: 349px;
+    padding: 6px 6px 6px 8px;
+    background-color:transparent;
+    font-weight: 500;
+    border: 1px solid var(--color-gray);
+}
