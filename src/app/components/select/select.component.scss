@@ -1,0 +1,24 @@
+$select-color: #FFFFFF;
+$select-height: 55.5px;
+
+select {
+    border-color: $select-color;
+    border-radius: 4px;
+    height: $select-height;
+    background-color: transparent;
+    color: $select-color;
+    padding: 1rem;
+    appearance: none;
+}
+
+option {
+    color: #000000;
+}
+
+.icon-select {
+    color: $select-color;
+    position: relative;
+    top: 0.3rem;
+    right: 2rem;
+    z-index: -1;
+}
