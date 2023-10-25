@@ -1,7 +1,11 @@
-<select (change)="sendData($event)" name="select-component" [ngStyle]="{'width': selectWidth, 'border-color': selectBorderColor}" [(ngModel)]="valueSelect">
-    <option value="" disabled selected hidden>Selecione um genero</option>
-    <option *ngFor="let optionItem of optionList" [ngValue]="optionItem" >{{ optionItem }}</option>
+<select
+  (change)="sendData($event)"
+  name="select-component"
+  [ngStyle]="{ width: selectWidth, 'border-color': selectBorderColor }"
+  [(ngModel)]="valueSelect"
+>
+  <option *ngFor="let optionItem of optionList" [ngValue]="optionItem">
+    {{ optionItem }}
+  </option>
 </select>
 <mat-icon class="icon-select">arrow_drop_down</mat-icon>
-
-
