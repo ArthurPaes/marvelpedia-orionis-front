@@ -1,23 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-select-genero',
-  templateUrl: './select-genero.component.html',
-  styleUrls: ['./select-genero.component.scss']
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss']
 })
 
-export class SelectGeneroComponent {
+export class SelectComponent {
 
   @Output() valueChange = new EventEmitter<string>;
   @Input() selectWidth:string = '100%';
   @Input() selectBorderColor:string = '';
-  
-  public optionList:Array<string> = [ 
-    'mulher (cis ou trans)', 
-    'homem (cis ou trans)', 
-    'não binário',  
-    'prefiro não dizer'
-  ]
+  @Input() optionList:Array<string> = [];
 
   public valueSelect: string = '';
   

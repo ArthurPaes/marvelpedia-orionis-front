@@ -4,14 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SelectGeneroComponent } from './components/select-genero/select-genero.component';
+import { SelectComponent } from './components/select/select.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SelectGeneroComponent,
+    SelectComponent,
   ],
   imports: [
     BrowserModule,
