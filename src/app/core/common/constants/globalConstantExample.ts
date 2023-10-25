@@ -1,1 +1,1 @@
-export const globalExample = ''
+export const globalExample = '';
