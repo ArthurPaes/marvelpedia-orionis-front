@@ -7,6 +7,7 @@
       placeHolder="E-mail"
       fieldsetLabel="E-email"
       (valueChange)="emailValueChange($event)"
+      autocomplet
       required
     ></app-input>
     <app-input
@@ -31,3 +32,7 @@
     (click)="onSubmit()"
   ></app-button>
 </form>
+<app-modal
+  [isModalActive]="true"
+  message="Login realizado com sucesso!"
+></app-modal>

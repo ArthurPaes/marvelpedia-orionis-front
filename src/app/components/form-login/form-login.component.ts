@@ -13,7 +13,6 @@ export class FormLoginComponent {
   /**
    * Função para a mudança no valor do checkbox.
    * @param checked - O novo valor do checkbox.
-   * @returns {void}
    */
   checkboxChange(checked: boolean): void {
     this.checkboxValue = checked;
@@ -22,7 +21,6 @@ export class FormLoginComponent {
   /**
    * Função para a mudança no valor do campo de e-mail.
    * @param newValue - O novo valor do e-mail.
-   * @returns {void}
    */
   emailValueChange(newValue: string): void {
     this.login.email = newValue;
@@ -32,7 +30,6 @@ export class FormLoginComponent {
   /**
    * Função para a mudança no valor do campo de senha.
    * @param newValue - O novo valor da senha.
-   * @returns {void}
    */
   passwordValueChange(newValue: string): void {
     this.login.password = newValue;
@@ -58,7 +55,6 @@ export class FormLoginComponent {
 
   /**
    * Atualiza o status de validade do formulário(isFormValid) com base na validação do e-mail e senha.
-   * @returns {void}
    */
   updateFormValidity(): void {
     this.isFormValid = this.validateEmail() && this.validatePassword();
@@ -66,7 +62,6 @@ export class FormLoginComponent {
 
   /**
    * Envia as informações de login para o service.
-   * @returns {void}
    */
   onSubmit(): void {
     //Função que irá enviar o objeto de login para o service

@@ -11,6 +11,7 @@ import { FormLoginComponent } from './components/form-login/form-login.component
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.componen
     InputComponent,
     ButtonComponent,
     CheckboxComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
