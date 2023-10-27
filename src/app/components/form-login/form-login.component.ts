@@ -10,36 +10,65 @@ export class FormLoginComponent {
   checkboxValue = false;
   isFormValid = false;
 
-  checkboxChange(checked: boolean) {
+  /**
+   * Função para a mudança no valor do checkbox.
+   * @param checked - O novo valor do checkbox.
+   * @returns {void}
+   */
+  checkboxChange(checked: boolean): void {
     this.checkboxValue = checked;
   }
 
-  emailValueChange(newValue: string) {
+  /**
+   * Função para a mudança no valor do campo de e-mail.
+   * @param newValue - O novo valor do e-mail.
+   * @returns {void}
+   */
+  emailValueChange(newValue: string): void {
     this.login.email = newValue;
     this.updateFormValidity();
   }
 
-  passwordValueChange(newValue: string) {
+  /**
+   * Função para a mudança no valor do campo de senha.
+   * @param newValue - O novo valor da senha.
+   * @returns {void}
+   */
+  passwordValueChange(newValue: string): void {
     this.login.password = newValue;
     this.updateFormValidity();
   }
 
-  validateEmail() {
+  /**
+   * Valida o formato do e-mail.
+   * @returns {boolean}
+   */
+  validateEmail(): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailRegex.test(this.login.email);
   }
 
-  validatePassword() {
+  /**
+   * Valida o comprimento da senha.
+   * @returns {boolean}
+   */
+  validatePassword(): boolean {
     return this.login.password.length >= 8;
   }
 
-  //Verifica se email e senha são válidos e desbloqueia o botão para submit
-  updateFormValidity() {
+  /**
+   * Atualiza o status de validade do formulário(isFormValid) com base na validação do e-mail e senha.
+   * @returns {void}
+   */
+  updateFormValidity(): void {
     this.isFormValid = this.validateEmail() && this.validatePassword();
   }
 
-  //Função que irá enviar o objeto de login para o service
-  onSubmit() {
-    console.log(this.login); //
+  /**
+   * Envia as informações de login para o service.
+   * @returns {void}
+   */
+  onSubmit(): void {
+    //Função que irá enviar o objeto de login para o service
   }
 }
