@@ -33,6 +33,7 @@
   ></app-button>
 </form>
 <app-modal
-  [isModalActive]="true"
+  [isModalActive]="showModal"
+  (emitEventClose)="closeModal($event)"
   message="Login realizado com sucesso!"
 ></app-modal>

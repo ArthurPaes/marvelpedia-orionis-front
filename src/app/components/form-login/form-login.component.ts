@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class FormLoginComponent {
   login: { email: string; password: string } = { email: '', password: '' };
   checkboxValue = false;
+  showModal = false;
   isFormValid = false;
 
   /**
@@ -79,5 +80,24 @@ export class FormLoginComponent {
    */
   onSubmit(): void {
     //Função que irá enviar o objeto de login para o service
+  }
+
+  /**
+   * openModal
+   *
+   * Abre o modal de sucesso.
+   */
+  openModal(): void {
+    this.showModal = true;
+  }
+
+  /**
+   * closeModal
+   *
+   * Fecha o modal de acordo com um evento.
+   * @param event - O evento de fechamento do modal.
+   */
+  closeModal(event: boolean): void {
+    this.showModal = event;
   }
 }
