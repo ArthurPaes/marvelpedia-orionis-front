@@ -11,6 +11,8 @@ export class FormLoginComponent {
   isFormValid = false;
 
   /**
+   * checkboxChange
+   *
    * Função para a mudança no valor do checkbox.
    * @param checked - O novo valor do checkbox.
    */
@@ -19,6 +21,8 @@ export class FormLoginComponent {
   }
 
   /**
+   * emailValueChange
+   *
    * Função para a mudança no valor do campo de e-mail.
    * @param newValue - O novo valor do e-mail.
    */
@@ -28,6 +32,8 @@ export class FormLoginComponent {
   }
 
   /**
+   * passwordValueChange
+   *
    * Função para a mudança no valor do campo de senha.
    * @param newValue - O novo valor da senha.
    */
@@ -37,8 +43,10 @@ export class FormLoginComponent {
   }
 
   /**
+   * validateEmail
+   *
    * Valida o formato do e-mail.
-   * @returns {boolean}
+   * @returns {boolean} retorna true caso o email esteja no formato correto
    */
   validateEmail(): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -46,14 +54,18 @@ export class FormLoginComponent {
   }
 
   /**
+   * validatePassword
+
    * Valida o comprimento da senha.
-   * @returns {boolean}
+   * @returns {boolean} retorna true caso a senha cumpra tenha mais de 7 caracteres
    */
   validatePassword(): boolean {
     return this.login.password.length >= 8;
   }
 
   /**
+   * updateFormValidity
+   *
    * Atualiza o status de validade do formulário(isFormValid) com base na validação do e-mail e senha.
    */
   updateFormValidity(): void {
@@ -61,6 +73,8 @@ export class FormLoginComponent {
   }
 
   /**
+   * onSubmit
+   *
    * Envia as informações de login para o service.
    */
   onSubmit(): void {
