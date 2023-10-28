@@ -51,7 +51,8 @@ export class SignUpComponent {
     );
   };
   /**
-   * checkIsFilled assigns the current filling state of a input.
+   * checkIsFilled
+   * Assigns the current filling state of a input.
    * @param eventValue: The value of a received event.
    * @param prop: A property of isFilled.
    */
@@ -61,7 +62,8 @@ export class SignUpComponent {
       : (this.isFilled[prop] = false);
   };
   /**
-   * emaildFormatChecker checks e-mail input value for emailRegex variable format.
+   * emaildFormatChecker
+   * Checks e-mail input value for emailRegex variable format.
    * @param emailData: input data value.
    */
   emaildFormatChecker = (emailData: string): void => {
@@ -74,7 +76,8 @@ export class SignUpComponent {
     }
   };
   /**
-   * passwordMatchChecker checks password input and password confirm for match.
+   * passwordMatchChecker
+   * Checks password input and password confirm for match.
    */
   passwordMatchChecker = (): void => {
     if (this.getPassword == this.getPasswordConfirm) {
@@ -86,7 +89,8 @@ export class SignUpComponent {
     }
   };
   /**
-   * receiveName recives the event emitted from app-input component "nome"
+   * receiveName
+   * Recives the event emitted from app-input component "nome"
    * and assign the data to getName variable.
    */
   receiveNameOnChange($event: string): void {
@@ -95,7 +99,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * receiveGenre recives the event emitted from app-select component "genero"
+   * receiveGenre
+   * Recives the event emitted from app-select component "genero"
    * and assign the data to getGenre variable.
    */
   receiveGenreOnChange($event: string): void {
@@ -104,7 +109,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * receiveBirthDate recives the event emitted from app-input component "data de nascimento"
+   * receiveBirthDate
+   * Recives the event emitted from app-input component "data de nascimento"
    * and assign the data to getBirthDate variable.
    */
   receiveBirthDateOnChange($event: string): void {
@@ -113,7 +119,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * receiveEmail recives the event emitted from app-input component "e-mail"
+   * receiveEmail
+   * Recives the event emitted from app-input component "e-mail"
    * and assign the data to getEmail variable.
    */
   receiveEmailOnChange($event: string): void {
@@ -123,7 +130,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * receivePassword recives the event emitted from app-input component "senha"
+   * receivePassword
+   * Recives the event emitted from app-input component "senha"
    * and assign the data to getPassword variable.
    */
   receivePasswordOnChange($event: string): void {
@@ -133,7 +141,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * receivePasswordConfirmed recives the event emitted from app-input component "Confirme Sua Senha"
+   * receivePasswordConfirmed
+   * Recives the event emitted from app-input component "Confirme Sua Senha"
    * and assign the data to getPasswordConfirmed variable.
    */
   receivePasswordConfirmOnChange($event: string): void {
@@ -143,7 +152,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * receivePasswordConfirmed recives the event emitted from app-checkbox component
+   * receivePasswordConfirmed
+   * Recives the event emitted from app-checkbox component
    * and assign the data to getCheckboxState variable.
    */
   receiveCheckboxStateOnChange($event: boolean): void {
@@ -152,7 +162,8 @@ export class SignUpComponent {
     this.btDissabler();
   }
   /**
-   * signUpDataPackage assigns the form data to signUpformData Object.
+   * signUpDataPackage
+   * Assigns the form data to signUpformData Object.
    */
   signUpDataPackage(): object {
     this.signUpformData.name = this.getName;
