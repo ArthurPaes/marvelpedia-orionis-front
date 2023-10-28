@@ -9,7 +9,10 @@ export class HttpRequestService {
   constructor(private http: HttpClient) {}
 
   /**
-   *sendHttpRequest : função global usada para emitir requisições http.
+   *sendHttpRequest
+   *
+   *   Usada para emitir requisições http.
+   *
    * @param path url backend que será feita a requisição http
    * @param method método GET, POST, PUT , DELETE
    * @param data dados que serão enviados para o backend

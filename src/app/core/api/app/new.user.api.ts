@@ -5,8 +5,11 @@ export class UserApi {
   constructor(private httpService: HttpRequestService) {}
 
   /**
-   *registerNewUser : POST que será usada no componente signUp
-   * @param userData dados em formato de objeto que será enviado na solicitação http
+   *registerNewUser
+     
+   * POST que será usada no componente signUp
+   * 
+     @param userData dados em formato de objeto que será enviado na solicitação http
    * @returns retorna o status, data e horário de retorno, id, nome, gernero, data de nascimento, email, criado em, ultima atualização e se está ativo.
    */
 

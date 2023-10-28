@@ -6,7 +6,10 @@ export class authApi {
   constructor(private httpService: HttpRequestService) {}
 
   /**
-   *authenticateUser : função POST que será usada no componente login.
+   *authenticateUser 
+     
+     POST que será usada no componente login.
+
    * @param login dados em formato de objeto que será enviado na solicitação http
    * @returns retorna o status e a data e horário de retorno da resposta.
    */
