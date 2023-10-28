@@ -1,17 +1,23 @@
+:root {
+  //Product
+  --color-white: rgb(255, 255, 255);
+  --color-primary: rgb(44, 133, 216);
+  --color-sup-red: rgb(227, 134, 134);
+  --color-gray: rgb(147, 147, 147);
+
+  //Buttons
+  --color-primary-hover: rgb(107, 174, 237);
+  --color-text-disable: rgb(23, 23, 23);
+  --color-disable: rgba(151, 151, 151, 0.3);
+}
+
 html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: darkblue;
+  background-color: black;
 }
 
-:root {
-  --color-white: #ffffff;
-  --color-primary: #2C85D8;
-  --color-primary-hover: #6BAEED;
-  --color-disable: #171717;
-  --color-sup-red: #E38686;
-}
