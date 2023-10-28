@@ -1,0 +1,73 @@
+<div class="background">
+    
+    <div class="container">
+        
+        <section class="titulo">
+            <h1>Novo por aqui?</h1>
+            <p>Cadastre-se e explore o Universo Marvel.</p>
+        </section>
+
+        <app-input
+            [inputType]="'inputEmail'"
+            [fieldsetLabel]="'Nome'"
+            [placeHolder]="'Nome'"
+            (valueChange)="receiveNameOnChange($event)"
+        ></app-input>
+
+        <div class="genreBirthContainer">
+            <app-select            
+                [optionList]="optionList"
+                [selectWidth]="'249px'"
+                (valueChange)="receiveGenreOnChange($event)"
+            ></app-select>
+            <app-input
+                [inputType]="'inputDate'"
+                [fieldsetLabel]="'Data de Nascimento'"
+                [placeHolder]="'Data de Nascimento'"
+                [inputWidth]="'249px'"
+                (valueChange)="receiveBirthDateOnChange($event)"
+            ></app-input>
+        </div>    
+
+        <app-input
+            [inputType]="'inputEmail'"
+            [inputBorderColor] = emailFormater 
+            [fieldsetLabel]="'E-mail'"
+            [placeHolder]="'E-mail'"
+            (valueChange)="receiveEmailOnChange($event)"
+        ></app-input>
+        <app-input
+            [inputType]="'inputPassword'"                       
+            [fieldsetLabel]="'Senha'"
+            [placeHolder]="'Senha'"
+            (valueChange)="receivePasswordOnChange($event)"
+        ></app-input>
+        <app-input
+            [inputType]="'inputPassword'"
+            [inputBorderColor] = passwordMatch
+            [fieldsetLabel]="'Confirme Sua Senha'"
+            [placeHolder]="'Confirme Sua Senha'"
+            (valueChange)="receivePasswordConfirmOnChange($event)"
+        ></app-input>         
+
+        <app-button
+            buttonType="cancel"
+            label="cancel"
+        ></app-button>    
+        <app-button
+            buttonType="large"
+            label="cadastrar"
+            [isDisabled]= !btRegisterState
+            (btnClick)="signUpDataPackage()"
+        ></app-button>
+        <div class="checkbox">
+            <app-checkbox
+                (checkedChange)="receiveCheckboxStateOnChange($event)"
+            ></app-checkbox>
+            <h4>
+                Ao preencher o formulário acima você concorda com os nossos 
+                <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.
+            </h4>
+        </div>
+    </div>
+</div>
