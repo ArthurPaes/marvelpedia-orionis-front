@@ -13,6 +13,7 @@ import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { authApi } from './core/api/app/auth.api';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ModalComponent } from './components/modal/modal.component';
     MatIconModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [authApi],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

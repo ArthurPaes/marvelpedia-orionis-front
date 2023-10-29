@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { authApi } from 'src/app/core/api/app/auth.api';
 
 @Component({
   selector: 'app-form-login',
@@ -10,6 +11,9 @@ export class FormLoginComponent {
   checkboxValue = false;
   showModal = false;
   isFormValid = false;
+  modalMessage = '';
+
+  constructor(private authLogin: authApi) {}
 
   /**
    * checkboxChange
@@ -79,16 +83,16 @@ export class FormLoginComponent {
    * Envia as informações de login para o service.
    */
   onSubmit(): void {
-    //Função que irá enviar o objeto de login para o service
-  }
-
-  /**
-   * openModal
-   *
-   * Abre o modal de sucesso.
-   */
-  openModal(): void {
-    this.showModal = true;
+    this.authLogin
+      .authenticateUser(this.login)
+      .then(() => {
+        this.modalMessage = 'Login efetuado com sucesso!';
+        this.showModal = true;
+      })
+      .catch((error) => {
+        this.modalMessage = error.error.data;
+        this.showModal = true;
+      });
   }
 
   /**

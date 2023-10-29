@@ -35,5 +35,5 @@
 <app-modal
   [isModalActive]="showModal"
   (emitEventClose)="closeModal($event)"
-  message="Login realizado com sucesso!"
+  [message]="modalMessage"
 ></app-modal>
