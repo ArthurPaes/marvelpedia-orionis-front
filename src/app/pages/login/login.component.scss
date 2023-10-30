@@ -19,7 +19,7 @@
     z-index: -1;
     inset: 0;
     background: black;
-    opacity: 0.35;
+    opacity: 0.05;
   }
 
   img {
@@ -28,4 +28,49 @@
     top: 80px;
   }
 
+  form {
+    display: block;
+
+    h1 {
+      color: var(--color-white);
+      font-family: Roboto;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 0.72px;
+    }
+    p {
+      color: var(--color-white);
+      font-family: Roboto;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 56px;
+    }
+
+    .input-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 51px;
+    }
+
+    .form-group{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 34px;
+
+      a{
+        text-decoration: none;
+        color: var(--color-white);
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
 }
