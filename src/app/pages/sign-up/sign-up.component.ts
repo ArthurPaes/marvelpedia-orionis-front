@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Checker, SignUp } from './interfaces/sign-up.interface';
+import { Checker, SignUp, Formatter } from './interfaces/sign-up.interface';
+import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,6 +8,8 @@ import { Checker, SignUp } from './interfaces/sign-up.interface';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
+  constructor(private submitUser: UserRegisterApi) {}
+
   optionList: string[] = [
     'Mulher (cis ou trans)',
     'Homem (cis ou trans)',
@@ -14,36 +17,33 @@ export class SignUpComponent {
     'Prefiro não dizer',
   ];
   optionItem = this.optionList;
+  btRegisterState = false;
 
-  getName = '';
-  getGender = '';
-  getBirthDate = '';
-  getEmail = '';
-  getPassword = '';
-  getPasswordConfirm = '';
-  getCheckboxState = false;
+  today = new Date();
 
-  signUpformData: SignUp = <SignUp>{};
+  signUpformData: SignUp = <SignUp>new Object();
 
   isFilled: Checker = <Checker>{
     name: false,
+    lastName: false,
     gender: false,
     birthDate: false,
     email: false,
-    emailMatch: false,
-    password: false,
-    passwordConf: false,
-    passwordMatch: false,
+    password: true,
+    passwordConfirm: true,
+    passwordMatch: true,
     checkbox: false,
   };
-  emailFormater = '';
-  emailRegex = new RegExp(
-    "/^[A-Za-z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm",
-  );
-  passwordMatch = '';
-  btRegisterState = false;
+  regexList: Formatter = {
+    name: /^[a-zA-Z]{2,30}$/,
+    lastName: /^[a-zA-Z]{2,30}$/,
+    email:
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  };
+  borderColor: SignUp = <SignUp>new Object();
   /**
-   * btRegisterState toggles the Register button between anabled/disabled states.
+   * btRegisterState
+   * Toggles the Register button between anabled/disabled states.
    */
   btDissabler = (): void => {
     this.btRegisterState = Object.values(this.isFilled).reduce(
@@ -56,122 +56,76 @@ export class SignUpComponent {
    * @param eventValue: The value of a received event.
    * @param prop: A property of isFilled.
    */
-  checkIsFilled = (eventValue: string, prop: keyof Checker): void => {
-    eventValue.length !== 0
-      ? (this.isFilled[prop] = true)
-      : (this.isFilled[prop] = false);
+  checkIsFilled = (inputValue: string, inputName: keyof Checker): void => {
+    inputValue.length !== 0 || undefined
+      ? (this.isFilled[inputName] = true)
+      : (this.isFilled[inputName] = false);
   };
   /**
    * emaildFormatChecker
    * Checks e-mail input value for emailRegex variable format.
-   * @param emailData: input data value.
+   * @param emailData: Email input data value.
    */
-  emaildFormatChecker = (emailData: string): void => {
-    if (this.emailRegex.test(emailData)) {
-      this.isFilled.emailMatch = true;
-      this.emailFormater = '#2C85D8';
-    } else {
-      this.isFilled.emailMatch = false;
-      this.emailFormater = 'red';
-    }
+  regexFormatChecker = (inputName: keyof Formatter & keyof Checker): void => {
+    this.regexList[inputName].test(this.signUpformData[inputName])
+      ? ((this.borderColor[inputName] = '#2C85D8'),
+        this.checkIsFilled(this.signUpformData[inputName], inputName))
+      : ((this.borderColor[inputName] = 'red'),
+        (this.isFilled[inputName] = false));
   };
   /**
-   * passwordMatchChecker
-   * Checks password input and password confirm for match.
+   * birthDateChecker
+   * Checks the input data to check if user is older than 10 years old.
    */
-  passwordMatchChecker = (): void => {
-    if (this.getPassword == this.getPasswordConfirm) {
-      this.isFilled.passwordMatch = true;
-      this.passwordMatch = '#2C85D8';
-    } else {
-      this.isFilled.passwordMatch = false;
-      this.passwordMatch = 'red';
-    }
+  birthDateChecker = (): void => {
+    parseInt(this.signUpformData.birthDate.slice(0, 4)) <=
+    this.today.getFullYear()
+      ? ((this.borderColor.birthDate = '#2C85D8'),
+        this.checkIsFilled(this.signUpformData.birthDate, 'birthDate'))
+      : (this.borderColor.birthDate = 'red');
   };
   /**
-   * receiveName
-   * Recives the event emitted from app-input component "nome"
-   * and assign the data to getName variable.
+   * receiveDataOnChange
+   * Recives the data emitted from app-input component and assigns it
+   * to signUpformData object.
+   * @param eventValue The event data emmited from componente, usually ($event)
+   * @param compName The componente name thas is been handled
    */
-  receiveNameOnChange($event: string): void {
-    this.getName = $event;
-    this.checkIsFilled($event, 'name');
+  receiveDataOnChange(
+    eventValue: string,
+    inputName: keyof Checker & keyof SignUp,
+  ): void {
+    this.signUpformData[inputName] = eventValue;
+    switch (inputName) {
+      case 'name':
+      case 'lastName':
+      case 'email':
+        this.regexFormatChecker(inputName);
+        break;
+      default:
+        this.checkIsFilled(eventValue, inputName);
+    }
     this.btDissabler();
   }
   /**
-   * receiveGenre
-   * Recives the event emitted from app-select component "genero"
-   * and assign the data to getGenre variable.
+   * receiveCheckboxStateOnChange
+   * Recives the event emitted from app-checkbox component and assigns it
+   * to signUpformData object.
+   * @param eventValue The event data emmited from componente, usually ($event)
    */
-  receiveGenreOnChange($event: string): void {
-    this.getGender = $event;
-    this.checkIsFilled($event, 'gender');
-    this.btDissabler();
-  }
-  /**
-   * receiveBirthDate
-   * Recives the event emitted from app-input component "data de nascimento"
-   * and assign the data to getBirthDate variable.
-   */
-  receiveBirthDateOnChange($event: string): void {
-    this.getBirthDate = $event;
-    this.checkIsFilled($event, 'birthDate');
-    this.btDissabler();
-  }
-  /**
-   * receiveEmail
-   * Recives the event emitted from app-input component "e-mail"
-   * and assign the data to getEmail variable.
-   */
-  receiveEmailOnChange($event: string): void {
-    this.getEmail = $event;
-    this.emaildFormatChecker($event);
-    this.checkIsFilled($event, 'email');
-    this.btDissabler();
-  }
-  /**
-   * receivePassword
-   * Recives the event emitted from app-input component "senha"
-   * and assign the data to getPassword variable.
-   */
-  receivePasswordOnChange($event: string): void {
-    this.getPassword = $event;
-    this.checkIsFilled($event, 'password');
-    this.passwordMatchChecker();
-    this.btDissabler();
-  }
-  /**
-   * receivePasswordConfirmed
-   * Recives the event emitted from app-input component "Confirme Sua Senha"
-   * and assign the data to getPasswordConfirmed variable.
-   */
-  receivePasswordConfirmOnChange($event: string): void {
-    this.getPasswordConfirm = $event;
-    this.checkIsFilled($event, 'passwordConf');
-    this.passwordMatchChecker();
-    this.btDissabler();
-  }
-  /**
-   * receivePasswordConfirmed
-   * Recives the event emitted from app-checkbox component
-   * and assign the data to getCheckboxState variable.
-   */
-  receiveCheckboxStateOnChange($event: boolean): void {
-    this.getCheckboxState = $event;
-    this.isFilled.checkbox = $event;
+  receiveCheckboxStateOnChange(eventValue: boolean): void {
+    this.isFilled.checkbox = eventValue;
     this.btDissabler();
   }
   /**
    * signUpDataPackage
-   * Assigns the form data to signUpformData Object.
+   * Submit signUpformData Object due Cadastrar onClick event.
    */
-  signUpDataPackage(): object {
-    this.signUpformData.name = this.getName;
-    this.signUpformData.gender = this.getGender.toString().slice(3);
-    this.signUpformData.birthDate = this.getBirthDate;
-    this.signUpformData.email = this.getEmail;
-    this.signUpformData.password = this.getPassword;
-
-    return this.signUpformData;
+  signUpDataSubmit(): void {
+    this.submitUser
+      .registerNewUser(this.signUpformData)
+      .then(() => console.log('sucesso'))
+      .catch(() => console.log('error'))
+      .finally(() => console.log('Finaly'));
   }
 }

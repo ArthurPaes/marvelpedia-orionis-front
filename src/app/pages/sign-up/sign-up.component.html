@@ -7,53 +7,68 @@
 
     <app-input
       [inputType]="'inputEmail'"
-      [fieldsetLabel]="'Nome'"
+      [fieldsetLabel]="'Digite seu nome'"
       [placeHolder]="'Nome'"
-      (valueChange)="receiveNameOnChange($event)"
+      [inputBorderColor]="borderColor.name"
+      (valueChange)="receiveDataOnChange($event, 'name')"
+    ></app-input>
+    <app-input
+      [inputType]="'inputEmail'"
+      [fieldsetLabel]="'Digite seu sobrenome'"
+      [placeHolder]="'Sobrenome'"
+      [inputBorderColor]="borderColor.lastName"
+      (valueChange)="receiveDataOnChange($event, 'lastName')"
     ></app-input>
 
     <div class="genreBirthContainer">
       <app-select
         [optionList]="optionList"
         [selectWidth]="'249px'"
-        (valueChange)="receiveGenreOnChange($event)"
+        (valueChange)="receiveDataOnChange($event, 'gender')"
       ></app-select>
       <app-input
         [inputType]="'inputDate'"
         [fieldsetLabel]="'Data de Nascimento'"
         [placeHolder]="'Data de Nascimento'"
         [inputWidth]="'249px'"
-        (valueChange)="receiveBirthDateOnChange($event)"
+        [inputBorderColor]="borderColor.birthDate"
+        (valueChange)="receiveDataOnChange($event, 'birthDate')"
+        (focusout)="birthDateChecker()"
       ></app-input>
     </div>
 
     <app-input
       [inputType]="'inputEmail'"
-      [inputBorderColor]="emailFormater"
       [fieldsetLabel]="'E-mail'"
       [placeHolder]="'E-mail'"
-      (valueChange)="receiveEmailOnChange($event)"
+      [inputBorderColor]="borderColor.email"
+      (valueChange)="receiveDataOnChange($event, 'email')"
     ></app-input>
     <app-input
       [inputType]="'inputPassword'"
       [fieldsetLabel]="'Senha'"
       [placeHolder]="'Senha'"
-      (valueChange)="receivePasswordOnChange($event)"
-    ></app-input>
-    <app-input
-      [inputType]="'inputPassword'"
-      [inputBorderColor]="passwordMatch"
-      [fieldsetLabel]="'Confirme Sua Senha'"
-      [placeHolder]="'Confirme Sua Senha'"
-      (valueChange)="receivePasswordConfirmOnChange($event)"
+      (valueChange)="receiveDataOnChange($event, 'password')"
     ></app-input>
 
-    <app-button buttonType="cancel" label="cancel"></app-button>
+    <div class="mockup">
+      <p>Mockup app-password-checker</p>
+    </div>
+
+    <app-input
+      [inputType]="'inputPassword'"
+      [fieldsetLabel]="'Confirme Sua Senha'"
+      [placeHolder]="'Confirme Sua Senha'"
+      [inputBorderColor]="borderColor.passwordConfirm"
+      (valueChange)="receiveDataOnChange($event, 'passwordConfirm')"
+    ></app-input>
+
+    <app-button buttonType="cancel" label="limpar"></app-button>
     <app-button
       buttonType="large"
-      label="cadastrar"
+      label="concluir cadastro"
       [isDisabled]="!btRegisterState"
-      (btnClick)="signUpDataPackage()"
+      (btnClick)="signUpDataSubmit()"
     ></app-button>
     <div class="checkbox">
       <app-checkbox
