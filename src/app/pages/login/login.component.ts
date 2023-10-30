@@ -80,7 +80,9 @@ export class LoginComponent {
   /**
    * onSubmit
    *
-   * Envia as informações de login para o service.
+   * Envia as informações de login do usuário para o service.
+   * Se o login for bem-sucedido, exibe uma mensagem de sucesso no modal.
+   * Se ocorrer um erro, a mensagem de erro é exibida no modal.
    */
   onSubmit(): void {
     this.authLogin
