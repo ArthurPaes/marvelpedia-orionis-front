@@ -1,4 +1,5 @@
 //Adicionar endpoints de autenticação
+import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { IRequestlogin, IResponseLogin } from '../interfaces/ILogin';
 
@@ -13,7 +14,7 @@ export class authApi {
    * @param login dados em formato de objeto que será enviado na solicitação http
    * @returns retorna o status e a data e horário de retorno da resposta.
    */
-
+  @Injectable()
   async authenticateUser(login: IRequestlogin): Promise<IResponseLogin> {
     const response = await this.httpService.sendHttpRequest(
       'http://localhost:4444/login',

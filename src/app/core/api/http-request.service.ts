@@ -11,7 +11,7 @@ export class HttpRequestService {
   /**
    *sendHttpRequest
    *
-   *   Usada para emitir requisições http.
+   * Usada para emitir requisições http.
    *
    * @param path url backend que será feita a requisição http
    * @param method método GET, POST, PUT , DELETE
