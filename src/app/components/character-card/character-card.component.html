@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="image-wrapper">
+    <img class="card-image" [src]="imageSrc" [alt]="title" />
+  </div>
+  <div class="card-body">
+    <h2 class="card-title">
+      {{ title }}
+    </h2>
+    <p class="card-description">{{ description }}</p>
+    <app-button
+      class="card-button"
+      buttonType="bt-card"
+      label="SABER MAIS"
+      (click)="showCharacterDetails()"
+    ></app-button>
+  </div>
+</div>
