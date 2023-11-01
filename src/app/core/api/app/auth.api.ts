@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { IRequestlogin, IResponseLogin } from '../interfaces/ILogin';
 
+@Injectable()
 export class authApi {
   constructor(private httpService: HttpRequestService) {}
 
   /**
-   *authenticateUser 
-     
+   *authenticateUser
+
      POST que será usada no componente login.
 
    * @param login dados em formato de objeto que será enviado na solicitação http
