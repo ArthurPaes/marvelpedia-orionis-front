@@ -1,37 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './pages/login/login.component';
-import { InputComponent } from './components/input/input.component';
-import { ButtonComponent } from './components/button/button.component';
-import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { authApi } from './core/api/app/auth.api';
+import { AuthModule } from './pages/auth/auth.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    InputComponent,
-    ButtonComponent,
-    CheckboxComponent,
-    ModalComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
-    MatIconModule,
     HttpClientModule,
+    AuthModule,
   ],
-  providers: [authApi],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
