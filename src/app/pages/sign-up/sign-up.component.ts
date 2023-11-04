@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Checker, SignUp, Formatter } from './interfaces/sign-up.interface';
+import { IFormatter } from './interfaces/sign-up.interface';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
+import { InputElement } from './InputData';
+import { IRequestNewUser } from 'src/app/core/interfaces/INewUser';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,115 +19,148 @@ export class SignUpComponent {
     'Prefiro não dizer',
   ];
   optionItem = this.optionList;
+
   btRegisterState = false;
+  currentYear = new Date();
 
-  today = new Date();
+  firstName = new InputElement('firstname');
+  lastName = new InputElement('lastname');
+  gender = new InputElement('gender');
+  birthDate = new InputElement('birthDate');
+  email = new InputElement('email');
+  password = new InputElement('password');
+  passwordConfirmation = new InputElement('passwordConfirmation');
+  checkbox = new InputElement('checkbox');
 
-  signUpformData: SignUp = <SignUp>new Object();
-
-  isFilled: Checker = <Checker>{
-    name: false,
-    lastName: false,
-    gender: false,
-    birthDate: false,
-    email: false,
-    password: true,
-    passwordConfirm: true,
-    passwordMatch: true,
-    checkbox: false,
-  };
-  regexList: Formatter = {
+  regexList: IFormatter = {
     name: /^[a-zA-Z]{2,30}$/,
-    lastName: /^[a-zA-Z]{2,30}$/,
     email:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   };
-  borderColor: SignUp = <SignUp>new Object();
   /**
-   * btRegisterState
+   * btDissabler
    * Toggles the Register button between anabled/disabled states.
    */
   btDissabler = (): void => {
-    this.btRegisterState = Object.values(this.isFilled).reduce(
-      (a, c) => a && c,
-    );
+    this.firstName.getIsAproved() &&
+    this.lastName.getIsAproved() &&
+    this.gender.getIsAproved() &&
+    this.birthDate.getIsAproved() &&
+    this.email.getIsAproved() &&
+    this.password.getIsAproved() &&
+    this.passwordConfirmation.getIsAproved() &&
+    this.checkbox.getIsAproved()
+      ? (this.btRegisterState = true)
+      : (this.btRegisterState = false);
   };
   /**
-   * checkIsFilled
-   * Assigns the current filling state of a input.
-   * @param eventValue: The value of a received event.
-   * @param prop: A property of isFilled.
+   * receiveData
+   * Handles the assignment of event data to  input Element object.
+   * @param inputName The Input element name.
+   * @param eventValue The event data ($event).
    */
-  checkIsFilled = (inputValue: string, inputName: keyof Checker): void => {
-    inputValue.length !== 0 || undefined
-      ? (this.isFilled[inputName] = true)
-      : (this.isFilled[inputName] = false);
+  receiveData = (inputName: InputElement, eventValue: string): void => {
+    inputName.setValue(eventValue);
   };
   /**
-   * emaildFormatChecker
-   * Checks e-mail input value for emailRegex variable format.
-   * @param emailData: Email input data value.
+   * receiveStatus
+   * Handles the assignment of boolean data to input Element is Approval proprietary.
+   * @param inputName The Input element name.
+   * @param eventValue The event data ($event).
    */
-  regexFormatChecker = (inputName: keyof Formatter & keyof Checker): void => {
-    this.regexList[inputName].test(this.signUpformData[inputName])
-      ? ((this.borderColor[inputName] = '#2C85D8'),
-        this.checkIsFilled(this.signUpformData[inputName], inputName))
-      : ((this.borderColor[inputName] = 'red'),
-        (this.isFilled[inputName] = false));
+  receiveStatus = (inputName: InputElement, eventValue: boolean) => {
+    inputName.setIsAproved(eventValue);
+    this.btDissabler();
   };
   /**
-   * birthDateChecker
-   * Checks the input data to check if user is older than 10 years old.
+   * regexFormatChecker
+   * Handles the requisites verification of inputs that uses regex as parameters.
+   * @param inputName The Input element name.
+   * @param eventValue The event data ($event).
    */
-  birthDateChecker = (): void => {
-    parseInt(this.signUpformData.birthDate.slice(0, 4)) <=
-    this.today.getFullYear()
-      ? ((this.borderColor.birthDate = '#2C85D8'),
-        this.checkIsFilled(this.signUpformData.birthDate, 'birthDate'))
-      : (this.borderColor.birthDate = 'red');
-  };
-  /**
-   * receiveDataOnChange
-   * Recives the data emitted from app-input component and assigns it
-   * to signUpformData object.
-   * @param eventValue The event data emmited from componente, usually ($event)
-   * @param compName The componente name thas is been handled
-   */
-  receiveDataOnChange(
-    eventValue: string,
-    inputName: keyof Checker & keyof SignUp,
-  ): void {
-    this.signUpformData[inputName] = eventValue;
-    switch (inputName) {
-      case 'name':
-      case 'lastName':
-      case 'email':
-        this.regexFormatChecker(inputName);
+  regexFormatChecker = (inputName: InputElement, eventValue: string): void => {
+    this.receiveData(inputName, eventValue);
+    switch (inputName.getType()) {
+      case 'firstname':
+        this.regexList.name.test(inputName.getValue())
+          ? (inputName.setIsAproved(true), inputName.setBorderColor('#2C85D8'))
+          : (inputName.setIsAproved(false), inputName.setBorderColor('red'));
         break;
-      default:
-        this.checkIsFilled(eventValue, inputName);
+      case 'lastname':
+        this.regexList.name.test(inputName.getValue())
+          ? (inputName.setIsAproved(true), inputName.setBorderColor('#2C85D8'))
+          : (inputName.setIsAproved(false), inputName.setBorderColor('red'));
+        break;
+      case 'email':
+        this.regexList.email.test(inputName.getValue())
+          ? (inputName.setIsAproved(true), inputName.setBorderColor('#2C85D8'))
+          : (inputName.setIsAproved(false), inputName.setBorderColor('red'));
+        break;
     }
     this.btDissabler();
-  }
+  };
   /**
-   * receiveCheckboxStateOnChange
-   * Recives the event emitted from app-checkbox component and assigns it
-   * to signUpformData object.
-   * @param eventValue The event data emmited from componente, usually ($event)
+   * isfilledChecker
+   * Handles verifications without comparison parameters. (ex. checkbox and select)
+   * @param inputName The Input element name.
+   * @param eventValue The event data ($event).
    */
-  receiveCheckboxStateOnChange(eventValue: boolean): void {
-    this.isFilled.checkbox = eventValue;
+  isfilledChecker = (inputName: InputElement, eventValue: string): void => {
+    this.receiveData(inputName, eventValue);
+    inputName.getValue().length != 0
+      ? inputName.setIsAproved(true)
+      : inputName.setIsAproved(false);
     this.btDissabler();
-  }
+  };
+  /**
+   * birthYearChecker
+   * Handles the minimum age verification.
+   * @param inputName The Input element name.
+   * @param eventValue The event data ($event).
+   */
+  birthYearChecker = (inputName: InputElement, eventValue: string): void => {
+    this.receiveData(inputName, eventValue);
+    const userYear =
+      this.currentYear.getFullYear() -
+      parseInt(inputName.getValue().slice(0, 4));
+    userYear >= 10
+      ? inputName.setIsAproved(true)
+      : inputName.setIsAproved(false);
+    this.btDissabler();
+  };
+  /**
+   * passwordMatchChecker
+   * Handles the password match verification.
+   * @param inputName The Input element name.
+   * @param eventValue The event data ($event).
+   */
+  passwordMatchChecker = (
+    inputName: InputElement,
+    eventValue: string,
+  ): void => {
+    this.receiveData(inputName, eventValue);
+    inputName.getValue() == this.password.getValue()
+      ? (inputName.setIsAproved(true), inputName.setBorderColor('#2C85D8'))
+      : (inputName.setIsAproved(false), inputName.setBorderColor('red'));
+    this.btDissabler();
+  };
   /**
    * signUpDataPackage
    * Submit signUpformData Object due Cadastrar onClick event.
    */
-  signUpDataSubmit(): void {
+  signUpDataSubmit = (): void => {
+    const signUpFormData: IRequestNewUser = {
+      firstName: this.firstName.getValue(),
+      lastName: this.lastName.getValue(),
+      gender: this.gender.getValue().slice(3),
+      birthDate: this.birthDate.getValue(),
+      email: this.email.getValue(),
+      password: this.password.getValue(),
+    };
     this.submitUser
-      .registerNewUser(this.signUpformData)
+      .registerNewUser(signUpFormData)
       .then(() => console.log('sucesso'))
       .catch(() => console.log('error'))
       .finally(() => console.log('Finaly'));
-  }
+  };
 }

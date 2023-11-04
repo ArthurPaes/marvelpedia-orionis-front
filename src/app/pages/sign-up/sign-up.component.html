@@ -9,31 +9,29 @@
       [inputType]="'inputEmail'"
       [fieldsetLabel]="'Digite seu nome'"
       [placeHolder]="'Nome'"
-      [inputBorderColor]="borderColor.name"
-      (valueChange)="receiveDataOnChange($event, 'name')"
+      [inputBorderColor]="firstName.getBorderColor()"
+      (valueChange)="regexFormatChecker(firstName, $event)"
     ></app-input>
     <app-input
       [inputType]="'inputEmail'"
       [fieldsetLabel]="'Digite seu sobrenome'"
       [placeHolder]="'Sobrenome'"
-      [inputBorderColor]="borderColor.lastName"
-      (valueChange)="receiveDataOnChange($event, 'lastName')"
+      [inputBorderColor]="lastName.getBorderColor()"
+      (valueChange)="regexFormatChecker(lastName, $event)"
     ></app-input>
 
     <div class="genreBirthContainer">
       <app-select
         [optionList]="optionList"
         [selectWidth]="'249px'"
-        (valueChange)="receiveDataOnChange($event, 'gender')"
+        (valueChange)="isfilledChecker(gender, $event)"
       ></app-select>
       <app-input
         [inputType]="'inputDate'"
         [fieldsetLabel]="'Data de Nascimento'"
         [placeHolder]="'Data de Nascimento'"
         [inputWidth]="'249px'"
-        [inputBorderColor]="borderColor.birthDate"
-        (valueChange)="receiveDataOnChange($event, 'birthDate')"
-        (focusout)="birthDateChecker()"
+        (valueChange)="birthYearChecker(birthDate, $event)"
       ></app-input>
     </div>
 
@@ -41,26 +39,29 @@
       [inputType]="'inputEmail'"
       [fieldsetLabel]="'E-mail'"
       [placeHolder]="'E-mail'"
-      [inputBorderColor]="borderColor.email"
-      (valueChange)="receiveDataOnChange($event, 'email')"
+      [inputBorderColor]="email.getBorderColor()"
+      (valueChange)="regexFormatChecker(email, $event)"
     ></app-input>
     <app-input
       [inputType]="'inputPassword'"
       [fieldsetLabel]="'Senha'"
-      [placeHolder]="'Senha'"
-      (valueChange)="receiveDataOnChange($event, 'password')"
+      [placeHolder]="'Digite sua senha'"
+      (valueChange)="isfilledChecker(password, $event)"
     ></app-input>
 
-    <div class="mockup">
-      <p>Mockup app-password-checker</p>
+    <div>
+      <app-password-checker
+        [passwordInput]="password.getValue()"
+        (sendStatus)="receiveStatus(password, $event)"
+      ></app-password-checker>
     </div>
 
     <app-input
       [inputType]="'inputPassword'"
       [fieldsetLabel]="'Confirme Sua Senha'"
-      [placeHolder]="'Confirme Sua Senha'"
-      [inputBorderColor]="borderColor.passwordConfirm"
-      (valueChange)="receiveDataOnChange($event, 'passwordConfirm')"
+      [placeHolder]="'Confirme sua senha'"
+      [inputBorderColor]="passwordConfirmation.getBorderColor()"
+      (valueChange)="passwordMatchChecker(passwordConfirmation, $event)"
     ></app-input>
 
     <app-button buttonType="cancel" label="limpar"></app-button>
@@ -72,7 +73,7 @@
     ></app-button>
     <div class="checkbox">
       <app-checkbox
-        (checkedChange)="receiveCheckboxStateOnChange($event)"
+        (checkedChange)="receiveStatus(checkbox, $event)"
       ></app-checkbox>
       <h4>
         Ao preencher o formulário acima você concorda com os nossos

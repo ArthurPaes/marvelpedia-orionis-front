@@ -1,28 +1,15 @@
-export interface SignUp {
-  name: string;
-  lastName: string;
-  gender: string;
-  birthDate: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  checkbox: string;
-}
-
-export interface Checker {
-  name: boolean;
+export interface IChecker {
+  firstName: boolean;
   lastName: boolean;
   gender: boolean;
   birthDate: boolean;
   email: boolean;
   password: boolean;
-  passwordConfirm: boolean;
-  passwordMatch: boolean;
+  passwordConfirmation: boolean;
   checkbox: boolean;
 }
 
-export interface Formatter {
+export interface IFormatter {
   name: RegExp;
-  lastName: RegExp;
   email: RegExp;
 }
