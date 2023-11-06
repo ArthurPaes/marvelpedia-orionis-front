@@ -3,9 +3,17 @@
     <img class="card-image" [src]="imageSrc" [alt]="title" />
   </div>
   <div class="card-body">
-    <h2 class="card-title">
-      {{ title }}
-    </h2>
+    <div class="card-title">
+      <h2 class="character-name">
+        {{ title }}
+      </h2>
+      <mat-icon (click)="toggleNotified()">
+        {{ notified ? "notifications" : "notifications_none" }}
+      </mat-icon>
+      <mat-icon (click)="toggleFavorited()">{{
+        favorited ? "favorite" : "favorite_border"
+      }}</mat-icon>
+    </div>
     <p class="card-description">{{ description }}</p>
     <app-button
       class="card-button"
