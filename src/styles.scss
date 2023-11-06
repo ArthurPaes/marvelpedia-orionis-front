@@ -11,13 +11,15 @@
   --color-disable: rgba(151, 151, 151, 0.3);
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  background-color: gray;
+}
 
-body {
+* {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  background-color: black;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 

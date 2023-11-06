@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="image-wrapper">
+    <img class="card-image" [src]="imageSrc" [alt]="title" />
+  </div>
+  <div class="card-body">
+    <div class="card-title">
+      <h2 class="character-name">
+        {{ title }}
+      </h2>
+      <mat-icon (click)="toggleNotified()">
+        {{ notified ? "notifications" : "notifications_none" }}
+      </mat-icon>
+      <mat-icon (click)="toggleFavorited()">{{
+        favorited ? "favorite" : "favorite_border"
+      }}</mat-icon>
+    </div>
+    <p class="card-description">{{ description }}</p>
+    <app-button
+      class="card-button"
+      buttonType="bt-card"
+      label="SABER MAIS"
+      (click)="showCharacterDetails()"
+    ></app-button>
+  </div>
+</div>
