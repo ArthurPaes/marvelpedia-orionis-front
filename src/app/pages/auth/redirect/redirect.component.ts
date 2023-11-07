@@ -31,7 +31,7 @@ export class RedirectComponent implements OnInit {
    *
    * Função que redireciona o usuário para a tela de login.
    */
-  redirectLogin() {
+  redirectLogin(): void {
     this.router.navigate(['login']);
   }
 }

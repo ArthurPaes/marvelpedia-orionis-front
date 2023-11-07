@@ -50,6 +50,8 @@ export class SelectComponent implements OnInit, OnChanges {
   }
 
   /**
+   * sendData
+   *
    * This function allows you send select chosen word to parent component.
    * @param selectData value selected in input component
    */
