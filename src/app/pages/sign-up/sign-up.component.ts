@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IFormatter } from './interfaces/sign-up.interface';
-import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
+import { UserRegisterApi } from '../../core/api/app/new.user.api';
 import { InputElement } from './InputData';
-import { IRequestNewUser } from 'src/app/core/interfaces/INewUser';
+import { IRequestNewUser } from '../../core/api/interfaces/INewUser';
 
 @Component({
   selector: 'app-sign-up',
