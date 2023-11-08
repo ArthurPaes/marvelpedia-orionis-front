@@ -10,6 +10,7 @@ import { CheckboxComponent } from 'src/app/components/checkbox/checkbox.componen
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
 import { authApi } from 'src/app/core/api/app/auth.api';
+import { RedirectComponent } from './redirect/redirect.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { authApi } from 'src/app/core/api/app/auth.api';
     CheckboxComponent,
     ModalComponent,
     SelectComponent,
+    RedirectComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   providers: [authApi],
@@ -29,6 +31,7 @@ import { authApi } from 'src/app/core/api/app/auth.api';
     CheckboxComponent,
     ModalComponent,
     SelectComponent,
+    RedirectComponent,
   ],
 })
 export class AuthModule {}

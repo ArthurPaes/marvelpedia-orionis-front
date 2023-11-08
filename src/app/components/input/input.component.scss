@@ -1,86 +1,75 @@
 $input-color: #FFFFFF;
 $input-height: 55.5px;
 
-.container-input-not-filled {
+.container-input {
     position: relative;
-    display: flex;
-    justify-content: right;
-    height: $input-height;
 }
 
-.container-input-filled {
-    display: flex;
-    justify-content: right;
-}
-
-.input-fieldset {
-    position: relative;
-    height: $input-height;
-    width: 100%;
-    border-width: 1px;
-    border-style: solid;
-    padding-top: 0;
+.input-label-position {
+    position: absolute;
+    top: -9.5px;
+    left: 15.3px;
     border-radius: 4px;
-    margin-top: -8.6px;
-    margin-left: 0.1px;
-    margin-right: 0px;
+    color: $input-color;
+    background-color: #2C85D8;
+    padding: 0px 6px;
+    z-index: 1;
+    font-size: 0.7rem;
 }
 
-.input-legend {
-    color: $input-color
-}
-
-.input-filled {
-    position: relative;
-    top: 4px;
-    border: none;
+.input-position {
+    width: 99.1%;
+    border-width: 1px;
+    border-color: $input-color;
+    border-style: solid;
     background-color: transparent;
     color: $input-color;
     border-radius: 4px;
-    width: 100.4%;
-    margin: 0 -1.7px;
-    padding-top: 5.5px;
-    padding-left: 8.3px;
+    height: 55.5px;
+    text-indent: 15px;
     &:focus {
         outline: none;
     }
 }
 
-.input-not-filled {
-    border-width: 1px;
-    border-style: solid;
-    border-color: $input-color;
-    background-color: transparent;
+.icon-position {
     color: $input-color;
-    padding: 1.1rem;
-    border-radius: 4px;
-    width: 100%;
+    position:absolute;
+    top: 1.1rem;
+    right: 0.8rem;
+    cursor: pointer;
+    z-index: 1;
 }
 
 ::placeholder {
     color: $input-color;
+    text-indent: 15px;
 }
 
-.icon-not-filled {
+.input-position-date {
+    width: 523px;
+    border-width: 1px;
+    border-color: $input-color;
+    border-style: solid;
+    background-color: transparent;
     color: $input-color;
-    position:absolute;
-    top: 0.95rem;
-    right: 1.3rem;
-    cursor: pointer;
+    border-radius: 4px;
+    height: 55.5px;
+    text-indent: 10px;
+    z-index: 1;
+    &:focus {
+        width: 523px;
+        height: 55.5px;
+        outline: none;
+        text-indent: 10px;
+    }
 }
 
-.icon-filled {
+.icon-position-date {
+    font-size: 1.2rem;
     color: $input-color;
     position:absolute;
-    top: 0.3rem;
-    right: 1.3rem;
-    cursor: pointer;
-    z-index: 2;
-}
-
-.icon-search {
-    color: $input-color;
-    position:absolute;
-    top: 1rem;
-    right: 1.1rem;
+    top: 1.1rem;
+    right: 0.4rem;
+    z-index: 0;
 }
