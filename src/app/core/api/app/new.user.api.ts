@@ -3,7 +3,7 @@ import { HttpRequestService } from '../http-request.service';
 import { IRequestNewUser, IResponseNewUser } from '../interfaces/INewUser';
 
 @Injectable()
-export class UserApi {
+export class UserRegisterApi {
   constructor(private httpService: HttpRequestService) {}
 
   /**

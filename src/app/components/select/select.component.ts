@@ -1,11 +1,18 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent implements OnInit, OnChanges {
   @Output() valueChange = new EventEmitter<string>();
   @Input() selectWidth = '';
   @Input() selectBorderColor = '';
@@ -42,7 +49,8 @@ export class SelectComponent implements OnInit {
     }
   }
 
-  /**sendData
+  /**
+   * sendData
    *
    * This function allows you send select chosen word to parent component.
    * @param selectData value selected in input component
