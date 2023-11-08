@@ -78,23 +78,32 @@ export class SignUpComponent {
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
-  regexFormatChecker = (componentName: InputElement, eventValue: string): void => {
+  regexFormatChecker = (
+    componentName: InputElement,
+    eventValue: string,
+  ): void => {
     this.receiveData(componentName, eventValue);
     switch (componentName.getType()) {
       case 'firstname':
         this.regexList.name.test(componentName.getValue())
-          ? (componentName.setIsAproved(true), componentName.setBorderColor('#2C85D8'))
-          : (componentName.setIsAproved(false), componentName.setBorderColor('red'));
+          ? (componentName.setIsAproved(true),
+            componentName.setBorderColor('#2C85D8'))
+          : (componentName.setIsAproved(false),
+            componentName.setBorderColor('red'));
         break;
       case 'lastname':
         this.regexList.name.test(componentName.getValue())
-          ? (componentName.setIsAproved(true), componentName.setBorderColor('#2C85D8'))
-          : (componentName.setIsAproved(false), componentName.setBorderColor('red'));
+          ? (componentName.setIsAproved(true),
+            componentName.setBorderColor('#2C85D8'))
+          : (componentName.setIsAproved(false),
+            componentName.setBorderColor('red'));
         break;
       case 'email':
         this.regexList.email.test(componentName.getValue())
-          ? (componentName.setIsAproved(true), componentName.setBorderColor('#2C85D8'))
-          : (componentName.setIsAproved(false), componentName.setBorderColor('red'));
+          ? (componentName.setIsAproved(true),
+            componentName.setBorderColor('#2C85D8'))
+          : (componentName.setIsAproved(false),
+            componentName.setBorderColor('red'));
         break;
     }
     this.btEnabler();
@@ -118,7 +127,10 @@ export class SignUpComponent {
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
-  birthYearChecker = (componentName: InputElement, eventValue: string): void => {
+  birthYearChecker = (
+    componentName: InputElement,
+    eventValue: string,
+  ): void => {
     this.receiveData(componentName, eventValue);
     const userYear =
       this.currentYear.getFullYear() -
@@ -140,8 +152,10 @@ export class SignUpComponent {
   ): void => {
     this.receiveData(componentName, eventValue);
     componentName.getValue() == this.password.getValue()
-      ? (componentName.setIsAproved(true), componentName.setBorderColor('#2C85D8'))
-      : (componentName.setIsAproved(false), componentName.setBorderColor('red'));
+      ? (componentName.setIsAproved(true),
+        componentName.setBorderColor('#2C85D8'))
+      : (componentName.setIsAproved(false),
+        componentName.setBorderColor('red'));
     this.btEnabler();
   };
   /**
@@ -157,7 +171,7 @@ export class SignUpComponent {
       email: this.email.getValue(),
       password: this.password.getValue(),
     };
-    
+
     this.submitUser
       .registerNewUser(signUpFormData)
       .then(() => console.log('sucesso'))
