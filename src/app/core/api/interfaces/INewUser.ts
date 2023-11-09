@@ -1,7 +1,8 @@
 export interface IRequestNewUser {
-  name: string;
+  firstName: string;
+  lastName: string;
   gender: string;
-  birth_date: string;
+  birthDate: string;
   email: string;
   password: string;
 }
@@ -13,10 +14,10 @@ export interface IResponseNewUser {
     id: number;
     name: string;
     gender: string;
-    birth_date: string;
+    birthDate: string;
     email: string;
-    created_at: string;
-    last_update: string;
+    createdAt: string;
+    lastUpdate: string;
     isActivated: boolean;
   };
 }

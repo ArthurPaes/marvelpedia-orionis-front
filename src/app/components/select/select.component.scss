@@ -1,24 +1,51 @@
 $select-color: #FFFFFF;
-$select-height: 55.5px;
+$select-height: 59.7px;
 
-select {
-    border-color: $select-color;
+.container-select {
+    position: relative;
+}
+
+.select-label-position {
+    font-size: 0.7rem;
+    position: absolute;
+    top: -9.5px;
+    left: 15.3px;
     border-radius: 4px;
-    height: $select-height;
+    color: $select-color;
+    background-color: #2C85D8;
+    padding: 0px 6px;
+    z-index: 2;
+}
+
+.select-position {
+    position: relative;
+    width: 100%;
+    border-width: 1px;
+    border-color: $select-color;
+    border-style: solid;
     background-color: transparent;
     color: $select-color;
-    padding: 1rem;
+    border-radius: 4px;
+    height: $select-height;
+    text-indent: 15px;
+    z-index: 1;
     appearance: none;
+}
+
+.container-select select:focus {
+    outline: none  !important;
+    border-color: #2C85D8 !important;
 }
 
 option {
     color: #000000;
 }
 
-.icon-select {
-    color: $select-color;
+.icon-position {
     position: relative;
-    top: 0.3rem;
-    right: 2rem;
-    z-index: -1;
+    color: $select-color;
+    position:absolute;
+    top: 1.1rem;
+    right: 0.8rem;
+    z-index: 0;
 }
