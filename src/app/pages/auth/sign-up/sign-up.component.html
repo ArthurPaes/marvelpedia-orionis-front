@@ -49,13 +49,6 @@
       (valueChange)="isfilledChecker(password, $event)"
     ></app-input>
 
-    <div>
-      <app-password-checker
-        [passwordInput]="password.getValue()"
-        (sendStatus)="receiveStatus(password, $event)"
-      ></app-password-checker>
-    </div>
-
     <app-input
       [inputType]="'inputPassword'"
       [fieldsetLabel]="'Confirme Sua Senha'"

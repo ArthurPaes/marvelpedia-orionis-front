@@ -2,10 +2,10 @@
     margin: 0;
     padding: 155px 421px;
     height: 100vh;
-    
+
     content: "";
     background-repeat: no-repeat;
-    background-image: url("../../../assets/images/marvel-space.jpg");
+    background-image: url("../../../../assets/images/marvel-space.png");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
     isolation: isolate;
-  
+
     ::after{
       position: relative;
       z-index: -1;
