@@ -5,7 +5,7 @@ import {
   OnChanges,
   EventEmitter,
 } from '@angular/core';
-import { PasswordChecker, Rules } from './interface/password-checker.interface';
+import { IPasswordChecker, IRules } from './interface/password-checker.interface';
 
 @Component({
   selector: 'app-password-checker',
@@ -19,7 +19,7 @@ export class PasswordCheckerComponent implements OnChanges {
    * @param rule: A rule from password rule list: eightChars | oneLetter | oneNumber | oneSpecialChar.
    * @param status: Set the rule status: True | False | Null.
    */
-  setStatus = (rule: keyof Rules, status: boolean | null): void => {
+  setStatus = (rule: keyof IRules, status: boolean | null): void => {
     switch (status) {
       case true:
         this.ruleList[rule] = 'aproved';
@@ -61,13 +61,13 @@ export class PasswordCheckerComponent implements OnChanges {
   };
   @Input() passwordInput = '';
   @Output() sendStatus = new EventEmitter<boolean>();
-  currentStatus: PasswordChecker = <PasswordChecker>{
+  currentStatus: IPasswordChecker = <IPasswordChecker>{
     eightChars: false,
     oneLetter: false,
     oneNumber: false,
     oneSpecialChar: false,
   };
-  ruleList: Rules = {
+  ruleList: IRules = {
     eightChars: 'waitingTest',
     oneLetter: 'waitingTest',
     oneNumber: 'waitingTest',
