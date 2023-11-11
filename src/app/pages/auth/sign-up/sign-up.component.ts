@@ -23,6 +23,10 @@ export class SignUpComponent {
   btRegisterState = false;
   currentYear = new Date();
 
+  showModal = false;
+  modalMessage = '';
+  handleError = true;
+
   firstName = new InputElement('firstname');
   lastName = new InputElement('lastname');
   gender = new InputElement('gender');
@@ -176,17 +180,38 @@ export class SignUpComponent {
 
     this.submitUser
       .registerNewUser(signUpFormData)
-      .then(() => console.log('sucesso'))
-      .catch(() => console.log('error'))
-      .finally(() => console.log('Finaly'));
+      .then(() => {
+        this.modalMessage = 'Login efetuado com sucesso!';
+        this.showModal = true;
+      })
+      .catch((error) => {
+        this.modalMessage = error.error.data;
+        this.showModal = true;
+        this.handleError = true;
+      });
   };
+
+  /**
+   * closeModal
+   *
+   * Fecha o modal de acordo com um evento.
+   * @param event - O evento de fechamento do modal.
+   */
+  closeModal(event: boolean): void {
+    this.showModal = event;
+  }
 
   // Solução criada por Rafael Horauti para soluciona o requisito
   // de limpar os inputs do formulário ao clicar no botão limpar;
   cleanInput = '';
   count = 0;
 
-  limparInput() {
+  /**
+   * limparInput
+   *
+   * Reset form inputs value.
+   */
+  limparInput(): void {
     this.cleanInput = 'true' + this.count;
     this.count++;
   }

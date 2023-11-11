@@ -107,4 +107,10 @@
       </div>
     </div>
   </div>
+  <app-modal
+    [isModalActive]="showModal"
+    (emitEventClose)="closeModal($event)"
+    [message]="modalMessage"
+    [isError]="handleError"
+  ></app-modal>
 </div>
