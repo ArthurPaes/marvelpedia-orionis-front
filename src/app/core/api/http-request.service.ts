@@ -24,10 +24,9 @@ export class HttpRequestService {
     path: string,
     method: string,
     data?: Record<string, any>,
-    authToken?: string,
   ): Promise<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${localStorage.getItem('@authToken')}`,
       'Content-Type': 'application/json',
     });
     switch (method) {
