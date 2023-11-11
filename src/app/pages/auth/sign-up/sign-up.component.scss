@@ -1,5 +1,6 @@
 .background {
     margin: 0;
+
     // padding: 150px 570px;
     width: -webkit-fill-available;
     height: 200vh;
@@ -12,7 +13,7 @@
     background-position: center;
     display: flex;
     justify-content: center;
-    
+
     ::after{
       position: relative;
       z-index: -1;
