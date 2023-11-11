@@ -15,6 +15,7 @@
         [placeHolder]="'Nome'"
         [inputBorderColor]="firstName.getBorderColor()"
         (valueChange)="regexFormatChecker(firstName, $event)"
+        [cleanValue]="cleanInput"
       ></app-input>
       <app-input
         [inputType]="'inputEmail'"
@@ -22,6 +23,7 @@
         [placeHolder]="'Sobrenome'"
         [inputBorderColor]="lastName.getBorderColor()"
         (valueChange)="regexFormatChecker(lastName, $event)"
+        [cleanValue]="cleanInput"
       ></app-input>
 
       <div class="genreBirthContainer">
@@ -31,6 +33,7 @@
           placeholder="Selecione seu gênero"
           [borderColor]="gender.getBorderColor()"
           (valueChange)="isfilledChecker(gender, $event)"
+          [cleanValue]="cleanInput"
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
@@ -39,6 +42,7 @@
           [inputWidth]="'249px'"
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
+          [cleanValue]="cleanInput"
         ></app-input>
       </div>
 
@@ -48,12 +52,14 @@
         [placeHolder]="'E-mail'"
         [inputBorderColor]="email.getBorderColor()"
         (valueChange)="regexFormatChecker(email, $event)"
+        [cleanValue]="cleanInput"
       ></app-input>
       <app-input
         [inputType]="'inputPassword'"
         [fieldsetLabel]="'Senha'"
         [placeHolder]="'Digite sua senha'"
         (valueChange)="isfilledChecker(password, $event)"
+        [cleanValue]="cleanInput"
       ></app-input>
 
       <div>
@@ -69,9 +75,16 @@
         [placeHolder]="'Confirme sua senha'"
         [inputBorderColor]="passwordConfirmation.getBorderColor()"
         (valueChange)="passwordMatchChecker(passwordConfirmation, $event)"
+        [cleanValue]="cleanInput"
       ></app-input>
 
-      <app-button buttonType="cancel" label="limpar" type="reset"></app-button>
+      <app-button
+        buttonType="cancel"
+        label="limpar"
+        type="reset"
+        (btnClick)="limparInput()"
+      ></app-button>
+
       <app-button
         buttonType="large"
         label="concluir cadastro"
@@ -90,4 +103,10 @@
       </div>
     </div>
   </div>
+  <app-modal
+    [isModalActive]="showModal"
+    (emitEventClose)="closeModal($event)"
+    [message]="modalMessage"
+    [isError]="handleError"
+  ></app-modal>
 </div>
