@@ -136,8 +136,10 @@ export class SignUpComponent {
       this.currentYear.getFullYear() -
       parseInt(componentName.getValue().slice(0, 4));
     userYear >= 10
-      ? componentName.setIsAproved(true)
-      : componentName.setIsAproved(false);
+      ? (componentName.setIsAproved(true),
+        componentName.setBorderColor('#2C85D8'))
+      : (componentName.setIsAproved(false),
+        componentName.setBorderColor('red'));
     this.btEnabler();
   };
   /**
