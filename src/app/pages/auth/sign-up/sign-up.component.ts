@@ -190,6 +190,7 @@ export class SignUpComponent {
         this.handleError = true;
       });
   };
+
   /**
    * closeModal
    *
@@ -204,6 +205,7 @@ export class SignUpComponent {
   // de limpar os inputs do formulário ao clicar no botão limpar;
   cleanInput = '';
   count = 0;
+
   /**
    * limparInput
    *

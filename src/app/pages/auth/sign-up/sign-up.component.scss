@@ -1,9 +1,10 @@
 .background {
     margin: 0;
+
     // padding: 150px 570px;
     width: -webkit-fill-available;
     height: 200vh;
-    
+
     content: "";
     background-repeat: no-repeat;
     background-image: url("../../../../assets/images/marvel-space.png");
@@ -12,7 +13,7 @@
     background-position: center;
     display: flex;
     justify-content: center;
-    
+
     ::after{
       position: relative;
       z-index: -1;

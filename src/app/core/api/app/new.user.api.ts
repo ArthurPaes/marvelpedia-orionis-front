@@ -14,6 +14,7 @@ export class UserRegisterApi {
      @param userData dados em formato de objeto que será enviado na solicitação http
    * @returns retorna o status, data e horário de retorno, id, nome, gernero, data de nascimento, email, criado em, ultima atualização e se está ativo.
    */
+
   async registerNewUser(userData: IRequestNewUser): Promise<IResponseNewUser> {
     const response = await this.httpService.sendHttpRequest(
       'http://localhost:4444/v1/signup',
