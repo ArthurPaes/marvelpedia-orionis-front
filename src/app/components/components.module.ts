@@ -9,6 +9,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ModalComponent } from './modal/modal.component';
 import { SelectComponent } from './select/select.component';
 import { CharacterCardComponent } from './character-card/character-card.component';
+import { PasswordCheckerComponent } from './password-checker/password-checker.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CharacterCardComponent } from './character-card/character-card.componen
     ModalComponent,
     SelectComponent,
     CharacterCardComponent,
+    PasswordCheckerComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   exports: [
@@ -27,6 +29,7 @@ import { CharacterCardComponent } from './character-card/character-card.componen
     ModalComponent,
     SelectComponent,
     CharacterCardComponent,
+    PasswordCheckerComponent,
   ],
 })
 export class ComponentsModule {}

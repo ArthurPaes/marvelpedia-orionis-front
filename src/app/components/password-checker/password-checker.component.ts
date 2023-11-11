@@ -5,7 +5,10 @@ import {
   OnChanges,
   EventEmitter,
 } from '@angular/core';
-import { IPasswordChecker, IRules } from './interface/password-checker.interface';
+import {
+  IPasswordChecker,
+  IRules,
+} from './interface/password-checker.interface';
 
 @Component({
   selector: 'app-password-checker',
