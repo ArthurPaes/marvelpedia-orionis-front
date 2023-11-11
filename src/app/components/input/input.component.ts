@@ -36,7 +36,7 @@ export class InputComponent implements OnChanges {
     if (this.cleanValue.includes('true')) {
       this.value = '';
       this.showTagLabel = false;
-      //this.inputBorderColor = '#FFFFFF';
+      this.inputBorderColor = '#FFFFFF';
     }
   }
 
@@ -47,7 +47,7 @@ export class InputComponent implements OnChanges {
    */
   cleanInputSearch(): void {
     this.value = '';
-    // this.inputBorderColor = '#FFFFFF';
+    this.inputBorderColor = '#FFFFFF';
     this.showTagLabel = false;
     this.showCloseBtn = false;
   }
