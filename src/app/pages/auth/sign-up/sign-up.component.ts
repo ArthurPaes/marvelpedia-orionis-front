@@ -188,8 +188,7 @@ export class SignUpComponent {
         this.modalMessage = error.error.data;
         this.showModal = true;
         this.handleError = true;
-      })
-      .finally(() => console.log('Finaly'));
+      });
   };
   /**
    * closeModal
@@ -205,8 +204,12 @@ export class SignUpComponent {
   // de limpar os inputs do formulário ao clicar no botão limpar;
   cleanInput = '';
   count = 0;
-
-  limparInput() {
+  /**
+   * limparInput
+   *
+   * Reset form inputs value.
+   */
+  limparInput(): void {
     this.cleanInput = 'true' + this.count;
     this.count++;
   }

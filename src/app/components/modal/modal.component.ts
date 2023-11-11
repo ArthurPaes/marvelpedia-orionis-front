@@ -23,7 +23,11 @@ export class ModalComponent {
   modalLabel = 'Label';
   btLabel = '';
   btRoute = '';
-
+  /**
+   * modalSwitch
+   *
+   * Toggles the modal between error/success depending on isError state.
+   */
   modalSwitch = (): void => {
     this.isError
       ? ((this.iconName = 'cancel_circle_outline'),
@@ -33,8 +37,12 @@ export class ModalComponent {
         (this.modalLabel = 'Sucesso!'),
         (this.btRoute = 'http://localhost:4200/home'));
   };
-
-  ngOnChanges() {
+  /**
+   * ngOnChanges
+   *
+   * Listen to isError changes to call modalSwitch function.
+   */
+  ngOnChanges(): void {
     this.modalSwitch();
   }
   /**
@@ -42,7 +50,6 @@ export class ModalComponent {
    *
    * Emit an event to parent component in order to close the modal.
    */
-
   closeModal(): void {
     this.emitEventClose.emit(false);
   }

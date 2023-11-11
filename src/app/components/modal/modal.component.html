@@ -8,8 +8,8 @@
     <mat-icon>{{ iconName }}</mat-icon>
     <h1>{{ modalLabel }}</h1>
     <p>{{ message }}</p>
-    <button (click)="closeModal()" id="btn-finalizar">
-      <a [href]="btRoute">FINALIZAR</a>
-    </button>
+    <a [href]="btRoute">
+      <button (click)="closeModal()" id="btn-finalizar">FINALIZAR</button>
+    </a>
   </div>
 </div>
