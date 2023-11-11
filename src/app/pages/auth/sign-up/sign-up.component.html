@@ -16,6 +16,7 @@
         [inputBorderColor]="firstName.getBorderColor()"
         (valueChange)="regexFormatChecker(firstName, $event)"
         [cleanValue]="cleanInput"
+
       ></app-input>
       <app-input
         [inputType]="'inputEmail'"
@@ -24,6 +25,7 @@
         [inputBorderColor]="lastName.getBorderColor()"
         (valueChange)="regexFormatChecker(lastName, $event)"
         [cleanValue]="cleanInput"
+
       ></app-input>
 
       <div class="genreBirthContainer">
@@ -34,6 +36,7 @@
           [borderColor]="gender.getBorderColor()"
           (valueChange)="isfilledChecker(gender, $event)"
           [cleanValue]="cleanInput"
+
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
@@ -43,6 +46,7 @@
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
           [cleanValue]="cleanInput"
+
         ></app-input>
       </div>
 
@@ -84,6 +88,7 @@
         type="reset"
         (btnClick)="limparInput()"
       ></app-button>
+
       <app-button
         buttonType="large"
         label="concluir cadastro"
