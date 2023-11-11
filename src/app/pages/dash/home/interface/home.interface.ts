@@ -1,5 +1,5 @@
 export interface ICharacterCard {
-  name: string;
+  enName: string;
   description: string;
   thumb: string;
 }
