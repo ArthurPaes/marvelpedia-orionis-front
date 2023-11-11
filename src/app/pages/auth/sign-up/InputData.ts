@@ -1,8 +1,9 @@
 export class InputElement {
   type: string;
   isAproved = false;
-  borderColor: string = '';
+  borderColor = '';
   dataValue = '';
+  fieldLabel = '';
 
   constructor(type: string) {
     this.type = type;
@@ -31,5 +32,12 @@ export class InputElement {
   }
   setValue(value: string) {
     this.dataValue = value;
+  }
+
+  getFieldLabel(): string {
+    return this.fieldLabel;
+  }
+  setFieldLabel(value: string) {
+    this.fieldLabel = value;
   }
 }

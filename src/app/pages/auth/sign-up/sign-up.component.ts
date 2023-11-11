@@ -25,7 +25,7 @@ export class SignUpComponent {
 
   showModal = false;
   modalMessage = '';
-  handleError = true;
+  handleError = false;
 
   firstName = new InputElement('firstname');
   lastName = new InputElement('lastname');
@@ -37,7 +37,8 @@ export class SignUpComponent {
   checkbox = new InputElement('checkbox');
 
   regexList: IFormatter = {
-    name: /^[a-zA-Z]{2,30}$/,
+    // name: /^[a-zA-Z]{2,30}$/,
+    name: /^[a-zàâãéêíïóôõöúçñ]+[\s]?[a-zàâãéêíïóôõöúçñ]+$/i,
     email:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   };
@@ -91,23 +92,33 @@ export class SignUpComponent {
       case 'firstname':
         this.regexList.name.test(componentName.getValue())
           ? (componentName.setIsAproved(true),
-            componentName.setBorderColor('#2C85D8'))
+            componentName.setBorderColor('#2C85D8'),
+            componentName.setFieldLabel('Nome'))
           : (componentName.setIsAproved(false),
-            componentName.setBorderColor('red'));
+            componentName.setBorderColor('#E38686'),
+            componentName.setFieldLabel(
+              'Seu nome pode ter 2 ou mais letras e apenas 1 espaço',
+            ));
         break;
       case 'lastname':
         this.regexList.name.test(componentName.getValue())
           ? (componentName.setIsAproved(true),
-            componentName.setBorderColor('#2C85D8'))
+            componentName.setBorderColor('#2C85D8'),
+            componentName.setFieldLabel('Sobrenome'))
           : (componentName.setIsAproved(false),
-            componentName.setBorderColor('red'));
+            componentName.setBorderColor('#E38686'),
+            componentName.setFieldLabel(
+              'Seu sobrenome pode ter 2 ou mais letras e apenas 1 espaço',
+            ));
         break;
       case 'email':
         this.regexList.email.test(componentName.getValue())
           ? (componentName.setIsAproved(true),
-            componentName.setBorderColor('#2C85D8'))
+            componentName.setBorderColor('#2C85D8'),
+            componentName.setFieldLabel('E-mail'))
           : (componentName.setIsAproved(false),
-            componentName.setBorderColor('red'));
+            componentName.setBorderColor('#E38686'),
+            componentName.setFieldLabel('E-mail inválido'));
         break;
     }
     this.btEnabler();
@@ -141,9 +152,11 @@ export class SignUpComponent {
       parseInt(componentName.getValue().slice(0, 4));
     userYear >= 10
       ? (componentName.setIsAproved(true),
-        componentName.setBorderColor('#2C85D8'))
+        componentName.setBorderColor('#2C85D8'),
+        componentName.setFieldLabel('Data de Nascimento'))
       : (componentName.setIsAproved(false),
-        componentName.setBorderColor('red'));
+        componentName.setBorderColor('#E38686'),
+        componentName.setFieldLabel('Deve ser MAIOR de 10 anos!'));
     this.btEnabler();
   };
   /**
@@ -159,9 +172,11 @@ export class SignUpComponent {
     this.receiveData(componentName, eventValue);
     componentName.getValue() == this.password.getValue()
       ? (componentName.setIsAproved(true),
-        componentName.setBorderColor('#2C85D8'))
+        componentName.setBorderColor('#2C85D8'),
+        componentName.setFieldLabel('Confirme sua senha'))
       : (componentName.setIsAproved(false),
-        componentName.setBorderColor('red'));
+        componentName.setBorderColor('#E38686'),
+        componentName.setFieldLabel('As senhas devem ser idênticas'));
     this.btEnabler();
   };
   /**
@@ -177,7 +192,6 @@ export class SignUpComponent {
       email: this.email.getValue(),
       password: this.password.getValue(),
     };
-
     this.submitUser
       .registerNewUser(signUpFormData)
       .then(() => {

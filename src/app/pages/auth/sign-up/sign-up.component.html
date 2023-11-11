@@ -11,21 +11,21 @@
       <!-- troca firstName por name para satisfazer o Back-End -->
       <app-input
         [inputType]="'inputEmail'"
-        [fieldsetLabel]="'Digite seu nome'"
+        [fieldsetLabel]="firstName.getFieldLabel()"
         [placeHolder]="'Nome'"
         [inputBorderColor]="firstName.getBorderColor()"
         (valueChange)="regexFormatChecker(firstName, $event)"
         [cleanValue]="cleanInput"
-
+        [backgroundColorTag]="firstName.getBorderColor()"
       ></app-input>
       <app-input
         [inputType]="'inputEmail'"
-        [fieldsetLabel]="'Digite seu sobrenome'"
+        [fieldsetLabel]="lastName.getFieldLabel()"
         [placeHolder]="'Sobrenome'"
         [inputBorderColor]="lastName.getBorderColor()"
         (valueChange)="regexFormatChecker(lastName, $event)"
         [cleanValue]="cleanInput"
-
+        [backgroundColorTag]="lastName.getBorderColor()"
       ></app-input>
 
       <div class="genreBirthContainer">
@@ -36,31 +36,31 @@
           [borderColor]="gender.getBorderColor()"
           (valueChange)="isfilledChecker(gender, $event)"
           [cleanValue]="cleanInput"
-
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
-          [fieldsetLabel]="'Data de Nascimento'"
+          [fieldsetLabel]="birthDate.getFieldLabel()"
           [placeHolder]="'Data de Nascimento'"
           [inputWidth]="'249px'"
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
           [cleanValue]="cleanInput"
-
+          [backgroundColorTag]="birthDate.getBorderColor()"
         ></app-input>
       </div>
 
       <app-input
         [inputType]="'inputEmail'"
-        [fieldsetLabel]="'Digite seu e-mail'"
+        [fieldsetLabel]="email.getFieldLabel()"
         [placeHolder]="'E-mail'"
         [inputBorderColor]="email.getBorderColor()"
         (valueChange)="regexFormatChecker(email, $event)"
         [cleanValue]="cleanInput"
+        [backgroundColorTag]="email.getBorderColor()"
       ></app-input>
       <app-input
         [inputType]="'inputPassword'"
-        [fieldsetLabel]="'Senha'"
+        [fieldsetLabel]="password.getFieldLabel()"
         [placeHolder]="'Digite sua senha'"
         (valueChange)="isfilledChecker(password, $event)"
         [cleanValue]="cleanInput"
@@ -75,11 +75,12 @@
 
       <app-input
         [inputType]="'inputPassword'"
-        [fieldsetLabel]="'Confirme Sua Senha'"
+        [fieldsetLabel]="passwordConfirmation.getFieldLabel()"
         [placeHolder]="'Confirme sua senha'"
         [inputBorderColor]="passwordConfirmation.getBorderColor()"
         (valueChange)="passwordMatchChecker(passwordConfirmation, $event)"
         [cleanValue]="cleanInput"
+        [backgroundColorTag]="passwordConfirmation.getBorderColor()"
       ></app-input>
 
       <app-button
