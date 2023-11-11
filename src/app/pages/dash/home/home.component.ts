@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import type { ICharacterCard } from './interface/home.interface';
-import { Characters } from 'src/app/core/api/app/characters.api';
+import { CharactersApi } from 'src/app/core/api/app/characters.api';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import { Characters } from 'src/app/core/api/app/characters.api';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private Characters: Characters) {}
+  constructor(private CharactersApi: CharactersApi) {}
 
   characters: ICharacterCard[] = [];
   pageNumber = 1;
@@ -22,7 +22,7 @@ export class HomeComponent {
    * @param page - Número da página a ser exibida os personagens.
    */
   serviceGetCharacters(page: number): void {
-    this.Characters.getCharacters(page)
+    this.CharactersApi.getCharacters(page)
       .then((response) => {
         this.characters = this.characters.concat(response.data);
       })
@@ -43,9 +43,9 @@ export class HomeComponent {
   /**
    * seeMoreCharacters() {
    *
-   * Exibi mais 9 personagens a cada vez que o botão "CONHECER MAIS" é clicado.
+   * Exibe mais 9 personagens a cada vez que o botão "CONHECER MAIS" é clicado.
    */
-  seeMoreCharacters() {
+  seeMoreCharacters(): void {
     this.pageNumber++;
     this.serviceGetCharacters(this.pageNumber);
   }

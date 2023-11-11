@@ -4,7 +4,7 @@ import { HttpRequestService } from '../http-request.service';
 @Injectable({
   providedIn: 'root',
 })
-export class Characters {
+export class CharactersApi {
   constructor(private httpGetCharacter: HttpRequestService) {}
 
   async getCharacters(page: number): Promise<any> {
