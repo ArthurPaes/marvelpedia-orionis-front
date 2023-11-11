@@ -17,7 +17,9 @@
 
 .card-image {
   height: 206px;
-  width: 100%;
+  width: 381px;
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .card-body {
