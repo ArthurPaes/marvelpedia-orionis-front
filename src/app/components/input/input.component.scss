@@ -47,7 +47,7 @@ $input-height: 55.5px;
 }
 
 .input-position-date {
-    width: 523px;
+    width: 249px;
     border-width: 1px;
     border-color: $input-color;
     border-style: solid;
@@ -58,7 +58,7 @@ $input-height: 55.5px;
     text-indent: 10px;
     z-index: 1;
     &:focus {
-        width: 523px;
+        width: 249px;
         height: 55.5px;
         outline: none;
         text-indent: 10px;
