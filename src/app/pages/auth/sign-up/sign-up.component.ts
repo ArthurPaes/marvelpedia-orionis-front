@@ -180,4 +180,15 @@ export class SignUpComponent {
       .catch(() => console.log('error'))
       .finally(() => console.log('Finaly'));
   };
+
+  // Solução criada por Rafael Horauti para soluciona o requisito
+  // de limpar os inputs do formulário ao clicar no botão limpar;
+  cleanInput = '';
+  count = 0;
+
+  limparInput() {
+    this.cleanInput = 'true' + this.count;
+    this.count++;
+  }
+  // fim da solução
 }
