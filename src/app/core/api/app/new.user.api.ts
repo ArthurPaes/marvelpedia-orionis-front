@@ -1,11 +1,13 @@
+import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { IRequestNewUser, IResponseNewUser } from '../interfaces/INewUser';
 
+@Injectable()
 export class UserRegisterApi {
   constructor(private httpService: HttpRequestService) {}
 
   /**
-   *registerNewUser
+   * registerNewUser
      
    * POST que será usada no componente signUp
    * 

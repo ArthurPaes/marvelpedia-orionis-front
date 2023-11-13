@@ -1,0 +1,11 @@
+<div class="background">
+  <img src="../../../../assets/images/marvel-logo.png" alt="" />
+  <div class="container-redirect">
+    <p>{{ message }}</p>
+    <app-button
+      (click)="redirectLogin()"
+      [buttonType]="'default'"
+      [label]="'Ir para a tela de Login'"
+    ></app-button>
+  </div>
+</div>

@@ -1,3 +1,6 @@
+$input-color: #FFFFFF;
+$input-height: 55.5px;
+
 .background {
     margin: 0;
     padding: 0;
@@ -29,24 +32,14 @@
     }
 }
 
-.main-container {
-    color: #FFFFFF;
-}
-
-.btn-close {
-    cursor: pointer;
-}
-
-.header {
+.container-redirect {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }
 
-.title {
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-.subtitle {
-    font-size: 0.9rem;
+.container-redirect p {
+    font-size: 25px;
+    color: $input-color;
 }

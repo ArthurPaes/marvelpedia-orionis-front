@@ -1,109 +1,95 @@
-<!--Input E-mail relacionado a tela de login, cadastro e recuperação de senha-->
+<!--Input E-mail-->
+
 <div
-  *ngIf="inputType === 'inputEmail' && value.length === 0"
+  *ngIf="inputType === 'inputEmail'"
   [ngStyle]="{ width: inputWidth }"
-  class="container-input-not-filled"
+  class="container-input"
 >
+  <span
+    *ngIf="showTagLabel"
+    class="input-label-position"
+    [ngStyle]="{ 'background-color': backgroundColorTag }"
+    >{{ fieldsetLabel }}</span
+  >
   <input
-    type="text"
-    class="input-not-filled"
     [placeholder]="placeHolder"
+    class="input-position"
     [(ngModel)]="value"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
     (input)="sendData($event)"
   />
 </div>
 
-<div
-  *ngIf="inputType === 'inputEmail' && value.length > 0"
-  [ngStyle]="{ width: inputWidth }"
-  class="container-input-filled"
->
-  <fieldset
-    class="input-fieldset"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
-  >
-    <legend class="input-legend">{{ fieldsetLabel }}</legend>
-    <input
-      type="text"
-      class="input-filled"
-      [(ngModel)]="value"
-      (input)="sendData($event)"
-    />
-  </fieldset>
-</div>
+<!--Input Senha-->
 
-<!--Input senha relacionado a tela de login, cadastro e recuperação de senha-->
 <div
-  *ngIf="inputType === 'inputPassword' && value.length === 0"
+  *ngIf="inputType === 'inputPassword'"
   [ngStyle]="{ width: inputWidth }"
-  class="container-input-not-filled"
+  class="container-input"
 >
-  <mat-icon (click)="showPassword = !showPassword" class="icon-not-filled">{{
+  <mat-icon (click)="showPassword = !showPassword" class="icon-position">{{
     showPassword ? "visibility" : "visibility_off"
   }}</mat-icon>
+  <span *ngIf="showTagLabel" class="input-label-position">{{
+    fieldsetLabel
+  }}</span>
   <input
     [type]="showPassword ? 'text' : 'password'"
-    class="input-not-filled"
     [placeholder]="placeHolder"
+    class="input-position"
     [(ngModel)]="value"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
     (input)="sendData($event)"
   />
 </div>
 
-<div
-  *ngIf="inputType === 'inputPassword' && value.length > 0"
-  [ngStyle]="{ width: inputWidth }"
-  class="container-input-filled"
->
-  <fieldset
-    class="input-fieldset"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
-  >
-    <mat-icon (click)="showPassword = !showPassword" class="icon-filled">{{
-      showPassword ? "visibility" : "visibility_off"
-    }}</mat-icon>
-    <legend class="input-legend">{{ fieldsetLabel }}</legend>
-    <input
-      [type]="showPassword ? 'text' : 'password'"
-      class="input-filled"
-      [(ngModel)]="value"
-      (input)="sendData($event)"
-    />
-  </fieldset>
-</div>
+<!--Input pesquisa da tela de dash personagens-->
 
-<!--Input relacionado a tela de busca-->
 <div
-  *ngIf="inputType === 'inputSearch' && value.length === 0"
+  *ngIf="inputType === 'inputSearch'"
   [ngStyle]="{ width: inputWidth }"
-  class="container-input-not-filled"
+  class="container-input"
 >
-  <mat-icon class="icon-search">search</mat-icon>
+  <mat-icon (click)="cleanInputSearch()" class="icon-position">{{
+    showCloseBtn ? "close" : "search"
+  }}</mat-icon>
+  <span *ngIf="showTagLabel" class="input-label-position">{{
+    fieldsetLabel
+  }}</span>
   <input
-    class="input-not-filled"
-    type="text"
     [placeholder]="placeHolder"
+    class="input-position"
     [(ngModel)]="value"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
     (input)="sendData($event)"
   />
 </div>
 
+<!--Input de data -->
+
 <div
-  *ngIf="inputType === 'inputSearch' && value.length > 0"
+  *ngIf="inputType === 'inputDate'"
   [ngStyle]="{ width: inputWidth }"
-  class="container-input-filled"
+  class="container-input-date"
 >
-  <fieldset
-    class="input-fieldset"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+  <mat-icon *ngIf="showIconDate" class="icon-position-date"
+    >calendar_today</mat-icon
   >
-    <mat-icon (click)="value = ''" class="icon-filled">close</mat-icon>
-    <legend class="input-legend">{{ fieldsetLabel }}</legend>
-    <input
-      class="input-filled"
-      type="text"
-      [(ngModel)]="value"
-      (input)="sendData($event)"
-    />
-  </fieldset>
+  <span
+    *ngIf="showTagLabel"
+    class="input-label-position"
+    [ngStyle]="{ 'background-color': backgroundColorTag }"
+    >{{ fieldsetLabel }}</span
+  >
+  <input
+    type="text"
+    (focus)="changeInputFocus()"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [placeholder]="placeHolder"
+    onfocus="this.type='date'"
+    class="input-position-date"
+    [(ngModel)]="value"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
+    (input)="sendData($event)"
+  />
 </div>

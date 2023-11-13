@@ -8,6 +8,9 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { SelectComponent } from 'src/app/components/select/select.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { CharacterCardComponent } from './character-card/character-card.component';
+import { RatingComponent } from './rating/rating.component';
+import { RatingApi } from '../core/api/app/rating.api';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,8 @@ import { FormsModule } from '@angular/forms';
     CheckboxComponent,
     ModalComponent,
     SelectComponent,
+    CharacterCardComponent,
+    RatingComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   exports: [
@@ -24,6 +29,9 @@ import { FormsModule } from '@angular/forms';
     CheckboxComponent,
     ModalComponent,
     SelectComponent,
+    CharacterCardComponent,
+    RatingComponent,
   ],
+  providers: [RatingApi],
 })
 export class ComponentsModule {}

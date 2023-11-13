@@ -10,6 +10,11 @@ export class ModalComponent {
   @Input() height = '321px';
   @Input() message = '';
   @Input() isModalActive = false;
+  @Input() icon = 'check_circle_outline';
+  @Input() title = 'Sucesso!';
+  @Input() buttonLabel = 'FINALIZAR';
+  @Input() showCloseButton = true;
+  @Input() closeButtonIcon = 'close';
   @Output() emitEventClose = new EventEmitter();
 
   /**

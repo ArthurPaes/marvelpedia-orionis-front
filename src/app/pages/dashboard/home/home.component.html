@@ -1,0 +1,38 @@
+<div class="background">
+  <div class="container">
+    <div class="filter-wrapper">
+      <h2>Personagens</h2>
+      <p>
+        Procure seus personagens preferidos e conheça melhor nossos heróis e
+        vilões!
+      </p>
+      <div class="input-area">
+        <app-select
+          [optionList]="['Filmes e séries', 'Quadrinhos']"
+          [selectWidth]="'381px'"
+        ></app-select>
+        <app-input
+          [inputType]="'inputEmail'"
+          [fieldsetLabel]="'Quem você procura?'"
+          [placeHolder]="'Quem você procura?'"
+          [inputWidth]="'653px'"
+        ></app-input>
+        <app-button label="Buscar" onclick=""></app-button>
+      </div>
+    </div>
+    <div class="grid-container">
+      <app-character-card
+        class="grid-item"
+        *ngFor="let character of characters"
+        [title]="character.name"
+        [description]="character.description"
+        [imageSrc]="character.thumb"
+      ></app-character-card>
+    </div>
+    <app-button
+      class="btn-see-more"
+      label="Conhecer mais"
+      (click)="searchCharacters()"
+    ></app-button>
+  </div>
+</div>
