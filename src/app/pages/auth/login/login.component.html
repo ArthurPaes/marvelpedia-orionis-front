@@ -7,7 +7,7 @@
       <app-input
         inputType="inputEmail"
         placeHolder="E-mail"
-        fieldsetLabel="E-email"
+        fieldsetLabel="E-mail"
         (valueChange)="emailValueChange($event)"
         autocomplet
         required
@@ -27,12 +27,19 @@
       ></app-checkbox>
       <a href="#">Esqueceu a senha</a>
     </div>
-    <app-button
-      label="Entrar"
-      buttonType="large"
-      [isDisabled]="!isFormValid"
-      (click)="onSubmit()"
-    ></app-button>
+    <div class="button-group">
+      <app-button
+        label="Entrar"
+        buttonType="large"
+        [isDisabled]="!isFormValid"
+        (click)="onSubmit()"
+      ></app-button>
+      <app-button
+        label="Criar uma conta"
+        buttonType="cancel"
+        routerLink="/signup"
+      ></app-button>
+    </div>
   </form>
   <app-modal
     [isModalActive]="showModal"
