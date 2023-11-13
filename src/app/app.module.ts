@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './pages/auth/auth.module';
-import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { DashModule } from './pages/dash/dash.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +15,7 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AuthModule,
-    DashboardModule,
+    DashModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

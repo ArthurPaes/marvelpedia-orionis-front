@@ -1,20 +1,19 @@
 .background {
     margin: 0;
-    padding: 155px 421px;
-    height: 100vh;
-    
+
+    // padding: 150px 570px;
+    width: -webkit-fill-available;
+    height: 200vh;
+
     content: "";
     background-repeat: no-repeat;
-    background-image: url("../../../assets/images/marvel-space.jpg");
+    background-image: url("../../../../assets/images/marvel-space.png");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
-    align-items: center;
-    isolation: isolate;
-  
+
     ::after{
       position: relative;
       z-index: -1;
@@ -24,17 +23,33 @@
     }
 
 }
+.component{
+    display: inline-grid;
+    grid-template-columns: 48px 522px;
+    margin-top: 100px;
+}
+.icon-nav{    
+    a{
+        color: white;        
+    }
+    :hover{
+        color: var(--color-primary);  
+    }
+}
 .container {
     display: flex;
     width: 522px;
+    height: 935px;
     flex-direction: column;
     gap: 24px;
     position: absolute;
+    margin-left: 40px;
 }
 .titulo {
     display: flex;
     flex-direction:column;
     margin-bottom: 16px;
+
 }
 h1 {
     color: var(--color-white);
@@ -51,6 +66,10 @@ h4 {
     letter-spacing: 0.72px;
     line-height: 12px;
     margin: 0;
+
+    a {
+        color: var(--color-primary);
+    }
 }
 p {
     color: var(--color-white);
@@ -63,12 +82,10 @@ p {
     width: 522px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 .checkbox{
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-a {
-    color: var(--color-primary);
 }

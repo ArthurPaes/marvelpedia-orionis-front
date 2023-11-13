@@ -64,7 +64,6 @@ export class RatingComponent {
     this.ratingValue.textboxValue = (
       textboxData.target as HTMLTextAreaElement
     ).value.trim();
-    console.log(this.ratingValue.textboxValue);
   }
 
   /**

@@ -17,7 +17,7 @@ export class UserRegisterApi {
 
   async registerNewUser(userData: IRequestNewUser): Promise<IResponseNewUser> {
     const response = await this.httpService.sendHttpRequest(
-      'http://localhost:4444/signup',
+      'http://localhost:4444/v1/signup',
       'POST',
       userData,
     );

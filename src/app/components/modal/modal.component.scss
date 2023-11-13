@@ -25,7 +25,7 @@ $words-color: #000000;
 
 .inner-container {
     text-align: center;
-    margin: 46px 52.5px;
+    margin: 46px 52.5px;    
 }
 
 .inner-container mat-icon {
@@ -63,4 +63,7 @@ $words-color: #000000;
     font-weight: 700;
     font-size: 1.1rem;
     letter-spacing: 0.3px;
+    a{
+        text-decoration: none;
+    }
 }

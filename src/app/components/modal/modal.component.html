@@ -3,13 +3,13 @@
   *ngIf="isModalActive"
   [ngStyle]="{ width: width, height: height }"
 >
-  <mat-icon *ngIf="showCloseButton" (click)="closeModal()" id="btn-close">{{
-    closeButtonIcon
-  }}</mat-icon>
+  <mat-icon (click)="closeModal()" id="btn-close">close</mat-icon>
   <div class="inner-container">
-    <mat-icon>{{ icon }}</mat-icon>
-    <h1>{{ title }}</h1>
+    <mat-icon>{{ iconName }}</mat-icon>
+    <h1>{{ modalLabel }}</h1>
     <p>{{ message }}</p>
-    <button (click)="closeModal()" id="btn-finalizar">{{ buttonLabel }}</button>
+    <a [href]="btRoute">
+      <button (click)="closeModal()" id="btn-finalizar">FINALIZAR</button>
+    </a>
   </div>
 </div>

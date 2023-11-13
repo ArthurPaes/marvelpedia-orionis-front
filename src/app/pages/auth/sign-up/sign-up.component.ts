@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IFormatter } from './interfaces/sign-up.interface';
-import { UserRegisterApi } from '../../core/api/app/new.user.api';
+import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { InputElement } from './InputData';
-import { IRequestNewUser } from '../../core/api/interfaces/INewUser';
+import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,6 +22,10 @@ export class SignUpComponent {
 
   btRegisterState = false;
   currentYear = new Date();
+
+  showModal = false;
+  modalMessage = '';
+  handleError = true;
 
   firstName = new InputElement('firstname');
   lastName = new InputElement('lastname');
@@ -136,8 +140,10 @@ export class SignUpComponent {
       this.currentYear.getFullYear() -
       parseInt(componentName.getValue().slice(0, 4));
     userYear >= 10
-      ? componentName.setIsAproved(true)
-      : componentName.setIsAproved(false);
+      ? (componentName.setIsAproved(true),
+        componentName.setBorderColor('#2C85D8'))
+      : (componentName.setIsAproved(false),
+        componentName.setBorderColor('red'));
     this.btEnabler();
   };
   /**
@@ -174,8 +180,40 @@ export class SignUpComponent {
 
     this.submitUser
       .registerNewUser(signUpFormData)
-      .then(() => console.log('sucesso'))
-      .catch(() => console.log('error'))
-      .finally(() => console.log('Finaly'));
+      .then(() => {
+        this.modalMessage = 'Login efetuado com sucesso!';
+        this.showModal = true;
+      })
+      .catch((error) => {
+        this.modalMessage = error.error.data;
+        this.showModal = true;
+        this.handleError = true;
+      });
   };
+
+  /**
+   * closeModal
+   *
+   * Fecha o modal de acordo com um evento.
+   * @param event - O evento de fechamento do modal.
+   */
+  closeModal(event: boolean): void {
+    this.showModal = event;
+  }
+
+  // Solução criada por Rafael Horauti para soluciona o requisito
+  // de limpar os inputs do formulário ao clicar no botão limpar;
+  cleanInput = '';
+  count = 0;
+
+  /**
+   * limparInput
+   *
+   * Reset form inputs value.
+   */
+  limparInput(): void {
+    this.cleanInput = 'true' + this.count;
+    this.count++;
+  }
+  // fim da solução
 }

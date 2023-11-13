@@ -1,7 +1,7 @@
 export class InputElement {
   type: string;
   isAproved = false;
-  borderColor: string = '#2C85D8' || 'red';
+  borderColor = '';
   dataValue = '';
 
   constructor(type: string) {
