@@ -11,7 +11,7 @@ import {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent {
+export class ModalComponent implements OnChanges {
   @Input() width = '360px';
   @Input() height = '321px';
   @Input() message = '';

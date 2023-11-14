@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { authApi } from 'src/app/core/api/app/auth.api';
+import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { ILogin } from './interface/login.interface';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginComponent {
   isFormValid = false;
   modalMessage = '';
 
-  constructor(private authLogin: authApi) {}
+  constructor(private authApi: AuthApi) {}
 
   /**
    * checkboxChange
@@ -85,7 +85,7 @@ export class LoginComponent {
    * Se ocorrer um erro, a mensagem de erro é exibida no modal.
    */
   onSubmit(): void {
-    this.authLogin
+    this.authApi
       .authenticateUser(this.login)
       .then(() => {
         this.modalMessage = 'Login efetuado com sucesso!';
