@@ -32,9 +32,13 @@
   <mat-icon (click)="showPassword = !showPassword" class="icon-position">{{
     showPassword ? "visibility" : "visibility_off"
   }}</mat-icon>
-  <span *ngIf="showTagLabel" class="input-label-position">{{
-    fieldsetLabel
-  }}</span>
+  <span
+    *ngIf="showTagLabel"
+    class="input-label-position"
+    [ngStyle]="{ 'background-color': backgroundColorTag }"
+  >
+    {{ fieldsetLabel }}</span
+  >
   <input
     [type]="showPassword ? 'text' : 'password'"
     [placeholder]="placeHolder"
