@@ -37,7 +37,6 @@ export class SignUpComponent {
   checkbox = new InputElement('checkbox');
 
   regexList: IFormatter = {
-    // name: /^[a-zA-Z]{2,30}$/,
     name: /^[a-zàâãéêíïóôõöúçñ]+[\s]?[a-zàâãéêíïóôõöúçñ]+$/i,
     email:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -147,10 +146,10 @@ export class SignUpComponent {
     eventValue: string,
   ): void => {
     this.receiveData(componentName, eventValue);
-    const userYear =
+    const userAge =
       this.currentYear.getFullYear() -
       parseInt(componentName.getValue().slice(0, 4));
-    userYear >= 10
+    userAge >= 10
       ? (componentName.setIsAproved(true),
         componentName.setBorderColor('#2C85D8'),
         componentName.setFieldLabel('Data de Nascimento'))
@@ -199,7 +198,7 @@ export class SignUpComponent {
         this.showModal = true;
       })
       .catch((error) => {
-        this.modalMessage = error.error.data;
+        this.modalMessage = error.error.data[0].msg;
         this.showModal = true;
         this.handleError = true;
       });
