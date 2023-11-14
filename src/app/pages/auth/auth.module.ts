@@ -10,9 +10,15 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { PasswordRedefEmailComponent } from './password-redefinition/password-redef-email/password-redef-email.component';
 
 @NgModule({
-  declarations: [LoginComponent, SignUpComponent, RedirectComponent],
+  declarations: [
+    LoginComponent,
+    SignUpComponent,
+    PasswordRedefEmailComponent,
+    RedirectComponent,
+  ],
   imports: [
     CommonModule,
     MatIconModule,
