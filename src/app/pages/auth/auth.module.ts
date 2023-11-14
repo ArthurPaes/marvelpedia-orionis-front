@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 import { LoginComponent } from './login/login.component';
@@ -12,7 +13,13 @@ import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent, RedirectComponent],
-  imports: [CommonModule, MatIconModule, FormsModule, ComponentsModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    FormsModule,
+    ComponentsModule,
+    RouterModule,
+  ],
   providers: [AuthApi, UserRegisterApi],
   bootstrap: [],
   exports: [LoginComponent, SignUpComponent, RedirectComponent],
