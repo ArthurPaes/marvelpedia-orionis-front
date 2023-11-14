@@ -15,7 +15,7 @@ export class RatingComponent {
   };
 
   constructor(
-    private httpRating: RatingApi,
+    private ratingApi: RatingApi,
     private router: Router,
   ) {}
 
@@ -73,7 +73,7 @@ export class RatingComponent {
    *
    */
   sendRating(): void {
-    this.httpRating
+    this.ratingApi
       .registerRating(this.ratingValue)
       .then(() => {
         this.modalMessage = 'Dados enviados com sucesso!';

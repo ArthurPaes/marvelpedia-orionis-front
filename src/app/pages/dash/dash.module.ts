@@ -6,13 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CharactersApi } from 'src/app/core/api/app/characters.api';
-import { SurvayComponent } from './survey/survay.component';
+import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
-  declarations: [HomeComponent, SurvayComponent],
+  declarations: [HomeComponent, SurveyComponent],
   imports: [CommonModule, MatIconModule, FormsModule, ComponentsModule],
   providers: [CharactersApi],
   bootstrap: [],
-  exports: [HomeComponent, SurvayComponent],
+  exports: [HomeComponent, SurveyComponent],
 })
 export class DashModule {}

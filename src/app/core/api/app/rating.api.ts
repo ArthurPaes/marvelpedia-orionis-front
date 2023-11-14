@@ -4,7 +4,7 @@ import { IRequestRating, IResponseRating } from '../interfaces/IRating';
 
 @Injectable()
 export class RatingApi {
-  constructor(private httpRating: HttpRequestService) {}
+  constructor(private httpRequestService: HttpRequestService) {}
 
   /**
    * registerRating
@@ -16,7 +16,7 @@ export class RatingApi {
    */
 
   async registerRating(ratingData: IRequestRating): Promise<IResponseRating> {
-    const response = await this.httpRating.sendHttpRequest(
+    const response = await this.httpRequestService.sendHttpRequest(
       'http://localhost:4444/survey',
       'POST',
       ratingData,

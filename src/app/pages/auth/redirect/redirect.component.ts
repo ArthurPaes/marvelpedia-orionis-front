@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { authApi } from 'src/app/core/api/app/auth.api';
+import { AuthApi } from 'src/app/core/api/app/auth.api';
 
 @Component({
   selector: 'app-redirect',
@@ -9,7 +9,7 @@ import { authApi } from 'src/app/core/api/app/auth.api';
 })
 export class RedirectComponent implements OnInit {
   constructor(
-    private httpRedirect: authApi,
+    private authApi: AuthApi,
     private router: Router,
   ) {}
 
@@ -18,10 +18,10 @@ export class RedirectComponent implements OnInit {
   /**
    * ngOnInit
    *
-   * Função http request GET que pega o status e mensagem após o usuário clicar no link do e-mail de validação.
+   * Função que será disparada ao inicializar o componente fazendo o http request GET que pega o status e mensagem após o usuário clicar no link do e-mail de validação.
    */
   ngOnInit(): void {
-    this.httpRedirect.checkValidToken().then((dt) => {
+    this.authApi.checkValidToken().then((dt) => {
       this.message = dt.message;
     });
   }
