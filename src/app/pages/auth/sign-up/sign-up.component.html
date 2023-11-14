@@ -17,7 +17,7 @@
         (valueChange)="regexFormatChecker(firstName, $event)"
         [cleanValue]="cleanInput"
         [backgroundColorTag]="firstName.getBorderColor()"
-      ></app-input>
+
       <app-input
         [inputType]="'inputEmail'"
         [fieldsetLabel]="lastName.getFieldLabel()"
@@ -26,7 +26,6 @@
         (valueChange)="regexFormatChecker(lastName, $event)"
         [cleanValue]="cleanInput"
         [backgroundColorTag]="lastName.getBorderColor()"
-      ></app-input>
 
       <div class="genreBirthContainer">
         <app-select
