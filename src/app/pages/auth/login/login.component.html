@@ -7,7 +7,7 @@
       <app-input
         inputType="inputEmail"
         placeHolder="E-mail"
-        fieldsetLabel="E-email"
+        fieldsetLabel="E-mail"
         (valueChange)="emailValueChange($event)"
         autocomplet
         required
@@ -35,8 +35,12 @@
     ></app-button>
   </form>
   <app-modal
-    [isModalActive]="showModal"
     (emitEventClose)="closeModal($event)"
-    [message]="modalMessage"
+    [isModalActive]="modalConfig.showModal"
+    [iconName]="modalConfig.icon"
+    [title]="modalConfig.title"
+    [message]="modalConfig.message"
+    [btText]="modalConfig.buttonText"
+    [closeOnOverlayClick]="modalConfig.overlayClick"
   ></app-modal>
 </div>
