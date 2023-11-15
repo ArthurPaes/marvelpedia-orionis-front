@@ -1,6 +1,7 @@
 export interface IRequestlogin {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 
 export interface IResponseLogin {

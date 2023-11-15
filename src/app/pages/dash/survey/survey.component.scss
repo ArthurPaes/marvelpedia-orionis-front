@@ -1,0 +1,52 @@
+.background {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-image: url("../../../../assets/images/marvel-space.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    isolation: isolate;
+  
+    ::after{
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: black;
+      opacity: 0.05;
+    }
+  
+    img {
+      position: absolute;
+      left: 80px;
+      top: 80px;
+    }
+}
+
+.main-container {
+    color: #FFFFFF;
+}
+
+.btn-close {
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+}

@@ -7,7 +7,7 @@ import { CharactersApi } from 'src/app/core/api/app/characters.api';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   constructor(private CharactersApi: CharactersApi) {}
 
   characters: ICharacterCard[] = [];

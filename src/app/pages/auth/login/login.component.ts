@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { authApi } from 'src/app/core/api/app/auth.api';
+import { AuthApi } from 'src/app/core/api/app/auth.api';
+import { ILogin } from './interface/login.interface';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +8,12 @@ import { authApi } from 'src/app/core/api/app/auth.api';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  login: { email: string; password: string } = { email: '', password: '' };
-  checkboxValue = false;
+  login: ILogin = { email: '', password: '', rememberMe: false };
   showModal = false;
   isFormValid = false;
   modalMessage = '';
 
-  constructor(private authLogin: authApi) {}
+  constructor(private authApi: AuthApi) {}
 
   /**
    * checkboxChange
@@ -22,7 +22,7 @@ export class LoginComponent {
    * @param checked - O novo valor do checkbox.
    */
   checkboxChange(checked: boolean): void {
-    this.checkboxValue = checked;
+    this.login.rememberMe = checked;
   }
 
   /**
@@ -85,7 +85,7 @@ export class LoginComponent {
    * Se ocorrer um erro, a mensagem de erro é exibida no modal.
    */
   onSubmit(): void {
-    this.authLogin
+    this.authApi
       .authenticateUser(this.login)
       .then(() => {
         this.modalMessage = 'Login efetuado com sucesso!';

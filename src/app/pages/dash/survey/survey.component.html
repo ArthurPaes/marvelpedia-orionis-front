@@ -1,0 +1,19 @@
+<div class="background">
+  <img src="../../../../assets/images/marvel-logo.png" alt="" />
+  <div class="main-container">
+    <div class="header">
+      <h1 class="title">Pesquisa de satisfação</h1>
+      <mat-icon (click)="redirectHome()" class="btn-close">close</mat-icon>
+    </div>
+    <p class="subtitle">
+      Deixe aqui sua avaliação sobre a experiência com a MarvelPedia até agora!
+    </p>
+    <app-rating
+      [showLabel]="false"
+      marginBottomStars="2.5rem"
+      margintopStars="2.5rem"
+      justifyContent="center"
+      textareaPlaceholder="Se desejar, comente o que mais gosta na plataforma ou o que poderia melhorar a sua experiência atual :)"
+    ></app-rating>
+  </div>
+</div>
