@@ -8,7 +8,7 @@ describe('PasswordRedefEmailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PasswordRedefEmailComponent]
+      declarations: [PasswordRedefEmailComponent],
     });
     fixture = TestBed.createComponent(PasswordRedefEmailComponent);
     component = fixture.componentInstance;
