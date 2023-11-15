@@ -19,6 +19,7 @@ export class ModalComponent {
   @Input() message = '';
   @Input() btText = '';
   @Input() isModalActive = false;
+  @Input() closeOnOverlayClick = true;
   @Output() emitEventClose = new EventEmitter();
 
   /**
