@@ -9,7 +9,7 @@ import { SurveyComponent } from './pages/dash/survey/survey.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'signup', component: SignUpComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'redirect', component: RedirectComponent },
   { path: 'survey', component: SurveyComponent },
   { path: '**', component: LoginComponent },

@@ -70,13 +70,11 @@ export class InputComponent implements OnChanges {
    * @param inputData Each letter typed in input component
    */
   sendData(inputData: Event): void {
-    this.inputBorderColor = '#FFFFFF';
     this.showTagLabel = false;
     this.showCloseBtn = false;
     this.value = (inputData.target as HTMLInputElement).value.trim();
     this.valueChange.emit(this.value);
     if (this.value.length > 0) {
-      this.inputBorderColor = '#2C85D8';
       this.showTagLabel = true;
       this.showCloseBtn = true;
     }
