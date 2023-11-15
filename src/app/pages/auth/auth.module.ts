@@ -11,6 +11,7 @@ import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PasswordRedefEmailComponent } from './password-redefinition/password-redef-email/password-redef-email.component';
+import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { PasswordRedefEmailComponent } from './password-redefinition/password-re
     ComponentsModule,
     RouterModule,
   ],
-  providers: [AuthApi, UserRegisterApi],
+  providers: [AuthApi, UserRegisterApi, PasswordRedefApi],
   bootstrap: [],
   exports: [LoginComponent, SignUpComponent, RedirectComponent],
 })
