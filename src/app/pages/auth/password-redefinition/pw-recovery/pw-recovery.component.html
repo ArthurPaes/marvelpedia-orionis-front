@@ -1,7 +1,7 @@
 <div class="background">
   <div class="component">
     <div class="icon-nav">
-      <a href="/login"><mat-icon>arrow_back_ios</mat-icon></a>
+      <button [routerLink]="'..'"><mat-icon>arrow_back_ios</mat-icon></button>
     </div>
     <div class="container">
       <section class="titulo">
@@ -19,6 +19,7 @@
         class="btEnviar"
         buttonType="cancel"
         label="cancelar"
+        [routerLink]="'..'"
       ></app-button>
       <app-button
         buttonType="large"
