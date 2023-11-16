@@ -5,7 +5,7 @@ import { RedirectComponent } from './pages/auth/redirect/redirect.component';
 import { HomeComponent } from './pages/dash/home/home.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { SurveyComponent } from './pages/dash/survey/survey.component';
-import { PasswordRedefEmailComponent } from './pages/auth/password-redefinition/password-redef-email/password-redef-email.component';
+import { PwRecoveryComponent } from './pages/auth/password-redefinition/pw-recovery/pw-recovery.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'redirect', component: RedirectComponent },
   { path: 'survey', component: SurveyComponent },
-  { path: 'pwrecovery', component: PasswordRedefEmailComponent },
+  { path: 'pwrecovery', component: PwRecoveryComponent },
   { path: '**', component: LoginComponent },
 ];
 

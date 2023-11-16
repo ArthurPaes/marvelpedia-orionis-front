@@ -10,14 +10,14 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { PasswordRedefEmailComponent } from './password-redefinition/password-redef-email/password-redef-email.component';
+import { PwRecoveryComponent } from './password-redefinition/pw-recovery/pw-recovery.component';
 import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignUpComponent,
-    PasswordRedefEmailComponent,
+    PwRecoveryComponent,
     RedirectComponent,
   ],
   imports: [
@@ -33,7 +33,7 @@ import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
     LoginComponent,
     SignUpComponent,
     RedirectComponent,
-    PasswordRedefEmailComponent,
+    PwRecoveryComponent,
   ],
 })
 export class AuthModule {}
