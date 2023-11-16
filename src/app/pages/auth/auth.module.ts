@@ -29,6 +29,11 @@ import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
   ],
   providers: [AuthApi, UserRegisterApi, PasswordRedefApi],
   bootstrap: [],
-  exports: [LoginComponent, SignUpComponent, RedirectComponent],
+  exports: [
+    LoginComponent,
+    SignUpComponent,
+    RedirectComponent,
+    PasswordRedefEmailComponent,
+  ],
 })
 export class AuthModule {}

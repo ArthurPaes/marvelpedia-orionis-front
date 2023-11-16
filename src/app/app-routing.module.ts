@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'redirect', component: RedirectComponent },
   { path: 'survey', component: SurveyComponent },
+  { path: 'pwrecovery', component: PasswordRedefEmailComponent },
   { path: '**', component: LoginComponent },
-  { path: 'pw-redef-email', component: PasswordRedefEmailComponent },
 ];
 
 @NgModule({

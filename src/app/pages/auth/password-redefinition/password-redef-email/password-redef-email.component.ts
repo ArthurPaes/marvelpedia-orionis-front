@@ -8,8 +8,6 @@ import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
 export class PasswordRedefEmailComponent {
   constructor(private sendEmail: PasswordRedefApi) {}
 
-  btSendEmail = false;
-
   showModal = false;
   modalMessage = '';
   handleError = true;
@@ -30,12 +28,11 @@ export class PasswordRedefEmailComponent {
       ? ((this.isAproved = true), (this.borderColor = '#2C85D8'))
       : ((this.isAproved = false), (this.borderColor = '#E38686'));
   };
-  //btEnabler = (): void => {};
   /**
    * signUpDataPackage
    * Submit signUpformData Object due Cadastrar onClick event.
    */
-  signUpDataSubmit = (): void => {
+  sendEmailSubmit = (): void => {
     this.sendEmail
       .pwRedefSendEmail(this.emailValue)
       .then(() => {
