@@ -1,6 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,19 +33,30 @@ export class HttpRequestService {
       Authorization: `Bearer ${localStorage.getItem('@authToken')}`,
       'Content-Type': 'application/json',
     });
-    switch (method) {
-      case 'GET': {
-        return await lastValueFrom(this.http.get(path, { headers }));
+    try {
+      switch (method) {
+        case 'GET': {
+          return await lastValueFrom(this.http.get(path, { headers }));
+        }
+        case 'POST': {
+          return await lastValueFrom(this.http.post(path, data, { headers }));
+        }
+        case 'PUT': {
+          return await lastValueFrom(this.http.put(path, { headers }));
+        }
+        case 'DELETE': {
+          return await lastValueFrom(this.http.delete(path, { headers }));
+        }
       }
-      case 'POST': {
-        return await lastValueFrom(this.http.post(path, data, { headers }));
-      }
-      case 'PUT': {
-        return await lastValueFrom(this.http.put(path, { headers }));
-      }
-      case 'DELETE': {
-        return await lastValueFrom(this.http.delete(path, { headers }));
-      }
+    } catch (error) {
+      return this.handleHttpError(error as HttpErrorResponse);
     }
+  }
+  private handleHttpError(error: HttpErrorResponse) {
+    //"Sem permissão. Token inválido."
+    if (error.status === 403) {
+      localStorage.removeItem('@authToken');
+    }
+    return throwError(error);
   }
 }
