@@ -44,9 +44,8 @@ export class PwRecoveryComponent {
     this.sendEmail
       .pwRedefSendEmail(this.emailValue)
       .then(() => {
-        this.modalMessage = (
-            'Verifique seu e-mail. Nós enviamos um link para você cadastrar uma nova senha.'
-          );
+        this.modalMessage =
+          'Verifique seu e-mail. Nós enviamos um link para você cadastrar uma nova senha.';
         this.showModal = true;
       })
       .catch((error) => {
