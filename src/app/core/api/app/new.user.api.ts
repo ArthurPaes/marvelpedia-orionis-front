@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 export class UserRegisterApi {
   private apiUrl = environment.API_BASE_URL;
 
-  constructor(private httpService: HttpRequestService) {}
+  constructor(private httpRequestService: HttpRequestService) {}
 
   /**
    * registerNewUser
@@ -19,7 +19,7 @@ export class UserRegisterApi {
    */
 
   async registerNewUser(userData: IRequestNewUser): Promise<IResponseNewUser> {
-    const response = await this.httpService.sendHttpRequest(
+    const response = await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/v1/signup`,
       'POST',
       userData,

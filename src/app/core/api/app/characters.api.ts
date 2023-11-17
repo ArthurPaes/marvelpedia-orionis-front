@@ -8,10 +8,10 @@ import { environment } from 'src/environments/environment';
 export class CharactersApi {
   private apiUrl = `${environment.API_BASE_URL}`;
 
-  constructor(private httpGetCharacter: HttpRequestService) {}
+  constructor(private httpRequestService: HttpRequestService) {}
 
   async getCharacters(page: number): Promise<any> {
-    return await this.httpGetCharacter.sendHttpRequest(
+    return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/characters?page=${page}`,
       'GET',
     );

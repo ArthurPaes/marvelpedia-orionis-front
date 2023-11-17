@@ -5,12 +5,16 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpRequestService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+  ) {}
 
   /**
    *sendHttpRequest
@@ -36,16 +40,18 @@ export class HttpRequestService {
     try {
       switch (method) {
         case 'GET': {
-          return await lastValueFrom(this.http.get(path, { headers }));
+          return await lastValueFrom(this.httpClient.get(path, { headers }));
         }
         case 'POST': {
-          return await lastValueFrom(this.http.post(path, data, { headers }));
+          return await lastValueFrom(
+            this.httpClient.post(path, data, { headers }),
+          );
         }
         case 'PUT': {
-          return await lastValueFrom(this.http.put(path, { headers }));
+          return await lastValueFrom(this.httpClient.put(path, { headers }));
         }
         case 'DELETE': {
-          return await lastValueFrom(this.http.delete(path, { headers }));
+          return await lastValueFrom(this.httpClient.delete(path, { headers }));
         }
       }
     } catch (error) {
@@ -56,6 +62,7 @@ export class HttpRequestService {
     //"Sem permissão. Token inválido."
     if (error.status === 403) {
       localStorage.removeItem('@authToken');
+      this.router.navigate(['/login']);
     }
     return throwError(error);
   }
