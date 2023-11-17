@@ -28,9 +28,13 @@
     grid-template-columns: 48px 522px;
     margin-top: 100px;
 }
-.icon-nav{    
-    a{
-        color: white;        
+button{
+    background-color:transparent;
+    border: none;
+    cursor: pointer;
+
+    mat-icon{
+        color: #fff;
     }
     :hover{
         color: var(--color-primary);  
