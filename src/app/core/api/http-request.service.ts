@@ -1,12 +1,20 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpRequestService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+  ) {}
 
   /**
    *sendHttpRequest
@@ -29,19 +37,42 @@ export class HttpRequestService {
       Authorization: `Bearer ${localStorage.getItem('@authToken')}`,
       'Content-Type': 'application/json',
     });
-    switch (method) {
-      case 'GET': {
-        return await lastValueFrom(this.http.get(path, { headers }));
+    try {
+      switch (method) {
+        case 'GET': {
+          return await lastValueFrom(this.httpClient.get(path, { headers }));
+        }
+        case 'POST': {
+          return await lastValueFrom(
+            this.httpClient.post(path, data, { headers }),
+          );
+        }
+        case 'PUT': {
+          return await lastValueFrom(this.httpClient.put(path, { headers }));
+        }
+        case 'DELETE': {
+          return await lastValueFrom(this.httpClient.delete(path, { headers }));
+        }
       }
-      case 'POST': {
-        return await lastValueFrom(this.http.post(path, data, { headers }));
-      }
-      case 'PUT': {
-        return await lastValueFrom(this.http.put(path, { headers }));
-      }
-      case 'DELETE': {
-        return await lastValueFrom(this.http.delete(path, { headers }));
-      }
+    } catch (error) {
+      return this.handleHttpError(error as HttpErrorResponse);
     }
+  }
+
+  /**
+   * handleHttpError
+   *
+   * Manipula erros HTTP. Em caso de status 403(em breve será alterado para 401) o usuário tem seu token removido do local storage e é redirecionado para a tela de login.
+   *
+   * @param error Objeto de erro HTTP.
+   * @returns Uma Observable que emite o erro ou executa uma ação específica.
+   */
+  private handleHttpError(error: HttpErrorResponse): Observable<never> {
+    // TODO: Alterar a condicional quando o back-end corrigir o statusCode.
+    if (error.status === 403) {
+      localStorage.removeItem('@authToken');
+      this.router.navigate(['/login']);
+    }
+    return throwError(error);
   }
 }
