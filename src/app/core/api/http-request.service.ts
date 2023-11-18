@@ -68,6 +68,7 @@ export class HttpRequestService {
    * @returns Uma Observable que emite o erro ou executa uma ação específica.
    */
   private handleHttpError(error: HttpErrorResponse): Observable<never> {
+    // TODO: Alterar a condicional quando o back-end corrigir o statusCode.
     if (error.status === 403) {
       localStorage.removeItem('@authToken');
       this.router.navigate(['/login']);
