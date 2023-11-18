@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
+import { Router } from '@angular/router';
+import { AuthApi } from 'src/app/core/api/app/auth.api';
 @Component({
-  selector: 'app-pw-recovery',
-  templateUrl: './pw-recovery.component.html',
-  styleUrls: ['./pw-recovery.component.scss'],
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss'],
 })
-export class PwRecoveryComponent {
-  constructor(private sendEmail: PasswordRedefApi) {}
+export class ResetPasswordComponent {
+  constructor(
+    private authApi: AuthApi,
+    private router: Router,
+  ) {}
 
   showModal = false;
   modalMessage = '';
@@ -22,27 +26,34 @@ export class PwRecoveryComponent {
    * Handles the assignment of event data to  input Element object.
    * @param eventValue The event data ($event).
    */
-  receiveData = (eventValue: string) => {
+  receiveData = (eventValue: string): void => {
     this.emailValue = eventValue;
   };
   /**
-   * regexFormatChecker
+   * emailChecker
    * Handles email verification usin a regExp.
    * @param eventValue The event data ($event).
    */
-  emailChecker = (eventValue: string) => {
+  emailChecker = (eventValue: string): void => {
     this.receiveData(eventValue);
     this.emailRegex.test(eventValue)
       ? ((this.isAproved = true), (this.borderColor = '#2C85D8'))
       : ((this.isAproved = false), (this.borderColor = '#E38686'));
   };
   /**
-   * signUpDataPackage
-   * Submit signUpformData Object due Cadastrar onClick event.
+   * handleBackButton
+   * Handles the navigation to login endpoint.
+   */
+  handleBackButton = (): void => {
+    this.router.navigate(['login']);
+  };
+  /**
+   * sendEmailSubmit
+   * Submit email value to back-end.
    */
   sendEmailSubmit = (): void => {
-    this.sendEmail
-      .pwRedefSendEmail(this.emailValue)
+    this.authApi
+      .sendPasswordResetEmail(this.emailValue)
       .then(() => {
         this.modalMessage =
           'Verifique seu e-mail. Nós enviamos um link para você cadastrar uma nova senha.';
