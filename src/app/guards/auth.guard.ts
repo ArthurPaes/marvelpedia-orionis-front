@@ -12,10 +12,19 @@ import {
 export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
-  async canActivate(
+  /**
+   * canActivate
+   *
+   * Verifica se o usuário possui um token de autenticação. Se não houver redireciona o usuário para a página de login.
+   *
+   * @param route - A snapshot da rota ativada.
+   * @param state - O estado do roteador.
+   * @returns Um valor booleano informando se o usuário pode ou não acessar a rota.
+   */
+  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Promise<boolean> {
+  ): boolean {
     if (!localStorage.getItem('@authToken')) {
       this.router.navigate(['/login']);
       return false;

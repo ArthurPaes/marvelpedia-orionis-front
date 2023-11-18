@@ -4,7 +4,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, throwError } from 'rxjs';
+import { Observable, lastValueFrom, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -58,8 +58,16 @@ export class HttpRequestService {
       return this.handleHttpError(error as HttpErrorResponse);
     }
   }
-  private handleHttpError(error: HttpErrorResponse) {
-    //"Sem permissão. Token inválido."
+
+  /**
+   * handleHttpError
+   *
+   * Manipula erros HTTP. Em caso de status 403(em breve será alterado para 401) o usuário tem seu token removido do local storage e é redirecionado para a tela de login.
+   *
+   * @param error Objeto de erro HTTP.
+   * @returns Uma Observable que emite o erro ou executa uma ação específica.
+   */
+  private handleHttpError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 403) {
       localStorage.removeItem('@authToken');
       this.router.navigate(['/login']);
