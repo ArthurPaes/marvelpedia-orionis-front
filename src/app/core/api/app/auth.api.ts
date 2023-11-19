@@ -41,4 +41,17 @@ export class AuthApi {
       'GET',
     );
   }
+  /**
+   * sendPasswordResetEmail
+   * @param emailValue Email cadastrado que será enviado na solicitação http
+   * @returns Retorna o resultado da verificação da existência do email do BD.
+   */
+  async sendPasswordResetEmail(emailValue: string | any): Promise<string> {
+    const response = await this.httpRequestService.sendHttpRequest(
+      '/v1/a_ser_definido',
+      'POST',
+      emailValue,
+    );
+    return response;
+  }
 }
