@@ -160,7 +160,7 @@ export class SignUpComponent {
     const userAge =
       this.currentYear.getFullYear() -
       parseInt(componentName.getValue().slice(0, 4));
-    userAge >= 10
+    userAge >= 10 || userAge
       ? (componentName.setIsAproved(true),
         componentName.setBorderColor('#2C85D8'),
         componentName.setFieldLabel('Data de Nascimento'))
