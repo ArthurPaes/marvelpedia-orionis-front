@@ -1,31 +1,31 @@
 <div class="background">
   <div class="component">
     <div class="icon-nav">
-      <a href="http://localhost:4200"><mat-icon>arrow_back_ios</mat-icon></a>
+      <button (click)="handleBackButton()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
     </div>
     <div class="container">
       <section class="titulo">
         <h1>Novo por aqui?</h1>
         <p>Cadastre-se e explore o Universo Marvel.</p>
       </section>
-      <!-- troca firstName por name para satisfazer o Back-End -->
       <app-input
         [inputType]="'inputEmail'"
-        [fieldsetLabel]="firstName.getFieldLabel()"
+        [fieldsetLabel]="'Digite seu nome'"
         [placeHolder]="'Nome'"
         [inputBorderColor]="firstName.getBorderColor()"
         (valueChange)="regexFormatChecker(firstName, $event)"
         [cleanValue]="cleanInput"
-        [backgroundColorTag]="firstName.getBorderColor()"
-
+      ></app-input>
       <app-input
         [inputType]="'inputEmail'"
-        [fieldsetLabel]="lastName.getFieldLabel()"
+        [fieldsetLabel]="'Digite seu sobrenome'"
         [placeHolder]="'Sobrenome'"
         [inputBorderColor]="lastName.getBorderColor()"
         (valueChange)="regexFormatChecker(lastName, $event)"
         [cleanValue]="cleanInput"
-        [backgroundColorTag]="lastName.getBorderColor()"
+      ></app-input>
 
       <div class="genreBirthContainer">
         <app-select
@@ -38,28 +38,26 @@
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
-          [fieldsetLabel]="birthDate.getFieldLabel()"
+          [fieldsetLabel]="'Data de Nascimento'"
           [placeHolder]="'Data de Nascimento'"
           [inputWidth]="'249px'"
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
           [cleanValue]="cleanInput"
-          [backgroundColorTag]="birthDate.getBorderColor()"
         ></app-input>
       </div>
 
       <app-input
         [inputType]="'inputEmail'"
-        [fieldsetLabel]="email.getFieldLabel()"
+        [fieldsetLabel]="'Digite seu e-mail'"
         [placeHolder]="'E-mail'"
         [inputBorderColor]="email.getBorderColor()"
         (valueChange)="regexFormatChecker(email, $event)"
         [cleanValue]="cleanInput"
-        [backgroundColorTag]="email.getBorderColor()"
       ></app-input>
       <app-input
         [inputType]="'inputPassword'"
-        [fieldsetLabel]="password.getFieldLabel()"
+        [fieldsetLabel]="'Senha'"
         [placeHolder]="'Digite sua senha'"
         (valueChange)="isfilledChecker(password, $event)"
         [cleanValue]="cleanInput"
@@ -74,17 +72,17 @@
 
       <app-input
         [inputType]="'inputPassword'"
-        [fieldsetLabel]="passwordConfirmation.getFieldLabel()"
+        [fieldsetLabel]="'Confirme Sua Senha'"
         [placeHolder]="'Confirme sua senha'"
         [inputBorderColor]="passwordConfirmation.getBorderColor()"
         (valueChange)="passwordMatchChecker(passwordConfirmation, $event)"
         [cleanValue]="cleanInput"
-        [backgroundColorTag]="passwordConfirmation.getBorderColor()"
       ></app-input>
 
       <app-button
         buttonType="cancel"
         label="limpar"
+        type="reset"
         (btnClick)="limparInput()"
       ></app-button>
 
