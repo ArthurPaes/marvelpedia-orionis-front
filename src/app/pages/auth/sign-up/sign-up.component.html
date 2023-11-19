@@ -55,6 +55,7 @@
         (valueChange)="regexFormatChecker(email, $event)"
         [cleanValue]="cleanInput"
       ></app-input>
+
       <app-input
         [inputType]="'inputPassword'"
         [fieldsetLabel]="'Senha'"
@@ -92,6 +93,7 @@
         [isDisabled]="!btRegisterState"
         (btnClick)="signUpDataSubmit()"
       ></app-button>
+
       <div class="checkbox">
         <app-checkbox
           (checkedChange)="receiveStatus(checkbox, $event)"
