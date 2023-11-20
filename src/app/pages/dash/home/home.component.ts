@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import type { ICharacterCard } from './interface/home.interface';
-import { CharactersApi } from 'src/app/core/api/app/characters.api';
+import type { IContentCard } from './interface/home.interface';
+import { ContentApi } from 'src/app/core/api/app/content.api';
 
 @Component({
   selector: 'app-home',
@@ -8,55 +8,114 @@ import { CharactersApi } from 'src/app/core/api/app/characters.api';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private charactersApi: CharactersApi) {}
+  constructor(private contentApi: ContentApi) {}
 
-  characters: ICharacterCard[] = [];
   pageNumber = 1;
+  category = 'characters';
+  search = '';
+  optionList = ['Personagens', 'Eventos', 'Quadrinhos', 'Séries'];
+  content: IContentCard[] = [];
+  seeMoreButton = true;
+
+  /** Mapeia as traduções das categorias */
+  categoryTranslation: Record<string, string> = {
+    Personagens: 'characters',
+    Eventos: 'events',
+    Quadrinhos: 'comics',
+    Séries: 'series',
+  };
+
+  /**
+   * ngOnInit
+   *
+   * Inicializa o componente, chamando o service para carregar o conteúdo da página inicial, no caso, personagens.
+   */
+  ngOnInit(): void {
+    this.serviceGetContent(this.category, this.pageNumber, this.search);
+  }
+
+  /**
+   * translateCategory
+   *
+   * Traduz a categoria em português para inglês, da forma que o backend espera no momento do request.
+   * @param category - Categoria a ser convertida para inglês.
+   * @returns Categoria em inglês.
+   */
+  translateCategory(category: string): string {
+    if (category in this.categoryTranslation) {
+      return this.categoryTranslation[category];
+    } else {
+      return category;
+    }
+  }
+
+  /**
+   * onCategoryChange
+   *
+   * Manipula a mudança no select de categorias.
+   * @param option - Categoria selecionada.
+   */
+  onCategoryChange(option: string): void {
+    //Extrai o nome da categoria e ignora o número e dois pontos que é implementado pelo componente select.
+    const categoryInPortuguese = option.slice(3);
+    this.category = this.translateCategory(categoryInPortuguese);
+  }
+
+  /**
+   * Manipula a mudança no input de texto da pesquisa.
+   *
+   * @param search - Texto da pesquisa feita pelo usuário.
+   */
+  onSearchChange(search: string): void {
+    this.search = search;
+  }
 
   /**
    * serviceGetCharacters
    *
-   * Adiciona personagens ao array 'characters' com base no número da página.
-   * A cada página são exibidos 9 novos personagens
+   * Busca o conteúdo com base na categoria, página e texto da pesquisa.
+   * A cada página são exibidos mais 9 cards.
    *
-   * @param page - Número da página a ser exibida os personagens.
+   * @param category - Categoria do conteúdo.
+   * @param page - Número da página a ser exibida.
+   * @param search - Texto da pesquisa.
    */
-  serviceGetCharacters(page: number): void {
-    this.charactersApi
-      .getCharacters(page)
+  serviceGetContent(category: string, page: number, search: string): void {
+    this.contentApi
+      .getContent(category, page, search)
       .then((response) => {
-        this.characters = this.characters.concat(response.data);
+        // Caso não tenha mais conteúdo disponível para buscar, remove o botão "Ver mais" da página
+        if (response.data.length < 9) {
+          this.seeMoreButton = false;
+        }
+        this.content = this.content.concat(response.data);
       })
       .catch((error) => {
+        this.seeMoreButton = false;
         console.log(error);
       });
   }
 
   /**
-   * ngOnInit
-   *
-   * Inicializa o componente, chamando o serviço para carregar os personagens da página inicial.
-   */
-  ngOnInit(): void {
-    this.serviceGetCharacters(this.pageNumber);
-  }
-
-  /**
    * seeMoreCharacters() {
    *
-   * Exibe mais 9 personagens a cada vez que o botão "CONHECER MAIS" é clicado.
+   * Exibe mais 9 cards a cada vez que o botão "CONHECER MAIS" é clicado.
    */
-  seeMoreCharacters(): void {
+  seeMoreContent(): void {
     this.pageNumber++;
-    this.serviceGetCharacters(this.pageNumber);
+    this.serviceGetContent(this.category, this.pageNumber, this.search);
   }
 
   /**
-   *searchCharacters
+   * searchContent
    *
-   * Realiza uma busca por personagens com base nos filtros.
+   * Realiza uma busca por conteúdo com base nos filtros.
+   * Limpa a lista de 'content', reinicia a paginação e ativa o botão "CONHECER MAIS"
    */
-  searchCharacters() {
-    //
+  searchContent() {
+    this.content = [];
+    this.pageNumber = 1;
+    this.seeMoreButton = true;
+    this.serviceGetContent(this.category, this.pageNumber, this.search);
   }
 }
