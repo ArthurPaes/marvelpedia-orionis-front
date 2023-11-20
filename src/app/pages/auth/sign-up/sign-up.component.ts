@@ -12,7 +12,7 @@ import { SelectComponent } from 'src/app/components/select/select.component';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  constructor(private submitUser: UserRegisterApi) {}
+  constructor(private userRegisterApi: UserRegisterApi) {}
 
   @ViewChildren(InputComponent) inputComponents?: QueryList<InputComponent>;
   @ViewChild(SelectComponent) selectComponent?: SelectComponent;
@@ -201,7 +201,7 @@ export class SignUpComponent {
       email: this.email.getValue(),
       password: this.password.getValue(),
     };
-    this.submitUser
+    this.userRegisterApi
       .registerNewUser(signUpFormData)
       .then(() => {
         this.modalMessage = 'Login efetuado com sucesso!';

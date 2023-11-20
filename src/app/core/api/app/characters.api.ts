@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
+import { environment } from 'src/environments/environment';
 import { IResponseCategoryList } from '../interfaces/ICharacterCategoryList';
 
 @Injectable({
