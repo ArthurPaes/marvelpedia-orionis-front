@@ -7,12 +7,13 @@ import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CharactersApi } from 'src/app/core/api/app/characters.api';
 import { SurveyComponent } from './survey/survey.component';
+import { CharacterDetailsComponent } from './character-details/character-details.component';
 
 @NgModule({
-  declarations: [HomeComponent, SurveyComponent],
+  declarations: [HomeComponent, SurveyComponent, CharacterDetailsComponent],
   imports: [CommonModule, MatIconModule, FormsModule, ComponentsModule],
   providers: [CharactersApi],
   bootstrap: [],
-  exports: [HomeComponent, SurveyComponent],
+  exports: [HomeComponent, SurveyComponent, CharacterDetailsComponent],
 })
 export class DashModule {}

@@ -5,11 +5,13 @@ import { RedirectComponent } from './pages/auth/redirect/redirect.component';
 import { HomeComponent } from './pages/dash/home/home.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { SurveyComponent } from './pages/dash/survey/survey.component';
+import { CharacterDetailsComponent } from './pages/dash/character-details/character-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'signup', component: SignUpComponent },
+  { path: 'characters/:id', component: CharacterDetailsComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'redirect', component: RedirectComponent },
   { path: 'survey', component: SurveyComponent },
   { path: '**', component: LoginComponent },

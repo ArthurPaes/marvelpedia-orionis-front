@@ -1,17 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  OnChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent implements OnChanges {
+export class InputComponent {
   @Output() valueChange = new EventEmitter<string>();
   @Input() placeHolder = '';
   @Input() inputType = '';
@@ -19,7 +13,6 @@ export class InputComponent implements OnChanges {
   @Input() inputWidth = '';
   @Input() inputBorderColor = '#FFFFFF';
   @Input() backgroundColorTag = '';
-  @Input() cleanValue = '';
 
   public value = '';
   public showPassword = false;
@@ -28,16 +21,14 @@ export class InputComponent implements OnChanges {
   public showIconDate = false;
 
   /**
-   * ngOnChanges
+   * cleanInputValue
    *
    * Função que limpa o input ao clicar em um botão limpar do componente pai.
    */
-  ngOnChanges(): void {
-    if (this.cleanValue.includes('true')) {
-      this.value = '';
-      this.showTagLabel = false;
-      this.inputBorderColor = '#FFFFFF';
-    }
+  cleanInputValue(): void {
+    this.value = '';
+    this.showTagLabel = false;
+    this.inputBorderColor = '#FFFFFF';
   }
 
   /**
@@ -70,13 +61,11 @@ export class InputComponent implements OnChanges {
    * @param inputData Each letter typed in input component
    */
   sendData(inputData: Event): void {
-    this.inputBorderColor = '#FFFFFF';
     this.showTagLabel = false;
     this.showCloseBtn = false;
     this.value = (inputData.target as HTMLInputElement).value.trim();
     this.valueChange.emit(this.value);
     if (this.value.length > 0) {
-      this.inputBorderColor = '#2C85D8';
       this.showTagLabel = true;
       this.showCloseBtn = true;
     }

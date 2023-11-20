@@ -1,0 +1,27 @@
+<div
+  class="container-header"
+  [ngStyle]="{
+    color: textColor,
+    'background-color': backgroundColor,
+    width: width,
+    height: containerHeight
+  }"
+>
+  <div class="container-title">
+    <div class="title">
+      <mat-icon (click)="backRoute()">arrow_back_ios</mat-icon>
+      <p>{{ CharacterDetailList.characterName }}</p>
+    </div>
+    <mat-icon (click)="redirectHome()" *ngIf="showCloseButton">close</mat-icon>
+  </div>
+  <p
+    class="character-description"
+    [ngStyle]="{
+      width: characterDescriptionWidth,
+      'margin-left': characterDescriptionPositon,
+      'margin-right': characterDescriptionPositon
+    }"
+  >
+    {{ CharacterDetailList.characterDescription }}
+  </p>
+</div>
