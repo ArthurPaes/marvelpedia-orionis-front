@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { PasswordRedefApi } from 'src/app/core/api/app/pwRedef.api';
-import { IPassword } from './interfaces/pw-change.interface';
+import { Router } from '@angular/router';
+import { IPassword } from './interfaces/change-password.interface';
+import { AuthApi } from 'src/app/core/api/app/auth.api';
 
 @Component({
-  selector: 'app-pw-change',
-  templateUrl: './pw-change.component.html',
-  styleUrls: ['./pw-change.component.scss'],
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss'],
 })
-export class PwChangeComponent {
-  constructor(private sendNewPassword: PasswordRedefApi) {}
+export class ChangePasswordComponent {
+  constructor(
+    private authApi: AuthApi,
+    private router: Router,
+  ) {}
 
   showModal = false;
   modalMessage = '';
@@ -17,11 +21,13 @@ export class PwChangeComponent {
   password: IPassword = {
     value: '',
     borderColor: '',
+    fieldsetLabel: '',
     isAproved: false,
   };
   passwordConfirm: IPassword = {
     value: '',
     borderColor: '',
+    fieldsetLabel: '',
     isAproved: false,
   };
   /**
@@ -34,12 +40,19 @@ export class PwChangeComponent {
     componentName.value = eventValue;
   };
   /**
+   * handleBackButton
+   * Handles the navigation to login endpoint.
+   */
+  handleBackButton = (): void => {
+    this.router.navigate(['login']);
+  };
+  /**
    * receiveStatus
    * Handles the assignment of a boolean data to the object isApproval property.
    * @param componentName The object name.
    * @param eventValue The event data ($event).
    */
-  receiveStatus = (componentName: IPassword, eventValue: boolean) => {
+  receiveStatus = (componentName: IPassword, eventValue: boolean): void => {
     componentName.isAproved = eventValue;
   };
   /**
@@ -67,17 +80,19 @@ export class PwChangeComponent {
     this.receiveData(componentName, eventValue);
     componentName.value == this.password.value
       ? ((componentName.isAproved = true),
+        (componentName.fieldsetLabel = 'Confirme sua senha'),
         (componentName.borderColor = '#2C85D8'))
       : ((componentName.isAproved = false),
+        (componentName.fieldsetLabel = 'As senhas devem ser idênticas'),
         (componentName.borderColor = 'red'));
   };
   /**
    * signUpDataPackage
    * Submit signUpformData Object due Cadastrar onClick event.
    */
-  sendNewPwSubmit = (): void => {
-    this.sendNewPassword
-      .pwRedef(this.passwordConfirm.value)
+  newPasswordSubmit = (): void => {
+    this.authApi
+      .sendNewPassword(this.passwordConfirm.value)
       .then(() => {
         this.modalMessage =
           'Verifique seu e-mail. Nós enviamos um link para você cadastrar uma nova senha.';
