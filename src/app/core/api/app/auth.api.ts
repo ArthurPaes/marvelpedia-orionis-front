@@ -2,14 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { IRequestlogin, IResponseLogin } from '../interfaces/ILogin';
 import { IResponseRedirect } from '../interfaces/IRedirect';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class AuthApi {
-  constructor(
-    private httpRequestService: HttpRequestService,
-    private route: ActivatedRoute,
-  ) {}
+  constructor(private httpRequestService: HttpRequestService) {}
 
   /**
    * authenticateUser
@@ -29,8 +25,6 @@ export class AuthApi {
     return response;
   }
 
-  public token = '';
-
   /**
    * checkValidToken
    *
@@ -38,13 +32,9 @@ export class AuthApi {
    *
    * @returns retorna a mensagem e o status 200(sucesso) ou 401(falha) dependendo se o token estiver válido.
    */
-  async checkValidToken(): Promise<IResponseRedirect> {
-    this.route.queryParams.subscribe((queryParam) => {
-      this.token = queryParam['token'];
-      console.log(this.token);
-    });
+  async checkValidToken(token: string | null): Promise<IResponseRedirect> {
     return await this.httpRequestService.sendHttpRequest(
-      `http://localhost:4444/v1/check?token=${this.token}`,
+      `http://localhost:4444/v1/check?token=${token}`,
       'GET',
     );
   }
