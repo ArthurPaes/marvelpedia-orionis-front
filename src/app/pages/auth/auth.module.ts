@@ -11,12 +11,14 @@ import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ResetPasswordComponent } from './password-redefinition/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './password-redefinition/change-password/change-password.component';
 @NgModule({
   declarations: [
     LoginComponent,
     SignUpComponent,
     RedirectComponent,
     ResetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { ResetPasswordComponent } from './password-redefinition/reset-password/r
     SignUpComponent,
     RedirectComponent,
     ResetPasswordComponent,
+    ChangePasswordComponent,
   ],
 })
 export class AuthModule {}
