@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { IRequestlogin, IResponseLogin } from '../interfaces/ILogin';
 import { IResponseRedirect } from '../interfaces/IRedirect';
-
+import { environment } from 'src/environments/environment';
 @Injectable()
 export class AuthApi {
+  private apiUrl = environment.API_BASE_URL;
+
   constructor(private httpRequestService: HttpRequestService) {}
 
   /**
@@ -17,7 +19,7 @@ export class AuthApi {
    */
   async authenticateUser(login: IRequestlogin): Promise<IResponseLogin> {
     const response = await this.httpRequestService.sendHttpRequest(
-      'http://localhost:4444/v1/login',
+      `${this.apiUrl}/login`,
       'POST',
       login,
     );
@@ -34,7 +36,7 @@ export class AuthApi {
    */
   async checkValidToken(token: string | null): Promise<IResponseRedirect> {
     return await this.httpRequestService.sendHttpRequest(
-      `http://localhost:4444/v1/check?token=${token}`,
+      `${this.apiUrl}/check?token=${token}`,
       'GET',
     );
   }

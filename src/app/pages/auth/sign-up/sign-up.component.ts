@@ -10,7 +10,7 @@ import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  constructor(private submitUser: UserRegisterApi) {}
+  constructor(private userRegisterApi: UserRegisterApi) {}
 
   optionList: string[] = [
     'Mulher (cis ou trans)',
@@ -191,7 +191,7 @@ export class SignUpComponent {
       email: this.email.getValue(),
       password: this.password.getValue(),
     };
-    this.submitUser
+    this.userRegisterApi
       .registerNewUser(signUpFormData)
       .then(() => {
         this.modalMessage = 'Login efetuado com sucesso!';

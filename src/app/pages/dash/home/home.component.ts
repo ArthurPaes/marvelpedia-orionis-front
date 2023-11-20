@@ -8,7 +8,7 @@ import { CharactersApi } from 'src/app/core/api/app/characters.api';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private CharactersApi: CharactersApi) {}
+  constructor(private charactersApi: CharactersApi) {}
 
   characters: ICharacterCard[] = [];
   pageNumber = 1;
@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit {
    * @param page - Número da página a ser exibida os personagens.
    */
   serviceGetCharacters(page: number): void {
-    this.CharactersApi.getCharacters(page)
+    this.charactersApi
+      .getCharacters(page)
       .then((response) => {
         this.characters = this.characters.concat(response.data);
       })

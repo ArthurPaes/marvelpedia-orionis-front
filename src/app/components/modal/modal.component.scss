@@ -13,6 +13,16 @@ $words-color: #000000;
     z-index: 100;
 }
 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
 #btn-close {
     color: $words-color;
     position: absolute;
@@ -25,7 +35,7 @@ $words-color: #000000;
 
 .inner-container {
     text-align: center;
-    margin: 46px 52.5px;    
+    margin: 46px 52.5px;
 }
 
 .inner-container mat-icon {
