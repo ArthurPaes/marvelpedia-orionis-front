@@ -81,6 +81,13 @@ export class InputComponent implements OnChanges {
     }
   }
 
+  /**
+   * sendDataLogin
+   *
+   * Função que envia cada caracter para o componente pai do tipo Login.
+   *
+   * @param inputData Each letter typed in input component
+   */
   sendDataLogin(inputData: Event): void {
     this.inputBorderColor = '#FFFFFF';
     this.showTagLabel = false;
