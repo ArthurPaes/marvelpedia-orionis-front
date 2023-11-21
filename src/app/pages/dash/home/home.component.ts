@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   optionList = ['Personagens', 'Eventos', 'Quadrinhos', 'Séries'];
   content: IContentCard[] = [];
   seeMoreButton = true;
+  defaultContentDescription =
+    'Venha conhecer um pouco mais sobre este conteúdo exclusivo da Marvel. Aproveite para acessar outros materiais relacionados em "Saber mais"!';
 
   /** Mapeia as traduções das categorias */
   categoryTranslation: Record<string, string> = {
