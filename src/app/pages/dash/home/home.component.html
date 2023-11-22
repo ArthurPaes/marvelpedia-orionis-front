@@ -1,11 +1,15 @@
 <div class="background">
   <div class="container">
     <div class="filter-wrapper">
-      <h2>Personagens</h2>
-      <p>
-        Procure seus personagens preferidos e conheça melhor nossos heróis e
-        vilões!
-      </p>
+      <app-button
+        buttonType="cancel"
+        label="Sair"
+        class="logout-button"
+        [custonStyle]="'width: 75px'"
+        (click)="userLogout()"
+      ></app-button>
+      <h2>MarvelPedia</h2>
+      <p>Explore nossos conteúdos e conheça mais sobre o universo da Marvel!</p>
       <div class="input-area">
         <app-select
           [optionList]="['Personagens', 'Filmes e séries', 'Quadrinhos']"
@@ -45,4 +49,5 @@
       (click)="seeMoreCharacters()"
     ></app-button>
   </div>
+  <app-footer></app-footer>
 </div>

@@ -1,14 +1,15 @@
 <div class="background">
   <div class="component">
     <div class="icon-nav">
-      <a href="http://localhost:4200"><mat-icon>arrow_back_ios</mat-icon></a>
+      <button (click)="handleBackButton()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
     </div>
     <div class="container">
       <section class="titulo">
         <h1>Novo por aqui?</h1>
         <p>Cadastre-se e explore o Universo Marvel.</p>
       </section>
-      <!-- troca firstName por name para satisfazer o Back-End -->
       <app-input
         [inputType]="'inputEmail'"
         [fieldsetLabel]="firstName.getFieldLabel()"
@@ -53,6 +54,7 @@
         (valueChange)="regexFormatChecker(email, $event)"
         [backgroundColorTag]="email.getBorderColor()"
       ></app-input>
+
       <app-input
         [inputType]="'inputPassword'"
         [fieldsetLabel]="password.getFieldLabel()"
@@ -88,6 +90,7 @@
         [isDisabled]="!btRegisterState"
         (btnClick)="signUpDataSubmit()"
       ></app-button>
+
       <div class="checkbox">
         <app-checkbox
           (checkedChange)="receiveStatus(checkbox, $event)"
@@ -105,4 +108,5 @@
     (emitEventClose)="closeModal($event)"
     [message]="modalMessage"
   ></app-modal>
+  <!-- [isError]="handleError" -->
 </div>

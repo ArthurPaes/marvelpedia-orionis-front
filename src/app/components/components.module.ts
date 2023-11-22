@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NextDirective } from './carousel/next.directive';
 import { PrevDirective } from './carousel/prev.directive';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PrevDirective } from './carousel/prev.directive';
     CarouselComponent,
     NextDirective,
     PrevDirective,
+    FooterComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   exports: [
@@ -46,6 +48,7 @@ import { PrevDirective } from './carousel/prev.directive';
     CarouselComponent,
     NextDirective,
     PrevDirective,
+    FooterComponent,
   ],
   providers: [RatingApi],
 })

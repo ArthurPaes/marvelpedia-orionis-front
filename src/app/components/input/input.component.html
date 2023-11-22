@@ -99,11 +99,10 @@
 >
   <mat-icon
     (click)="cleanInputSearch()"
-    [ngStyle]="{ color: color }"
     class="icon-position"
+    [ngStyle]="{ color: color }"
+    >{{ showCloseBtn ? "close" : "search" }}</mat-icon
   >
-    {{ showCloseBtn ? "close" : "search" }}
-  </mat-icon>
   <span
     *ngIf="showTagLabel"
     class="input-label-position"

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import type { ICharacterCard } from './interface/home.interface';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,10 @@ import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private marvelContentApi: MarvelContentApi) {}
+  constructor(
+    private marvelContentApi: MarvelContentApi,
+    private router: Router,
+  ) {}
 
   characters: ICharacterCard[] = [];
   pageNumber = 1;
@@ -58,5 +62,15 @@ export class HomeComponent implements OnInit {
    */
   searchCharacters() {
     //
+  }
+
+  /**
+   * userLogout
+   *
+   * Realiza o logout do usuário, removendo o token de autenticação e redirecionando para a página de login.
+   */
+  userLogout(): void {
+    localStorage.removeItem('@authToken');
+    this.router.navigate(['/login']);
   }
 }
