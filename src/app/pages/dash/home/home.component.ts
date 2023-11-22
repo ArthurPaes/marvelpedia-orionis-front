@@ -109,24 +109,28 @@ export class HomeComponent implements OnInit {
    * @param page - Número da página a ser exibida.
    * @param search - Texto da pesquisa.
    */
-  serviceGetContent(
+  async serviceGetContent(
     category: EnumContentCategory,
     page: number,
     search: string,
-  ): void {
-    this.marvelContentApi
-      .getContentByCategorie(category, page, search)
-      .then((response) => {
-        // Caso não tenha mais conteúdo disponível para buscar, remove o botão "Ver mais" da página
-        if (response.data.length < 9) {
-          this.seeMoreButton = false;
-        }
-        this.content = this.content.concat(response.data);
-      })
-      .catch((error) => {
+  ): Promise<void> {
+    try {
+      const response = await this.marvelContentApi.getContentByCategorie(
+        category,
+        page,
+        search,
+      );
+
+      // Caso não tenha mais conteúdo disponível para buscar, remove o botão "Ver mais" da página
+      if (response.data.length < 9) {
         this.seeMoreButton = false;
-        console.log(error);
-      });
+      }
+
+      this.content = this.content.concat(response.data);
+    } catch (error) {
+      this.seeMoreButton = false;
+      console.error(error);
+    }
   }
 
   /**
