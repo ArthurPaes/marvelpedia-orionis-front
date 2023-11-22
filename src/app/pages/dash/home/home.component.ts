@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
    * translateCategory
    *
    * Traduz a categoria em português para inglês, da forma que o backend espera no momento do request.
-   * @param category - Categoria a ser convertida para inglês.
+   * @param categoryInPortuguese - Categoria a ser convertida para inglês.
    * @returns Categoria em inglês.
    */
   private translateCategory(categoryInPortuguese: string): EnumContentCategory {
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
    * onCategoryChange
    *
    * Manipula a mudança no select de categorias.
-   * @param option - Categoria selecionada.
+   * @param optionCategory - Categoria selecionada.
    */
   onCategoryChange(optionCategory: string): void {
     //Extrai o nome da categoria e ignora o número e dois pontos que é implementado pelo componente select.
