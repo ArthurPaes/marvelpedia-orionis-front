@@ -1,0 +1,17 @@
+<div [ngStyle]="{ width: selectWidth }" class="container-select">
+  <mat-icon class="icon-position">arrow_drop_down</mat-icon>
+  <span *ngIf="showTagLabel" class="select-label-position">{{ tagLabel }}</span>
+  <select
+    class="select-position"
+    [(ngModel)]="valueSelect"
+    [ngStyle]="{ 'border-color': borderColor }"
+    (change)="sendData($event)"
+  >
+    <option hidden disabled selected value="{{ placeholder }}">
+      {{ placeholder }}
+    </option>
+    <option *ngFor="let optionItem of optionList" [ngValue]="optionItem">
+      {{ optionItem }}
+    </option>
+  </select>
+</div>

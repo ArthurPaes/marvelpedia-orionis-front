@@ -1,0 +1,19 @@
+<div class="modal" *ngIf="isModalActive">
+  <div
+    class="overlay"
+    [class.disable-close]="!closeOnOverlayClick"
+    (click)="closeOnOverlayClick && closeModal()"
+    (keyup.esc)="closeOnOverlayClick && closeModal()"
+    tabindex="0"
+  ></div>
+  <div class="main-container" [ngStyle]="{ width: width, height: height }">
+    <div class="inner-container">
+      <mat-icon>{{ iconName }}</mat-icon>
+      <h1>{{ title }}</h1>
+      <p>{{ message }}</p>
+      <button (click)="closeModal()" id="btn-finalizar">
+        {{ btText }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="background">
+  <div class="container">
+    <div class="filter-wrapper">
+      <app-button
+        buttonType="cancel"
+        label="Sair"
+        class="logout-button"
+        [custonStyle]="'width: 75px'"
+        (click)="userLogout()"
+      ></app-button>
+      <h2>MarvelPedia</h2>
+      <p>Explore nossos conteúdos e conheça mais sobre o universo da Marvel!</p>
+      <div class="input-area">
+        <app-select
+          [optionList]="['Personagens', 'Filmes e séries', 'Quadrinhos']"
+          [selectWidth]="'381px'"
+          [placeholder]="'Categoria dos personagens'"
+        ></app-select>
+        <app-input
+          [inputType]="'inputSearch'"
+          [fieldsetLabel]="'Quem você procura?'"
+          [placeHolder]="'Quem você procura?'"
+          [inputWidth]="'653px'"
+        ></app-input>
+        <app-button label="Buscar" onclick="searchCharacters()"></app-button>
+      </div>
+    </div>
+    <div class="grid-container">
+      <app-character-card
+        class="grid-item"
+        *ngFor="let character of characters"
+        [title]="character.enName"
+        [description]="character.description"
+        [imageSrc]="
+          character.thumb
+            ? character.thumb
+            : '../../../../assets/images/personagem-sem-imagem.jpg'
+        "
+      ></app-character-card>
+    </div>
+    <app-button
+      class="btn-see-more"
+      label="Conhecer mais"
+      (click)="seeMoreCharacters()"
+    ></app-button>
+  </div>
+  <app-footer></app-footer>
+</div>

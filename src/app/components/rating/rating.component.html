@@ -1,0 +1,49 @@
+<div
+  class="container-star"
+  [ngStyle]="{
+    'margin-bottom': marginBottomStars,
+    'margin-top': marginTopStars,
+    'justify-content': justifyContent
+  }"
+>
+  <span *ngIf="showLabel" [ngStyle]="{ color: textColor }"
+    >Deixe sua avaliação</span
+  >
+  <div *ngIf="showStars" class="container-star">
+    <mat-icon
+      #starElement
+      *ngFor="let star of starList"
+      (click)="selectStarPosition(star)"
+      class="icon-star"
+      [ngStyle]="{ width: spaceBetweenStars, color: textColor }"
+    >
+      {{ star < ratingValue.chosenRate ? "star" : "star_border" }}</mat-icon
+    >
+  </div>
+</div>
+<textarea
+  *ngIf="showTextarea"
+  [ngClass]="placeHolderColor"
+  (input)="registerTextareaData($event)"
+  [(ngModel)]="ratingValue.textboxValue"
+  [placeholder]="textareaPlaceholder"
+  [ngStyle]="{
+    height: textareaHeight,
+    'margin-top': marginTopTextarea,
+    'margin-bottom': marginBottomTextarea,
+    width: textareaWidth,
+    'border-color': textareaBorderColor,
+    color: textareaColor
+  }"
+></textarea>
+<app-button
+  (btnClick)="sendRating()"
+  [isDisabled]="btnDisabled"
+  label="ENVIAR"
+  buttonType="large"
+></app-button>
+<app-modal
+  [isModalActive]="isModalActive"
+  message="modalMessage"
+  (emitEventClose)="closeModal($event)"
+></app-modal>

@@ -1,4 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  //Product
+  --color-white: rgb(255, 255, 255);
+  --color-primary: rgb(44, 133, 216);
+  --color-sup-red: rgb(227, 134, 134);
+  --color-gray: rgb(147, 147, 147);
+
+  //Buttons
+  --color-primary-hover: rgb(107, 174, 237);
+  --color-text-disable: rgb(23, 23, 23);
+  --color-disable: rgba(151, 151, 151, 0.3);
+}
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  background-color: gray;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
