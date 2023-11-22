@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
    *
    * Realiza o logout do usuário, removendo o token de autenticação e redirecionando para a página de login.
    */
-  userLogout() {
+  userLogout(): void {
     localStorage.removeItem('@authToken');
     this.router.navigate(['/login']);
   }
