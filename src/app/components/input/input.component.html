@@ -1,6 +1,22 @@
-<!--Input E-mail-->
-
-<!--Input E-mail-->
+<div
+  *ngIf="inputType === 'inputEmailLogin'"
+  [ngStyle]="{ width: inputWidth }"
+  class="container-input"
+>
+  <span
+    *ngIf="showTagLabel"
+    class="input-label-position"
+    [ngStyle]="{ 'background-color': backgroundColorTag }"
+    >{{ fieldsetLabel }}</span
+  >
+  <input
+    [placeholder]="placeHolder"
+    class="input-position"
+    [(ngModel)]="value"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
+    (input)="sendDataLogin($event)"
+  />
+</div>
 
 <div
   *ngIf="inputType === 'inputEmail'"
@@ -49,6 +65,31 @@
   />
 </div>
 
+<div
+  *ngIf="inputType === 'inputPasswordLogin'"
+  [ngStyle]="{ width: inputWidth }"
+  class="container-input"
+>
+  <mat-icon (click)="showPassword = !showPassword" class="icon-position">{{
+    showPassword ? "visibility" : "visibility_off"
+  }}</mat-icon>
+  <span
+    *ngIf="showTagLabel"
+    class="input-label-position"
+    [ngStyle]="{ 'background-color': backgroundColorTag }"
+  >
+    {{ fieldsetLabel }}</span
+  >
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    [placeholder]="placeHolder"
+    class="input-position"
+    [(ngModel)]="value"
+    [ngStyle]="{ 'border-color': inputBorderColor }"
+    (input)="sendDataLogin($event)"
+  />
+</div>
+
 <!--Input pesquisa da tela de dash personagens-->
 
 <div
@@ -56,18 +97,31 @@
   [ngStyle]="{ width: inputWidth }"
   class="container-input"
 >
-  <mat-icon (click)="cleanInputSearch()" class="icon-position">{{
-    showCloseBtn ? "close" : "search"
-  }}</mat-icon>
-  <span *ngIf="showTagLabel" class="input-label-position">{{
-    fieldsetLabel
-  }}</span>
+  <mat-icon
+    (click)="cleanInputSearch()"
+    [ngStyle]="{ color: color }"
+    class="icon-position"
+  >
+    {{ showCloseBtn ? "close" : "search" }}
+  </mat-icon>
+  <span
+    *ngIf="showTagLabel"
+    class="input-label-position"
+    [ngStyle]="{ 'background-color': backgroundColorTag }"
+  >
+    {{ fieldsetLabel }}
+  </span>
   <input
     [placeholder]="placeHolder"
     class="input-position"
+    [ngClass]="inputSearchClass"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
-    (input)="sendData($event)"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      color: color,
+      height: height
+    }"
+    (input)="sendDataLogin($event)"
   />
 </div>
 

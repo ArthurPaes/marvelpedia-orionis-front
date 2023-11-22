@@ -5,7 +5,9 @@
     <p>Por favor, preencha os campos abaixo para logar.</p>
     <div class="input-area">
       <app-input
-        inputType="inputEmail"
+        inputType="inputEmailLogin"
+        [backgroundColorTag]="'#2C85D8'"
+        [color]="'#FFFFFF'"
         placeHolder="E-mail"
         fieldsetLabel="E-mail"
         (valueChange)="emailValueChange($event)"
@@ -13,7 +15,9 @@
         required
       ></app-input>
       <app-input
-        inputType="inputPassword"
+        inputType="inputPasswordLogin"
+        [backgroundColorTag]="'#2C85D8'"
+        [color]="'#FFFFFF'"
         placeHolder="Senha"
         fieldsetLabel="Senha"
         (valueChange)="passwordValueChange($event)"
