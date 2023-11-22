@@ -5,18 +5,18 @@
     <p>Por favor, preencha os campos abaixo para logar.</p>
     <div class="input-area">
       <app-input
-        inputType="inputEmail"
+        inputType="inputEmailLogin"
         placeHolder="E-mail"
         fieldsetLabel="E-mail"
-        (valueChange)="emailValueChange($event)"
+        (valueChangeLogin)="emailValueChange($event)"
         autocomplet
         required
       ></app-input>
       <app-input
-        inputType="inputPassword"
+        inputType="inputPasswordLogin"
         placeHolder="Senha"
         fieldsetLabel="Senha"
-        (valueChange)="passwordValueChange($event)"
+        (valueChangeLogin)="passwordValueChange($event)"
         required
       ></app-input>
     </div>
