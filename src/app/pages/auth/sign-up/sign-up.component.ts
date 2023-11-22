@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { IFormatter } from './interfaces/sign-up.interface';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { InputElement } from './InputData';
@@ -10,7 +11,10 @@ import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  constructor(private userRegisterApi: UserRegisterApi) {}
+  constructor(
+    private userRegisterApi: UserRegisterApi,
+    private router: Router,
+  ) {}
 
   optionList: string[] = [
     'Mulher (cis ou trans)',
@@ -42,6 +46,13 @@ export class SignUpComponent {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   };
   /**
+   * handleBackButton
+   * Handles the navigation to login endpoint.
+   */
+  handleBackButton = (): void => {
+    this.router.navigate(['login']);
+  };
+  /**
    * btEnabler
    * Toggles the Register button between anabled/disabled states.
    */
@@ -68,11 +79,11 @@ export class SignUpComponent {
   };
   /**
    * receiveStatus
-   * Handles the assignment of boolean data to input Element is Approval proprietary.
+   * Handles the assignment of boolean data to input Element isApproval property.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
-  receiveStatus = (componentName: InputElement, eventValue: boolean) => {
+  receiveStatus = (componentName: InputElement, eventValue: boolean): void => {
     componentName.setIsAproved(eventValue);
     this.btEnabler();
   };
@@ -124,7 +135,7 @@ export class SignUpComponent {
   };
   /**
    * isfilledChecker
-   * Handles verifications without comparison parameters. (ex. checkbox and select)
+   * Checks if the input value isn't empty.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
@@ -160,7 +171,7 @@ export class SignUpComponent {
   };
   /**
    * passwordMatchChecker
-   * Handles the password match verification.
+   * Checks if passoword confirmation input and password input are matching.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
@@ -179,8 +190,8 @@ export class SignUpComponent {
     this.btEnabler();
   };
   /**
-   * signUpDataPackage
-   * Submit signUpformData Object due Cadastrar onClick event.
+   * signUpDataSubmit
+   * Submit signUpformData Object due button onClick event.
    */
   signUpDataSubmit = (): void => {
     const signUpFormData: IRequestNewUser = {

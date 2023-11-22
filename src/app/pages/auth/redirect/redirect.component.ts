@@ -24,8 +24,8 @@ export class RedirectComponent implements OnInit {
   ngOnInit(): void {
     const token: string | null =
       this.activatedRoute.snapshot.queryParamMap.get('token');
-    this.authApi.checkValidToken(token).then((dt) => {
-      this.message = dt.message;
+    this.authApi.checkValidToken(token).then((tokenValidated) => {
+      this.message = tokenValidated.message;
     });
   }
 
