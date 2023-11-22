@@ -1,31 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import type { IContentCard } from './interface/home.interface';
-import { ContentApi } from 'src/app/core/api/app/content.api';
+import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 
+export enum EnumContentCategory {
+  Characters = 'characters',
+  Comics = 'comics',
+  Series = 'series',
+  Stories = 'stories',
+  Favorites = 'favorites',
+  Events = 'events',
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private contentApi: ContentApi) {}
+  constructor(private marvelContentApi: MarvelContentApi) {}
 
   pageNumber = 1;
-  category = 'characters';
+  categoryInputValue = EnumContentCategory.Characters;
+  searchInputValue = '';
+  category = EnumContentCategory.Characters;
   search = '';
-  optionList = ['Personagens', 'Eventos', 'Quadrinhos', 'Séries'];
+  optionList = [
+    'Personagens',
+    'Quadrinhos',
+    'Séries',
+    'Histórias',
+    'Favoritos',
+    'Eventos',
+  ];
   content: IContentCard[] = [];
   seeMoreButton = true;
-  defaultContentDescription =
+  defaultCardDescription =
     'Venha conhecer um pouco mais sobre este conteúdo exclusivo da Marvel. Aproveite para acessar outros materiais relacionados em "Saber mais"!';
-
-  /** Mapeia as traduções das categorias */
-  categoryTranslation: Record<string, string> = {
-    Personagens: 'characters',
-    Eventos: 'events',
-    Quadrinhos: 'comics',
-    Séries: 'series',
-  };
 
   /**
    * ngOnInit
@@ -33,7 +42,11 @@ export class HomeComponent implements OnInit {
    * Inicializa o componente, chamando o service para carregar o conteúdo da página inicial, no caso, personagens.
    */
   ngOnInit(): void {
-    this.serviceGetContent(this.category, this.pageNumber, this.search);
+    this.serviceGetContent(
+      this.category,
+      this.pageNumber,
+      this.searchInputValue,
+    );
   }
 
   /**
@@ -43,11 +56,25 @@ export class HomeComponent implements OnInit {
    * @param category - Categoria a ser convertida para inglês.
    * @returns Categoria em inglês.
    */
-  translateCategory(category: string): string {
-    if (category in this.categoryTranslation) {
-      return this.categoryTranslation[category];
-    } else {
-      return category;
+  private translateCategory(categoryInPortuguese: string): EnumContentCategory {
+    switch (categoryInPortuguese.toLowerCase()) {
+      case 'personagens':
+        return EnumContentCategory.Characters;
+      case 'eventos':
+        return EnumContentCategory.Events;
+      case 'quadrinhos':
+        return EnumContentCategory.Comics;
+      case 'séries':
+        return EnumContentCategory.Series;
+      case 'histórias':
+        return EnumContentCategory.Stories;
+      case 'favoritos':
+        return EnumContentCategory.Favorites;
+      default:
+        console.log(
+          `Tradução não encontrada para a categoria: ${categoryInPortuguese}`,
+        );
+        return categoryInPortuguese as EnumContentCategory;
     }
   }
 
@@ -57,10 +84,10 @@ export class HomeComponent implements OnInit {
    * Manipula a mudança no select de categorias.
    * @param option - Categoria selecionada.
    */
-  onCategoryChange(option: string): void {
+  onCategoryChange(optionCategory: string): void {
     //Extrai o nome da categoria e ignora o número e dois pontos que é implementado pelo componente select.
-    const categoryInPortuguese = option.slice(3);
-    this.category = this.translateCategory(categoryInPortuguese);
+    const categoryInPortuguese = optionCategory.slice(3);
+    this.categoryInputValue = this.translateCategory(categoryInPortuguese);
   }
 
   /**
@@ -69,7 +96,7 @@ export class HomeComponent implements OnInit {
    * @param search - Texto da pesquisa feita pelo usuário.
    */
   onSearchChange(search: string): void {
-    this.search = search;
+    this.searchInputValue = search;
   }
 
   /**
@@ -82,9 +109,13 @@ export class HomeComponent implements OnInit {
    * @param page - Número da página a ser exibida.
    * @param search - Texto da pesquisa.
    */
-  serviceGetContent(category: string, page: number, search: string): void {
-    this.contentApi
-      .getContent(category, page, search)
+  serviceGetContent(
+    category: EnumContentCategory,
+    page: number,
+    search: string,
+  ): void {
+    this.marvelContentApi
+      .getContentByCategorie(category, page, search)
       .then((response) => {
         // Caso não tenha mais conteúdo disponível para buscar, remove o botão "Ver mais" da página
         if (response.data.length < 9) {
@@ -114,10 +145,12 @@ export class HomeComponent implements OnInit {
    * Realiza uma busca por conteúdo com base nos filtros.
    * Limpa a lista de 'content', reinicia a paginação e ativa o botão "CONHECER MAIS"
    */
-  searchContent() {
+  searchContent(): void {
     this.content = [];
     this.pageNumber = 1;
     this.seeMoreButton = true;
+    this.category = this.categoryInputValue;
+    this.search = this.searchInputValue;
     this.serviceGetContent(this.category, this.pageNumber, this.search);
   }
 }

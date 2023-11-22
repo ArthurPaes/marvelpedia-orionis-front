@@ -29,7 +29,7 @@
         *ngFor="let content of content"
         [title]="content.enName ? content.enName : content.enTitle"
         [description]="
-          content.description ? content.description : defaultContentDescription
+          content.description ? content.description : defaultCardDescription
         "
         [imageSrc]="
           content.thumb

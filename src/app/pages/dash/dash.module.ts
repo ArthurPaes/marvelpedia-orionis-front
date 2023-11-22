@@ -5,13 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { ContentApi } from 'src/app/core/api/app/content.api';
+import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
   declarations: [HomeComponent, SurveyComponent],
   imports: [CommonModule, MatIconModule, FormsModule, ComponentsModule],
-  providers: [ContentApi],
+  providers: [MarvelContentApi],
   bootstrap: [],
   exports: [HomeComponent, SurveyComponent],
 })

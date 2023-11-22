@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { environment } from 'src/environments/environment';
-import { IResponseContent } from '../interfaces/IContent';
+import { IResponseContentByCategorie } from '../interfaces/IContent';
+import { EnumContentCategory } from 'src/app/pages/dash/home/home.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContentApi {
+export class MarvelContentApi {
   private apiUrl = `${environment.API_BASE_URL}`;
 
   constructor(private httpRequestService: HttpRequestService) {}
 
-  async getContent(
-    category: string,
+  async getContentByCategorie(
+    category: EnumContentCategory,
     page: number,
     search: string,
-  ): Promise<IResponseContent> {
+  ): Promise<IResponseContentByCategorie> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/${category}?page=${page}&search=${search}`,
       'GET',
