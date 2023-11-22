@@ -28,7 +28,6 @@
         [cleanValue]="cleanInput"
         [backgroundColorTag]="lastName.getBorderColor()"
       ></app-input>
-
       <div class="genreBirthContainer">
         <app-select
           [optionList]="optionList"
@@ -114,6 +113,6 @@
     [isModalActive]="showModal"
     (emitEventClose)="closeModal($event)"
     [message]="modalMessage"
-    [isError]="handleError"
   ></app-modal>
+  <!-- [isError]="handleError" -->
 </div>

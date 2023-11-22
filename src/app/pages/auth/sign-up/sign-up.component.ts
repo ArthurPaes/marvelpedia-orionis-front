@@ -171,7 +171,7 @@ export class SignUpComponent {
   };
   /**
    * passwordMatchChecker
-   * Checks if passowrd confirmation input and password input are matching.
+   * Checks if passoword confirmation input and password input are matching.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
