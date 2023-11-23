@@ -1,8 +1,7 @@
-//Adicionar endpoints de autenticação
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { IRequestlogin, IResponseLogin } from '../interfaces/ILogin';
-import { IResponseRedirect } from '../interfaces/IRedirect';
+import { IResponseCheckValidToken } from '../interfaces/IRedirect';
 import { environment } from 'src/environments/environment';
 @Injectable()
 export class AuthApi {
@@ -35,9 +34,11 @@ export class AuthApi {
    *
    * @returns retorna a mensagem e o status 200(sucesso) ou 401(falha) dependendo se o token estiver válido.
    */
-  async checkValidToken(): Promise<IResponseRedirect> {
+  async checkValidToken(
+    token: string | null,
+  ): Promise<IResponseCheckValidToken> {
     return await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/check`,
+      `${this.apiUrl}/check?token=${token}`,
       'GET',
     );
   }
