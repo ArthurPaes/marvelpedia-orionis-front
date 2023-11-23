@@ -11,7 +11,7 @@ export class MarvelContentApi {
 
   constructor(private httpRequestService: HttpRequestService) {}
 
-  async getContentByCategorie(page: number): Promise<any> {
+  async getCharacters(page: number): Promise<any> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/characters?page=${page}`,
       'GET',

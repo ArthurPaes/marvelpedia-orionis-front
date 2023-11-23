@@ -1,9 +1,9 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appPrev]',
+  selector: '[appPrevCarouselItem]',
 })
-export class PrevDirective {
+export class PrevCarouselCardDirective {
   constructor(private elementRef: ElementRef) {}
 
   @HostListener('click')

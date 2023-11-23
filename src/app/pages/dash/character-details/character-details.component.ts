@@ -32,7 +32,7 @@ export class CharacterDetailsComponent implements OnInit {
    *
    * Quando o usuário vier da página home ao clicar no card, essa função irá receber o id do personagem como parâmetro da URL ao inicializar a página, e irá solicitar ao backend informações que irão compor a página de detalhes como dados do cabeçalho e arrays de quadrinhos, histórias, séres e eventos.
    */
-  getCategoryList() {
+  getCategoryList(): void {
     const characterIdParams: string | null =
       this.activatedRoute.snapshot.paramMap.get('id');
     if (characterIdParams != null) {
