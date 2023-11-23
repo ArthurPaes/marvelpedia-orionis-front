@@ -6,6 +6,8 @@
     <div class="input-area">
       <app-input
         inputType="inputEmailLogin"
+        [backgroundColorTag]="'#2C85D8'"
+        [color]="'#FFFFFF'"
         placeHolder="E-mail"
         fieldsetLabel="E-mail"
         (valueChangeLogin)="emailValueChange($event)"
@@ -14,6 +16,8 @@
       ></app-input>
       <app-input
         inputType="inputPasswordLogin"
+        [backgroundColorTag]="'#2C85D8'"
+        [color]="'#FFFFFF'"
         placeHolder="Senha"
         fieldsetLabel="Senha"
         (valueChangeLogin)="passwordValueChange($event)"

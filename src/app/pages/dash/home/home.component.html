@@ -14,12 +14,17 @@
         <app-select
           [optionList]="['Personagens', 'Filmes e séries', 'Quadrinhos']"
           [selectWidth]="'381px'"
+          [height]="'57px'"
+          [tagLabel]="'Categoria dos personagens'"
           [placeholder]="'Categoria dos personagens'"
         ></app-select>
         <app-input
           [inputType]="'inputSearch'"
           [fieldsetLabel]="'Quem você procura?'"
+          [color]="'#FFFFFF'"
           [placeHolder]="'Quem você procura?'"
+          [inputBorderColor]="'#FFFFFF'"
+          [inputSearchClass]="'inputSearchStandard'"
           [inputWidth]="'653px'"
         ></app-input>
         <app-button label="Buscar" onclick="searchCharacters()"></app-button>

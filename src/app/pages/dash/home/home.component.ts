@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import type { ICharacterCard } from './interface/home.interface';
-import { CharactersApi } from 'src/app/core/api/app/characters.api';
+import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   constructor(
-    private charactersApi: CharactersApi,
+    private marvelContentApi: MarvelContentApi,
     private router: Router,
   ) {}
 
@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
    * @param page - Número da página a ser exibida os personagens.
    */
   serviceGetCharacters(page: number): void {
-    this.charactersApi
-      .getCharacters(page)
+    this.marvelContentApi
+      .getContentByCategorie(page)
       .then((response) => {
         this.characters = this.characters.concat(response.data);
       })
