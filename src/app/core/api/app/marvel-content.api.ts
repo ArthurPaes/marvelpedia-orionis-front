@@ -13,7 +13,7 @@ export class MarvelContentApi {
   constructor(private httpRequestService: HttpRequestService) {}
 
   /**
-   * getContentByCategorie
+   * getContentByCategory
    *
    * Obtém o conteúdo da API com base na categoria especificada.
    * A categoria pode ser uma das seguintes: 'characters', 'comics', 'series', 'stories', 'favorites', 'events'.
