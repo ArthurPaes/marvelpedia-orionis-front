@@ -50,25 +50,17 @@ export class HomeComponent implements OnInit {
    * @returns Categoria em inglês.
    */
   private translateCategory(categoryInPortuguese: string): EnumContentCategory {
-    switch (categoryInPortuguese.toLowerCase()) {
-      case 'personagens':
-        return EnumContentCategory.Characters;
-      case 'eventos':
-        return EnumContentCategory.Events;
-      case 'quadrinhos':
-        return EnumContentCategory.Comics;
-      case 'séries':
-        return EnumContentCategory.Series;
-      case 'histórias':
-        return EnumContentCategory.Stories;
-      case 'favoritos':
-        return EnumContentCategory.Favorites;
-      default:
-        console.log(
-          `Tradução não encontrada para a categoria: ${categoryInPortuguese}`,
-        );
-        return categoryInPortuguese as EnumContentCategory;
-    }
+    const categoryMap: Record<string, EnumContentCategory> = {
+      personagens: EnumContentCategory.Characters,
+      eventos: EnumContentCategory.Events,
+      quadrinhos: EnumContentCategory.Comics,
+      séries: EnumContentCategory.Series,
+      histórias: EnumContentCategory.Stories,
+      favoritos: EnumContentCategory.Favorites,
+    };
+
+    const translatedCategory = categoryMap[categoryInPortuguese.toLowerCase()];
+    return translatedCategory;
   }
 
   /**
