@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { IFormatter } from './interfaces/sign-up.interface';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { InputElement } from './InputData';
 import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
 import { IModalConfig } from '../login/interface/login.interface';
+import { InputComponent } from 'src/app/components/input/input.component';
+import { SelectComponent } from 'src/app/components/select/select.component';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -15,6 +18,9 @@ export class SignUpComponent {
     private userRegisterApi: UserRegisterApi,
     private router: Router,
   ) {}
+
+  @ViewChildren(InputComponent) inputComponents?: QueryList<InputComponent>;
+  @ViewChild(SelectComponent) selectComponent?: SelectComponent;
 
   optionList: string[] = [
     'Mulher (cis ou trans)',
@@ -153,6 +159,10 @@ export class SignUpComponent {
     componentName.getValue().length != 0
       ? componentName.setIsAproved(true)
       : componentName.setIsAproved(false);
+    this.passwordMatchChecker(
+      this.passwordConfirmation,
+      this.passwordConfirmation.dataValue,
+    );
     this.btEnabler();
   };
   /**
@@ -247,7 +257,6 @@ export class SignUpComponent {
       await this.userRegisterApi.registerNewUser(signUpFormData);
       this.handleSignUpSuccess();
     } catch (e: any) {
-      console.log(e.error.data[0].msg);
       this.handleSignUpError(e.error.data[0].msg);
     }
   }
@@ -267,17 +276,16 @@ export class SignUpComponent {
 
   // Solução criada por Rafael Horauti para soluciona o requisito
   // de limpar os inputs do formulário ao clicar no botão limpar;
-  cleanInput = '';
-  count = 0;
-
   /**
-   * limparInput
+   * cleanForm
    *
    * Reset form inputs value.
    */
-  limparInput(): void {
-    this.cleanInput = 'true' + this.count;
-    this.count++;
+  cleanForm(): void {
+    this.inputComponents?.forEach((input) => {
+      input.cleanInputValue();
+    });
+    this.selectComponent?.cleanSelectValue();
   }
   // fim da solução
 }
