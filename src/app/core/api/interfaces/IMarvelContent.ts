@@ -5,3 +5,12 @@ export interface IResponseContentByCategory {
   status: boolean;
   data: IContentCard[];
 }
+
+export enum EnumContentCategory {
+  Characters = 'characters',
+  Comics = 'comics',
+  Series = 'series',
+  Stories = 'stories',
+  Favorites = 'favorites',
+  Events = 'events',
+}

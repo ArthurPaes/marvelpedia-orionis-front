@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { environment } from 'src/environments/environment';
 import { IResponseContentByCategory } from '../interfaces/IMarvelContent';
-import { EnumContentCategory } from 'src/app/pages/dash/home/home.component';
+import { EnumContentCategory } from '../interfaces/IMarvelContent';
 
 @Injectable({
   providedIn: 'root',

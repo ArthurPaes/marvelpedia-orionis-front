@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import type { IContentCard } from './interface/home.interface';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
+import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
 
-export enum EnumContentCategory {
-  Characters = 'characters',
-  Comics = 'comics',
-  Series = 'series',
-  Stories = 'stories',
-  Favorites = 'favorites',
-  Events = 'events',
-}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
