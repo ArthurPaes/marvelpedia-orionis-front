@@ -90,24 +90,6 @@ export class LoginComponent {
   }
 
   /**
-   * handleLoginSuccess
-   *
-   * Manipula o sucesso no login.
-   * Indica que não houve erro através da variável 'loginError' e configura o modal para exibir a mensagem de sucesso.
-   */
-  handleLoginSuccess(): void {
-    this.loginError = false;
-    this.modalConfig = {
-      showModal: true,
-      icon: 'check_circle_outline',
-      title: 'Sucesso!',
-      message: 'Login efetuado com sucesso!',
-      buttonText: 'ENTRAR',
-      overlayClick: false,
-    };
-  }
-
-  /**
    * handleLoginError
    *
    * Manipula o erro no login.
@@ -135,7 +117,7 @@ export class LoginComponent {
   async onSubmit(): Promise<void> {
     try {
       await this.authApi.authenticateUser(this.login);
-      this.handleLoginSuccess();
+      this.router.navigate(['/home']);
     } catch (error) {
       this.handleLoginError();
     }
@@ -149,9 +131,6 @@ export class LoginComponent {
    * @param event - O evento de fechamento do modal.
    */
   closeModal(event: boolean): void {
-    if (!this.loginError) {
-      this.router.navigate(['/home']);
-    }
     this.modalConfig.showModal = event;
   }
 }
