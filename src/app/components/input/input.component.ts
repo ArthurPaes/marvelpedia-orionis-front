@@ -1,17 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  OnChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent implements OnChanges {
+export class InputComponent {
   @Output() valueChange = new EventEmitter<string>();
   @Output() valueChangeLogin = new EventEmitter<string>();
   @Input() placeHolder = '';
@@ -19,8 +13,11 @@ export class InputComponent implements OnChanges {
   @Input() fieldsetLabel = '';
   @Input() inputWidth = '';
   @Input() inputBorderColor = '#FFFFFF';
+  @Input() color = '';
   @Input() backgroundColorTag = '';
   @Input() cleanValue = '';
+  @Input() inputSearchClass = 'inputSearchDetails';
+  @Input() height = '';
 
   public value = '';
   public showPassword = false;
@@ -29,16 +26,14 @@ export class InputComponent implements OnChanges {
   public showIconDate = false;
 
   /**
-   * ngOnChanges
+   * cleanInputValue
    *
    * Função que limpa o input ao clicar em um botão limpar do componente pai.
    */
-  ngOnChanges(): void {
-    if (this.cleanValue.includes('true')) {
-      this.value = '';
-      this.showTagLabel = false;
-      this.inputBorderColor = '#FFFFFF';
-    }
+  cleanInputValue(): void {
+    this.value = '';
+    this.showTagLabel = false;
+    this.inputBorderColor = '#FFFFFF';
   }
 
   /**
@@ -48,7 +43,11 @@ export class InputComponent implements OnChanges {
    */
   cleanInputSearch(): void {
     this.value = '';
-    this.inputBorderColor = '#FFFFFF';
+    if (this.color == '#FFFFFF') {
+      this.inputBorderColor = '#FFFFFF';
+    } else {
+      this.inputBorderColor = '#000000';
+    }
     this.showTagLabel = false;
     this.showCloseBtn = false;
   }
@@ -84,12 +83,16 @@ export class InputComponent implements OnChanges {
   /**
    * sendDataLogin
    *
-   * Função que envia cada caracter para o componente pai do tipo Login.
+   * This function allows you send input typed word to parent component Login.
    *
    * @param inputData Each letter typed in input component
    */
   sendDataLogin(inputData: Event): void {
-    this.inputBorderColor = '#FFFFFF';
+    if (this.color == '#FFFFFF') {
+      this.inputBorderColor = '#FFFFFF';
+    } else {
+      this.inputBorderColor = '#000000';
+    }
     this.showTagLabel = false;
     this.showCloseBtn = false;
     this.value = (inputData.target as HTMLInputElement).value.trim();

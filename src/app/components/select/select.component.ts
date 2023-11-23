@@ -1,18 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  OnInit,
-  OnChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 })
-export class SelectComponent implements OnInit, OnChanges {
+export class SelectComponent implements OnInit {
   @Output() valueChange = new EventEmitter<string>();
   @Input() selectWidth = '';
   @Input() selectBorderColor = '';
@@ -20,10 +13,11 @@ export class SelectComponent implements OnInit, OnChanges {
   @Input() tagLabel = '';
   @Input() borderColor = '#FFFFFF';
   @Input() placeholder = '';
-  @Input() cleanValue = '';
+  @Input() height = '';
 
   public valueSelect = '';
   public showTagLabel = false;
+  public placeHolderClean = '';
 
   /**
    * ngOnInit
@@ -33,20 +27,21 @@ export class SelectComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.placeholder) {
       this.valueSelect = this.placeholder;
+      this.placeHolderClean = this.placeholder;
     }
   }
 
   /**
-   * ngOnChanges
+   * cleanSelectValue
    *
    * Função que limpa o select ao clicar em um botão limpar do componente pai.
    */
-  ngOnChanges(): void {
-    if (this.cleanValue.includes('true')) {
-      this.valueSelect = this.placeholder;
-      this.showTagLabel = false;
-      this.borderColor = '#FFFFFF';
-    }
+  cleanSelectValue(): void {
+    this.valueSelect = '';
+    this.showTagLabel = false;
+    this.selectBorderColor = '#FFFFFF';
+    this.borderColor = '#FFFFFF';
+    this.valueSelect = this.placeHolderClean;
   }
 
   /**

@@ -97,9 +97,12 @@
   [ngStyle]="{ width: inputWidth }"
   class="container-input"
 >
-  <mat-icon (click)="cleanInputSearch()" class="icon-position">{{
-    showCloseBtn ? "close" : "search"
-  }}</mat-icon>
+  <mat-icon
+    (click)="cleanInputSearch()"
+    class="icon-position"
+    [ngStyle]="{ color: color }"
+    >{{ showCloseBtn ? "close" : "search" }}</mat-icon
+  >
   <span
     *ngIf="showTagLabel"
     class="input-label-position"
@@ -110,8 +113,13 @@
   <input
     [placeholder]="placeHolder"
     class="input-position"
+    [ngClass]="inputSearchClass"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      color: color,
+      height: height
+    }"
     (input)="sendDataLogin($event)"
   />
 </div>

@@ -12,36 +12,44 @@
       <p>Explore nossos conteúdos e conheça mais sobre o universo da Marvel!</p>
       <div class="input-area">
         <app-select
-          [optionList]="['Personagens', 'Filmes e séries', 'Quadrinhos']"
+          [optionList]="optionList"
+          [placeholder]="'Personagens'"
           [selectWidth]="'381px'"
-          [placeholder]="'Categoria dos personagens'"
+          (valueChange)="onCategoryChange($event)"
         ></app-select>
         <app-input
           [inputType]="'inputSearch'"
           [fieldsetLabel]="'Quem você procura?'"
+          [color]="'#FFFFFF'"
           [placeHolder]="'Quem você procura?'"
+          [inputBorderColor]="'#FFFFFF'"
+          [inputSearchClass]="'inputSearchStandard'"
           [inputWidth]="'653px'"
+          (valueChangeLogin)="onSearchChange($event)"
         ></app-input>
-        <app-button label="Buscar" onclick="searchCharacters()"></app-button>
+        <app-button label="Buscar" (click)="searchContent()"></app-button>
       </div>
     </div>
     <div class="grid-container">
       <app-character-card
         class="grid-item"
-        *ngFor="let character of characters"
-        [title]="character.enName"
-        [description]="character.description"
+        *ngFor="let content of content"
+        [title]="content.enName ? content.enName : content.enTitle"
+        [description]="
+          content.description ? content.description : defaultCardDescription
+        "
         [imageSrc]="
-          character.thumb
-            ? character.thumb
+          content.thumb
+            ? content.thumb
             : '../../../../assets/images/personagem-sem-imagem.jpg'
         "
       ></app-character-card>
     </div>
     <app-button
+      *ngIf="seeMoreButton"
       class="btn-see-more"
       label="Conhecer mais"
-      (click)="seeMoreCharacters()"
+      (click)="seeMoreContent()"
     ></app-button>
   </div>
   <app-footer></app-footer>
