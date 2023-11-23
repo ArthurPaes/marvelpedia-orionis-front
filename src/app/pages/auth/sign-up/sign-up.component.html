@@ -16,7 +16,6 @@
         [placeHolder]="'Nome'"
         [inputBorderColor]="firstName.getBorderColor()"
         (valueChange)="regexFormatChecker(firstName, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="firstName.getBorderColor()"
       ></app-input>
       <app-input
@@ -25,17 +24,16 @@
         [placeHolder]="'Sobrenome'"
         [inputBorderColor]="lastName.getBorderColor()"
         (valueChange)="regexFormatChecker(lastName, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="lastName.getBorderColor()"
       ></app-input>
       <div class="genreBirthContainer">
         <app-select
           [optionList]="optionList"
           [selectWidth]="'249px'"
+          [tagLabel]="'Gênero'"
           placeholder="Selecione seu gênero"
           [borderColor]="gender.getBorderColor()"
           (valueChange)="isfilledChecker(gender, $event)"
-          [cleanValue]="cleanInput"
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
@@ -44,7 +42,6 @@
           [inputWidth]="'249px'"
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
-          [cleanValue]="cleanInput"
           [backgroundColorTag]="birthDate.getBorderColor()"
         ></app-input>
       </div>
@@ -55,7 +52,6 @@
         [placeHolder]="'E-mail'"
         [inputBorderColor]="email.getBorderColor()"
         (valueChange)="regexFormatChecker(email, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="email.getBorderColor()"
       ></app-input>
 
@@ -64,7 +60,6 @@
         [fieldsetLabel]="password.getFieldLabel()"
         [placeHolder]="'Digite sua senha'"
         (valueChange)="isfilledChecker(password, $event)"
-        [cleanValue]="cleanInput"
       ></app-input>
 
       <div>
@@ -80,14 +75,13 @@
         [placeHolder]="'Confirme sua senha'"
         [inputBorderColor]="passwordConfirmation.getBorderColor()"
         (valueChange)="passwordMatchChecker(passwordConfirmation, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="passwordConfirmation.getBorderColor()"
       ></app-input>
 
       <app-button
         buttonType="cancel"
         label="limpar"
-        (btnClick)="limparInput()"
+        (btnClick)="cleanForm()"
       ></app-button>
 
       <app-button

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { environment } from 'src/environments/environment';
+import { IResponseCategoryList } from '../interfaces/ICharacterCategoryList';
 import { IResponseContentByCategory } from '../interfaces/IMarvelContent';
 import { EnumContentCategory } from '../interfaces/IMarvelContent';
 
@@ -29,6 +30,23 @@ export class MarvelContentApi {
   ): Promise<IResponseContentByCategory> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/${category}?page=${page}&search=${search}`,
+      'GET',
+    );
+  }
+
+  /**
+   * getCharacterCategoryList
+   *
+   * Função que solicita dados para popular a página de detalhes dos personagens.
+   *
+   * @param characterId id do personagem que foi escolhido na tela de home.
+   * @returns uma promise que em caso de sucesso traz os dados que serão inseridos na tela de detalhe dos personagens.
+   */
+  async getCharacterCategoryList(
+    characterId: string,
+  ): Promise<IResponseCategoryList> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/characters/${characterId}`,
       'GET',
     );
   }
