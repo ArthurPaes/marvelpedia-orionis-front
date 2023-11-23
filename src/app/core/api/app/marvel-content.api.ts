@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { environment } from 'src/environments/environment';
-import { IResponseContentByCategorie } from '../interfaces/IContent';
+import { IResponseContentByCategory } from '../interfaces/IMarvelContent';
 import { EnumContentCategory } from 'src/app/pages/dash/home/home.component';
 
 @Injectable({
@@ -22,11 +22,11 @@ export class MarvelContentApi {
    * @param search - Uma string de pesquisa opcional para filtrar os resultados.
    * @returns retorna uma Promise contendo um array objetos contendo os conteúdos da categoria especificada.
    */
-  async getContentByCategorie(
+  async getContentByCategory(
     category: EnumContentCategory,
     page: number,
     search: string,
-  ): Promise<IResponseContentByCategorie> {
+  ): Promise<IResponseContentByCategory> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/${category}?page=${page}&search=${search}`,
       'GET',

@@ -91,8 +91,9 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * Manipula a mudança no input de texto da pesquisa.
+   * onSearchChange
    *
+   * Manipula a mudança no input de texto da pesquisa.
    * @param search - Texto da pesquisa feita pelo usuário.
    */
   onSearchChange(search: string): void {
@@ -100,7 +101,7 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * serviceGetCharacters
+   * serviceGetContent
    *
    * Busca o conteúdo com base na categoria, página e texto da pesquisa.
    * A cada página são exibidos mais 9 cards.
@@ -115,7 +116,7 @@ export class HomeComponent implements OnInit {
     search: string,
   ): Promise<void> {
     try {
-      const response = await this.marvelContentApi.getContentByCategorie(
+      const response = await this.marvelContentApi.getContentByCategory(
         category,
         page,
         search,
@@ -134,7 +135,7 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * seeMoreCharacters() {
+   * seeMoreContent() {
    *
    * Exibe mais 9 cards a cada vez que o botão "CONHECER MAIS" é clicado.
    */
