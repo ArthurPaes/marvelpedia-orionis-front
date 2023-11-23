@@ -12,6 +12,7 @@ import { CharacterCardComponent } from './character-card/character-card.componen
 import { RatingComponent } from './rating/rating.component';
 import { RatingApi } from '../core/api/app/rating.api';
 import { PasswordCheckerComponent } from './password-checker/password-checker.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PasswordCheckerComponent } from './password-checker/password-checker.co
     CharacterCardComponent,
     RatingComponent,
     PasswordCheckerComponent,
+    FooterComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   exports: [
@@ -34,6 +36,7 @@ import { PasswordCheckerComponent } from './password-checker/password-checker.co
     CharacterCardComponent,
     RatingComponent,
     PasswordCheckerComponent,
+    FooterComponent,
   ],
   providers: [RatingApi],
 })

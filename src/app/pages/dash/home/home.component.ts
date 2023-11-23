@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import type { IContentCard } from './interface/home.interface';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
@@ -9,7 +10,10 @@ import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent'
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private marvelContentApi: MarvelContentApi) {}
+  constructor(
+    private marvelContentApi: MarvelContentApi,
+    private router: Router,
+  ) {}
 
   pageNumber = 1;
   categoryInputValue = EnumContentCategory.Characters;
@@ -142,5 +146,15 @@ export class HomeComponent implements OnInit {
     this.category = this.categoryInputValue;
     this.search = this.searchInputValue;
     this.serviceGetContent(this.category, this.pageNumber, this.search);
+  }
+
+  /**
+   * userLogout
+   *
+   * Realiza o logout do usuário, removendo o token de autenticação e redirecionando para a página de login.
+   */
+  userLogout(): void {
+    localStorage.removeItem('@authToken');
+    this.router.navigate(['/login']);
   }
 }

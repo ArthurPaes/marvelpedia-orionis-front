@@ -13,6 +13,7 @@ import {
 })
 export class InputComponent implements OnChanges {
   @Output() valueChange = new EventEmitter<string>();
+  @Output() valueChangeLogin = new EventEmitter<string>();
   @Input() placeHolder = '';
   @Input() inputType = '';
   @Input() fieldsetLabel = '';
@@ -70,13 +71,32 @@ export class InputComponent implements OnChanges {
    * @param inputData Each letter typed in input component
    */
   sendData(inputData: Event): void {
-    this.inputBorderColor = '#FFFFFF';
     this.showTagLabel = false;
     this.showCloseBtn = false;
     this.value = (inputData.target as HTMLInputElement).value.trim();
     this.valueChange.emit(this.value);
     if (this.value.length > 0) {
+      this.showTagLabel = true;
+      this.showCloseBtn = true;
+    }
+  }
+
+  /**
+   * sendDataLogin
+   *
+   * Função que envia cada caracter para o componente pai do tipo Login.
+   *
+   * @param inputData Each letter typed in input component
+   */
+  sendDataLogin(inputData: Event): void {
+    this.inputBorderColor = '#FFFFFF';
+    this.showTagLabel = false;
+    this.showCloseBtn = false;
+    this.value = (inputData.target as HTMLInputElement).value.trim();
+    this.valueChangeLogin.emit(this.value);
+    if (this.value.length > 0) {
       this.inputBorderColor = '#2C85D8';
+      this.backgroundColorTag = '#2C85D8';
       this.showTagLabel = true;
       this.showCloseBtn = true;
     }

@@ -1,4 +1,4 @@
-export interface IResponseRedirect {
+export interface IResponseCheckValidToken {
   status: number;
   message: string;
 }

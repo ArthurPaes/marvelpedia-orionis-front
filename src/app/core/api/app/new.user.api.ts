@@ -20,7 +20,7 @@ export class UserRegisterApi {
 
   async registerNewUser(userData: IRequestNewUser): Promise<IResponseNewUser> {
     const response = await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/v1/signup`,
+      `${this.apiUrl}/signup`,
       'POST',
       userData,
     );
