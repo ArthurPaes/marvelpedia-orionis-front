@@ -4,7 +4,7 @@ import { IFormatter } from './interfaces/sign-up.interface';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { InputElement } from './InputData';
 import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
-
+import { IModalConfig } from '../login/interface/login.interface';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -27,9 +27,18 @@ export class SignUpComponent {
   btRegisterState = false;
   currentYear = new Date();
 
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+    overlayClick: true,
+  };
+
+  loginError = false;
   showModal = false;
   modalMessage = '';
-  handleError = false;
 
   firstName = new InputElement('firstname');
   lastName = new InputElement('lastname');
@@ -190,10 +199,42 @@ export class SignUpComponent {
     this.btEnabler();
   };
   /**
+   * handleSignUpSuccess
+   *
+   * Configura o modal para exibir a mensagem de sucesso.
+   */
+  handleSignUpSuccess(): void {
+    this.loginError = false;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'check_circle_outline',
+      title: 'Cadastro finalizado!',
+      message: 'Verifique sua caixa de e-mail.',
+      buttonText: 'FECHAR',
+      overlayClick: false,
+    };
+  }
+  /**
+   * handleSignUpError
+   *
+   * Configura o modal para exibir a mensagem de erro.
+   */
+  handleSignUpError(message: string): void {
+    this.loginError = true;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: message,
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
+  }
+  /**
    * signUpDataSubmit
    * Submit signUpformData Object due button onClick event.
    */
-  signUpDataSubmit = (): void => {
+  async signUpDataSubmit(): Promise<void> {
     const signUpFormData: IRequestNewUser = {
       firstName: this.firstName.getValue(),
       lastName: this.lastName.getValue(),
@@ -202,27 +243,26 @@ export class SignUpComponent {
       email: this.email.getValue(),
       password: this.password.getValue(),
     };
-    this.userRegisterApi
-      .registerNewUser(signUpFormData)
-      .then(() => {
-        this.modalMessage = 'Login efetuado com sucesso!';
-        this.showModal = true;
-      })
-      .catch((error) => {
-        this.modalMessage = error.error.data[0].msg;
-        this.showModal = true;
-        this.handleError = true;
-      });
-  };
-
+    try {
+      await this.userRegisterApi.registerNewUser(signUpFormData);
+      this.handleSignUpSuccess();
+    } catch (e: any) {
+      console.log(e.error.data[0].msg);
+      this.handleSignUpError(e.error.data[0].msg);
+    }
+  }
   /**
    * closeModal
    *
    * Fecha o modal de acordo com um evento.
+   * Se não houver erro no login, redireciona o usuário para a página Home.
    * @param event - O evento de fechamento do modal.
    */
   closeModal(event: boolean): void {
-    this.showModal = event;
+    if (!this.loginError) {
+      this.router.navigate(['/login']);
+    }
+    this.modalConfig.showModal = event;
   }
 
   // Solução criada por Rafael Horauti para soluciona o requisito
