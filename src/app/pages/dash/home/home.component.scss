@@ -63,3 +63,36 @@ p {
 .btn-see-more {
   margin: 32px 0;
 }
+
+.not-found-message {
+  align-items: center;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.not-found-message mat-icon {
+  color: var( --color-sup-red);
+  height: 146px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 156px;
+}
+
+.not-found-message .error-title {
+  color: var(--color-white);
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.not-found-message .error-description {
+  color: var(--color-white);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
