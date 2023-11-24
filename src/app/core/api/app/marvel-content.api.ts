@@ -9,7 +9,7 @@ import { EnumContentCategory } from '../interfaces/IMarvelContent';
   providedIn: 'root',
 })
 export class MarvelContentApi {
-  private apiUrl = `${environment.API_BASE_URL}`;
+  private apiUrl = `${process.env.API_BASE_URL}`;
 
   constructor(private httpRequestService: HttpRequestService) {}
 

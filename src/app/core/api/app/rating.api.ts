@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class RatingApi {
-  private apiUrl = environment.API_BASE_URL;
+  private apiUrl = process.env.API_BASE_URL;
 
   constructor(private httpRequestService: HttpRequestService) {}
 
