@@ -115,7 +115,6 @@ export class HomeComponent implements OnInit {
         search,
       );
       this.seeMoreButton = true;
-      console.log(response.data);
       // Caso não tenha mais conteúdo disponível para buscar, ou a categoria selecionada seja 'Favoritos', remove o botão "Conhecer Mais'".
       if (category === 'favorites' || response.data.length < 9) {
         this.seeMoreButton = false;
@@ -124,7 +123,6 @@ export class HomeComponent implements OnInit {
       this.contentList = this.contentList.concat(response.data);
     } catch (error) {
       this.seeMoreButton = false;
-      console.error(error);
     }
   }
 
@@ -168,21 +166,20 @@ export class HomeComponent implements OnInit {
     selectedCharacterId: number,
     selectedCharacterName: string,
   ): Promise<void> {
-    const character: ICharacter = { character_id: selectedCharacterId };
     try {
-      await this.marvelContentApi.togleFavoriteCharacter(character).then(() => {
-        this.toastMessage = selectedCharacterIsFavorited
-          ? `${selectedCharacterName} adicionado(a) aos favoritos!`
-          : `${selectedCharacterName} removido(a) dos favoritos!`;
+      const character: ICharacter = { character_id: selectedCharacterId };
+      await this.marvelContentApi.togleFavoriteCharacter(character);
+      this.toastMessage = selectedCharacterIsFavorited
+        ? `${selectedCharacterName} adicionado(a) aos favoritos!`
+        : `${selectedCharacterName} removido(a) dos favoritos!`;
 
-        this.openSnackBar(`${this.toastMessage}`, 'Fechar');
+      this.openSnackBar(`${this.toastMessage}`, 'Fechar');
 
-        if (this.category === 'favorites') {
-          this.contentList = this.contentList.filter(
-            (item) => item.id !== character.character_id,
-          );
-        }
-      });
+      if (this.category === 'favorites') {
+        this.contentList = this.contentList.filter(
+          (item) => item.id !== character.character_id,
+        );
+      }
     } catch (error) {
       this.toastMessage = `Erro ao executar ação!`;
       this.openSnackBar(`${this.toastMessage}`, 'Fechar');
