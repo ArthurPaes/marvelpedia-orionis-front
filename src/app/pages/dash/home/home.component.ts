@@ -4,6 +4,7 @@ import type { IContentCard } from './interface/home.interface';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
 import { ICharacter } from './interface/home.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private marvelContentApi: MarvelContentApi,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   pageNumber = 1;
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
   ];
   contentList: IContentCard[] = [];
   seeMoreButton = true;
+  toastMessage = '';
   defaultCardDescription =
     'Venha conhecer um pouco mais sobre este conteúdo exclusivo da Marvel. Aproveite para acessar outros materiais relacionados em "Saber mais"!';
 
@@ -154,26 +157,50 @@ export class HomeComponent implements OnInit {
    * toggleFavorite
    *
    * Alterna o status de favorito de um personagem. Adiciona ou remove um personagem da lista de favoritos.
-   * Se a categoria atual "Favoritos", atualiza a lista de conteúdo exibida na página, removendo o personagem da lista.
+   * Se a categoria atual for "Favoritos", atualiza a lista de conteúdo exibida na página, removendo o personagem da lista.
    *
-   * @param selectedCharacterId - recebe o ID do personagem a ser adicionado ou removido.
+   @param selectedCharacterIsFavorited - Indica se o personagem selecionado está sendo favoritado ou não favoritado pelo usuário.
+   @param selectedCharacterId - O ID do personagem selecionado, enviado em forma de objeto para o backend.
+   @param selectedCharacterName - O nome do personagem selecionado. O nome será exibido no toast indicando se o personagem foi adionado ou removido da lista de favoritos.
    */
-  async ToggleFavorite(selectedCharacterId: number): Promise<void> {
+  async toggleFavorite(
+    selectedCharacterIsFavorited: boolean,
+    selectedCharacterId: number,
+    selectedCharacterName: string,
+  ): Promise<void> {
     const character: ICharacter = { character_id: selectedCharacterId };
     try {
-      await this.marvelContentApi
-        .togleFavoriteCharacter(character)
-        .then((response) => {
-          if (this.category === 'favorites') {
-            this.contentList = this.contentList.filter(
-              (item) => item.id !== character.character_id,
-            );
-          }
-          console.log(response);
-        });
+      await this.marvelContentApi.togleFavoriteCharacter(character).then(() => {
+        this.toastMessage = selectedCharacterIsFavorited
+          ? `${selectedCharacterName} adicionado(a) aos favoritos!`
+          : `${selectedCharacterName} removido(a) dos favoritos!`;
+
+        this.openSnackBar(`${this.toastMessage}`, 'Fechar');
+
+        if (this.category === 'favorites') {
+          this.contentList = this.contentList.filter(
+            (item) => item.id !== character.character_id,
+          );
+        }
+      });
     } catch (error) {
-      console.error(error);
+      this.toastMessage = `Erro ao executar ação!`;
+      this.openSnackBar(`${this.toastMessage}`, 'Fechar');
     }
+  }
+
+  /**
+   * openSnackBar
+   *
+   * Abre um componente de Snackbar do Angular Material exibindo uma mensagem para o usuário e um botão de ação.
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000, // Duração em milissegundos
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: ['snackbar-1'],
+    });
   }
 
   /**

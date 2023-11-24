@@ -35,7 +35,7 @@
         class="grid-item"
         *ngFor="let content of contentList"
         [isCharacter]="content.enName ? true : false"
-        (favoriteClick)="ToggleFavorite(content.id)"
+        (favoriteClick)="toggleFavorite($event, content.id, content.enName)"
         [favorited]="content.favorited"
         [title]="content.enName ? content.enName : content.enTitle"
         [description]="

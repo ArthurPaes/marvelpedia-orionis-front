@@ -1,4 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-character-card',
@@ -13,6 +14,7 @@ export class CharacterCardComponent {
   @Input() isCharacter = false;
   notified = false;
   @Output() favoriteClick = new EventEmitter();
+
   /**
    * toggleNotified()
    *
@@ -31,6 +33,6 @@ export class CharacterCardComponent {
    */
   toggleFavorited(): void {
     this.favorited = !this.favorited;
-    this.favoriteClick.emit();
+    this.favoriteClick.emit(this.favorited);
   }
 }
