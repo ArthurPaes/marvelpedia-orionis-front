@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     'Eventos',
   ];
   contentList: IContentCard[] = [];
+  notFoundMessage = false;
   seeMoreButton = true;
   toastMessage = '';
   defaultCardDescription =
@@ -114,6 +115,7 @@ export class HomeComponent implements OnInit {
         page,
         search,
       );
+      this.notFoundMessage = false;
       this.seeMoreButton = true;
       // Caso não tenha mais conteúdo disponível para buscar, ou a categoria selecionada seja 'Favoritos', remove o botão "Conhecer Mais'".
       if (category === 'favorites' || response.data.length < 9) {
@@ -123,6 +125,7 @@ export class HomeComponent implements OnInit {
       this.contentList = this.contentList.concat(response.data);
     } catch (error) {
       this.seeMoreButton = false;
+      this.notFoundMessage = true;
     }
   }
 

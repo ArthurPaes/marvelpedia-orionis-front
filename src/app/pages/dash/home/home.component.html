@@ -31,6 +31,11 @@
       </div>
     </div>
     <div class="grid-container">
+      <div *ngIf="notFoundMessage" class="not-found-message">
+        <mat-icon>error_outline</mat-icon>
+        <h3 class="error-title">Erro 404</h3>
+        <p class="error-description">Não foi póssível realizar essa busca</p>
+      </div>
       <app-character-card
         class="grid-item"
         *ngFor="let content of contentList"
