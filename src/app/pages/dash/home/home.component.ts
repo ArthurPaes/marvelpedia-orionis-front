@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import type { IContentCard } from './interface/home.interface';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
+import { ICharacter } from './interface/home.interface';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     'Favoritos',
     'Eventos',
   ];
-  content: IContentCard[] = [];
+  contentList: IContentCard[] = [];
   seeMoreButton = true;
   defaultCardDescription =
     'Venha conhecer um pouco mais sobre este conteúdo exclusivo da Marvel. Aproveite para acessar outros materiais relacionados em "Saber mais"!';
@@ -110,13 +111,14 @@ export class HomeComponent implements OnInit {
         page,
         search,
       );
-
-      // Caso não tenha mais conteúdo disponível para buscar, remove o botão "Ver mais" da página
-      if (response.data.length < 9) {
+      this.seeMoreButton = true;
+      console.log(response.data);
+      // Caso não tenha mais conteúdo disponível para buscar, ou a categoria selecionada seja 'Favoritos', remove o botão "Conhecer Mais'".
+      if (category === 'favorites' || response.data.length < 9) {
         this.seeMoreButton = false;
       }
 
-      this.content = this.content.concat(response.data);
+      this.contentList = this.contentList.concat(response.data);
     } catch (error) {
       this.seeMoreButton = false;
       console.error(error);
@@ -137,15 +139,41 @@ export class HomeComponent implements OnInit {
    * searchContent
    *
    * Realiza uma busca por conteúdo com base nos filtros.
-   * Limpa a lista de 'content', reinicia a paginação e ativa o botão "CONHECER MAIS"
+   * Limpa a lista de 'contentList', reinicia a paginação e desativa o botão "CONHECER MAIS"
    */
   searchContent(): void {
-    this.content = [];
+    this.contentList = [];
     this.pageNumber = 1;
-    this.seeMoreButton = true;
+    this.seeMoreButton = false;
     this.category = this.categoryInputValue;
     this.search = this.searchInputValue;
     this.serviceGetContent(this.category, this.pageNumber, this.search);
+  }
+
+  /**
+   * toggleFavorite
+   *
+   * Alterna o status de favorito de um personagem. Adiciona ou remove um personagem da lista de favoritos.
+   * Se a categoria atual "Favoritos", atualiza a lista de conteúdo exibida na página, removendo o personagem da lista.
+   *
+   * @param selectedCharacterId - recebe o ID do personagem a ser adicionado ou removido.
+   */
+  async ToggleFavorite(selectedCharacterId: number): Promise<void> {
+    const character: ICharacter = { character_id: selectedCharacterId };
+    try {
+      await this.marvelContentApi
+        .togleFavoriteCharacter(character)
+        .then((response) => {
+          if (this.category === 'favorites') {
+            this.contentList = this.contentList.filter(
+              (item) => item.id !== character.character_id,
+            );
+          }
+          console.log(response);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   /**

@@ -14,3 +14,9 @@ export enum EnumContentCategory {
   Favorites = 'favorites',
   Events = 'events',
 }
+
+export interface IResponseTogleFavoriteCharacter {
+  date: string;
+  status: boolean;
+  data: string;
+}

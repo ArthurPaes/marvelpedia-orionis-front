@@ -6,6 +6,11 @@ export interface IContentCard {
   id: number;
   idMarvel: number;
   isTranslated: true;
+  favorited: boolean;
   ptName: string;
   thumb: string;
+}
+
+export interface ICharacter {
+  character_id: number;
 }
