@@ -12,7 +12,7 @@ import {
   providedIn: 'root',
 })
 export class MarvelContentApi {
-  private apiUrl = `${environment.API_BASE_URL}`;
+  private apiUrl = `${process.env.NG_APP_API_BASE_URL}`;
 
   constructor(private httpRequestService: HttpRequestService) {}
 
