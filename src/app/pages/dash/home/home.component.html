@@ -33,7 +33,10 @@
     <div class="grid-container">
       <app-character-card
         class="grid-item"
-        *ngFor="let content of content"
+        *ngFor="let content of contentList"
+        [isCharacter]="content.enName ? true : false"
+        (favoriteClick)="ToggleFavorite(content.id)"
+        [favorited]="content.favorited"
         [title]="content.enName ? content.enName : content.enTitle"
         [description]="
           content.description ? content.description : defaultCardDescription
