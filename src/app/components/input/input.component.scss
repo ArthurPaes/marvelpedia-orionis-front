@@ -72,3 +72,19 @@ $input-height: 55.5px;
     right: 0.4rem;
     z-index: 0;
 }
+
+.inputSearchDetails {
+    color: #000000;
+    &::placeholder {
+        color: #000000;
+        font-weight: 400;
+    }
+}
+
+.inputSearchStandard {
+    color: #FFFFFF;
+    &::placeholder {
+        color: #FFFFFF;
+        font-weight: 400;
+    }
+}
