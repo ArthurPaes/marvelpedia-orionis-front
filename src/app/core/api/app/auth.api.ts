@@ -5,7 +5,7 @@ import { IResponseCheckValidToken } from '../interfaces/IRedirect';
 import { environment } from 'src/environments/environment';
 @Injectable()
 export class AuthApi {
-  private apiUrl = process.env.API_BASE_URL;
+  private apiUrl = process.env.NG_APP_API_BASE_URL;
 
   constructor(private httpRequestService: HttpRequestService) {}
 
