@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     'Eventos',
   ];
   content: IContentCard[] = [];
+  notFoundMessage = false;
   seeMoreButton = true;
   defaultCardDescription =
     'Venha conhecer um pouco mais sobre este conteúdo exclusivo da Marvel. Aproveite para acessar outros materiais relacionados em "Saber mais"!';
@@ -110,15 +111,16 @@ export class HomeComponent implements OnInit {
         page,
         search,
       );
-
+      this.notFoundMessage = false;
+      this.seeMoreButton = true;
       // Caso não tenha mais conteúdo disponível para buscar, remove o botão "Ver mais" da página
       if (response.data.length < 9) {
         this.seeMoreButton = false;
       }
-
       this.content = this.content.concat(response.data);
     } catch (error) {
       this.seeMoreButton = false;
+      this.notFoundMessage = true;
       console.error(error);
     }
   }
@@ -142,7 +144,7 @@ export class HomeComponent implements OnInit {
   searchContent(): void {
     this.content = [];
     this.pageNumber = 1;
-    this.seeMoreButton = true;
+    this.seeMoreButton = false;
     this.category = this.categoryInputValue;
     this.search = this.searchInputValue;
     this.serviceGetContent(this.category, this.pageNumber, this.search);
