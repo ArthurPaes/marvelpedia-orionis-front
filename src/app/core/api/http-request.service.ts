@@ -55,24 +55,25 @@ export class HttpRequestService {
         }
       }
     } catch (error) {
-      return this.handleHttpError(error as HttpErrorResponse);
+      this.handleHttpError(error as HttpErrorResponse);
+      throw error;
     }
   }
 
   /**
    * handleHttpError
    *
-   * Manipula erros HTTP. Em caso de status 403(em breve será alterado para 401) o usuário tem seu token removido do local storage e é redirecionado para a tela de login.
+   * Manipula erros HTTP. Em caso de status 401, o usuário tem seu token removido do local storage e é redirecionado para a tela de login.
    *
    * @param error Objeto de erro HTTP.
    * @returns Uma Observable que emite o erro ou executa uma ação específica.
    */
-  private handleHttpError(error: HttpErrorResponse): Observable<never> {
+  private handleHttpError(error: HttpErrorResponse): void {
     // TODO: Alterar a condicional quando o back-end corrigir o statusCode.
-    if (error.status === 403) {
+    if (error.status === 401) {
       localStorage.removeItem('@authToken');
       this.router.navigate(['/login']);
+      return;
     }
-    return throwError(error);
   }
 }
