@@ -38,7 +38,10 @@
       </div>
       <app-character-card
         class="grid-item"
-        *ngFor="let content of content"
+        *ngFor="let content of contentList"
+        [isCharacter]="content.enName ? true : false"
+        (favoriteClick)="toggleFavorite($event, content.id, content.enName)"
+        [favorited]="content.favorited"
         [title]="content.enName ? content.enName : content.enTitle"
         [description]="
           content.description ? content.description : defaultCardDescription

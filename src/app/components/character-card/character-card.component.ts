@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-character-card',
@@ -9,8 +10,10 @@ export class CharacterCardComponent {
   @Input() title = '';
   @Input() description = '';
   @Input() imageSrc = '';
-  favorited = false;
+  @Input() favorited = false;
+  @Input() isCharacter = false;
   notified = false;
+  @Output() favoriteClick = new EventEmitter();
 
   /**
    * toggleNotified()
@@ -26,18 +29,10 @@ export class CharacterCardComponent {
    * toggleFavorited()
    *
    * Responsável por alternar o valor da variável `favorited` entre `true` e `false` toda vez que o usuário clica no ícone de favorito.
+   * Emite o evento `favoriteClick` quando o ícone é.
    */
-  toggleFavorited() {
+  toggleFavorited(): void {
     this.favorited = !this.favorited;
-    console.log(this.favorited);
-  }
-
-  /**
-   * showCharacterDetails()
-   *
-   * Manipula o evento de clique do botão do card para exibir informações do personagem.
-   */
-  showCharacterDetails() {
-    // Lógica para exibir informações do personagem
+    this.favoriteClick.emit(this.favorited);
   }
 }
