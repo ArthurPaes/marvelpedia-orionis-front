@@ -42,4 +42,33 @@ export class AuthApi {
       'GET',
     );
   }
+  /**
+   * sendNewPassword
+   * @param newPassword Email cadastrado que será enviado na solicitação http
+   * @returns Retorna o resultado da verificação da existência do email do BD.
+   */
+  async sendNewPassword(
+    token: string | null,
+    newPassword: object,
+  ): Promise<string> {
+    const response = await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/changepassword?token=${token}`,
+      'POST',
+      newPassword,
+    );
+    return response;
+  }
+  /**
+   * sendPasswordResetEmail
+   * @param emailValue Email cadastrado que será enviado na solicitação http
+   * @returns Retorna o resultado da verificação da existência do email do BD.
+   */
+  async sendPasswordResetEmail(emailValue: string | any): Promise<string> {
+    const response = await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/recovery`,
+      'POST',
+      emailValue,
+    );
+    return response;
+  }
 }
