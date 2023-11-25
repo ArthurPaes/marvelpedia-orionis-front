@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
+import { IModalConfig } from '../../login/interface/login.interface';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -12,11 +13,22 @@ export class ResetPasswordComponent {
     private router: Router,
   ) {}
 
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+    overlayClick: true,
+  };
+
+  loginError = false;
   showModal = false;
   modalMessage = '';
-  handleError = true;
 
-  emailValue = '';
+  emailValue = {
+    email: '',
+  };
   borderColor = '';
   isAproved = false;
   emailRegex =
@@ -27,7 +39,7 @@ export class ResetPasswordComponent {
    * @param eventValue The event data ($event).
    */
   receiveData = (eventValue: string): void => {
-    this.emailValue = eventValue;
+    this.emailValue.email = eventValue;
   };
   /**
    * emailChecker
@@ -48,23 +60,49 @@ export class ResetPasswordComponent {
     this.router.navigate(['login']);
   };
   /**
-   * sendEmailSubmit
+   * handleSignUpSuccess
+   *
+   * Configura o modal para exibir a mensagem de sucesso.
+   */
+  handleSignUpSuccess(): void {
+    this.loginError = false;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'check_circle_outline',
+      title: 'Sucesso!',
+      message: 'Verifique sua caixa de e-mail.',
+      buttonText: 'FECHAR',
+      overlayClick: false,
+    };
+  }
+  /**
+   * handleSignUpError
+   *
+   * Configura o modal para exibir a mensagem de erro.
+   */
+  handleSignUpError(message: string): void {
+    this.loginError = true;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: message,
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
+  }
+  /**
+   * emailSubmit
    * Submit email value to back-end.
    */
-  sendEmailSubmit = (): void => {
-    this.authApi
-      .sendPasswordResetEmail(this.emailValue)
-      .then(() => {
-        this.modalMessage =
-          'Verifique seu e-mail. Nós enviamos um link para você cadastrar uma nova senha.';
-        this.showModal = true;
-      })
-      .catch((error) => {
-        this.modalMessage = error.error.data;
-        this.showModal = true;
-        this.handleError = true;
-      });
-  };
+  async emailSubmit(): Promise<any> {
+    try {
+      await this.authApi.sendPasswordResetEmail(this.emailValue);
+      this.handleSignUpSuccess();
+    } catch (e: any) {
+      this.handleSignUpError(e.error.data[0].msg);
+    }
+  }
   /**
    * closeModal
    * Fecha o modal de acordo com um evento.

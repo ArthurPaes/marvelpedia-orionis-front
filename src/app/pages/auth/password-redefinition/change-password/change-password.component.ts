@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IPassword } from './interfaces/change-password.interface';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
+import { IModalConfig } from '../../login/interface/login.interface';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnInit {
   constructor(
     private authApi: AuthApi,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
-  showModal = false;
-  modalMessage = '';
-  handleError = true;
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+    overlayClick: true,
+  };
 
   password: IPassword = {
     value: '',
@@ -30,6 +37,9 @@ export class ChangePasswordComponent {
     fieldsetLabel: '',
     isAproved: false,
   };
+  tokenExtractedFromURL: string | null = '';
+  newPasswordValue = new Object();
+
   /**
    * receiveData
    * Handles the assignment of event data to the object.
@@ -80,6 +90,7 @@ export class ChangePasswordComponent {
     this.receiveData(componentName, eventValue);
     componentName.value == this.password.value
       ? ((componentName.isAproved = true),
+        (this.newPasswordValue = { newpassword: this.passwordConfirm.value }),
         (componentName.fieldsetLabel = 'Confirme sua senha'),
         (componentName.borderColor = '#2C85D8'))
       : ((componentName.isAproved = false),
@@ -87,44 +98,71 @@ export class ChangePasswordComponent {
         (componentName.borderColor = 'red'));
   };
   /**
-   * signUpDataPackage
-   * Submit signUpformData Object due Cadastrar onClick event.
+   * handlePasswordSubmitSuccess
+   *
+   * Configura o modal para exibir a mensagem de erro.
    */
-  newPasswordSubmit = (): void => {
-    this.authApi
-      .sendNewPassword(this.passwordConfirm.value)
-      .then(() => {
-        this.modalMessage =
-          'Verifique seu e-mail. Nós enviamos um link para você cadastrar uma nova senha.';
-        this.showModal = true;
-      })
-      .catch((error) => {
-        this.modalMessage = error.error.data;
-        this.showModal = true;
-        this.handleError = true;
-      });
-  };
+  handlePasswordSubmitSuccess(): void {
+    this.modalConfig = {
+      showModal: true,
+      icon: 'check_circle_outline',
+      title: 'Sucesso!',
+      message: 'Sua senha foi modificada.',
+      buttonText: 'FECHAR',
+      overlayClick: false,
+    };
+  }
+  /**
+   * handlePasswordSubmitError
+   *
+   * Configura o modal para exibir a mensagem de erro.
+   */
+  handlePasswordSubmitError(message: string): void {
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: message,
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
+  }
+  /**
+   * newPasswordSubmit
+   * Submits the token and the new user password for validation and
+   * haldles it´s sucess or fail.
+   * @param tokenExtractedFromURL - Token extracted from the URL sended with redefiniton e-mail.
+   * @param newPasswordValue - New password from confirmation input value.
+   */
+  async newPasswordSubmit(): Promise<any> {
+    try {
+      await this.authApi.sendNewPassword(
+        this.tokenExtractedFromURL,
+        this.newPasswordValue,
+      );
+      this.handlePasswordSubmitSuccess();
+    } catch (e: any) {
+      console.log(e);
+      this.handlePasswordSubmitError(e.error.data);
+    }
+  }
   /**
    * closeModal
+   *
    * Fecha o modal de acordo com um evento.
+   * Se não houver erro, redireciona o usuário para a página Home.
    * @param event - O evento de fechamento do modal.
    */
   closeModal(event: boolean): void {
-    this.showModal = event;
+    this.modalConfig.showModal = event;
+    this.router.navigate(['/home']);
   }
-  // Solução criada por Rafael Horauti para soluciona o requisito
-  // de limpar os inputs do formulário ao clicar no botão limpar;
-  cleanInput = '';
-  count = 0;
-
   /**
-   * limparInput
-   *
-   * Reset form inputs value.
+   * ngOnInit
+   * Extracts the token value for the URL and assigns it to a variable.
    */
-  limparInput(): void {
-    this.cleanInput = 'true' + this.count;
-    this.count++;
+  ngOnInit(): void {
+    this.tokenExtractedFromURL =
+      this.activatedRoute.snapshot.queryParamMap.get('token');
   }
-  // fim da solução
 }
