@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
 import { environment } from 'src/environments/environment';
 import { IResponseCategoryList } from '../interfaces/ICharacterCategoryList';
-import { IResponseContentByCategory } from '../interfaces/IMarvelContent';
-import { EnumContentCategory } from '../interfaces/IMarvelContent';
+import {
+  IResponseContentByCategory,
+  IResponseTogleFavoriteCharacter,
+  EnumContentCategory,
+} from '../interfaces/IMarvelContent';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +51,23 @@ export class MarvelContentApi {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/characters/${characterId}`,
       'GET',
+    );
+  }
+
+  /**
+   * toggleFavoriteCharacter
+   *
+   * Adiciona ou remove um personagem na lista de favoritos no usuário. Envia um objeto no body da requisição com o conteúdo do ID.
+   * @param characterId - recebe um objeto contendo o ID do personagem a ser adicionado ou removido dos favoritos.
+   * @returns Uma Promise contendo uma string informando o id do usuário e o id do personagem que foi adicionado/removido da lista de favoritos.
+   */
+  async togleFavoriteCharacter(
+    characterId: object,
+  ): Promise<IResponseTogleFavoriteCharacter> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/favorite`,
+      'POST',
+      characterId,
     );
   }
 }

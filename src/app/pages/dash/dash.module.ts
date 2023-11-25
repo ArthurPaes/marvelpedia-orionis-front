@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from 'src/app/components/components.module';
@@ -11,7 +12,13 @@ import { CharacterDetailsComponent } from './character-details/character-details
 
 @NgModule({
   declarations: [HomeComponent, SurveyComponent, CharacterDetailsComponent],
-  imports: [CommonModule, MatIconModule, FormsModule, ComponentsModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    FormsModule,
+    ComponentsModule,
+    MatSnackBarModule,
+  ],
   providers: [MarvelContentApi],
   bootstrap: [],
   exports: [HomeComponent, SurveyComponent, CharacterDetailsComponent],

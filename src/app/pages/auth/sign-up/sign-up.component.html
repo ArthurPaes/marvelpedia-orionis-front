@@ -104,9 +104,12 @@
     </div>
   </div>
   <app-modal
-    [isModalActive]="showModal"
     (emitEventClose)="closeModal($event)"
-    [message]="modalMessage"
+    [isModalActive]="modalConfig.showModal"
+    [iconName]="modalConfig.icon"
+    [title]="modalConfig.title"
+    [message]="modalConfig.message"
+    [btText]="modalConfig.buttonText"
+    [closeOnOverlayClick]="modalConfig.overlayClick"
   ></app-modal>
-  <!-- [isError]="handleError" -->
 </div>
