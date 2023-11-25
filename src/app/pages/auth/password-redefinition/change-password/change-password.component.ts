@@ -74,8 +74,10 @@ export class ChangePasswordComponent implements OnInit {
   isfilledChecker = (componentName: IPassword, eventValue: string): void => {
     this.receiveData(componentName, eventValue);
     componentName.value.length != 0
-      ? (componentName.isAproved = true)
-      : (componentName.isAproved = false);
+      ? ((componentName.isAproved = true),
+        (componentName.borderColor = '#2C85D8'))
+      : ((componentName.isAproved = false),
+        (componentName.borderColor = 'red'));
   };
   /**
    * passwordMatchChecker
@@ -155,7 +157,7 @@ export class ChangePasswordComponent implements OnInit {
    */
   closeModal(event: boolean): void {
     this.modalConfig.showModal = event;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
   /**
    * ngOnInit
