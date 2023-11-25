@@ -35,6 +35,9 @@ export class HttpRequestService {
   ): Promise<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('@authToken')}`,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
       'Content-Type': 'application/json',
     });
     try {
