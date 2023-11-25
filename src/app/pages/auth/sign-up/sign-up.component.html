@@ -1,40 +1,39 @@
 <div class="background">
   <div class="component">
     <div class="icon-nav">
-      <a href="http://localhost:4200"><mat-icon>arrow_back_ios</mat-icon></a>
+      <button (click)="handleBackButton()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
     </div>
     <div class="container">
       <section class="titulo">
         <h1>Novo por aqui?</h1>
         <p>Cadastre-se e explore o Universo Marvel.</p>
       </section>
-      <!-- troca firstName por name para satisfazer o Back-End -->
       <app-input
         [inputType]="'inputEmail'"
         [fieldsetLabel]="firstName.getFieldLabel()"
         [placeHolder]="'Nome'"
         [inputBorderColor]="firstName.getBorderColor()"
         (valueChange)="regexFormatChecker(firstName, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="firstName.getBorderColor()"
-
+      ></app-input>
       <app-input
         [inputType]="'inputEmail'"
         [fieldsetLabel]="lastName.getFieldLabel()"
         [placeHolder]="'Sobrenome'"
         [inputBorderColor]="lastName.getBorderColor()"
         (valueChange)="regexFormatChecker(lastName, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="lastName.getBorderColor()"
-
+      ></app-input>
       <div class="genreBirthContainer">
         <app-select
           [optionList]="optionList"
           [selectWidth]="'249px'"
+          [tagLabel]="'Gênero'"
           placeholder="Selecione seu gênero"
           [borderColor]="gender.getBorderColor()"
           (valueChange)="isfilledChecker(gender, $event)"
-          [cleanValue]="cleanInput"
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
@@ -43,7 +42,6 @@
           [inputWidth]="'249px'"
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
-          [cleanValue]="cleanInput"
           [backgroundColorTag]="birthDate.getBorderColor()"
         ></app-input>
       </div>
@@ -54,15 +52,14 @@
         [placeHolder]="'E-mail'"
         [inputBorderColor]="email.getBorderColor()"
         (valueChange)="regexFormatChecker(email, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="email.getBorderColor()"
       ></app-input>
+
       <app-input
         [inputType]="'inputPassword'"
         [fieldsetLabel]="password.getFieldLabel()"
         [placeHolder]="'Digite sua senha'"
         (valueChange)="isfilledChecker(password, $event)"
-        [cleanValue]="cleanInput"
       ></app-input>
 
       <div>
@@ -78,14 +75,13 @@
         [placeHolder]="'Confirme sua senha'"
         [inputBorderColor]="passwordConfirmation.getBorderColor()"
         (valueChange)="passwordMatchChecker(passwordConfirmation, $event)"
-        [cleanValue]="cleanInput"
         [backgroundColorTag]="passwordConfirmation.getBorderColor()"
       ></app-input>
 
       <app-button
         buttonType="cancel"
         label="limpar"
-        (btnClick)="limparInput()"
+        (btnClick)="cleanForm()"
       ></app-button>
 
       <app-button
@@ -94,6 +90,7 @@
         [isDisabled]="!btRegisterState"
         (btnClick)="signUpDataSubmit()"
       ></app-button>
+
       <div class="checkbox">
         <app-checkbox
           (checkedChange)="receiveStatus(checkbox, $event)"
@@ -107,9 +104,12 @@
     </div>
   </div>
   <app-modal
-    [isModalActive]="showModal"
     (emitEventClose)="closeModal($event)"
-    [message]="modalMessage"
-    [isError]="handleError"
+    [isModalActive]="modalConfig.showModal"
+    [iconName]="modalConfig.icon"
+    [title]="modalConfig.title"
+    [message]="modalConfig.message"
+    [btText]="modalConfig.buttonText"
+    [closeOnOverlayClick]="modalConfig.overlayClick"
   ></app-modal>
 </div>

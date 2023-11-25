@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { ILogin } from './interface/login.interface';
+import { IModalConfig } from './interface/login.interface';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,21 @@ import { ILogin } from './interface/login.interface';
 })
 export class LoginComponent {
   login: ILogin = { email: '', password: '', rememberMe: false };
-  showModal = false;
   isFormValid = false;
-  modalMessage = '';
+  loginError = false;
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+    overlayClick: true,
+  };
 
-  constructor(private authApi: AuthApi) {}
+  constructor(
+    private authApi: AuthApi,
+    private router: Router,
+  ) {}
 
   /**
    * checkboxChange
@@ -78,32 +90,47 @@ export class LoginComponent {
   }
 
   /**
+   * handleLoginError
+   *
+   * Manipula o erro no login.
+   * Indica que houve erro através da variável loginError e configura o modal para exibir a mensagem de erro.
+   */
+  handleLoginError(): void {
+    this.loginError = true;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: 'E-mail ou senha inválidos!',
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
+  }
+
+  /**
    * onSubmit
    *
-   * Envia as informações de login do usuário para o service.
-   * Se o login for bem-sucedido, exibe uma mensagem de sucesso no modal.
-   * Se ocorrer um erro, a mensagem de erro é exibida no modal.
+   * Envia as informações de login do usuário para o serviço.
+   * Se o login for bem-sucedido, chama a função de manipulação de sucesso no login.
+   * Se ocorrer um erro, chama a função de manipulação de erro no login.
    */
-  onSubmit(): void {
-    this.authApi
-      .authenticateUser(this.login)
-      .then(() => {
-        this.modalMessage = 'Login efetuado com sucesso!';
-        this.showModal = true;
-      })
-      .catch((error) => {
-        this.modalMessage = error.error.data;
-        this.showModal = true;
-      });
+  async onSubmit(): Promise<void> {
+    try {
+      await this.authApi.authenticateUser(this.login);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      this.handleLoginError();
+    }
   }
 
   /**
    * closeModal
    *
    * Fecha o modal de acordo com um evento.
+   * Se não houver erro no login, redireciona o usuário para a página Home.
    * @param event - O evento de fechamento do modal.
    */
   closeModal(event: boolean): void {
-    this.showModal = event;
+    this.modalConfig.showModal = event;
   }
 }

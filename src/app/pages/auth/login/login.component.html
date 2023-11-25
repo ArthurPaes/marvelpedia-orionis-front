@@ -5,18 +5,22 @@
     <p>Por favor, preencha os campos abaixo para logar.</p>
     <div class="input-area">
       <app-input
-        inputType="inputEmail"
+        inputType="inputEmailLogin"
+        [backgroundColorTag]="'#2C85D8'"
+        [color]="'#FFFFFF'"
         placeHolder="E-mail"
         fieldsetLabel="E-mail"
-        (valueChange)="emailValueChange($event)"
+        (valueChangeLogin)="emailValueChange($event)"
         autocomplet
         required
       ></app-input>
       <app-input
-        inputType="inputPassword"
+        inputType="inputPasswordLogin"
+        [backgroundColorTag]="'#2C85D8'"
+        [color]="'#FFFFFF'"
         placeHolder="Senha"
         fieldsetLabel="Senha"
-        (valueChange)="passwordValueChange($event)"
+        (valueChangeLogin)="passwordValueChange($event)"
         required
       ></app-input>
     </div>
@@ -25,7 +29,7 @@
         label="Lembrar de mim"
         (checkedChange)="checkboxChange($event)"
       ></app-checkbox>
-      <a href="#">Esqueceu a senha</a>
+      <a href="/reset-password">Esqueceu a senha</a>
     </div>
     <div class="button-group">
       <app-button
@@ -42,8 +46,12 @@
     </div>
   </form>
   <app-modal
-    [isModalActive]="showModal"
     (emitEventClose)="closeModal($event)"
-    [message]="modalMessage"
+    [isModalActive]="modalConfig.showModal"
+    [iconName]="modalConfig.icon"
+    [title]="modalConfig.title"
+    [message]="modalConfig.message"
+    [btText]="modalConfig.buttonText"
+    [closeOnOverlayClick]="modalConfig.overlayClick"
   ></app-modal>
 </div>

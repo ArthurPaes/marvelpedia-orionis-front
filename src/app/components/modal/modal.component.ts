@@ -1,50 +1,21 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  OnChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnChanges {
+export class ModalComponent {
   @Input() width = '360px';
   @Input() height = '321px';
+  @Input() iconName = 'check_circle_outline';
+  @Input() title = '';
   @Input() message = '';
+  @Input() btText = '';
   @Input() isModalActive = false;
-  @Input() isError = false;
+  @Input() closeOnOverlayClick = true;
   @Output() emitEventClose = new EventEmitter();
 
-  iconName = '';
-  modalLabel = 'Label';
-  btLabel = '';
-  btRoute = '';
-  /**
-   * modalSwitch
-   *
-   * Toggles the modal between error/success depending on isError state.
-   */
-  modalSwitch = (): void => {
-    this.isError
-      ? ((this.iconName = 'cancel_circle_outline'),
-        (this.modalLabel = 'Error!'),
-        (this.btRoute = 'http://localhost:4200/login'))
-      : ((this.iconName = 'check_circle_outline'),
-        (this.modalLabel = 'Sucesso!'),
-        (this.btRoute = 'http://localhost:4200/home'));
-  };
-  /**
-   * ngOnChanges
-   *
-   * Listen to isError changes to call modalSwitch function.
-   */
-  ngOnChanges(): void {
-    this.modalSwitch();
-  }
   /**
    * closeModal
    *

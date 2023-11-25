@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 import { IFormatter } from './interfaces/sign-up.interface';
 import { UserRegisterApi } from 'src/app/core/api/app/new.user.api';
 import { InputElement } from './InputData';
 import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
+import { IModalConfig } from '../login/interface/login.interface';
+import { InputComponent } from 'src/app/components/input/input.component';
+import { SelectComponent } from 'src/app/components/select/select.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +14,13 @@ import { IRequestNewUser } from 'src/app/core/api/interfaces/INewUser';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  constructor(private userRegisterApi: UserRegisterApi) {}
+  constructor(
+    private userRegisterApi: UserRegisterApi,
+    private router: Router,
+  ) {}
+
+  @ViewChildren(InputComponent) inputComponents?: QueryList<InputComponent>;
+  @ViewChild(SelectComponent) selectComponent?: SelectComponent;
 
   optionList: string[] = [
     'Mulher (cis ou trans)',
@@ -23,9 +33,18 @@ export class SignUpComponent {
   btRegisterState = false;
   currentYear = new Date();
 
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+    overlayClick: true,
+  };
+
+  loginError = false;
   showModal = false;
   modalMessage = '';
-  handleError = false;
 
   firstName = new InputElement('firstname');
   lastName = new InputElement('lastname');
@@ -40,6 +59,13 @@ export class SignUpComponent {
     name: /^[a-zàâãéêíïóôõöúçñ]+[\s]?[a-zàâãéêíïóôõöúçñ]+$/i,
     email:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  };
+  /**
+   * handleBackButton
+   * Handles the navigation to login endpoint.
+   */
+  handleBackButton = (): void => {
+    this.router.navigate(['login']);
   };
   /**
    * btEnabler
@@ -68,11 +94,11 @@ export class SignUpComponent {
   };
   /**
    * receiveStatus
-   * Handles the assignment of boolean data to input Element is Approval proprietary.
+   * Handles the assignment of boolean data to input Element isApproval property.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
-  receiveStatus = (componentName: InputElement, eventValue: boolean) => {
+  receiveStatus = (componentName: InputElement, eventValue: boolean): void => {
     componentName.setIsAproved(eventValue);
     this.btEnabler();
   };
@@ -124,7 +150,7 @@ export class SignUpComponent {
   };
   /**
    * isfilledChecker
-   * Handles verifications without comparison parameters. (ex. checkbox and select)
+   * Checks if the input value isn't empty.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
@@ -133,6 +159,10 @@ export class SignUpComponent {
     componentName.getValue().length != 0
       ? componentName.setIsAproved(true)
       : componentName.setIsAproved(false);
+    this.passwordMatchChecker(
+      this.passwordConfirmation,
+      this.passwordConfirmation.dataValue,
+    );
     this.btEnabler();
   };
   /**
@@ -160,7 +190,7 @@ export class SignUpComponent {
   };
   /**
    * passwordMatchChecker
-   * Handles the password match verification.
+   * Checks if passoword confirmation input and password input are matching.
    * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
@@ -179,10 +209,42 @@ export class SignUpComponent {
     this.btEnabler();
   };
   /**
-   * signUpDataPackage
-   * Submit signUpformData Object due Cadastrar onClick event.
+   * handleSignUpSuccess
+   *
+   * Configura o modal para exibir a mensagem de sucesso.
    */
-  signUpDataSubmit = (): void => {
+  handleSignUpSuccess(): void {
+    this.loginError = false;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'check_circle_outline',
+      title: 'Cadastro finalizado!',
+      message: 'Verifique sua caixa de e-mail.',
+      buttonText: 'FECHAR',
+      overlayClick: false,
+    };
+  }
+  /**
+   * handleSignUpError
+   *
+   * Configura o modal para exibir a mensagem de erro.
+   */
+  handleSignUpError(message: string): void {
+    this.loginError = true;
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: message,
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
+  }
+  /**
+   * signUpDataSubmit
+   * Submit signUpformData Object due button onClick event.
+   */
+  async signUpDataSubmit(): Promise<void> {
     const signUpFormData: IRequestNewUser = {
       firstName: this.firstName.getValue(),
       lastName: this.lastName.getValue(),
@@ -191,42 +253,39 @@ export class SignUpComponent {
       email: this.email.getValue(),
       password: this.password.getValue(),
     };
-    this.userRegisterApi
-      .registerNewUser(signUpFormData)
-      .then(() => {
-        this.modalMessage = 'Login efetuado com sucesso!';
-        this.showModal = true;
-      })
-      .catch((error) => {
-        this.modalMessage = error.error.data[0].msg;
-        this.showModal = true;
-        this.handleError = true;
-      });
-  };
-
+    try {
+      await this.userRegisterApi.registerNewUser(signUpFormData);
+      this.handleSignUpSuccess();
+    } catch (e: any) {
+      this.handleSignUpError(e.error.data[0].msg);
+    }
+  }
   /**
    * closeModal
    *
    * Fecha o modal de acordo com um evento.
+   * Se não houver erro no login, redireciona o usuário para a página Home.
    * @param event - O evento de fechamento do modal.
    */
   closeModal(event: boolean): void {
-    this.showModal = event;
+    if (!this.loginError) {
+      this.router.navigate(['/login']);
+    }
+    this.modalConfig.showModal = event;
   }
 
   // Solução criada por Rafael Horauti para soluciona o requisito
   // de limpar os inputs do formulário ao clicar no botão limpar;
-  cleanInput = '';
-  count = 0;
-
   /**
-   * limparInput
+   * cleanForm
    *
    * Reset form inputs value.
    */
-  limparInput(): void {
-    this.cleanInput = 'true' + this.count;
-    this.count++;
+  cleanForm(): void {
+    this.inputComponents?.forEach((input) => {
+      input.cleanInputValue();
+    });
+    this.selectComponent?.cleanSelectValue();
   }
   // fim da solução
 }

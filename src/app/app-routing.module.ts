@@ -8,9 +8,11 @@ import { SurveyComponent } from './pages/dash/survey/survey.component';
 import { ResetPasswordComponent } from './pages/auth/password-redefinition/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './pages/auth/password-redefinition/change-password/change-password.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CharacterDetailsComponent } from './pages/dash/character-details/character-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'characters/:id', component: CharacterDetailsComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'redirect', component: RedirectComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },

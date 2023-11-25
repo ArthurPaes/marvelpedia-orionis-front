@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UserRegisterApi {
-  private apiUrl = environment.API_BASE_URL;
+  private apiUrl = process.env.NG_APP_API_BASE_URL;
 
   constructor(private httpRequestService: HttpRequestService) {}
 
@@ -20,7 +20,7 @@ export class UserRegisterApi {
 
   async registerNewUser(userData: IRequestNewUser): Promise<IResponseNewUser> {
     const response = await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/v1/signup`,
+      `${this.apiUrl}/signup`,
       'POST',
       userData,
     );
