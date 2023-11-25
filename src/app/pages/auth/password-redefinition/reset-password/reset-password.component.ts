@@ -110,5 +110,6 @@ export class ResetPasswordComponent {
    */
   closeModal(event: boolean): void {
     this.showModal = event;
+    this.router.navigate(['/login']);
   }
 }
