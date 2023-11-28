@@ -1,21 +1,28 @@
 .container-star {
-    display: flex;
-    align-items: center;
+    width: 100%;
+    text-align: center;    
 }
 
 .container-star span {
     margin-top: 14px;
-    margin-right: 1.5rem;
-    font-size: 1.2rem;
+    font-size: 0.5rem;
     font-weight: 700;
 }
 
 .icon-star {
     font-size: 3rem;
     height: 2.5rem;
+    overflow: visible;
 }
 
+@media screen and (max-width: 460px) {
+    .icon-star {
+        width: 20% !important;
+    }
+}  
+
 .textarea-default {
+    box-sizing: border-box;
     background-color: transparent;
     border-width: 3px 1px;
     border-style: solid;

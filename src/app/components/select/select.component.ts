@@ -7,13 +7,16 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 })
 export class SelectComponent implements OnInit {
   @Output() valueChange = new EventEmitter<string>();
-  @Input() selectWidth = '';
+  @Input() selectWidth = '522px';
+  @Input() selectMaxWidth = '';
   @Input() selectBorderColor = '';
   @Input() optionList: Array<string> = [];
   @Input() tagLabel = '';
   @Input() borderColor = '#FFFFFF';
   @Input() placeholder = '';
   @Input() height = '';
+  @Input() selectMarginBottom = '';
+  @Input() selectMarginTop = '';
 
   public valueSelect = '';
   public showTagLabel = false;

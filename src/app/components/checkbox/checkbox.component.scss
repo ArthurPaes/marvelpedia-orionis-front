@@ -36,3 +36,11 @@
     align-items: center;
   }
 }
+
+@media screen and (max-width: 360px) {
+  label {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+}

@@ -17,7 +17,7 @@ $input-height: 55.5px;
 }
 
 .input-position {
-    width: 99.1%;
+    width: 100%;
     border-width: 1px;
     border-color: $input-color;
     border-style: solid;
@@ -35,7 +35,7 @@ $input-height: 55.5px;
     color: $input-color;
     position:absolute;
     top: 1.1rem;
-    right: 0.8rem;
+    right: 1.4rem;
     cursor: pointer;
     z-index: 1;
 }
@@ -46,19 +46,20 @@ $input-height: 55.5px;
 }
 
 .input-position-date {
-    width: 249px;
+    box-sizing: border-box;
+    width: 100%;
     border-width: 1px;
     border-color: $input-color;
     border-style: solid;
     background-color: transparent;
     color: $input-color;
     border-radius: 4px;
-    height: 55.5px;
+    height: 58.5px;
     text-indent: 10px;
     z-index: 1;
     &:focus {
-        width: 249px;
-        height: 55.5px;
+        width: 100%;
+        height: 58.5px;
         outline: none;
         text-indent: 10px;
     }
@@ -66,7 +67,6 @@ $input-height: 55.5px;
 
 .icon-position-date {
     font-size: 1.2rem;
-    color: $input-color;
     position:absolute;
     top: 1.1rem;
     right: 0.4rem;
@@ -86,5 +86,11 @@ $input-height: 55.5px;
     &::placeholder {
         color: #FFFFFF;
         font-weight: 400;
+    }
+}
+
+@media screen and (max-width: 250px) {
+    .icon-position {
+        display: none;
     }
 }

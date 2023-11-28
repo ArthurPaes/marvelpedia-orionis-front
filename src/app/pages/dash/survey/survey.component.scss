@@ -1,5 +1,5 @@
 .background {
-    margin: 0;
+    position: relative;
     padding: 0;
     height: 100vh;
     background-repeat: no-repeat;
@@ -11,7 +11,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    isolation: isolate;
   
     ::after{
       content: '';
@@ -21,7 +20,7 @@
       background: black;
       opacity: 0.05;
     }
-  
+
     img {
       position: absolute;
       left: 80px;
@@ -30,16 +29,43 @@
 }
 
 .main-container {
+    width: 522px;
     color: #FFFFFF;
+    margin: 1rem;
 }
+
+@media screen and (max-width: 900px) {
+    .background img {
+        position: absolute;
+        left: 50%;
+        top: 3%;
+        transform: translate(-50%);
+    }
+    .header {
+        padding-top: 5.5rem;
+    }
+}  
+
+@media screen and (max-width: 400px) {
+    .background {
+        align-items: start;
+        height: 125vh;
+    }   
+    .background .main-container {
+        width: 95%;
+        overflow: auto;
+    }    
+}  
 
 .btn-close {
     cursor: pointer;
+    margin-left: 0.5rem;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
+    margin-top: -1rem;
 }
 
 .title {

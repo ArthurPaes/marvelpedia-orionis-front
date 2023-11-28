@@ -11,13 +11,16 @@ export class InputComponent {
   @Input() placeHolder = '';
   @Input() inputType = '';
   @Input() fieldsetLabel = '';
-  @Input() inputWidth = '';
+  @Input() inputWidth = '522px';
+  @Input() inputMaxWidth = '';
   @Input() inputBorderColor = '#FFFFFF';
   @Input() color = '';
   @Input() backgroundColorTag = '';
   @Input() cleanValue = '';
   @Input() inputSearchClass = 'inputSearchDetails';
   @Input() height = '';
+  @Input() inputMarginTop = '';
+  @Input() inputMarginBottom = '';
 
   public value = '';
   public showPassword = false;
@@ -59,7 +62,6 @@ export class InputComponent {
    */
   changeInputFocus(): void {
     this.showIconDate = true;
-    this.inputWidth = '100%';
   }
 
   /**

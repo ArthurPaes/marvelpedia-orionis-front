@@ -1,5 +1,6 @@
 <div
   [ngStyle]="{
+    'max-width': selectMaxWidth,
     width: selectWidth,
     'border-color': selectBorderColor
   }"
@@ -10,7 +11,12 @@
   <select
     class="select-position"
     [(ngModel)]="valueSelect"
-    [ngStyle]="{ 'border-color': borderColor, height: height }"
+    [ngStyle]="{
+      'border-color': borderColor,
+      height: height,
+      'margin-bottom': selectMarginBottom,
+      'margin-top': selectMarginTop
+    }"
     (change)="sendData($event)"
   >
     <option hidden disabled selected value="{{ placeholder }}">
