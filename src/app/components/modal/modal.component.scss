@@ -11,6 +11,8 @@ $words-color: #000000;
     border: 1px solid $words-color;
     background-color: #FFFFFF;
     z-index: 100;
+    overflow: auto;
+    justify-content: center;
 }
 
 .overlay {
@@ -18,7 +20,8 @@ $words-color: #000000;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
@@ -28,20 +31,22 @@ $words-color: #000000;
     position: absolute;
     top: 0.6rem;
     right: 0.2rem;
-    width: 31px;
+    width: 100%;
     height: 32px;
     cursor: pointer;
 }
 
 .inner-container {
+    box-sizing: border-box;
+    width: 100%;
     text-align: center;
     margin: 46px 52.5px;
 }
 
 .inner-container mat-icon {
     color: $words-color;
-    width: 69px;
-    height: 69px;
+    width: 100%;
+    height: 30%;
     font-weight: 400;
     font-size: 72px;
 }
@@ -65,7 +70,7 @@ $words-color: #000000;
 #btn-finalizar {
     cursor: pointer;
     margin-top: 0.4rem;
-    width: 255px;
+    width: 100%;
     height: 56px;
     border-radius: 4px;
     border: 1px solid #000000;
@@ -75,5 +80,19 @@ $words-color: #000000;
     letter-spacing: 0.3px;
     a{
         text-decoration: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main-container {
+        width: 90% !important;
+    }
+    .inner-container {
+        width: 90%;
+        margin: 46px 10px;
+    }
+    
+    #btn-finalizar {
+        width: 90%;
     }
 }

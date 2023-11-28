@@ -21,15 +21,15 @@ export class RatingComponent {
 
   @Input() justifyContent = '';
   @Input() textColor = '#FFFFFF';
-  @Input() spaceBetweenStars = '25%';
+  @Input() spaceBetweenStars = '15%';
   @Input() marginTopStars = '1.5rem';
   @Input() marginBottomStars = '1.5rem';
   @Input() textareaHeight = '120px';
   @Input() textareaColor = '#FFFFFF';
-  @Input() textareaWidth = '90%';
+  @Input() textareaWidth = '100%';
   @Input() textareaPlaceholder =
     'Se desejar, descreva mais sobre sua opinião aqui!';
-  @Input() marginTopTextarea = '0.5rem';
+  @Input() marginTopTextarea = '1.5rem';
   @Input() marginBottomTextarea = '1.5rem';
   @Input() textareaBorderColor = '#FFFFFF';
   @Input() showLabel = true;
