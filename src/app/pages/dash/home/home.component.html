@@ -1,4 +1,49 @@
 <div class="background">
+  <div class="banner">
+    <div class="banner-text">
+      <div class="content-area">
+        <img
+          src="../../../../assets/images/marvel-logo.png"
+          class="logo-marvel"
+          alt="Logo da Marvel"
+        />
+        <div>
+          <h1>Seja bem-vindo ao buscador do infinito!</h1>
+          <p>
+            Aqui você irá encontrar conteúdos oficiais da Marvel, para te ajudar
+            em sua exploração desse universo de histórias!
+          </p>
+        </div>
+        <div class="buttons">
+          <app-button
+            [buttonType]="'cancel'"
+            label="VISUALIZAR PLANOS"
+            [custonStyle]="'width: 260px'"
+          ></app-button>
+          <a href="home#content">
+            <app-button
+              [buttonType]="''"
+              label="EXPLORAR CONTEÚDO"
+              [custonStyle]="'width: 260px'"
+            ></app-button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="banner-image">
+      <img
+        src="../../../../assets/images/characters-banner.svg"
+        alt="Personagens da Marvel batalhando"
+      />
+      <div class="stripe"></div>
+    </div>
+  </div>
+  <a class="ad-bar" id="content" href="/home">
+    <p>
+      É artista? Junte-se à revolução Marve! <span>Clique aqui</span> para
+      fechar uma parceira!
+    </p>
+  </a>
   <div class="container">
     <div class="filter-wrapper">
       <app-button
