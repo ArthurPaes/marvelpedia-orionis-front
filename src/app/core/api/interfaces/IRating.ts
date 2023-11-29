@@ -1,9 +1,25 @@
+export interface IResponseEligibility {
+  date: string;
+  status: boolean;
+  data: {
+    eligible: boolean;
+  };
+}
+
 export interface IRequestRating {
-  chosenRate: number;
-  textboxValue: string;
+  comment: string;
+  grade: number;
 }
 
 export interface IResponseRating {
-  status: number;
   date: string;
+  status: true;
+  data: {
+    comment: string;
+    grade: number;
+    answered: boolean;
+    id: number;
+    createdAt: string;
+    userId: number;
+  };
 }

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RatingApi } from 'src/app/core/api/app/rating.api';
 import { IRequestRating } from 'src/app/core/api/interfaces/IRating';
+import { IModalConfig } from 'src/app/pages/auth/login/interface/login.interface';
 
 @Component({
   selector: 'app-rating',
@@ -10,8 +11,8 @@ import { IRequestRating } from 'src/app/core/api/interfaces/IRating';
 })
 export class RatingComponent {
   public ratingValue: IRequestRating = {
-    chosenRate: 0,
-    textboxValue: '',
+    grade: 0,
+    comment: '',
   };
 
   constructor(
@@ -38,8 +39,6 @@ export class RatingComponent {
   @Input() placeHolderColor = 'textarea-default';
   public starList: Array<number> = [0, 1, 2, 3, 4];
   public btnDisabled = true;
-  public modalMessage = '';
-  public isModalActive = false;
 
   /**
    * selectStarPosition
@@ -50,7 +49,7 @@ export class RatingComponent {
    */
   selectStarPosition(index: number): void {
     this.btnDisabled = false;
-    this.ratingValue.chosenRate = index + 1;
+    this.ratingValue.grade = index + 1;
   }
 
   /**
@@ -61,9 +60,52 @@ export class RatingComponent {
    * @param textboxData Evento do textarea que registra cada tecla digitada.
    */
   registerTextareaData(textboxData: Event): void {
-    this.ratingValue.textboxValue = (
+    this.ratingValue.comment = (
       textboxData.target as HTMLTextAreaElement
     ).value.trim();
+  }
+
+  public ratingError = false;
+
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+    overlayClick: false,
+  };
+
+  /**
+   * handleRatingSuccess
+   *
+   * Objeto que manipula o caso de sucesso no modal.
+   */
+  handleRatingSuccess(successMessage: string): void {
+    this.modalConfig = {
+      showModal: true,
+      icon: 'check_circle_outline',
+      title: 'Sucesso!',
+      message: successMessage,
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
+  }
+
+  /**
+   * handleRatingError
+   *
+   * Objeto que manipula o caso de erro no modal.
+   */
+  handleRatingError(errorMessage: string): void {
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: errorMessage,
+      buttonText: 'FECHAR',
+      overlayClick: true,
+    };
   }
 
   /**
@@ -72,17 +114,20 @@ export class RatingComponent {
    * Função que envia o objeto para o backend que contem a avaliação pela estrela e comentários
    *
    */
-  sendRating(): void {
-    this.ratingApi
-      .registerRating(this.ratingValue)
-      .then(() => {
-        this.modalMessage = 'Dados enviados com sucesso!';
-        this.isModalActive = true;
-      })
-      .catch(() => {
-        this.isModalActive = true;
-        this.modalMessage = 'Falha ao enviar os dados!';
-      });
+  async sendRating(): Promise<void> {
+    try {
+      const ratingValidation = await this.ratingApi.registerRating(
+        this.ratingValue,
+      );
+      this.handleRatingSuccess(ratingValidation.data.comment);
+    } catch (error: any) {
+      if (error.data.msg) {
+        this.handleRatingError(error.data.msg);
+      } else {
+        this.handleRatingError('Erro interno do servidor!');
+        this.ratingError = true;
+      }
+    }
   }
 
   /**
@@ -92,7 +137,11 @@ export class RatingComponent {
    *
    */
   closeModal(statusModal: boolean): void {
-    this.isModalActive = statusModal;
-    this.router.navigate(['home']);
+    if (this.ratingError) {
+      this.modalConfig.showModal = statusModal;
+    } else {
+      this.ratingError = false;
+      this.router.navigate(['home']);
+    }
   }
 }
