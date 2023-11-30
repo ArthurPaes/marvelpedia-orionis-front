@@ -33,7 +33,7 @@
           [tagLabel]="'Gênero'"
           placeholder="Selecione seu gênero"
           [borderColor]="gender.getBorderColor()"
-          (valueChange)="isfilledChecker(gender, $event)"
+          (valueChange)="genreChecker($event)"
         ></app-select>
         <app-input
           [inputType]="'inputDate'"
@@ -59,12 +59,13 @@
         [inputType]="'inputPassword'"
         [fieldsetLabel]="password.getFieldLabel()"
         [placeHolder]="'Digite sua senha'"
-        (valueChange)="isfilledChecker(password, $event)"
+        (valueChange)="passwordChecker($event)"
       ></app-input>
 
       <div>
         <app-password-checker
           [passwordInput]="password.getValue()"
+          [setInicialStyle]="passwordCheckerReload"
           (sendStatus)="receiveStatus(password, $event)"
         ></app-password-checker>
       </div>
