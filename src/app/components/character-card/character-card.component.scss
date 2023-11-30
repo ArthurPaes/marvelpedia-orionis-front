@@ -74,6 +74,9 @@ mat-icon {
 }
 
 .card-button {
+  width: 349px;
+}
+.card-button {
   position: absolute;
   bottom: 16px;
 }
@@ -96,8 +99,8 @@ mat-icon {
     width: 283px;
   }
 
-  app-button {
-    width: 50px;
+  .card-button {
+    width: 283px;
   }
 
 }
