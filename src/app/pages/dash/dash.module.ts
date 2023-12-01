@@ -9,9 +9,15 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { SurveyComponent } from './survey/survey.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
+import { OthersDetailsComponent } from './others-details/others-details.component';
 
 @NgModule({
-  declarations: [HomeComponent, SurveyComponent, CharacterDetailsComponent],
+  declarations: [
+    HomeComponent,
+    SurveyComponent,
+    CharacterDetailsComponent,
+    OthersDetailsComponent,
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -21,6 +27,11 @@ import { CharacterDetailsComponent } from './character-details/character-details
   ],
   providers: [MarvelContentApi],
   bootstrap: [],
-  exports: [HomeComponent, SurveyComponent, CharacterDetailsComponent],
+  exports: [
+    HomeComponent,
+    SurveyComponent,
+    CharacterDetailsComponent,
+    OthersDetailsComponent,
+  ],
 })
 export class DashModule {}
