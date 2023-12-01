@@ -74,6 +74,35 @@ mat-icon {
 }
 
 .card-button {
+  width: 349px;
+}
+.card-button {
   position: absolute;
   bottom: 16px;
 }
+
+@media (max-width: 1237px) {
+  .card {
+    width: 315px;
+    height: 395px;
+  }
+
+  .card-image {
+    height: 206px;
+    width: 315px;
+    object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .card-body {
+    padding: 16px;
+    width: 283px;
+  }
+
+  .card-button {
+    width: 283px;
+  }
+
+}
+
+
