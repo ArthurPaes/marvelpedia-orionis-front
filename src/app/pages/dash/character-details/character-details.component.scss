@@ -6,10 +6,14 @@
     height: calc(100vh - 16px);
 }
 
+.container-content {
+    
+}
+
 .search-area {
     box-sizing: border-box;
-    padding-top: 28px;
-    gap: 8px;
+    padding-top: 8px;
+    gap: 10px;
     width: 1204px;
     display: flex;
     flex-direction: column;
@@ -21,14 +25,19 @@
     padding-bottom: 28px;
 }
 
+.search-area:first-child {
+    padding-top: 40px;
+}
+
 .search-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 1204px;
     box-sizing: border-box;
     padding: 0 16px;
     margin-bottom: 16px;
+}
+
+.search-line p {
+    margin-bottom: 27px;
 }
 
 .search-area p {
@@ -36,3 +45,26 @@
     margin-left: 6px;
     font-weight: 700;
 }
+
+.not-found-message {
+    align-items: center;
+    text-align: center;
+    margin: 61px auto;
+  }
+
+.not-found-message mat-icon {
+    color: var( --color-sup-red);
+    height: 229px;
+    width: 100%;
+    font-weight: 400;
+    font-size: 239px;
+    margin-bottom: 23px;
+  }
+  
+  .not-found-message .error-description {
+    font-family: Inter;
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }

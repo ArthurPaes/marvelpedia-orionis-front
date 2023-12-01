@@ -15,6 +15,7 @@
     <mat-icon (click)="redirectHome()" *ngIf="showCloseButton">close</mat-icon>
   </div>
   <p
+    *ngIf="characterDescription.length > 0"
     class="character-description"
     [ngStyle]="{
       width: characterDescriptionWidth,

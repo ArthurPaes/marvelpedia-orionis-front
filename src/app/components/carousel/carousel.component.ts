@@ -14,7 +14,7 @@ export class CarouselComponent {
    * Send the card content ID on click event.
    * @param event Event data.
    */
-  onClick(event: string): void {
+  onClick(event: number): void {
     this.getCardId.emit(event);
   }
 }

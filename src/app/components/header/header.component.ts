@@ -14,7 +14,7 @@ export class HeaderComponent {
   ) {}
 
   @Input() width = '1205px';
-  @Input() containerHeight = '153px';
+  @Input() containerHeight = '200px';
   @Input() backgroundColor = '#000000';
   @Input() textColor = '#FFFFFF';
   @Input() showCloseButton = false;

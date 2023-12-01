@@ -1,23 +1,34 @@
 <div class="container">
-  <app-header></app-header>
+  <app-header
+    [characterName]="characterDetailList.characterName"
+    [characterDescription]="characterDetailList.characterDescription"
+  ></app-header>
   <div class="container-content">
     <div class="search-area">
       <div class="search-line">
         <p>Séries</p>
         <app-input
           [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um série específica?'"
+          [fieldsetLabel]="'Está buscando uma série específica?'"
           [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
+          [inputWidth]="'100%'"
           [inputBorderColor]="'#000000'"
           [color]="'#000000'"
-          [placeHolder]="'Está buscando um série específica?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.seriesList)
-          "
+          [placeHolder]="'Está buscando uma série específica?'"
+          (valueChangeLogin)="filterCategorySeries($event)"
+          (emitCleanValue)="cleanSearchSeries($event)"
         ></app-input>
       </div>
-      <app-carousel [cardsList]="characterDetailList.seriesList"></app-carousel>
+      <app-carousel
+        *ngIf="seriesListFilter.length > 0; else searchNotFound"
+        [cardsList]="seriesListFilter"
+      ></app-carousel>
+      <<ng-template #searchNotFound>
+        <div class="not-found-message">
+          <mat-icon>error_outline</mat-icon>
+          <p class="error-description">Não foi póssível realizar essa busca!</p>
+        </div>
+      </ng-template>
     </div>
     <div class="search-area">
       <div class="search-line">
@@ -26,36 +37,50 @@
           [inputType]="'inputSearch'"
           [fieldsetLabel]="'Está buscando um quadrinho específico?'"
           [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
+          [inputWidth]="'100%'"
           [inputBorderColor]="'#000000'"
           [color]="'#000000'"
           [placeHolder]="'Está buscando um quadrinho específico?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.comicsList)
-          "
+          (valueChangeLogin)="filterCategoryComics($event)"
+          (emitCleanValue)="cleanSearchComics($event)"
         ></app-input>
       </div>
-      <app-carousel [cardsList]="characterDetailList.comicsList"></app-carousel>
+      <app-carousel
+        *ngIf="comicsListFilter.length > 0; else searchNotFound"
+        [cardsList]="comicsListFilter"
+      ></app-carousel>
+      <<ng-template #searchNotFound>
+        <div class="not-found-message">
+          <mat-icon>error_outline</mat-icon>
+          <p class="error-description">Não foi póssível realizar essa busca!</p>
+        </div>
+      </ng-template>
     </div>
     <div class="search-area">
       <div class="search-line">
         <p>Histórias</p>
         <app-input
           [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um história específica?'"
+          [fieldsetLabel]="'Está buscando uma história específica?'"
           [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
+          [inputWidth]="'100%'"
           [inputBorderColor]="'#000000'"
           [color]="'#000000'"
-          [placeHolder]="'Está buscando um história específica?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.storiesList)
-          "
+          [placeHolder]="'Está buscando uma história específica?'"
+          (valueChangeLogin)="filterCategoryStories($event)"
+          (emitCleanValue)="cleanSearchStories($event)"
         ></app-input>
       </div>
       <app-carousel
-        [cardsList]="characterDetailList.storiesList"
+        *ngIf="storiesListFilter.length > 0; else searchNotFound"
+        [cardsList]="storiesListFilter"
       ></app-carousel>
+      <<ng-template #searchNotFound>
+        <div class="not-found-message">
+          <mat-icon>error_outline</mat-icon>
+          <p class="error-description">Não foi póssível realizar essa busca!</p>
+        </div>
+      </ng-template>
     </div>
     <div class="search-area">
       <div class="search-line">
@@ -64,16 +89,24 @@
           [inputType]="'inputSearch'"
           [fieldsetLabel]="'Está buscando um evento específico?'"
           [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
+          [inputWidth]="'100%'"
           [inputBorderColor]="'#000000'"
           [color]="'#000000'"
           [placeHolder]="'Está buscando um evento específico?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.eventsList)
-          "
+          (valueChangeLogin)="filterCategoryEvents($event)"
+          (emitCleanValue)="cleanSearchEvents($event)"
         ></app-input>
       </div>
-      <app-carousel [cardsList]="characterDetailList.eventsList"></app-carousel>
+      <app-carousel
+        *ngIf="eventsListFilter.length > 0; else searchNotFound"
+        [cardsList]="eventsListFilter"
+      ></app-carousel>
+      <<ng-template #searchNotFound>
+        <div class="not-found-message">
+          <mat-icon>error_outline</mat-icon>
+          <p class="error-description">Não foi póssível realizar essa busca!</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

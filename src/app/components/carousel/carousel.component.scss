@@ -50,18 +50,18 @@ h1 {
 .btNav {
     position: relative;
     top:195px;
-    height: 200px;
+    height: 100px;
     border: none;
     border-radius: 4px;
-    background-color:transparent;
+    background-color: var(--color-primary);
     color: var(--color-white);
     cursor: pointer;
     transform: translate(-50%, -50%);
     &:hover {background-color: var(--color-primary-hover)};
 }
 #prev {    
-    left: 24px;    
+    left: 13px;    
 }
 #next {
-    left: 1142px;
+    left: 1149px;
 }

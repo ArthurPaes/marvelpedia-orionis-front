@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class InputComponent {
   @Output() valueChange = new EventEmitter<string>();
   @Output() valueChangeLogin = new EventEmitter<string>();
+  @Output() emitCleanValue = new EventEmitter<boolean>();
   @Input() placeHolder = '';
   @Input() inputType = '';
   @Input() fieldsetLabel = '';
@@ -53,6 +54,7 @@ export class InputComponent {
     }
     this.showTagLabel = false;
     this.showCloseBtn = false;
+    this.emitCleanValue.emit(true);
   }
 
   /**
