@@ -6,7 +6,7 @@ $input-height: 55.5px;
     padding: 0;
     height: 100vh;
     background-repeat: no-repeat;
-    background-image: url("../../../../assets/images/marvel-space.png");
+    background-image: url("../../../../assets/images/marvel-space.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -14,21 +14,12 @@ $input-height: 55.5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    isolation: isolate;
-  
-    ::after{
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background: black;
-      opacity: 0.05;
-    }
-  
+
     img {
       position: absolute;
       left: 80px;
       top: 80px;
+      width: 80px;
     }
 }
 
@@ -42,4 +33,14 @@ $input-height: 55.5px;
 .container-redirect p {
     font-size: 25px;
     color: $input-color;
+}
+
+
+@media screen and (max-width: 900px) {
+  .background img {
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    transform: translate(-50%);
+  }
 }
