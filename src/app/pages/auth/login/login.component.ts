@@ -94,14 +94,15 @@ export class LoginComponent {
    *
    * Manipula o erro no login.
    * Indica que houve erro através da variável loginError e configura o modal para exibir a mensagem de erro.
+   * @param errorMessage - Recebe a mensagem de erro que será exibida no modal.
    */
-  handleLoginError(): void {
+  handleLoginError(errorMessage: string): void {
     this.loginError = true;
     this.modalConfig = {
       showModal: true,
       icon: 'error_outline',
       title: 'Erro!',
-      message: 'E-mail ou senha inválidos!',
+      message: errorMessage,
       buttonText: 'FECHAR',
       overlayClick: true,
     };
@@ -118,8 +119,14 @@ export class LoginComponent {
     try {
       await this.authApi.authenticateUser(this.login);
       this.router.navigate(['/home']);
-    } catch (error) {
-      this.handleLoginError();
+    } catch (e: any) {
+      if (
+        e.error.data === 'Necessária a confirmação do cadastro pelo e-mail.'
+      ) {
+        this.handleLoginError(e.error.data);
+        return;
+      }
+      this.handleLoginError('E-mail ou senha inválidos!');
     }
   }
 
