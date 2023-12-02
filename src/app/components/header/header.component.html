@@ -4,6 +4,7 @@
     color: textColor,
     'background-color': backgroundColor,
     width: width,
+    'max-width': maxWidthHeader,
     height: containerHeight
   }"
 >
@@ -12,7 +13,13 @@
       <mat-icon (click)="goBack()">arrow_back_ios</mat-icon>
       <p>{{ characterName }}</p>
     </div>
-    <mat-icon (click)="redirectHome()" *ngIf="showCloseButton">close</mat-icon>
+    <app-button
+      buttonType="cancel"
+      label="Home"
+      class="logout-button"
+      [custonStyle]="'width: 75px'"
+      (click)="redirectHome()"
+    ></app-button>
   </div>
   <p
     *ngIf="characterDescription.length > 0"

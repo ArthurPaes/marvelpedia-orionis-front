@@ -1,24 +1,24 @@
-<div class="container">
+<div class="container-main">
   <app-header
+    [showCloseButton]="true"
+    [maxWidthHeader]="'1205px'"
     [characterName]="characterDetailList.characterName"
     [characterDescription]="characterDetailList.characterDescription"
   ></app-header>
-  <div class="container-content">
-    <div class="search-area">
-      <div class="search-line">
-        <p>Séries</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando uma série específica?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'100%'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando uma série específica?'"
-          (valueChangeLogin)="filterCategorySeries($event)"
-          (emitCleanValue)="cleanSearchSeries($event)"
-        ></app-input>
-      </div>
+  <div class="search-area">
+    <p>Séries</p>
+    <app-input
+      [inputType]="'inputSearch'"
+      [fieldsetLabel]="'Está buscando uma série específica?'"
+      [backgroundColorTag]="'#2C85D8'"
+      [inputWidth]="'100%'"
+      [inputBorderColor]="'#000000'"
+      [color]="'#000000'"
+      [placeHolder]="'Está buscando uma série específica?'"
+      (valueChangeLogin)="filterCategorySeries($event)"
+      (emitCleanValue)="cleanSearchSeries($event)"
+    ></app-input>
+    <div class="carrosel-area">
       <app-carousel
         *ngIf="seriesListFilter.length > 0; else searchNotFound"
         [cardsList]="seriesListFilter"
@@ -30,21 +30,23 @@
         </div>
       </ng-template>
     </div>
-    <div class="search-area">
-      <div class="search-line">
-        <p>Quadrinhos</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um quadrinho específico?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'100%'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando um quadrinho específico?'"
-          (valueChangeLogin)="filterCategoryComics($event)"
-          (emitCleanValue)="cleanSearchComics($event)"
-        ></app-input>
-      </div>
+  </div>
+  <div class="search-area">
+    <div class="search-line">
+      <p>Quadrinhos</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando um quadrinho específico?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'100%'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando um quadrinho específico?'"
+        (valueChangeLogin)="filterCategoryComics($event)"
+        (emitCleanValue)="cleanSearchComics($event)"
+      ></app-input>
+    </div>
+    <div class="carrosel-area">
       <app-carousel
         *ngIf="comicsListFilter.length > 0; else searchNotFound"
         [cardsList]="comicsListFilter"
@@ -56,21 +58,23 @@
         </div>
       </ng-template>
     </div>
-    <div class="search-area">
-      <div class="search-line">
-        <p>Histórias</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando uma história específica?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'100%'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando uma história específica?'"
-          (valueChangeLogin)="filterCategoryStories($event)"
-          (emitCleanValue)="cleanSearchStories($event)"
-        ></app-input>
-      </div>
+  </div>
+  <div class="search-area">
+    <div class="search-line">
+      <p>Histórias</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando uma história específica?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'100%'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando uma história específica?'"
+        (valueChangeLogin)="filterCategoryStories($event)"
+        (emitCleanValue)="cleanSearchStories($event)"
+      ></app-input>
+    </div>
+    <div class="carrosel-area">
       <app-carousel
         *ngIf="storiesListFilter.length > 0; else searchNotFound"
         [cardsList]="storiesListFilter"
@@ -82,21 +86,23 @@
         </div>
       </ng-template>
     </div>
-    <div class="search-area">
-      <div class="search-line">
-        <p>Eventos</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um evento específico?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'100%'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando um evento específico?'"
-          (valueChangeLogin)="filterCategoryEvents($event)"
-          (emitCleanValue)="cleanSearchEvents($event)"
-        ></app-input>
-      </div>
+  </div>
+  <div class="search-area">
+    <div class="search-line">
+      <p>Eventos</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando um evento específico?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'100%'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando um evento específico?'"
+        (valueChangeLogin)="filterCategoryEvents($event)"
+        (emitCleanValue)="cleanSearchEvents($event)"
+      ></app-input>
+    </div>
+    <div class="carrosel-area">
       <app-carousel
         *ngIf="eventsListFilter.length > 0; else searchNotFound"
         [cardsList]="eventsListFilter"

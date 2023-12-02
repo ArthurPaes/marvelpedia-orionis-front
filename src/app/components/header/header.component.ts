@@ -13,7 +13,8 @@ export class HeaderComponent {
     private location: Location,
   ) {}
 
-  @Input() width = '1205px';
+  @Input() width = '';
+  @Input() maxWidthHeader = '';
   @Input() containerHeight = '200px';
   @Input() backgroundColor = '#000000';
   @Input() textColor = '#FFFFFF';

@@ -2,18 +2,25 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
+    padding-bottom: 1.7rem;
+}
+
+.logout-button {
+    margin-right: 1.5rem;
 }
 
 .container-title {
     display: flex;
     justify-content: space-between;
-    margin: 1.2rem 1.5rem;
+    align-items: end;
+    margin: 1.1rem 1.5rem;
 }
 
 .container-title p {
     font-size: 2.5rem;
     font-weight: 500;
-    margin-left: 1.5rem;
+    margin-left: 0.2rem;
 }
 
 .container-title mat-icon {
@@ -34,4 +41,13 @@
     margin-left: 25px;
     margin-right: 25px;
     margin-bottom: 10px;
+}
+
+@media screen and (max-width: 500px) { 
+    .container-title {
+        margin: auto 0;
+    }
+    .container-title p {
+        font-size: 1.5rem;
+    }
 }
