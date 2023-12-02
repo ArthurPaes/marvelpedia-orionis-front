@@ -12,18 +12,7 @@ export class CharacterCardComponent {
   @Input() imageSrc = '';
   @Input() favorited = false;
   @Input() isCharacter = false;
-  notified = false;
   @Output() favoriteClick = new EventEmitter();
-
-  /**
-   * toggleNotified()
-   *
-   * Responsável por alternar o valor da variável `notified` entre `true` e `false` toda vez que o usuário clica no ícone de notificação.
-   */
-  toggleNotified() {
-    this.notified = !this.notified;
-    console.log(this.notified);
-  }
 
   /**
    * toggleFavorited()

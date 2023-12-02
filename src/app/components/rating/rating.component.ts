@@ -81,12 +81,12 @@ export class RatingComponent {
    *
    * Objeto que manipula o caso de sucesso no modal.
    */
-  handleRatingSuccess(successMessage: string): void {
+  handleRatingSuccess(): void {
     this.modalConfig = {
       showModal: true,
       icon: 'check_circle_outline',
       title: 'Sucesso!',
-      message: successMessage,
+      message: 'Pesquisa enviada com sucesso!',
       buttonText: 'FECHAR',
       overlayClick: true,
     };
@@ -96,6 +96,7 @@ export class RatingComponent {
    * handleRatingError
    *
    * Objeto que manipula o caso de erro no modal.
+   * @param errorMessage mensagem de erro que vem do backend
    */
   handleRatingError(errorMessage: string): void {
     this.modalConfig = {
@@ -116,13 +117,14 @@ export class RatingComponent {
    */
   async sendRating(): Promise<void> {
     try {
-      const ratingValidation = await this.ratingApi.registerRating(
+      const respostaRating = await this.ratingApi.registerRating(
         this.ratingValue,
       );
-      this.handleRatingSuccess(ratingValidation.data.comment);
-    } catch (error: any) {
-      if (error.data.msg) {
-        this.handleRatingError(error.data.msg);
+      console.log(respostaRating);
+      this.handleRatingSuccess();
+    } catch (errorResponse: any) {
+      if (errorResponse.error.data.msg) {
+        this.handleRatingError(errorResponse.error.data.msg);
       } else {
         this.handleRatingError('Erro interno do servidor!');
         this.ratingError = true;

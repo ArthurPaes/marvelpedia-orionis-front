@@ -7,9 +7,6 @@
       <h2 class="character-name">
         {{ title }}
       </h2>
-      <mat-icon *ngIf="isCharacter" (click)="toggleNotified()">
-        {{ notified ? "notifications" : "notifications_none" }}
-      </mat-icon>
       <mat-icon *ngIf="isCharacter" (click)="toggleFavorited()">{{
         favorited ? "favorite" : "favorite_border"
       }}</mat-icon>
@@ -19,6 +16,7 @@
       class="card-button"
       buttonType="bt-card"
       label="SABER MAIS"
+      [custonStyle]="'width: 100%'"
     ></app-button>
   </div>
 </div>

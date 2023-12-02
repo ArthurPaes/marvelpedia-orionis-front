@@ -39,7 +39,7 @@ export class RatingApi {
    */
   async validateEligibility(): Promise<IResponseEligibility> {
     return await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/survey/eligibility`,
+      `${this.apiUrl}/survey/user_eligibility`,
       'GET',
     );
   }
