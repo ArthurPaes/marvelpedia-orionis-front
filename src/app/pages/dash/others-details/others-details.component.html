@@ -21,6 +21,7 @@
       ></app-button>
     </section>
   </header>
+
   <div class="product-view">
     <div class="product-card"></div>
     <div class="content-container">
@@ -42,33 +43,37 @@
         <h2>Conheça mais</h2>
         <h4>URL_oferecido_pela_API_da_Marvel</h4>
       </div>
-      <div class="coment-list">
-        <h2>comentarios</h2>
-        <ol>
-          <li class="coment-item">
-            <h3>Ana Barbosa</h3>
-            <span>23/11/2023</span>
-            <h4>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium quas molestiae, deserunt nostrum quidem commodi quis
-              ullam minus.
-            </h4>
-          </li>
-        </ol>
-        <app-button [buttonType]="'small'" [label]="'ver mais'"></app-button>
-      </div>
     </div>
-    <div class="relative-card-container">
-      <h2>Conteúdo relacionado</h2>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-      <div class="relative-card"></div>
-    </div>
+  </div>
+
+  <div class="coment-list">
+    <h2>Comentarios</h2>
+    <ol>
+      <li class="coment-item">
+        <h3>Ana Barbosa<span>01/12/2023</span></h3>
+        <h4>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+          quas molestiae, deserunt nostrum quidem commodi quis ullam minus.
+        </h4>
+        <mat-icon class="bt-delete">delete</mat-icon>
+      </li>
+      <li class="coment-item">
+        <h3>Rodrigo Lima<span>23/11/2023</span></h3>
+        <h4>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+          quas molestiae, deserunt nostrum quidem commodi quis ullam minus.
+        </h4>
+        <mat-icon class="bt-delete">delete</mat-icon>
+      </li>
+      <li class="coment-item">
+        <h3>Roberta Fernandes<span>20/11/2023</span></h3>
+        <h4>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+          quas molestiae, deserunt nostrum quidem commodi quis ullam minus.
+        </h4>
+        <mat-icon class="bt-delete">delete</mat-icon>
+      </li>
+    </ol>
+    <app-button [buttonType]="'small'" [label]="'ver mais'"></app-button>
   </div>
 </div>

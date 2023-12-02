@@ -2,16 +2,16 @@
     box-sizing: border-box;
     max-width: 1205px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    align-items: center; 
 }
-
 header {
     height: 312px;
     display: flex;
     flex-direction: column;
     background-color: black;    
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 section {    
     display: grid;
@@ -46,9 +46,10 @@ h1 {
 }
 h2 {
     margin: 0;
+    margin-bottom: 10px;
 }
 .bt-comentar{
-    width: inherit;
+    width: 100%;
 }
 .app-button {
     display: flex;
@@ -56,19 +57,17 @@ h2 {
     margin-right: 30%;
 }
 .product-view{
-    width: inherit;
+    width: 80%;
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 120px;
+    margin-bottom: 40px;
 }
 .content-container {
-    
     width: inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 0 20px;
 }
 textarea {
     width: calc(100% - 22px);
@@ -90,37 +89,44 @@ textarea {
     background-color: rgb(19, 55, 138);
     border-radius: 5px;
 }
-.relative-card-container{
-    display: flex;
-    min-width: 274px;
-    width: 274px;
-    height: 427px;
-    background-color: rgb(44 133 216 / 25%);
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-end;
+.coment-list{
+    -webkit-box-shadow: 0px 8px 10px 1px rgba(0, 20, 40, 0.2);
+    -moz-box-shadow: 0px 8px 10px 1px rgba(0, 20, 40, 0.2);
+    box-shadow: 0px 8px 10px 1px rgba(0, 20, 40, 0.2);
     border-radius: 5px;
-    padding: 5px;
-    gap: 5px;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 40px;
+
 }
-.relative-card{
-    height: 128px;
-    min-width: 88px;
-    border-radius: 5px;
-    background-color: rgb(19, 55, 138);
+.coment-item{
+    border: 1px solid rgb(140, 190, 240);
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+h3{
+    color: var(--color-primary);
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+span{
+    font-weight: 300;
+    color: rgb(140, 190, 240);
+}
+.bt-delete{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    color: var(--color-primary)
 }
 
+
 @media (min-width: 740px ) and (max-width: 920px) {
-    .relative-card-container{        
-        display: none;
-    }
-    .relative-card{        
-        display: none;
-    }
-    textarea {
-        padding: 5px;    
-        width: 410px;
-    }
     .product-view{
         width: inherit;
         display: flex;
@@ -128,10 +134,6 @@ textarea {
         gap: 20px;
     }
 }
-
-
-
-
 
 @media (min-width: 320px) and (max-width: 740px) {
     header {
@@ -153,24 +155,21 @@ textarea {
     }
     
     textarea {
+        width: calc(100% - 22px);
         padding: 10px;
         resize: none;
     }
-    .product-view{           
+    .product-view{
+        width: 100%;        
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
     }
     .product-card {
         width: 274px;
         height: 427px;
         margin-bottom: 20px;
-    }
-    .relative-card-container{
-        display: none;
-    }
-    .relative-card {
-        display: none;
     }
     
     h2{
@@ -181,5 +180,12 @@ textarea {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .coment-list {
+        width: 100%;
+        padding: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
     }
 }
