@@ -5,61 +5,59 @@ import {
   IResponseCategoryList,
   IResponseStandardCategory,
 } from 'src/app/core/api/interfaces/ICharacterCategoryList';
-import mock from './mock';
 
 @Component({
   selector: 'app-character-details',
   templateUrl: './character-details.component.html',
   styleUrls: ['./character-details.component.scss'],
 })
-// export class CharacterDetailsComponent implements OnInit {
-export class CharacterDetailsComponent {
+export class CharacterDetailsComponent implements OnInit {
   constructor(
     private marvelContentApi: MarvelContentApi,
     private activatedRoute: ActivatedRoute,
   ) {}
 
-  public characterId = mock.characterId;
+  public characterId = '';
   public characterDetailList: IResponseCategoryList = {
-    characterName: mock.characterName,
-    characterDescription: mock.characterDescription,
-    seriesList: mock.seriesList,
-    comicsList: mock.comicsList,
-    eventsList: mock.eventsList,
-    storiesList: mock.storiesList,
+    characterName: '',
+    characterDescription: '',
+    seriesList: [],
+    comicsList: [],
+    eventsList: [],
+    storiesList: [],
   };
 
-  public seriesListFilter = mock.seriesList;
-  public comicsListFilter = mock.comicsList;
-  public eventsListFilter = mock.eventsList;
-  public storiesListFilter = mock.storiesList;
+  public seriesListFilter = this.characterDetailList.seriesList;
+  public comicsListFilter = this.characterDetailList.comicsList;
+  public eventsListFilter = this.characterDetailList.eventsList;
+  public storiesListFilter = this.characterDetailList.storiesList;
 
   /**
    * getCategoryList
    *
    * Quando o usuário vier da página home ao clicar no card, essa função irá receber o id do personagem como parâmetro da URL ao inicializar a página, e irá solicitar ao backend informações que irão compor a página de detalhes como dados do cabeçalho e arrays de quadrinhos, histórias, séres e eventos.
    */
-  // getCategoryList(): void {
-  //   const characterIdParams: string | null =
-  //     this.activatedRoute.snapshot.paramMap.get('id');
-  //   if (characterIdParams != null) {
-  //     this.characterId = characterIdParams;
-  //   }
-  //   this.marvelContentApi
-  //     .getCharacterCategoryList(this.characterId)
-  //     .then((characterDetailsDataList) => {
-  //       this.characterDetailList = characterDetailsDataList;
-  //     });
-  // }
+  getCategoryList(): void {
+    const characterIdParams: string | null =
+      this.activatedRoute.snapshot.paramMap.get('id');
+    if (characterIdParams != null) {
+      this.characterId = characterIdParams;
+    }
+    this.marvelContentApi
+      .getCharacterCategoryList(this.characterId)
+      .then((characterDetailsDataList) => {
+        this.characterDetailList = characterDetailsDataList;
+      });
+  }
 
   /**
    * ngOnInit
    *
    * Ao inicializar a página será chamado a função getCategoryList para popular os componentes da página.
    */
-  // ngOnInit(): void {
-  //   this.getCategoryList();
-  // }
+  ngOnInit(): void {
+    this.getCategoryList();
+  }
 
   /**
    * cleanSearchSeries
@@ -67,7 +65,7 @@ export class CharacterDetailsComponent {
    * Função que pega um evento de limpar do componente input e reseta os cards de series.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchSeries(isClean: boolean) {
+  cleanSearchSeries(isClean: boolean): void {
     if (isClean) {
       this.seriesListFilter = this.characterDetailList.seriesList;
     }
@@ -79,7 +77,7 @@ export class CharacterDetailsComponent {
    * Função que pega um evento de limpar do componente input e reseta os cards de comics.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchComics(isClean: boolean) {
+  cleanSearchComics(isClean: boolean): void {
     if (isClean) {
       this.comicsListFilter = this.characterDetailList.comicsList;
     }
@@ -91,7 +89,7 @@ export class CharacterDetailsComponent {
    * Função que pega um evento de limpar do componente input e reseta os cards de events.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchEvents(isClean: boolean) {
+  cleanSearchEvents(isClean: boolean): void {
     if (isClean) {
       this.eventsListFilter = this.characterDetailList.eventsList;
     }
@@ -103,7 +101,7 @@ export class CharacterDetailsComponent {
    * Função que pega um evento de limpar do componente input e reseta os cards de stories.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchStories(isClean: boolean) {
+  cleanSearchStories(isClean: boolean): void {
     if (isClean) {
       this.storiesListFilter = this.characterDetailList.storiesList;
     }
