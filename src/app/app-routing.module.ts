@@ -16,7 +16,7 @@ const routes: Routes = [
     component: CharacterDetailsComponent,
     canActivate: [AuthGuard],
   },
-  // TODO: Trocar ResetPasswordComponent por "OtherDetails".
+  // TODO: Trocar SurveyComponent por "OtherDetails".
   {
     path: ':category/:id',
     component: SurveyComponent,
