@@ -53,7 +53,7 @@ export class PasswordCheckerComponent implements OnChanges {
    * handleResetComponent
    * Resets the component style propety.
    */
-  handleResetComponent() {
+  handleResetComponent(): void {
     this.setStatus('eightChars', false);
     this.setStatus('oneLetter', false);
     this.setStatus('oneNumber', false);
@@ -85,16 +85,16 @@ export class PasswordCheckerComponent implements OnChanges {
     this.sendStatus.emit(
       Object.values(this.currentStatus).reduce((a, c) => a && c),
     );
-  };  
+  };
   /**
    * ngOnChanges
    * Checks the passwordInput and emits the current status of overall rules trigged by passwordInput change.
    * @param passwordInput:
    */
-  ngOnChanges() {    
+  ngOnChanges(): void {
     this.passwordChecker(this.passwordInput);
-    if(this.setInicialStyle) {
+    if (this.setInicialStyle) {
       this.handleResetComponent();
     }
-  }; 
+  }
 }

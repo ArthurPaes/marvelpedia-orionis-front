@@ -222,7 +222,12 @@ export class SignUpComponent {
     this.btEnabler();
     this.passwordCheckerReload = false;
   };
-  handleFormRefresh() {
+  /**
+   * handleFormRefresh
+   *
+   * Sets all inputs aproved property to orinial state (false).
+   */
+  handleFormRefresh(): void {
     this.firstName.setIsAproved(false);
     this.lastName.setIsAproved(false);
     this.gender.setIsAproved(false);
