@@ -12,7 +12,6 @@
       </section>
       <app-input
         [inputType]="'inputEmail'"
-        [inputWidth]="'100%'"
         [fieldsetLabel]="firstName.getFieldLabel()"
         [placeHolder]="'Nome'"
         [inputBorderColor]="firstName.getBorderColor()"
@@ -21,7 +20,6 @@
       ></app-input>
       <app-input
         [inputType]="'inputEmail'"
-        [inputWidth]="'100%'"
         [fieldsetLabel]="lastName.getFieldLabel()"
         [placeHolder]="'Sobrenome'"
         [inputBorderColor]="lastName.getBorderColor()"
@@ -30,20 +28,18 @@
       ></app-input>
       <div class="genreBirthContainer">
         <app-select
-          id="app-select-signup"
           [optionList]="optionList"
+          [selectWidth]="'249px'"
           [tagLabel]="'Gênero'"
-          [selectWidth]="'100%'"
           placeholder="Selecione seu gênero"
           [borderColor]="gender.getBorderColor()"
-          (valueChange)="isfilledChecker(gender, $event)"
+          (valueChange)="genreChecker($event)"
         ></app-select>
         <app-input
-          id="app-input-date-signup"
           [inputType]="'inputDate'"
-          [inputWidth]="'100%'"
           [fieldsetLabel]="birthDate.getFieldLabel()"
           [placeHolder]="'Data de Nascimento'"
+          [inputWidth]="'249px'"
           [inputBorderColor]="birthDate.getBorderColor()"
           (valueChange)="birthYearChecker(birthDate, $event)"
           [backgroundColorTag]="birthDate.getBorderColor()"
@@ -52,7 +48,6 @@
 
       <app-input
         [inputType]="'inputEmail'"
-        [inputWidth]="'100%'"
         [fieldsetLabel]="email.getFieldLabel()"
         [placeHolder]="'E-mail'"
         [inputBorderColor]="email.getBorderColor()"
@@ -62,22 +57,21 @@
 
       <app-input
         [inputType]="'inputPassword'"
-        [inputWidth]="'100%'"
         [fieldsetLabel]="password.getFieldLabel()"
         [placeHolder]="'Digite sua senha'"
-        (valueChange)="isfilledChecker(password, $event)"
+        (valueChange)="passwordChecker($event)"
       ></app-input>
 
       <div>
         <app-password-checker
           [passwordInput]="password.getValue()"
+          [setInicialStyle]="passwordCheckerReload"
           (sendStatus)="receiveStatus(password, $event)"
         ></app-password-checker>
       </div>
 
       <app-input
         [inputType]="'inputPassword'"
-        [inputWidth]="'100%'"
         [fieldsetLabel]="passwordConfirmation.getFieldLabel()"
         [placeHolder]="'Confirme sua senha'"
         [inputBorderColor]="passwordConfirmation.getBorderColor()"

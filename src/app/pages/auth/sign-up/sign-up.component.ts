@@ -124,7 +124,7 @@ export class SignUpComponent {
           : (componentName.setIsAproved(false),
             componentName.setBorderColor('#E38686'),
             componentName.setFieldLabel(
-              'O nome deve ser simples ou composto, contendo apenas letras.',
+              'Seu nome pode conter apenas letras e somente 2 nomes.',
             ));
         break;
       case 'lastname':
@@ -135,7 +135,7 @@ export class SignUpComponent {
           : (componentName.setIsAproved(false),
             componentName.setBorderColor('#E38686'),
             componentName.setFieldLabel(
-              'Seu sobrenome pode conter apenas letras.',
+              'Seu sobrenome pode conter apenas letras',
             ));
         break;
       case 'email':
@@ -192,7 +192,7 @@ export class SignUpComponent {
     const userAge =
       this.currentYear.getFullYear() -
       parseInt(componentName.getValue().slice(0, 4));
-    userAge >= 10 && userAge <= 100
+    userAge >= 10
       ? (componentName.setIsAproved(true),
         componentName.setBorderColor('#2C85D8'),
         componentName.setFieldLabel('Data de Nascimento'))
@@ -222,7 +222,12 @@ export class SignUpComponent {
     this.btEnabler();
     this.passwordCheckerReload = false;
   };
-  handleFormRefresh() {
+  /**
+   * handleFormRefresh
+   *
+   * Sets all inputs aproved property to orinial state (false).
+   */
+  handleFormRefresh(): void {
     this.firstName.setIsAproved(false);
     this.lastName.setIsAproved(false);
     this.gender.setIsAproved(false);

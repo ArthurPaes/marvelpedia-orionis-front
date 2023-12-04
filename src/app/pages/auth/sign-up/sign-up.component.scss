@@ -1,15 +1,18 @@
 .background {
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
+    margin: 0;
+
+    // padding: 150px 570px;
+    width: -webkit-fill-available;
+    height: 200vh;
+
+    content: "";
     background-repeat: no-repeat;
+    background-image: url("../../../../assets/images/marvel-space.png");
+    background-size: cover;
     background-attachment: fixed;
-    background-image: url("../../../../assets/images/marvel-space-homepage.jpg");
     background-position: center;
-    justify-content: center;
     display: flex;
     justify-content: center;
-    overflow: auto;
 
     ::after{
       position: relative;
@@ -21,8 +24,9 @@
 
 }
 .component{
-    margin-top: 40px;
-    width: 93%;
+    display: inline-grid;
+    grid-template-columns: 48px 522px;
+    margin-top: 100px;
 }
 button{
     background-color:transparent;
@@ -38,18 +42,22 @@ button{
 }
 .container {
     display: flex;
-    width: 90%;
+    width: 522px;
+    height: 935px;
     flex-direction: column;
     gap: 24px;
+    position: absolute;
+    margin-left: 40px;
 }
 .titulo {
     display: flex;
     flex-direction:column;
+    margin-bottom: 16px;
 
 }
 h1 {
     color: var(--color-white);
-    font-size: 36px;
+    font-size: 48px;
     font-style: normal;
     font-weight: 500;
     letter-spacing: 0.72px;
@@ -75,45 +83,13 @@ p {
     font-weight: 400;
 }
 .genreBirthContainer {
-    width: 100%;
+    width: 522px;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-#app-select-signup, #app-input-date-signup {
-    width: 723px;
-
-} 
-#app-select-signup {
-    margin-right: 24px;
-    
-} 
 .checkbox{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 40px;
 }
-
-@media screen and (min-width: 760px) {
-    .component{
-        width: 522px;
-    }
-}
-
-@media screen and (max-width: 759px) {
-    .component{
-        max-width: 512px;
-        margin-left: 12px;
-        margin-right: 12px;
-    }
-    .genreBirthContainer {
-        display: block;
-    }
-    #app-select-signup, #app-input-date-signup {
-        width: 100%;
-    } 
-    #app-select-signup {
-        display: block;
-        margin-bottom: 24px !important;
-    }
-}
-
