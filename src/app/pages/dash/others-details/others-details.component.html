@@ -79,11 +79,17 @@
 
     <footer>
       <div class="footer-content-container">
-        <h1>Quer ter acesso a <span>POSTERES EXCLUSIVOS?</span></h1>
-        <h2>
-          Por apenas <span>R$15,00</span> você escolhe um dos artistas da nossa
-          comunidade para criar um poster exclusivo no Universo Marvel!
-        </h2>
+        <h1>Quer ter acesso a <span>POSTERS EXCLUSIVOS?</span></h1>
+        <div>
+          <h2>
+            Por apenas <span>R$15,00</span> você recebe um poster criado por um
+            dos artistas da nossa comunidade.
+          </h2>
+          <app-button
+            [buttonType]="'large'"
+            [label]="'Quero meu poster exclusivo'"
+          ></app-button>
+        </div>
       </div>
       <div class="partners">
         <h2>Conheça nossos parceiros</h2>
@@ -105,8 +111,8 @@
             <p>Nome do artista</p>
           </div>
         </div>
-        <app-footer></app-footer>
       </div>
+      <app-footer></app-footer>
     </footer>
   </div>
 </div>
