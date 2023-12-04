@@ -52,6 +52,42 @@ export class HomeComponent implements OnInit {
   }
 
   /**
+   * navigateToDetails
+   *
+   * Esta função navega para a rota de detalhes com os dados fornecidos.
+   * Navega para a rota com os dados de Category e Name.
+   * Se a categoria for 'favorites', ajusta para 'characters'.
+   * Envia o id do conteúdo através do dataToTransfer.
+   * @param categoryContent A categoria do card.
+   * @param nameContent O nome do card.
+   * @param idContent O id do card.
+   */
+  navigateToDetails(
+    categoryContent: string,
+    nameContent: string,
+    idContent: number,
+  ): void {
+    if (categoryContent === 'favorites') {
+      categoryContent = 'characters';
+    }
+
+    const dataToTransfer = {
+      state: {
+        data: idContent,
+      },
+    };
+
+    this.router.navigate(
+      [
+        `${categoryContent}/${nameContent
+          .replaceAll(' ', '')
+          .replaceAll(/[()]/g, '')}`,
+      ],
+      dataToTransfer,
+    );
+  }
+
+  /**
    * translateCategory
    *
    * Traduz a categoria em português para inglês, da forma que o backend espera no momento do request.
