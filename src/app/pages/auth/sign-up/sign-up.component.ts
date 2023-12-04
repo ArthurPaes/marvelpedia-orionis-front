@@ -57,8 +57,8 @@ export class SignUpComponent {
   checkbox = new InputElement('checkbox');
 
   regexList: IFormatter = {
-    name: /^[a-zàâãéêíïóôõöúçñ]+[\s]?[a-zàâãéêíïóôõöúçñ]+$/i,
-    lastName: /^[a-zA-ZÀ-Ú ]+$/,
+    name: /^[a-zàáâãéêíïóôõöúçñ]+[\s]?[a-zàáâãéêíïóôõöúçñ]+$/i,
+    lastName: /^[a-zA-ZÀ-Úàáâãéêíïóôõöúçñ ]+$/,
     email:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   };
