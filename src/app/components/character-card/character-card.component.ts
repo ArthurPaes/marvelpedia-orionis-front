@@ -1,5 +1,4 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-character-card',
@@ -7,12 +6,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./character-card.component.scss'],
 })
 export class CharacterCardComponent {
+  @Input() id = '';
   @Input() title = '';
   @Input() description = '';
   @Input() imageSrc = '';
   @Input() favorited = false;
   @Input() isCharacter = false;
   @Output() favoriteClick = new EventEmitter();
+  @Output() buttonClick = new EventEmitter();
+
+  /**
+   * onClick
+   *
+   * Função responsável por emitir o evento de click para o componente pai.
+   */
+  onClick() {
+    this.buttonClick.emit();
+  }
 
   /**
    * toggleFavorited()

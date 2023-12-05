@@ -11,5 +11,6 @@ export interface IChecker {
 
 export interface IFormatter {
   name: RegExp;
+  lastName: RegExp;
   email: RegExp;
 }

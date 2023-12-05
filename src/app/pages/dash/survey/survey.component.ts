@@ -15,6 +15,6 @@ export class SurveyComponent {
    * Função que redireciona para a página home
    */
   redirectHome(): void {
-    this.router.navigate(['login']);
+    this.router.navigate(['home']);
   }
 }
