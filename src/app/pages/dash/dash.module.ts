@@ -11,12 +11,15 @@ import { SurveyComponent } from './survey/survey.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { MediaExplorerComponent } from './others-details/media-explorer.component';
 
+import { LastNamePipe } from './others-details/pipes/last-name.pipe';
+
 @NgModule({
   declarations: [
     HomeComponent,
     SurveyComponent,
     CharacterDetailsComponent,
     MediaExplorerComponent,
+    LastNamePipe,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { MediaExplorerComponent } from './others-details/media-explorer.componen
     SurveyComponent,
     CharacterDetailsComponent,
     MediaExplorerComponent,
+    LastNamePipe,
   ],
 })
 export class DashModule {}

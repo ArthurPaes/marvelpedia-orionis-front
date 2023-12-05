@@ -6,6 +6,7 @@ import {
   IResponseContentByCategory,
   IResponseTogleFavoriteCharacter,
   EnumContentCategory,
+  IResponseComment,
 } from '../interfaces/IMarvelContent';
 
 @Injectable({
@@ -68,6 +69,41 @@ export class MarvelContentApi {
       `${this.apiUrl}/favorite`,
       'POST',
       characterId,
+    );
+  }
+
+  /**
+   * getCommentsByCategory
+   *
+   * Obtém o conteúdo ao qual será exibido os detalhes
+   * A categoria pode ser uma das seguintes: 'characters', 'comics', 'series', 'stories', 'favorites', 'events'.
+   * @param category - A categoria do conteúdo que será exibido.
+   * @param categoryId - Id do conteúdo que será exibido.
+   * @param page - Uma string de pesquisa opcional para filtrar os resultados.
+   * @returns retorna uma Promise contendo um array objetos contendo os conteúdos da categoria especificada.
+   */
+  async getCommentsByCategoryId(
+    category: EnumContentCategory,
+    categoryId: number,
+    page: number,
+  ): Promise<IResponseComment[]> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${category}/${categoryId}/?page=${page}`,
+      'GET',
+    );
+  }
+  /**
+   * deleteComment
+   *
+   * Deleta o comentário a partir de seu ID.
+   * @param commentId -Número que identifica o comentário.
+   */
+  async deleteComment(
+    commentId: number,
+  ): Promise<IResponseTogleFavoriteCharacter> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${commentId}`,
+      'DELETE',
     );
   }
 }

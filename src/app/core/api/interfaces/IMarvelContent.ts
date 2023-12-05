@@ -20,3 +20,14 @@ export interface IResponseTogleFavoriteCharacter {
   status: boolean;
   data: string;
 }
+
+export interface IResponseComment {
+  id: number;
+  userName: string;
+  userLastName: string;
+  comment: string;
+  createdAt: string;
+  categoryId: number;
+  category: string;
+  userComment: boolean;
+}

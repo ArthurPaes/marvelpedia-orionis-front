@@ -46,19 +46,22 @@
 
     <div class="coment-list">
       <h2>Comentarios</h2>
-      <ol *ngFor="let comment of arrCommentMockUp">
+      <ol *ngFor="let comment of commentList">
         <li class="coment-item">
           <h3>
-            Ana Barbosa<span>{{ arrCommentMockUp }}</span>
+            {{ comment.userName }} {{ comment.userLastName | getLastName
+            }}<span>{{ comment.createdAt | date }}</span>
           </h3>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            quas molestiae, deserunt nostrum quidem commodi quis ullam minus.
-          </h4>
-          <mat-icon class="bt-delete">delete</mat-icon>
+          <h4>{{ comment.comment }}</h4>
+          <mat-icon
+            *ngIf="comment.userComment"
+            class="bt-delete"
+            (click)="handleCommentDelete(comment.id)"
+            >delete</mat-icon
+          >
         </li>
       </ol>
-      <app-button [buttonType]="'small'" [label]="'ver mais'"></app-button>
+      <app-button [buttonType]="'large'" [label]="'ver mais'"></app-button>
     </div>
 
     <footer>
