@@ -166,6 +166,7 @@
   <input
     type="text"
     (focus)="changeInputFocus()"
+    max="9999-12-31"
     [ngStyle]="{ 'border-color': inputBorderColor }"
     [placeholder]="placeHolder"
     onfocus="this.type='date'"
