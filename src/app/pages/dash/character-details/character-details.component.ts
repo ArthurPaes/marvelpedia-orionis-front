@@ -5,6 +5,7 @@ import {
   IResponseCategoryList,
   IResponseStandardCategory,
 } from 'src/app/core/api/interfaces/ICharacterCategoryList';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-character-details',
@@ -27,10 +28,10 @@ export class CharacterDetailsComponent implements OnInit {
     storiesList: [],
   };
 
-  public seriesListFilter = this.characterDetailList.seriesList;
-  public comicsListFilter = this.characterDetailList.comicsList;
-  public eventsListFilter = this.characterDetailList.eventsList;
-  public storiesListFilter = this.characterDetailList.storiesList;
+  public seriesListFilter = [{ id: 0, thumbnail: '', description: '' }];
+  public comicsListFilter = [{ id: 0, thumbnail: '', description: '' }];
+  public eventsListFilter = [{ id: 0, thumbnail: '', description: '' }];
+  public storiesListFilter = [{ id: 0, thumbnail: '', description: '' }];
 
   /**
    * getCategoryList
@@ -48,6 +49,10 @@ export class CharacterDetailsComponent implements OnInit {
       .then((characterDetailsDataList) => {
         this.characterDetailList = characterDetailsDataList;
       });
+    this.seriesListFilter = this.characterDetailList.seriesList;
+    this.comicsListFilter = this.characterDetailList.comicsList;
+    this.eventsListFilter = this.characterDetailList.eventsList;
+    this.storiesListFilter = this.characterDetailList.storiesList;
   }
 
   /**
@@ -59,162 +64,249 @@ export class CharacterDetailsComponent implements OnInit {
     this.getCategoryList();
   }
 
+  customOptionsSeries: OwlOptions = {
+    loop: false,
+    skip_validateItems: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<span><</span>', '<span>></span>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 2,
+      },
+      740: {
+        items: 3,
+      },
+      940: {
+        items: 4,
+      },
+    },
+    nav: true,
+  };
+
+  customOptionsComics: OwlOptions = {
+    loop: false,
+    skip_validateItems: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<span><</span>', '<span>></span>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 2,
+      },
+      740: {
+        items: 3,
+      },
+      940: {
+        items: 4,
+      },
+    },
+    nav: true,
+  };
+
+  customOptionsStories: OwlOptions = {
+    loop: false,
+    skip_validateItems: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<span><</span>', '<span>></span>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 2,
+      },
+      740: {
+        items: 3,
+      },
+      940: {
+        items: 4,
+      },
+    },
+    nav: true,
+  };
+
+  customOptionsEvents: OwlOptions = {
+    loop: false,
+    skip_validateItems: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<span><</span>', '<span>></span>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 2,
+      },
+      740: {
+        items: 3,
+      },
+      940: {
+        items: 4,
+      },
+    },
+    nav: true,
+  };
+
   /**
-   * cleanSearchSeries
+   * clearSearchSeries
    *
    * Função que pega um evento de limpar do componente input e reseta os cards de series.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchSeries(isClean: boolean): void {
+  clearSearchSeries(isClean: boolean): void {
     if (isClean) {
       this.seriesListFilter = this.characterDetailList.seriesList;
     }
   }
 
   /**
-   * cleanSearchComics
+   * clearSearchComics
    *
    * Função que pega um evento de limpar do componente input e reseta os cards de comics.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchComics(isClean: boolean): void {
+  clearSearchComics(isClean: boolean): void {
     if (isClean) {
       this.comicsListFilter = this.characterDetailList.comicsList;
     }
   }
 
   /**
-   * cleanSearchEvents
+   * clearSearchEvents
    *
    * Função que pega um evento de limpar do componente input e reseta os cards de events.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchEvents(isClean: boolean): void {
+  clearSearchEvents(isClean: boolean): void {
     if (isClean) {
       this.eventsListFilter = this.characterDetailList.eventsList;
     }
   }
 
   /**
-   * cleanSearchStories
+   * clearSearchStories
    *
    * Função que pega um evento de limpar do componente input e reseta os cards de stories.
    * @param isClean evento boleano emitido pelo componente input
    */
-  cleanSearchStories(isClean: boolean): void {
+  clearSearchStories(isClean: boolean): void {
     if (isClean) {
       this.storiesListFilter = this.characterDetailList.storiesList;
     }
   }
 
   /**
-   * filterCategorySeries
+   * compareInputValueWithWord
    *
-   * @param letter cada letra digitada no input de busca
+   * função que compara se o valor digitado no input buscar bate com a descrição do card.
+   *
+   * @param inputValue cada letra digitada no input buscar
+   * @param category objeto da categoria séries, histórias, quadrinhos ou eventos
+   * @returns um boolean se a letra digitada deu match com a descrição do card.
+   */
+  compareInputValueWithWord(
+    inputValue: string,
+    category: IResponseStandardCategory,
+  ): boolean {
+    return inputValue
+      .trim()
+      .replace('  ', ' ')
+      .split(' ')
+      .every((word) =>
+        category.description.toLowerCase().includes(
+          word
+            .normalize('NFC')
+            .replace(/\p{Diacritic}/gu, '')
+            .toLowerCase(),
+        ),
+      );
+  }
+
+  /**
+   * filterSeriesCategory
+   *
+   * @param inputValue cada letra digitada no input de busca
    * @returns Array filtrado da categoria series conforme as palavras digitadas no input.
    */
-  filterCategorySeries(letter: string): Array<IResponseStandardCategory> {
-    if (letter.length == 0) {
+  filterSeriesCategory(inputValue: string): Array<IResponseStandardCategory> {
+    if (inputValue.length == 0) {
       return (this.seriesListFilter = this.characterDetailList.seriesList);
     } else {
       return (this.seriesListFilter =
         this.characterDetailList.seriesList.filter((serie) =>
-          letter
-            .trim()
-            .replace('  ', ' ')
-            .split(' ')
-            .every((word) =>
-              serie.description.toLowerCase().includes(
-                word
-                  .normalize('NFC')
-                  .replace(/\p{Diacritic}/gu, '')
-                  .toLowerCase(),
-              ),
-            ),
+          this.compareInputValueWithWord(inputValue, serie),
         ));
     }
   }
 
   /**
-   * filterCategoryComics
+   * filterComicsCategory
    *
-   * @param letter cada letra digitada no input de busca
+   * @param inputValue cada letra digitada no input de busca
    * @returns Array filtrado da categoria comics conforme as palavras digitadas no input.
    */
-  filterCategoryComics(letter: string): Array<IResponseStandardCategory> {
-    if (letter.length == 0) {
+  filterComicsCategory(inputValue: string): Array<IResponseStandardCategory> {
+    if (inputValue.length == 0) {
       return (this.comicsListFilter = this.characterDetailList.comicsList);
     } else {
       return (this.comicsListFilter =
         this.characterDetailList.comicsList.filter((comic) =>
-          letter
-            .trim()
-            .replace('  ', ' ')
-            .split(' ')
-            .every((word) =>
-              comic.description.toLowerCase().includes(
-                word
-                  .normalize('NFC')
-                  .replace(/\p{Diacritic}/gu, '')
-                  .toLowerCase(),
-              ),
-            ),
+          this.compareInputValueWithWord(inputValue, comic),
         ));
     }
   }
 
   /**
-   * filterCategoryEvents
+   * filterEventsCategory
    *
-   * @param letter cada letra digitada no input de busca
+   * @param inputValue cada letra digitada no input de busca
    * @returns Array filtrado da categoria events conforme as palavras digitadas no input.
    */
-  filterCategoryEvents(letter: string): Array<IResponseStandardCategory> {
-    if (letter.length == 0) {
+  filterEventsCategory(inputValue: string): Array<IResponseStandardCategory> {
+    if (inputValue.length == 0) {
       return (this.eventsListFilter = this.characterDetailList.eventsList);
     } else {
       return (this.eventsListFilter =
         this.characterDetailList.eventsList.filter((event) =>
-          letter
-            .trim()
-            .replace('  ', ' ')
-            .split(' ')
-            .every((word) =>
-              event.description.toLowerCase().includes(
-                word
-                  .normalize('NFC')
-                  .replace(/\p{Diacritic}/gu, '')
-                  .toLowerCase(),
-              ),
-            ),
+          this.compareInputValueWithWord(inputValue, event),
         ));
     }
   }
 
   /**
-   * filterCategoryStories
+   * filterStoriesCategory
    *
-   * @param letter cada letra digitada no input de busca
+   * @param inputValue cada letra digitada no input de busca
    * @returns Array filtrado da categoria stories conforme as palavras digitadas no input.
    */
-  filterCategoryStories(letter: string): Array<IResponseStandardCategory> {
-    if (letter.length == 0) {
+  filterStoriesCategory(inputValue: string): Array<IResponseStandardCategory> {
+    if (inputValue.length == 0) {
       return (this.storiesListFilter = this.characterDetailList.storiesList);
     } else {
       return (this.storiesListFilter =
         this.characterDetailList.storiesList.filter((storie) =>
-          letter
-            .trim()
-            .replace('  ', ' ')
-            .split(' ')
-            .every((word) =>
-              storie.description.toLowerCase().includes(
-                word
-                  .normalize('NFC')
-                  .replace(/\p{Diacritic}/gu, '')
-                  .toLowerCase(),
-              ),
-            ),
+          this.compareInputValueWithWord(inputValue, storie),
         ));
     }
   }

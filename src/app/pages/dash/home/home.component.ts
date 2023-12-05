@@ -155,6 +155,18 @@ export class HomeComponent implements OnInit {
   }
 
   /**
+   * clearSearchCategory
+   *
+   * Função que pega um evento de limpar do componente input e reseta a busca de cards.
+   * @param isClean evento boleano emitido pelo componente input
+   */
+  clearSearchCategory(isClean: boolean): void {
+    if (isClean) {
+      this.searchInputValue = '';
+    }
+  }
+
+  /**
    * toggleFavorite
    *
    * Alterna o status de favorito de um personagem. Adiciona ou remove um personagem da lista de favoritos.

@@ -22,36 +22,49 @@
     padding-top: 8px;
     gap: 10px;
     width: 100%;
-    padding: 1.5rem 60px;
+    padding: 0.5rem 60px;
     background-color: #FFFFFF;
 }
 
-.carrosel-area {
+.input-width {
+    width: 97.7%;
+    margin-left: 11px;
+}
+
+.carrosel-area, .carrosel-area-series {
     margin-top: 1.5rem;
 }
 
 .search-area:last-child {
-    padding-bottom: 28px;
-}
-
-.search-line p {
-    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .search-area p {
+    margin: 0;
     font-size: 28px;
     font-weight: 700;
+    margin-left: 0.7rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.search-area p:first-child {
-    margin-top: 1.5rem;
+.search-area p:nth-last-child(3) {
+    margin-top: 2.5rem;
     margin-bottom: 1.5rem;
 }
 
 .not-found-message {
     align-items: center;
     text-align: center;
-    margin: 61px auto;
+    margin: 74.2px auto;
+}
+
+.carrosel-area-series .not-found-message {
+    margin: 84.3px auto;
+}
+
+.not-found-message-series {
+    margin: 90.1px auto;
 }
 
 .not-found-message mat-icon {
@@ -71,8 +84,42 @@ font-weight: 400;
 line-height: normal;
 }
 
+.error-message-box-series {
+    margin-bottom: 30px;
+}
+
+.item-card {
+    margin: 0 11px;
+    // max-width: 274px;
+    // max-height: 427px;
+}
+
+.item-card {
+    p {
+        font-size: 16px;
+        margin-top: 0.5rem;
+        text-align: center;
+        font-weight: 400;
+    }
+}
+
 @media screen and (max-width: 900px) {
     .search-area {
         padding: 1.5rem 1.5rem;
+    }
+    .input-width {
+        width: 97%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .input-width {
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .input-width {
+        width: 92%;
     }
 }

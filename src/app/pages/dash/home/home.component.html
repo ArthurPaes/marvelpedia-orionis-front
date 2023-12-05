@@ -80,6 +80,7 @@
             [inputSearchClass]="'inputSearchStandard'"
             [inputWidth]="'100%'"
             (valueChangeLogin)="onSearchChange($event)"
+            (emitCleanValue)="clearSearchCategory($event)"
           ></app-input>
         </div>
         <app-button
@@ -93,7 +94,7 @@
     <div class="grid-container">
       <div *ngIf="notFoundMessage" class="not-found-message">
         <mat-icon>error_outline</mat-icon>
-        <p class="error-description">Não foi póssível realizar essa busca!</p>
+        <p class="error-description">Não existem registros a serem exibidos!</p>
       </div>
       <app-character-card
         class="grid-item"
