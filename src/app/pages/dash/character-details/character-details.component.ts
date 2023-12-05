@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import {
   IResponseCategoryList,
@@ -15,7 +15,10 @@ export class CharacterDetailsComponent implements OnInit {
   constructor(
     private marvelContentApi: MarvelContentApi,
     private activatedRoute: ActivatedRoute,
-  ) {}
+    private router: Router,
+  ) {
+    const data = this?.router?.getCurrentNavigation()?.extras?.state?.data;
+  }
 
   public characterId = '';
   public characterDetailList: IResponseCategoryList = {
