@@ -1,0 +1,122 @@
+
+header {
+  position: relative;
+  display: flex;
+  background-position: bottom;
+  object-fit: cover;
+  background-size: cover;
+  height: 312px;
+  width: 1205px;
+  background-color: #000;
+  margin: auto;
+  overflow: hidden;
+}
+
+.header-background {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  height: 600px;
+}
+
+.header-background img {
+  display: flex;
+  object-fit: cover;
+  width: 100%;
+  min-height: 550px;
+  background-size: cover;
+  object-fit: cover;
+  background-position: bottom;
+  opacity: 20%;
+}
+
+
+header section {
+  z-index: 1;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+section .content {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header-relative {
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  top: 5px;
+  left: -30px;
+}
+
+.content a {
+  text-decoration: none;
+  width: fit-content;
+}
+
+
+.header-title {
+  color: var(--foundation-gray-scale-white, #FFF);
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.header-description {
+  color: #979797;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  overflow: hidden; /* Oculta o texto que não cabe */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  margin-bottom: 32px;
+}
+
+button{
+    display: flex;
+    background-color:transparent;
+    border: none;
+    cursor: pointer;
+
+    mat-icon {
+        color: #fff;
+    }
+    :hover{
+        color: var(--color-primary);
+    }
+}
+
+@media (max-width: 1205px)  {
+  header {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1114px)  {
+  header {
+    height: 400px;
+  }
+
+}
+
+@media (max-width: 649px) {
+  header {
+    height: 500px;
+  }
+  .header-description {
+    -webkit-line-clamp: 17;
+  }
+}
