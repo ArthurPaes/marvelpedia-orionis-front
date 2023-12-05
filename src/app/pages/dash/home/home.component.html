@@ -111,6 +111,13 @@
             ? content.thumb
             : '../../../../assets/images/personagem-sem-imagem.jpg'
         "
+        (buttonClick)="
+          navigateToDetails(
+            category,
+            content.enName || content.enTitle,
+            content.id
+          )
+        "
       ></app-character-card>
     </div>
     <app-button

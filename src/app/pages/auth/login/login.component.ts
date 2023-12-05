@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { ILogin } from './interface/login.interface';
 import { IModalConfig } from './interface/login.interface';
+import { RatingApi } from 'src/app/core/api/app/rating.api';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent {
 
   constructor(
     private authApi: AuthApi,
+    private ratingApi: RatingApi,
     private router: Router,
   ) {}
 
@@ -118,14 +120,17 @@ export class LoginComponent {
   async onSubmit(): Promise<void> {
     try {
       await this.authApi.authenticateUser(this.login);
-      this.router.navigate(['/home']);
-    } catch (e: any) {
-      if (
-        e.error.data === 'Necessária a confirmação do cadastro pelo e-mail.'
-      ) {
-        this.handleLoginError(e.error.data);
-        return;
+      try {
+        const eligibilityStatus = await this.ratingApi.validateEligibility();
+        if (eligibilityStatus.data.eligible) {
+          this.router.navigate(['/survey']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      } catch (error) {
+        this.router.navigate(['/home']);
       }
+    } catch (error) {
       this.handleLoginError('E-mail ou senha inválidos!');
     }
   }
