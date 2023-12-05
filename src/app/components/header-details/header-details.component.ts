@@ -24,7 +24,6 @@ export class HeaderDetailsComponent {
    * Função que retorna uma página anterior ao que o usuário estava navegando.
    */
   goBack(): void {
-    console.log(this.location);
     this.location.back();
   }
 }
