@@ -46,27 +46,11 @@
 
     <div class="coment-list">
       <h2>Comentarios</h2>
-      <ol>
+      <ol *ngFor="let comment of arrCommentMockUp">
         <li class="coment-item">
-          <h3>Ana Barbosa<span>01/12/2023</span></h3>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            quas molestiae, deserunt nostrum quidem commodi quis ullam minus.
-          </h4>
-          <mat-icon class="bt-delete">delete</mat-icon>
-        </li>
-        <li class="coment-item">
-          <h3>Rodrigo Lima<span>23/11/2023</span></h3>
-          <h4>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-            error est aut blanditiis minus reiciendis? Quia labore doloremque
-            dolor natus voluptatem rem quisquam eligendi autem consequuntur
-            aperiam! Nesciunt, totam minima.
-          </h4>
-          <mat-icon class="bt-delete">delete</mat-icon>
-        </li>
-        <li class="coment-item">
-          <h3>Roberta Fernandes<span>20/11/2023</span></h3>
+          <h3>
+            Ana Barbosa<span>{{ arrCommentMockUp }}</span>
+          </h3>
           <h4>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
             quas molestiae, deserunt nostrum quidem commodi quis ullam minus.

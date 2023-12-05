@@ -9,14 +9,14 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { SurveyComponent } from './survey/survey.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
-import { OthersDetailsComponent } from './others-details/others-details.component';
+import { MediaExplorerComponent } from './others-details/media-explorer.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     SurveyComponent,
     CharacterDetailsComponent,
-    OthersDetailsComponent,
+    MediaExplorerComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +31,7 @@ import { OthersDetailsComponent } from './others-details/others-details.componen
     HomeComponent,
     SurveyComponent,
     CharacterDetailsComponent,
-    OthersDetailsComponent,
+    MediaExplorerComponent,
   ],
 })
 export class DashModule {}
