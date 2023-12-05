@@ -1,5 +1,4 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-character-card',
@@ -7,22 +6,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./character-card.component.scss'],
 })
 export class CharacterCardComponent {
+  @Input() id = '';
   @Input() title = '';
   @Input() description = '';
   @Input() imageSrc = '';
   @Input() favorited = false;
   @Input() isCharacter = false;
-  notified = false;
   @Output() favoriteClick = new EventEmitter();
+  @Output() buttonClick = new EventEmitter();
 
   /**
-   * toggleNotified()
+   * onClick
    *
-   * Responsável por alternar o valor da variável `notified` entre `true` e `false` toda vez que o usuário clica no ícone de notificação.
+   * Função responsável por emitir o evento de click para o componente pai.
    */
-  toggleNotified() {
-    this.notified = !this.notified;
-    console.log(this.notified);
+  onClick() {
+    this.buttonClick.emit();
   }
 
   /**

@@ -46,33 +46,48 @@
   </a>
   <div class="container">
     <div class="filter-wrapper">
-      <app-button
-        buttonType="cancel"
-        label="Sair"
-        class="logout-button"
-        [custonStyle]="'width: 75px'"
-        (click)="userLogout()"
-      ></app-button>
-      <h2>MarvelPedia</h2>
+      <div class="first-line">
+        <mat-icon class="icon-loggout-mobile" (click)="userLogout()"
+          >exit_to_app</mat-icon
+        >
+        <app-button
+          buttonType="cancel"
+          label="Sair"
+          class="logout-button"
+          [custonStyle]="'width: 75px'"
+          (click)="userLogout()"
+        ></app-button>
+        <h2>MarvelPedia</h2>
+      </div>
       <p>Explore nossos conteúdos e conheça mais sobre o universo da Marvel!</p>
       <div class="input-area">
-        <app-select
-          [optionList]="optionList"
-          [placeholder]="'Personagens'"
-          [selectWidth]="'381px'"
-          (valueChange)="onCategoryChange($event)"
-        ></app-select>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Quem você procura?'"
-          [color]="'#FFFFFF'"
-          [placeHolder]="'Quem você procura?'"
-          [inputBorderColor]="'#FFFFFF'"
-          [inputSearchClass]="'inputSearchStandard'"
-          [inputWidth]="'653px'"
-          (valueChangeLogin)="onSearchChange($event)"
-        ></app-input>
-        <app-button label="Buscar" (click)="searchContent()"></app-button>
+        <div class="select-wrapper">
+          <app-select
+            [optionList]="optionList"
+            id="selectCategory"
+            [placeholder]="'Personagens'"
+            [selectWidth]="'100%'"
+            (valueChange)="onCategoryChange($event)"
+          ></app-select>
+        </div>
+        <div class="input-wrapper">
+          <app-input
+            [inputType]="'inputSearch'"
+            [fieldsetLabel]="'Quem você procura?'"
+            [color]="'#FFFFFF'"
+            [placeHolder]="'Quem você procura?'"
+            [inputBorderColor]="'#FFFFFF'"
+            [inputSearchClass]="'inputSearchStandard'"
+            [inputWidth]="'100%'"
+            (valueChangeLogin)="onSearchChange($event)"
+          ></app-input>
+        </div>
+        <app-button
+          class="search-button"
+          label="Buscar"
+          (click)="searchContent()"
+          [custonStyle]="'width: 100%'"
+        ></app-button>
       </div>
     </div>
     <div class="grid-container">
@@ -94,6 +109,13 @@
           content.thumb
             ? content.thumb
             : '../../../../assets/images/personagem-sem-imagem.jpg'
+        "
+        (buttonClick)="
+          navigateToDetails(
+            category,
+            content.enName || content.enTitle,
+            content.id
+          )
         "
       ></app-character-card>
     </div>
