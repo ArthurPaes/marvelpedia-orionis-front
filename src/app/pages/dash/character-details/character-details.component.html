@@ -1,79 +1,81 @@
-<div class="container">
-  <app-header></app-header>
-  <div class="container-content">
-    <div class="search-area">
-      <div class="search-line">
-        <p>Séries</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um série específica?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando um série específica?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.seriesList)
-          "
-        ></app-input>
-      </div>
-      <app-carousel [cardsList]="characterDetailList.seriesList"></app-carousel>
+<!-- TODO: alterar as props do componente 'header details' quando a API estiver pronta  -->
+<app-header-details
+  ContentName="Iron man"
+  ContentDescription="Homem de Ferro é um personagem dos quadrinhos publicados pela Marvel Comics. Sua verdadeira identidade é o empresário e bilionário Tony Stark, que usa armaduras de alta tecnologia no combate ao crime. Foi criado em 1963 pelo escritor Stan Lee."
+  ContentUrlButton="http://localhost:4200/home"
+  ContentThumb="./assets/images/header-details.svg"
+></app-header-details>
+<div class="container-main">
+  <div class="search-area">
+    <div class="search-line">
+      <p>Séries</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando um série específica?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'600px'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando um série específica?'"
+        (valueChangeLogin)="
+          filterCategory($event, characterDetailList.seriesList)
+        "
+      ></app-input>
     </div>
-    <div class="search-area">
-      <div class="search-line">
-        <p>Quadrinhos</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um quadrinho específico?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando um quadrinho específico?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.comicsList)
-          "
-        ></app-input>
-      </div>
-      <app-carousel [cardsList]="characterDetailList.comicsList"></app-carousel>
+    <app-carousel [cardsList]="characterDetailList.seriesList"></app-carousel>
+  </div>
+  <div class="search-area">
+    <div class="search-line">
+      <p>Quadrinhos</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando um quadrinho específico?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'600px'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando um quadrinho específico?'"
+        (valueChangeLogin)="
+          filterCategory($event, characterDetailList.comicsList)
+        "
+      ></app-input>
     </div>
-    <div class="search-area">
-      <div class="search-line">
-        <p>Histórias</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um história específica?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando um história específica?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.storiesList)
-          "
-        ></app-input>
-      </div>
-      <app-carousel
-        [cardsList]="characterDetailList.storiesList"
-      ></app-carousel>
+    <app-carousel [cardsList]="characterDetailList.comicsList"></app-carousel>
+  </div>
+  <div class="search-area">
+    <div class="search-line">
+      <p>Histórias</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando um história específica?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'600px'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando um história específica?'"
+        (valueChangeLogin)="
+          filterCategory($event, characterDetailList.storiesList)
+        "
+      ></app-input>
     </div>
-    <div class="search-area">
-      <div class="search-line">
-        <p>Eventos</p>
-        <app-input
-          [inputType]="'inputSearch'"
-          [fieldsetLabel]="'Está buscando um evento específico?'"
-          [backgroundColorTag]="'#2C85D8'"
-          [inputWidth]="'600px'"
-          [inputBorderColor]="'#000000'"
-          [color]="'#000000'"
-          [placeHolder]="'Está buscando um evento específico?'"
-          (valueChangeLogin)="
-            filterCategory($event, characterDetailList.eventsList)
-          "
-        ></app-input>
-      </div>
-      <app-carousel [cardsList]="characterDetailList.eventsList"></app-carousel>
+    <app-carousel [cardsList]="characterDetailList.storiesList"></app-carousel>
+  </div>
+  <div class="search-area">
+    <div class="search-line">
+      <p>Eventos</p>
+      <app-input
+        [inputType]="'inputSearch'"
+        [fieldsetLabel]="'Está buscando um evento específico?'"
+        [backgroundColorTag]="'#2C85D8'"
+        [inputWidth]="'600px'"
+        [inputBorderColor]="'#000000'"
+        [color]="'#000000'"
+        [placeHolder]="'Está buscando um evento específico?'"
+        (valueChangeLogin)="
+          filterCategory($event, characterDetailList.eventsList)
+        "
+      ></app-input>
     </div>
+    <app-carousel [cardsList]="characterDetailList.eventsList"></app-carousel>
   </div>
 </div>

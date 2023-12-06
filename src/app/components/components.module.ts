@@ -12,11 +12,11 @@ import { CharacterCardComponent } from './character-card/character-card.componen
 import { RatingComponent } from './rating/rating.component';
 import { RatingApi } from '../core/api/app/rating.api';
 import { PasswordCheckerComponent } from './password-checker/password-checker.component';
-import { HeaderComponent } from './header/header.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NextCarouselCardDirective } from './carousel/next.directive';
 import { PrevCarouselCardDirective } from './carousel/prev.directive';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderDetailsComponent } from './header-details/header-details.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +28,11 @@ import { FooterComponent } from './footer/footer.component';
     CharacterCardComponent,
     RatingComponent,
     PasswordCheckerComponent,
-    HeaderComponent,
     CarouselComponent,
     NextCarouselCardDirective,
     FooterComponent,
     FooterComponent,
+    HeaderDetailsComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   exports: [
@@ -44,11 +44,11 @@ import { FooterComponent } from './footer/footer.component';
     CharacterCardComponent,
     RatingComponent,
     PasswordCheckerComponent,
-    HeaderComponent,
     CarouselComponent,
     NextCarouselCardDirective,
     FooterComponent,
     FooterComponent,
+    HeaderDetailsComponent,
   ],
   providers: [RatingApi],
 })
