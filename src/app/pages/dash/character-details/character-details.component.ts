@@ -28,10 +28,10 @@ export class CharacterDetailsComponent implements OnInit {
     storiesList: [],
   };
 
-  public seriesListFilter = [{ id: 0, thumbnail: '', description: '' }];
-  public comicsListFilter = [{ id: 0, thumbnail: '', description: '' }];
-  public eventsListFilter = [{ id: 0, thumbnail: '', description: '' }];
-  public storiesListFilter = [{ id: 0, thumbnail: '', description: '' }];
+  public seriesListFilter: Array<IResponseStandardCategory> = [];
+  public comicsListFilter: Array<IResponseStandardCategory> = [];
+  public eventsListFilter: Array<IResponseStandardCategory> = [];
+  public storiesListFilter: Array<IResponseStandardCategory> = [];
 
   /**
    * getCategoryList
@@ -64,85 +64,7 @@ export class CharacterDetailsComponent implements OnInit {
     this.getCategoryList();
   }
 
-  customOptionsSeries: OwlOptions = {
-    loop: false,
-    skip_validateItems: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<span><</span>', '<span>></span>'],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 2,
-      },
-      740: {
-        items: 3,
-      },
-      940: {
-        items: 4,
-      },
-    },
-    nav: true,
-  };
-
-  customOptionsComics: OwlOptions = {
-    loop: false,
-    skip_validateItems: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<span><</span>', '<span>></span>'],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 2,
-      },
-      740: {
-        items: 3,
-      },
-      940: {
-        items: 4,
-      },
-    },
-    nav: true,
-  };
-
-  customOptionsStories: OwlOptions = {
-    loop: false,
-    skip_validateItems: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<span><</span>', '<span>></span>'],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 2,
-      },
-      740: {
-        items: 3,
-      },
-      940: {
-        items: 4,
-      },
-    },
-    nav: true,
-  };
-
-  customOptionsEvents: OwlOptions = {
+  customOptions: OwlOptions = {
     loop: false,
     skip_validateItems: true,
     mouseDrag: true,

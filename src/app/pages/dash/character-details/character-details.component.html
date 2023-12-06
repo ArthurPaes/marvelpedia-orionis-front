@@ -24,7 +24,7 @@
       <div class="carrosel-area-series">
         <owl-carousel-o
           *ngIf="seriesListFilter.length > 0; else searchNotFound"
-          [options]="customOptionsSeries"
+          [options]="customOptions"
         >
           <ng-template carouselSlide *ngFor="let serie of seriesListFilter">
             <div class="item-card">
@@ -63,7 +63,7 @@
       <div class="carrosel-area">
         <owl-carousel-o
           *ngIf="comicsListFilter.length > 0; else searchNotFound"
-          [options]="customOptionsComics"
+          [options]="customOptions"
         >
           <ng-template carouselSlide *ngFor="let comic of comicsListFilter">
             <div class="item-card">
@@ -102,7 +102,7 @@
       <div class="carrosel-area">
         <owl-carousel-o
           *ngIf="storiesListFilter.length > 0; else searchNotFound"
-          [options]="customOptionsStories"
+          [options]="customOptions"
         >
           <ng-template carouselSlide *ngFor="let storie of storiesListFilter">
             <div class="item-card">
@@ -141,7 +141,7 @@
       <div class="carrosel-area">
         <owl-carousel-o
           *ngIf="eventsListFilter.length > 0; else searchNotFound"
-          [options]="customOptionsEvents"
+          [options]="customOptions"
         >
           <ng-template carouselSlide *ngFor="let event of eventsListFilter">
             <div class="item-card">
