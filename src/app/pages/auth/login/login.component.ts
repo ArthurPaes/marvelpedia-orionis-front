@@ -138,10 +138,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     } catch (e: any) {
-      console.log(e);
       if (e.error.data == 'Necessária a confirmação do cadastro pelo e-mail.') {
         this.handleLoginError(e.error.data);
-        return;
       } else {
         this.handleLoginError('E-mail ou senha inválidos!');
       }
