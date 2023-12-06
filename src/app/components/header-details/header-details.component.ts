@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-details',
@@ -8,10 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header-details.component.scss'],
 })
 export class HeaderDetailsComponent {
-  constructor(
-    private route: Router,
-    private location: Location,
-  ) {}
+  constructor(private location: Location) {}
 
   @Input() ContentName = '';
   @Input() ContentDescription = '';

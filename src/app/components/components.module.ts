@@ -12,9 +12,6 @@ import { CharacterCardComponent } from './character-card/character-card.componen
 import { RatingComponent } from './rating/rating.component';
 import { RatingApi } from '../core/api/app/rating.api';
 import { PasswordCheckerComponent } from './password-checker/password-checker.component';
-import { CarouselComponent } from './carousel/carousel.component';
-import { NextCarouselCardDirective } from './carousel/next.directive';
-import { PrevCarouselCardDirective } from './carousel/prev.directive';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderDetailsComponent } from './header-details/header-details.component';
 
@@ -28,9 +25,6 @@ import { HeaderDetailsComponent } from './header-details/header-details.componen
     CharacterCardComponent,
     RatingComponent,
     PasswordCheckerComponent,
-    CarouselComponent,
-    NextCarouselCardDirective,
-    FooterComponent,
     FooterComponent,
     HeaderDetailsComponent,
   ],
@@ -44,9 +38,6 @@ import { HeaderDetailsComponent } from './header-details/header-details.componen
     CharacterCardComponent,
     RatingComponent,
     PasswordCheckerComponent,
-    CarouselComponent,
-    NextCarouselCardDirective,
-    FooterComponent,
     FooterComponent,
     HeaderDetailsComponent,
   ],

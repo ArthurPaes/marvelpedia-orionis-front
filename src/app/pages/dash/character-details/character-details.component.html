@@ -1,81 +1,164 @@
-<!-- TODO: alterar as props do componente 'header details' quando a API estiver pronta  -->
-<app-header-details
-  ContentName="Iron man"
-  ContentDescription="Homem de Ferro é um personagem dos quadrinhos publicados pela Marvel Comics. Sua verdadeira identidade é o empresário e bilionário Tony Stark, que usa armaduras de alta tecnologia no combate ao crime. Foi criado em 1963 pelo escritor Stan Lee."
-  ContentUrlButton="http://localhost:4200/home"
-  ContentThumb="./assets/images/header-details.svg"
-></app-header-details>
-<div class="container-main">
-  <div class="search-area">
-    <div class="search-line">
+<div class="background">
+  <div class="container-main">
+    <app-header-details
+      ContentName="Iron man"
+      ContentDescription="Homem de Ferro é um personagem dos quadrinhos publicados pela Marvel Comics. Sua verdadeira identidade é o empresário e bilionário Tony Stark, que usa armaduras de alta tecnologia no combate ao crime. Foi criado em 1963 pelo escritor Stan Lee."
+      ContentUrlButton="http://localhost:4200/home"
+      ContentThumb="./assets/images/header-details.svg"
+    ></app-header-details>
+    <div class="search-area">
       <p>Séries</p>
-      <app-input
-        [inputType]="'inputSearch'"
-        [fieldsetLabel]="'Está buscando um série específica?'"
-        [backgroundColorTag]="'#2C85D8'"
-        [inputWidth]="'600px'"
-        [inputBorderColor]="'#000000'"
-        [color]="'#000000'"
-        [placeHolder]="'Está buscando um série específica?'"
-        (valueChangeLogin)="
-          filterCategory($event, characterDetailList.seriesList)
-        "
-      ></app-input>
+      <div class="input-width">
+        <app-input
+          [inputType]="'inputSearch'"
+          [fieldsetLabel]="'Procura uma série?'"
+          [backgroundColorTag]="'#2C85D8'"
+          [inputWidth]="'100%'"
+          [inputBorderColor]="'#000000'"
+          [color]="'#000000'"
+          [placeHolder]="'Procura uma série?'"
+          (valueChangeLogin)="filterSeriesCategory($event)"
+          (emitCleanValue)="clearSearchSeries($event)"
+        ></app-input>
+      </div>
+      <div class="carrosel-area-series">
+        <owl-carousel-o
+          *ngIf="seriesListFilter.length > 0; else searchNotFound"
+          [options]="carouselOptions"
+        >
+          <ng-template carouselSlide *ngFor="let serie of seriesListFilter">
+            <div class="item-card">
+              <img src="{{ serie.thumbnail }}" class="thumbnail" />
+              <p>{{ serie.description }}</p>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+        <ng-template #searchNotFound>
+          <div class="not-found-message">
+            <mat-icon>error_outline</mat-icon>
+            <p class="error-description">
+              Não existem registros a serem exibidos!
+            </p>
+          </div>
+        </ng-template>
+      </div>
     </div>
-    <app-carousel [cardsList]="characterDetailList.seriesList"></app-carousel>
-  </div>
-  <div class="search-area">
-    <div class="search-line">
-      <p>Quadrinhos</p>
-      <app-input
-        [inputType]="'inputSearch'"
-        [fieldsetLabel]="'Está buscando um quadrinho específico?'"
-        [backgroundColorTag]="'#2C85D8'"
-        [inputWidth]="'600px'"
-        [inputBorderColor]="'#000000'"
-        [color]="'#000000'"
-        [placeHolder]="'Está buscando um quadrinho específico?'"
-        (valueChangeLogin)="
-          filterCategory($event, characterDetailList.comicsList)
-        "
-      ></app-input>
+    <div class="search-area">
+      <div class="search-line">
+        <p>Quadrinhos</p>
+        <div class="input-width">
+          <app-input
+            [inputType]="'inputSearch'"
+            [fieldsetLabel]="'Procura um quadrinho?'"
+            [backgroundColorTag]="'#2C85D8'"
+            [inputWidth]="'100%'"
+            [inputBorderColor]="'#000000'"
+            [color]="'#000000'"
+            [placeHolder]="'Procura um quadrinho?'"
+            (valueChangeLogin)="filterComicsCategory($event)"
+            (emitCleanValue)="clearSearchComics($event)"
+          ></app-input>
+        </div>
+      </div>
+      <div class="carrosel-area">
+        <owl-carousel-o
+          *ngIf="comicsListFilter.length > 0; else searchNotFound"
+          [options]="carouselOptions"
+        >
+          <ng-template carouselSlide *ngFor="let comic of comicsListFilter">
+            <div class="item-card">
+              <img src="{{ comic.thumbnail }}" class="thumbnail" />
+              <p>{{ comic.description }}</p>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+        <ng-template #searchNotFound>
+          <div class="not-found-message">
+            <mat-icon>error_outline</mat-icon>
+            <p class="error-description">
+              Não existem registros a serem exibidos!
+            </p>
+          </div>
+        </ng-template>
+      </div>
     </div>
-    <app-carousel [cardsList]="characterDetailList.comicsList"></app-carousel>
-  </div>
-  <div class="search-area">
-    <div class="search-line">
-      <p>Histórias</p>
-      <app-input
-        [inputType]="'inputSearch'"
-        [fieldsetLabel]="'Está buscando um história específica?'"
-        [backgroundColorTag]="'#2C85D8'"
-        [inputWidth]="'600px'"
-        [inputBorderColor]="'#000000'"
-        [color]="'#000000'"
-        [placeHolder]="'Está buscando um história específica?'"
-        (valueChangeLogin)="
-          filterCategory($event, characterDetailList.storiesList)
-        "
-      ></app-input>
+    <div class="search-area">
+      <div class="search-line">
+        <p>Histórias</p>
+        <div class="input-width">
+          <app-input
+            [inputType]="'inputSearch'"
+            [fieldsetLabel]="'Procura uma história?'"
+            [backgroundColorTag]="'#2C85D8'"
+            [inputWidth]="'100%'"
+            [inputBorderColor]="'#000000'"
+            [color]="'#000000'"
+            [placeHolder]="'Procura uma história?'"
+            (valueChangeLogin)="filterStoriesCategory($event)"
+            (emitCleanValue)="clearSearchStories($event)"
+          ></app-input>
+        </div>
+      </div>
+      <div class="carrosel-area">
+        <owl-carousel-o
+          *ngIf="storiesListFilter.length > 0; else searchNotFound"
+          [options]="carouselOptions"
+        >
+          <ng-template carouselSlide *ngFor="let storie of storiesListFilter">
+            <div class="item-card">
+              <img src="{{ storie.thumbnail }}" class="thumbnail" />
+              <p>{{ storie.description }}</p>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+        <ng-template #searchNotFound>
+          <div class="not-found-message">
+            <mat-icon>error_outline</mat-icon>
+            <p class="error-description">
+              Não existem registros a serem exibidos!
+            </p>
+          </div>
+        </ng-template>
+      </div>
     </div>
-    <app-carousel [cardsList]="characterDetailList.storiesList"></app-carousel>
-  </div>
-  <div class="search-area">
-    <div class="search-line">
-      <p>Eventos</p>
-      <app-input
-        [inputType]="'inputSearch'"
-        [fieldsetLabel]="'Está buscando um evento específico?'"
-        [backgroundColorTag]="'#2C85D8'"
-        [inputWidth]="'600px'"
-        [inputBorderColor]="'#000000'"
-        [color]="'#000000'"
-        [placeHolder]="'Está buscando um evento específico?'"
-        (valueChangeLogin)="
-          filterCategory($event, characterDetailList.eventsList)
-        "
-      ></app-input>
+    <div class="search-area">
+      <div class="search-line">
+        <p>Eventos</p>
+        <div class="input-width">
+          <app-input
+            [inputType]="'inputSearch'"
+            [fieldsetLabel]="'Procura uma evento?'"
+            [backgroundColorTag]="'#2C85D8'"
+            [inputWidth]="'100%'"
+            [inputBorderColor]="'#000000'"
+            [color]="'#000000'"
+            [placeHolder]="'Procura uma evento?'"
+            (valueChangeLogin)="filterEventsCategory($event)"
+            (emitCleanValue)="clearSearchEvents($event)"
+          ></app-input>
+        </div>
+      </div>
+      <div class="carrosel-area">
+        <owl-carousel-o
+          *ngIf="eventsListFilter.length > 0; else searchNotFound"
+          [options]="carouselOptions"
+        >
+          <ng-template carouselSlide *ngFor="let event of eventsListFilter">
+            <div class="item-card">
+              <img src="{{ event.thumbnail }}" class="thumbnail" />
+              <p>{{ event.description }}</p>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+        <ng-template #searchNotFound>
+          <div class="not-found-message">
+            <mat-icon>error_outline</mat-icon>
+            <p class="error-description">
+              Não existem registros a serem exibidos!
+            </p>
+          </div>
+        </ng-template>
+      </div>
     </div>
-    <app-carousel [cardsList]="characterDetailList.eventsList"></app-carousel>
   </div>
 </div>
