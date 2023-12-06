@@ -137,8 +137,14 @@ export class LoginComponent implements OnInit {
       } catch (error) {
         this.router.navigate(['/home']);
       }
-    } catch (error) {
-      this.handleLoginError('E-mail ou senha inválidos!');
+    } catch (e: any) {
+      console.log(e);
+      if (e.error.data == 'Necessária a confirmação do cadastro pelo e-mail.') {
+        this.handleLoginError(e.error.data);
+        return;
+      } else {
+        this.handleLoginError('E-mail ou senha inválidos!');
+      }
     }
   }
 
