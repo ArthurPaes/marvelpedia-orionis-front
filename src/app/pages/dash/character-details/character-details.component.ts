@@ -64,7 +64,7 @@ export class CharacterDetailsComponent implements OnInit {
     this.getCategoryList();
   }
 
-  customOptions: OwlOptions = {
+  carouselOptions: OwlOptions = {
     loop: false,
     skip_validateItems: true,
     mouseDrag: true,
