@@ -73,7 +73,8 @@ export class HomeComponent implements OnInit {
 
     const dataToTransfer = {
       state: {
-        data: idContent,
+        idContent: idContent,
+        categoryContent: categoryContent,
       },
     };
 
