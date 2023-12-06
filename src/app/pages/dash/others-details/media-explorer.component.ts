@@ -58,7 +58,11 @@ export class MediaExplorerComponent {
     thumb: 'url do thumb do card a ser exibido',
     externalLink: 'link de detalhes',
   };
-
+  /**
+   * getCommentList
+   *
+   * Requests the comment list of deteiled content.
+   */
   async getCommentList(): Promise<void> {
     try {
       const response = await this.marvelContentApi.getCommentsByCategoryId(
@@ -71,7 +75,11 @@ export class MediaExplorerComponent {
       console.log(err);
     }
   }
-
+  /**
+   * handleCommentDelete
+   *
+   * Handles the user comment deletion.
+   */
   async handleCommentDelete(commentId: number): Promise<void> {
     try {
       await this.marvelContentApi.deleteComment(commentId);
