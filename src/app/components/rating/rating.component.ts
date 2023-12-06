@@ -123,8 +123,9 @@ export class RatingComponent {
       console.log(respostaRating);
       this.handleRatingSuccess();
     } catch (errorResponse: any) {
-      if (errorResponse.error.data.msg) {
-        this.handleRatingError(errorResponse.error.data.msg);
+      if (errorResponse.error.data[0].msg) {
+        this.handleRatingError(errorResponse.error.data[0].msg);
+        this.ratingError = true;
       } else {
         this.handleRatingError('Erro interno do servidor!');
         this.ratingError = true;
