@@ -31,7 +31,7 @@
         <textarea
           [(ngModel)]="newComment.comment"
           type="textarea"
-          maxlength="150"
+          maxlength="300"
           placeholder="Compartilhe sua opinião com a comunidade Marvel!"
           name="comment"
           id="comment"
@@ -54,14 +54,14 @@
       <ol *ngFor="let comment of commentList">
         <li class="coment-item">
           <h3>
-            {{ comment.userName }} {{ comment.userLastName | getLastName }}
+            {{ comment.userName }} {{ comment.userLastName.split(" ").pop() }}
             <span>{{ comment.createdAt | date }}</span>
           </h3>
           <h4>{{ comment.comment }}</h4>
           <mat-icon
             *ngIf="comment.userComment"
             class="bt-delete"
-            (click)="handleCommentDelete(comment.id)"
+            (click)="handleDeleteComment(comment.id)"
             >delete</mat-icon
           >
         </li>
@@ -75,7 +75,7 @@
           [isDisabled]="disableButtonPreviousPage"
         >
           <mat-icon>keyboard_arrow_left</mat-icon></app-button
-        ><span>{{ pageNumberComments }}</span>
+        ><span>{{ pageNumber }}</span>
         <app-button
           [buttonType]="'large'"
           (click)="nextPageComments()"

@@ -24,7 +24,7 @@ export class MediaExplorerComponent implements OnInit {
   dataContent: any;
   commentList: IComment[] = [];
   totalComments = 0;
-  pageNumberComments = 1;
+  pageNumber = 1;
   disableButtonPreviousPage = true;
   disableButtonNextPage = false;
   newComment = { comment: '' };
@@ -38,75 +38,48 @@ export class MediaExplorerComponent implements OnInit {
     externalLink: 'link de detalhes',
   };
   ngOnInit() {
-    console.log(this.dataContent);
     this.getCommentList(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
-      this.pageNumberComments,
+      this.pageNumber,
     );
-  }
-
-  createComment() {
-    this.createNewComment(
-      this.dataContent.categoryContent,
-      this.dataContent.idContent,
-      this.newComment,
-    );
-    this.newComment.comment = '';
-  }
-
-  async createNewComment(
-    category: EnumContentCategory,
-    categoryId: number,
-    newComment: object,
-  ): Promise<void> {
-    try {
-      console.log('passaaqui');
-      const response = await this.marvelContentApi.createUserComment(
-        category,
-        categoryId,
-        newComment,
-      );
-      this.openSnackBar(`Seu comentário foi publicado com sucesso!`, 'Fechar');
-      this.getCommentList(
-        this.dataContent.categoryContent,
-        this.dataContent.idContent,
-        this.pageNumberComments,
-      );
-    } catch (err: any) {
-      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
-    }
   }
 
   /**
    * getCommentList
    *
-   * Requests the comment list of deteiled content.
+   * Obtém a lista de comentários para o conteúdo atual.
+   *
+   * Realiza uma chamada à API para trazer a lista de comentários associada
+   * a um conteúdo específico da Marvel.
+   *
+   * @param category - A categoria do conteúdo Marvel
+   * @param categoryId - O ID do conteúdo Marvel.
+   * @param pageNumber - O número da página de comentários a ser exibida.
    */
   async getCommentList(
     category: EnumContentCategory,
     categoryId: number,
-    pageNumberComments: number,
+    pageNumber: number,
   ): Promise<void> {
     this.showNotFoundMessage = false;
     try {
       const response = await this.marvelContentApi.getCommentsByCategoryId(
         category,
         categoryId,
-        pageNumberComments,
+        pageNumber,
       );
       this.showNextPreviousButtons = true;
       this.commentList = response.commentsWithUserComment;
-      console.log(response.data);
+      //número total de comentários disponibilizados pela API em relação ao conteúdo Marvel
       this.totalComments = response.data.totalComments;
-      console.log(this.totalComments);
-      if (3 * pageNumberComments >= this.totalComments) {
+      if (3 * pageNumber >= this.totalComments) {
         this.disableButtonNextPage = true;
         return;
       }
       this.disableButtonNextPage = false;
     } catch (err: any) {
-      if (pageNumberComments > 1) {
+      if (pageNumber > 1) {
         this.previousPageComments();
       }
       if (err.error.data === 'Página não encontrada.') {
@@ -118,44 +91,102 @@ export class MediaExplorerComponent implements OnInit {
   }
 
   /**
+   * createNewComment
+   *
+   * Esta função usa o service `MarvelContentApi` para enviar um novo comentário à API.
+   * Após o envio, exibe uma mensagem de sucesso usando `openSnackBar`, limpa o campo de comentário para preparar para um novo comentário e atualiza a lista de comentários chamando `getCommentList`.
+   *
+   * @param category - A categoria do conteúdo Marvel
+   * @param categoryId - O ID do conteúdo Marvel.
+   * @param newComment - Um objeto contendo o novo comentário a ser enviado.
+   */
+
+  async createNewComment(
+    category: EnumContentCategory,
+    categoryId: number,
+    newComment: object,
+  ): Promise<void> {
+    try {
+      await this.marvelContentApi.createUserComment(
+        category,
+        categoryId,
+        newComment,
+      );
+      this.openSnackBar(`Seu comentário foi publicado com sucesso!`, 'Fechar');
+      this.newComment.comment = '';
+      this.pageNumber = 1;
+      this.getCommentList(
+        this.dataContent.categoryContent,
+        this.dataContent.idContent,
+        this.pageNumber,
+      );
+    } catch (err: any) {
+      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
+    }
+  }
+
+  /**
    * handleCommentDelete
    *
-   * Handles the user comment deletion.
+   * A função usa o service `MarvelContentApi` para excluir um comentário com o ID fornecido. Após a exclusão, exibe uma mensagem de sucesso utilizando `openSnackBar` e atualiza a lista de comentários chamando `getCommentList`.
+   *
+   * @param commentId - O ID do comentário a ser excluído
    */
-  async handleCommentDelete(commentId: number): Promise<void> {
+  async handleDeleteComment(commentId: number): Promise<void> {
     try {
       await this.marvelContentApi.deleteUserComment(commentId);
       this.openSnackBar(`Seu comentário foi excluído!`, 'Fechar');
       this.getCommentList(
         this.dataContent.categoryContent,
         this.dataContent.idContent,
-        this.pageNumberComments,
+        this.pageNumber,
       );
     } catch (err) {
-      console.log(err);
       this.openSnackBar(`Não foi possível excluir o comentário!`, 'Fechar');
     }
   }
 
-  nextPageComments() {
-    this.disableButtonPreviousPage = false;
-    this.pageNumberComments++;
-    this.getCommentList(
+  /**
+   * createComment
+   *
+   * Esta função é chamada quando o usuário quando o usuário clica no botão "Comentar". Ela realiza a chamada da função `createNewComment` para enviar o novo comentário que está armazenado na variável "newComment".
+   */
+  createComment() {
+    this.createNewComment(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
-      this.pageNumberComments,
+      this.newComment,
     );
   }
 
-  previousPageComments() {
-    this.pageNumberComments--;
-    this.disableButtonNextPage = false;
-    this.disableButtonPreviousPage =
-      this.pageNumberComments === 1 ? true : false;
+  /**
+   * nextPageComments
+   *
+   * A função é chamada quando o usuário deseja visualizar a próxima página de comentários.
+   */
+  nextPageComments() {
+    this.disableButtonPreviousPage = false;
+    this.pageNumber++;
     this.getCommentList(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
-      this.pageNumberComments,
+      this.pageNumber,
+    );
+  }
+
+  /**
+   * previousPageComments
+   *
+   * A função é chamada quando o usuário deseja visualizar a página anterior de comentários.
+   */
+  previousPageComments() {
+    this.pageNumber--;
+    this.disableButtonNextPage = false;
+    this.disableButtonPreviousPage = this.pageNumber === 1 ? true : false;
+    this.getCommentList(
+      this.dataContent.categoryContent,
+      this.dataContent.idContent,
+      this.pageNumber,
     );
   }
 
