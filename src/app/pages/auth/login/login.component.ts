@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthApi } from 'src/app/core/api/app/auth.api';
 import { ILogin } from './interface/login.interface';
@@ -10,7 +10,7 @@ import { RatingApi } from 'src/app/core/api/app/rating.api';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   login: ILogin = { email: '', password: '', rememberMe: false };
   isFormValid = false;
   loginError = false;
@@ -28,6 +28,13 @@ export class LoginComponent {
     private ratingApi: RatingApi,
     private router: Router,
   ) {}
+
+  ngOnInit(): void {
+    if (localStorage.getItem('@authToken')) {
+      this.router.navigate(['/home']);
+      return;
+    }
+  }
 
   /**
    * checkboxChange
@@ -130,8 +137,12 @@ export class LoginComponent {
       } catch (error) {
         this.router.navigate(['/home']);
       }
-    } catch (error) {
-      this.handleLoginError('E-mail ou senha inválidos!');
+    } catch (e: any) {
+      if (e.error.data == 'Necessária a confirmação do cadastro pelo e-mail.') {
+        this.handleLoginError(e.error.data);
+      } else {
+        this.handleLoginError('E-mail ou senha inválidos!');
+      }
     }
   }
 
