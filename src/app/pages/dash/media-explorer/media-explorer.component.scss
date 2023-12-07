@@ -1,0 +1,308 @@
+.component-body{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../../../../assets/images/marvel-space-homepage.jpg");
+    background-position: top;
+    justify-content: center;
+    overflow: auto;
+    margin: 0;
+}
+.container {
+    box-sizing: border-box;
+    max-width: 1205px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+}
+header {
+    height: 312px;
+    width: 1205px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    background-color: black;
+    margin-bottom: 40px;
+}
+header h1 {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    line-height: 100%;
+}
+header h4{
+    color: #ffffff;
+}
+img {
+    filter: grayscale(1);
+    z-index: 0;
+    opacity: 25%;
+}
+section {
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    align-items: start;
+    color: white;
+    z-index: 1;
+    position: absolute;
+}
+button{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 60%;
+    margin-top: 5%;
+
+    background-color:transparent;
+    border: none;
+    cursor: pointer;
+
+    mat-icon {
+        color: #fff;
+    }
+    :hover{
+        color: var(--color-primary);
+    }
+}
+
+h2 {
+    color: #000000;
+    margin: 0;
+    margin-bottom: 10px;
+}
+h3{
+    color: #000000;
+    color: var(--color-primary);
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+span{
+    font-weight: 300;
+    color: rgb(140, 190, 240);
+}
+.bt-comentar{
+    width: 100%;
+}
+.app-button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 30%;
+}
+.product-view{
+    width: 70%;
+    display: flex;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+.content-container {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 4px;
+    min-height: 180px;
+    resize: none;
+}
+.know-more-URL {
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.product-card {
+    min-width: 227px;
+    height: 380px;
+    background-color: rgb(19, 55, 138);
+    border-radius: 4px;
+}
+.coment-list {
+    border-radius: 4px;
+    width: 90%;
+    padding: 20px;
+    margin-bottom: 60px;
+}
+.coment-item{
+    // box-shadow: 0 8px 32px 0 rgba(46, 59, 237, 0.37);
+    // backdrop-filter: blur( 4px );
+    // -webkit-backdrop-filter: blur( 4px );
+    border: 1px solid rgb(140, 190, 240);
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+.bt-delete{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+.wrapper-buttons {
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  max-width: 340px;
+  gap: 16px;
+}
+
+.wrapper-buttons span{
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.wrapper-buttons .btn-see-less {
+  padding: 0;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(140, 190, 240);
+    width: 100%;
+    padding: 60px 12px;
+}
+footer h1{
+    color: #000000;
+    font-weight: bold;
+    font-size: 3rem;
+    letter-spacing: 1.5px;
+    line-height: 58px;
+}
+footer div h2 {
+    color: #000000;
+    margin: 0;
+    width: 360px;
+    min-width: 125px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+footer span {
+    color: rgb(255, 255, 255);
+    background-color: rgb(176, 0, 59);
+    padding: 0 5px;
+    font-weight: bolder;
+    letter-spacing: 4px;
+    line-height: 1.2;
+    margin-top: 27px;
+}
+.footer-content-container{
+    width: 82%;
+    display: grid;
+    grid-template-columns: 42% 35%;
+    grid-gap: 60px;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    align-items: center;
+}
+.poster-container {
+    display: flex;
+    gap: 20px;
+}
+.poster-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.poster {
+    border-radius: 4px;
+    background-color: rgb(19, 55, 138);
+    width: 227px;
+    height: 380px;
+}
+.partners {
+    margin: 20px 20px;
+}
+.app-footer {
+    color: #000000;
+}
+@media (min-width: 740px ) and (max-width: 920px) {
+    section {
+        right: 170px;
+        left: 170px;
+    }
+    .product-view{
+        width: inherit;
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+    }
+    footer div h2 {
+        width: 115%;
+        line-height: 35px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 740px) {
+    header {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    section {
+        display: grid;
+        grid-template-rows: 10% 70% 20%;
+        align-items: start;
+        right: 400px;
+        left: 400px;
+    }
+    .app-button {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-right: 30%;
+    }
+
+    textarea {
+        width: calc(100% - 22px);
+        padding: 10px;
+        resize: none;
+    }
+    .product-view{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .product-card {
+        width: 274px;
+        height: 427px;
+        margin-bottom: 20px;
+    }
+
+    h2{
+        margin-bottom: 10px;
+    }
+    .coment-list {
+        width: 100%;
+        padding: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}

@@ -1,0 +1,130 @@
+<div class="component-body">
+  <div class="container">
+    <header>
+      <section>
+        <button>
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <div class="content">
+          <h1>Homem de Ferro</h1>
+          <h4>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias optio
+            rem tempora quaerat saepe ad laboriosam, dolores, repudiandae atque
+            consectetur nam aperiam? Ullam sapiente ad hic accusantium, ratione
+            tenetur ipsum?
+          </h4>
+        </div>
+        <app-button
+          class="app-button"
+          [buttonType]="'cancel'"
+          [label]="'home'"
+          [custonStyle]="'width: 55px'"
+        ></app-button>
+      </section>
+      <img src="../../../../assets/images/characters-banner.svg" />
+    </header>
+
+    <div class="product-view">
+      <div class="product-card"></div>
+      <div class="content-container">
+        <h2>Deixe seu comentário</h2>
+        <textarea
+          [(ngModel)]="newComment.comment"
+          type="textarea"
+          maxlength="150"
+          placeholder="Compartilhe sua opinião com a comunidade Marvel!"
+          name="comment"
+          id="comment"
+        ></textarea>
+        <app-button
+          class="bt-comentar"
+          [buttonType]="'large'"
+          [label]="'comentar'"
+          [isDisabled]="false"
+          (click)="createComment()"
+        ></app-button>
+      </div>
+    </div>
+
+    <div class="coment-list">
+      <h2>Comentários</h2>
+      <p *ngIf="showNotFoundMessage">
+        Seja o primeiro a comentar sobre esse conteúdo!
+      </p>
+      <ol *ngFor="let comment of commentList">
+        <li class="coment-item">
+          <h3>
+            Brenner Paiva
+            <!-- {{ comment.userName }} {{ comment.userLastName | getLastName
+            }} -->
+            <span>{{ comment.createdAt | date }}</span>
+          </h3>
+          <h4>{{ comment.comment }}</h4>
+          <mat-icon
+            *ngIf="comment.userComment"
+            class="bt-delete"
+            (click)="handleCommentDelete(comment.id)"
+            >delete</mat-icon
+          >
+        </li>
+      </ol>
+      <div *ngIf="showNextPreviousButtons" class="wrapper-buttons">
+        <app-button
+          [buttonType]="'large'"
+          (click)="previousPageComments()"
+          class="btn-see-less"
+          custonStyle="padding: 8px"
+          [isDisabled]="disableButtonPreviousPage"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon></app-button
+        ><span>{{ pageNumberComments }}</span>
+        <app-button
+          [buttonType]="'large'"
+          (click)="nextPageComments()"
+          custonStyle="padding: 8px"
+          [isDisabled]="disableButtonNextPage"
+        >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </app-button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content-container">
+        <h1>Quer ter acesso a <span>POSTERS EXCLUSIVOS?</span></h1>
+        <div>
+          <h2>
+            Por apenas <span>R$15,00</span> você recebe um poster criado por um
+            dos artistas da nossa comunidade.
+          </h2>
+          <app-button
+            [buttonType]="'large'"
+            [label]="'Quero meu poster exclusivo'"
+          ></app-button>
+        </div>
+      </div>
+      <div class="partners">
+        <h2>Conheça nossos parceiros</h2>
+        <div class="poster-container">
+          <div class="poster-item">
+            <div class="poster"></div>
+            <p>Nome do artista</p>
+          </div>
+          <div class="poster-item">
+            <div class="poster"></div>
+            <p>Nome do artista</p>
+          </div>
+          <div class="poster-item">
+            <div class="poster"></div>
+            <p>Nome do artista</p>
+          </div>
+          <div class="poster-item">
+            <div class="poster"></div>
+            <p>Nome do artista</p>
+          </div>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </footer>
+  </div>
+</div>
