@@ -6,11 +6,10 @@ header {
   object-fit: cover;
   background-size: cover;
   height: 312px;
-  width: 1205px;
+  width: 100%;
   background-color: #000;
   margin: auto;
   overflow: hidden;
-  border-radius: 0 0 10px 10px;
 }
 
 .header-background {
@@ -34,10 +33,11 @@ header {
 
 header section {
   z-index: 1;
-  width: 100%;
+  width: 1205px;
   padding: 16px;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
 }
 
 section .content {
@@ -116,7 +116,7 @@ button{
 
 @media (max-width: 649px) {
   header {
-    height: 500px;
+    height: 600px;
   }
   .header-description {
     -webkit-line-clamp: 17;
