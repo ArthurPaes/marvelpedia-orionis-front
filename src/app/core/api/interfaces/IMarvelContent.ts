@@ -1,4 +1,5 @@
 import { IContentCard } from 'src/app/pages/dash/home/interface/home.interface';
+import { IComment } from 'src/app/pages/dash/media-explorer/interface/media-explorer';
 
 export interface IResponseContentByCategory {
   date: string;
@@ -22,12 +23,10 @@ export interface IResponseTogleFavoriteCharacter {
 }
 
 export interface IResponseComment {
-  id: number;
-  userName: string;
-  userLastName: string;
-  comment: string;
-  createdAt: string;
-  categoryId: number;
-  category: string;
-  userComment: boolean;
+  date: string;
+  status: boolean;
+  data: {
+    totalComments: number;
+  };
+  commentsWithUserComment: IComment[];
 }

@@ -86,7 +86,7 @@ export class MarvelContentApi {
     category: EnumContentCategory,
     categoryId: number,
     page: number,
-  ): Promise<IResponseComment[]> {
+  ): Promise<IResponseComment> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/comments/${category}/${categoryId}/?page=${page}`,
       'GET',
@@ -98,12 +98,22 @@ export class MarvelContentApi {
    * Deleta o comentário a partir de seu ID.
    * @param commentId -Número que identifica o comentário.
    */
-  async deleteComment(
-    commentId: number,
-  ): Promise<IResponseTogleFavoriteCharacter> {
+  async deleteUserComment(commentId: number): Promise<any> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/comments/${commentId}`,
       'DELETE',
+    );
+  }
+
+  async createUserComment(
+    category: EnumContentCategory,
+    categoryId: number,
+    newComment: object,
+  ) {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${category}/${categoryId}`,
+      'POST',
+      newComment,
     );
   }
 }

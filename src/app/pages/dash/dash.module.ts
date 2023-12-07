@@ -9,9 +9,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { SurveyComponent } from './survey/survey.component';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
-import { MediaExplorerComponent } from './others-details/media-explorer.component';
+import { MediaExplorerComponent } from './media-explorer/media-explorer.component';
 
-import { LastNamePipe } from './others-details/pipes/last-name.pipe';
+import { LastNamePipe } from './media-explorer/pipes/last-name.pipe';
 
 @NgModule({
   declarations: [
