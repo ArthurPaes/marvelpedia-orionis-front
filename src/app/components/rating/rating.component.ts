@@ -144,7 +144,7 @@ export class RatingComponent {
       this.modalConfig.showModal = statusModal;
     } else {
       this.ratingError = false;
-      this.router.navigate(['home']);
+      this.router.navigate(['/home']);
     }
   }
 }
