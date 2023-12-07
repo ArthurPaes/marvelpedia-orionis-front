@@ -10,6 +10,7 @@ header {
   background-color: #000;
   margin: auto;
   overflow: hidden;
+  border-radius: 0 0 10px 10px;
 }
 
 .header-background {
@@ -40,7 +41,7 @@ header section {
 }
 
 section .content {
-  width: 80%;
+  width: 85%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -52,7 +53,7 @@ section .content {
 
 .arrow {
   position: absolute;
-  top: 5px;
+  top: 12px;
   left: -30px;
 }
 
@@ -72,7 +73,7 @@ section .content {
 }
 
 .header-description {
-  color: #979797;
+  color: #c7c7c7;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
