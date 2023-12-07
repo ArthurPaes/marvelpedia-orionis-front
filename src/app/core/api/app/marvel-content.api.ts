@@ -47,9 +47,10 @@ export class MarvelContentApi {
    */
   async getCharacterCategoryList(
     characterId: string,
+    category: string,
   ): Promise<IResponseCategoryList> {
     return await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/characters/${characterId}`,
+      `${this.apiUrl}/${category}/${characterId}`,
       'GET',
     );
   }
