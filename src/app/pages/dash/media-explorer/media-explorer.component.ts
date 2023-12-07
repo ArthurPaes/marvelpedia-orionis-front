@@ -47,16 +47,12 @@ export class MediaExplorerComponent implements OnInit {
   }
 
   createComment() {
-    if (this.newComment.comment == '') {
-      alert('não é possível comentar sem nenhum caracter');
-      return;
-    }
     this.createNewComment(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
       this.newComment,
     );
-    this.newComment.comment = ' ';
+    this.newComment.comment = '';
   }
 
   async createNewComment(
@@ -78,8 +74,7 @@ export class MediaExplorerComponent implements OnInit {
         this.pageNumberComments,
       );
     } catch (err: any) {
-      console.log(err);
-      console.log('passa erro');
+      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
     }
   }
 
@@ -130,7 +125,7 @@ export class MediaExplorerComponent implements OnInit {
   async handleCommentDelete(commentId: number): Promise<void> {
     try {
       await this.marvelContentApi.deleteUserComment(commentId);
-
+      this.openSnackBar(`Seu comentário foi excluído!`, 'Fechar');
       this.getCommentList(
         this.dataContent.categoryContent,
         this.dataContent.idContent,
@@ -138,6 +133,7 @@ export class MediaExplorerComponent implements OnInit {
       );
     } catch (err) {
       console.log(err);
+      this.openSnackBar(`Não foi possível excluir o comentário!`, 'Fechar');
     }
   }
 

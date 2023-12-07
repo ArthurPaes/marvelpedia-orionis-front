@@ -175,6 +175,16 @@ textarea {
   padding: 0;
 }
 
+::ng-deep .snackbar-1{
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+::ng-deep .snackbar-1 .mdc-button__label{
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
 footer {
     display: flex;
     flex-direction: column;

@@ -40,7 +40,7 @@
           class="bt-comentar"
           [buttonType]="'large'"
           [label]="'comentar'"
-          [isDisabled]="false"
+          [isDisabled]="this.newComment.comment.trim() !== '' ? false : true"
           (click)="createComment()"
         ></app-button>
       </div>
@@ -54,9 +54,7 @@
       <ol *ngFor="let comment of commentList">
         <li class="coment-item">
           <h3>
-            Brenner Paiva
-            <!-- {{ comment.userName }} {{ comment.userLastName | getLastName
-            }} -->
+            {{ comment.userName }} {{ comment.userLastName | getLastName }}
             <span>{{ comment.createdAt | date }}</span>
           </h3>
           <h4>{{ comment.comment }}</h4>
