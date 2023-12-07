@@ -180,27 +180,62 @@ export class SignUpComponent {
   };
   /**
    * birthYearChecker
-   * Handles the minimum age verification.
-   * @param componentName The Input element name.
+   * Handles the 10 years minimum age, 100 years maximum requirements verification.
    * @param eventValue The event data ($event).
    */
-  birthYearChecker = (
-    componentName: InputElement,
-    eventValue: string,
-  ): void => {
-    this.receiveData(componentName, eventValue);
+  birthYearChecker = (eventValue: string): void => {
+    this.receiveData(this.birthDate, eventValue);
     const userAge =
       this.currentYear.getFullYear() -
-      parseInt(componentName.getValue().slice(0, 4));
-    userAge >= 10
-      ? (componentName.setIsAproved(true),
-        componentName.setBorderColor('#2C85D8'),
-        componentName.setFieldLabel('Data de Nascimento'))
-      : (componentName.setIsAproved(false),
-        componentName.setBorderColor('#E38686'),
-        componentName.setFieldLabel('Deve ser MAIOR de 10 anos!'));
+      parseInt(this.birthDate.getValue().slice(0, 4));
+
+    if (userAge <= 0) {
+      this.birthDate.setIsAproved(false);
+      this.birthDate.setBorderColor('#E38686');
+      this.birthDate.setFieldLabel('Digite uma data válida!');
+    } else if (!Number.isInteger(userAge)) {
+      this.birthDate.setIsAproved(false);
+      this.birthDate.setBorderColor('#E38686');
+      this.birthDate.setFieldLabel('Digite uma data válida!');
+    } else if (userAge > 100) {
+      if (this.birthDate.getValue().slice(0, 4).split('')[0] != '0') {
+        this.birthDate.setIsAproved(false);
+        this.birthDate.setBorderColor('#E38686');
+        this.birthDate.setFieldLabel(`${userAge} anos parece demais, não?`);
+      } else {
+        this.birthDate.setIsAproved(true);
+        this.birthDate.setBorderColor('#2C85D8');
+        this.birthDate.setFieldLabel('Data de Nascimento');
+      }
+    } else if (userAge < 10) {
+      this.birthDate.setIsAproved(false);
+      this.birthDate.setBorderColor('#E38686');
+      this.birthDate.setFieldLabel('Deve ser MAIOR de 10 anos!');
+    } else {
+      this.birthDate.setIsAproved(true);
+      this.birthDate.setBorderColor('#2C85D8');
+      this.birthDate.setFieldLabel('Data de Nascimento');
+    }
     this.btEnabler();
   };
+  /**
+   * handleFocusOutCheck
+   * Checks the date imput on focus out to avoid incomplete data.
+   */
+  handleFocusOutCheck(): void {
+    if (parseInt(this.birthDate.getValue().slice(0, 4)) < 1923) {
+      this.birthDate.setFieldLabel('Digite uma data válida!');
+      this.birthDate.setIsAproved(false);
+      this.birthDate.setBorderColor('#E38686');
+    } else if (
+      !Number.isInteger(parseInt(this.birthDate.getValue().slice(0, 4)))
+    ) {
+      this.birthDate.setIsAproved(false);
+      this.birthDate.setBorderColor('#E38686');
+      this.birthDate.setFieldLabel('Digite uma data válida!');
+    }
+    this.btEnabler();
+  }
   /**
    * passwordMatchChecker
    * Checks if passoword confirmation input and password input are matching.

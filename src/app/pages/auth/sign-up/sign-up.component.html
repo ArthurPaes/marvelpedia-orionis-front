@@ -46,8 +46,9 @@
           [fieldsetLabel]="birthDate.getFieldLabel()"
           [placeHolder]="'Data de Nascimento'"
           [inputBorderColor]="birthDate.getBorderColor()"
-          (valueChange)="birthYearChecker(birthDate, $event)"
+          (valueChange)="birthYearChecker($event)"
           [backgroundColorTag]="birthDate.getBorderColor()"
+          (focusout)="handleFocusOutCheck()"
         ></app-input>
       </div>
 
