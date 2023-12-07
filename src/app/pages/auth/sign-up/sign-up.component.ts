@@ -86,6 +86,34 @@ export class SignUpComponent {
       : (this.btRegisterState = false);
   };
   /**
+   * handleInpuAproved
+   * Sets the border-color, fildset label and the "isAproved" property as true.
+   * @param componentName The Input element name.
+   * @param fieldSetLabelMessage The feedback massage shown on fildset.
+   */
+  handleInpuAproved(
+    componentName: InputElement,
+    fieldSetLabelMessage: string,
+  ): void {
+    componentName.setIsAproved(true);
+    componentName.setBorderColor('#2C85D8');
+    componentName.setFieldLabel(fieldSetLabelMessage);
+  }
+  /**
+   * handleInpuAproved
+   * Sets the border-color, fildset label and the "isAproved" property as true.
+   * @param componentName The Input element name.
+   * @param fieldSetLabelMessage The feedback massage shown on fildset.
+   */
+  handleInpuNotAproved(
+    componentName: InputElement,
+    fieldSetLabelMessage: string,
+  ): void {
+    componentName.setIsAproved(false);
+    componentName.setBorderColor('#E38686');
+    componentName.setFieldLabel(fieldSetLabelMessage);
+  }
+  /**
    * receiveData
    * Handles the assignment of event data to  input Element object.
    * @param componentName The Input element name.
@@ -118,34 +146,24 @@ export class SignUpComponent {
     switch (componentName.getType()) {
       case 'firstname':
         this.regexList.name.test(componentName.getValue())
-          ? (componentName.setIsAproved(true),
-            componentName.setBorderColor('#2C85D8'),
-            componentName.setFieldLabel('Nome'))
-          : (componentName.setIsAproved(false),
-            componentName.setBorderColor('#E38686'),
-            componentName.setFieldLabel(
+          ? this.handleInpuAproved(componentName, 'Nome TEste')
+          : this.handleInpuNotAproved(
+              componentName,
               'Seu nome pode conter apenas letras e somente 2 nomes.',
-            ));
+            );
         break;
       case 'lastname':
         this.regexList.lastName.test(this.lastName.getValue())
-          ? (componentName.setIsAproved(true),
-            componentName.setBorderColor('#2C85D8'),
-            componentName.setFieldLabel('Sobrenome'))
-          : (componentName.setIsAproved(false),
-            componentName.setBorderColor('#E38686'),
-            componentName.setFieldLabel(
+          ? this.handleInpuAproved(componentName, 'Sobrenome')
+          : this.handleInpuNotAproved(
+              componentName,
               'Seu sobrenome pode conter apenas letras',
-            ));
+            );
         break;
       case 'email':
         this.regexList.email.test(componentName.getValue())
-          ? (componentName.setIsAproved(true),
-            componentName.setBorderColor('#2C85D8'),
-            componentName.setFieldLabel('E-mail'))
-          : (componentName.setIsAproved(false),
-            componentName.setBorderColor('#E38686'),
-            componentName.setFieldLabel('E-mail inválido'));
+          ? this.handleInpuAproved(componentName, 'E-mail')
+          : this.handleInpuNotAproved(componentName, 'E-mail inválido');
         break;
     }
     this.btEnabler();
@@ -158,8 +176,10 @@ export class SignUpComponent {
   passwordChecker = (eventValue: string): void => {
     this.receiveData(this.password, eventValue);
     this.password.getValue().length != 0
-      ? this.password.setIsAproved(true)
-      : this.password.setIsAproved(false);
+      ? (this.password.setIsAproved(true),
+        this.password.setBorderColor('#2C85D8'))
+      : (this.password.setIsAproved(false),
+        this.password.setBorderColor('#E38686'));
     this.passwordMatchChecker(
       this.passwordConfirmation,
       this.passwordConfirmation.dataValue,
@@ -190,31 +210,22 @@ export class SignUpComponent {
       parseInt(this.birthDate.getValue().slice(0, 4));
 
     if (userAge <= 0) {
-      this.birthDate.setIsAproved(false);
-      this.birthDate.setBorderColor('#E38686');
-      this.birthDate.setFieldLabel('Digite uma data válida!');
+      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
     } else if (!Number.isInteger(userAge)) {
-      this.birthDate.setIsAproved(false);
-      this.birthDate.setBorderColor('#E38686');
-      this.birthDate.setFieldLabel('Digite uma data válida!');
+      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
     } else if (userAge > 100) {
       if (this.birthDate.getValue().slice(0, 4).split('')[0] != '0') {
-        this.birthDate.setIsAproved(false);
-        this.birthDate.setBorderColor('#E38686');
-        this.birthDate.setFieldLabel(`${userAge} anos parece demais, não?`);
+        this.handleInpuNotAproved(
+          this.birthDate,
+          `${userAge} anos parece demais, não?`,
+        );
       } else {
-        this.birthDate.setIsAproved(true);
-        this.birthDate.setBorderColor('#2C85D8');
-        this.birthDate.setFieldLabel('Data de Nascimento');
+        this.handleInpuAproved(this.birthDate, 'Data de Nascimento');
       }
     } else if (userAge < 10) {
-      this.birthDate.setIsAproved(false);
-      this.birthDate.setBorderColor('#E38686');
-      this.birthDate.setFieldLabel('Deve ser MAIOR de 10 anos!');
+      this.handleInpuNotAproved(this.birthDate, 'Deve ser MAIOR de 10 anos!');
     } else {
-      this.birthDate.setIsAproved(true);
-      this.birthDate.setBorderColor('#2C85D8');
-      this.birthDate.setFieldLabel('Data de Nascimento');
+      this.handleInpuAproved(this.birthDate, 'Data de Nascimento');
     }
     this.btEnabler();
   };
@@ -224,15 +235,11 @@ export class SignUpComponent {
    */
   handleFocusOutCheck(): void {
     if (parseInt(this.birthDate.getValue().slice(0, 4)) < 1923) {
-      this.birthDate.setFieldLabel('Digite uma data válida!');
-      this.birthDate.setIsAproved(false);
-      this.birthDate.setBorderColor('#E38686');
+      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
     } else if (
       !Number.isInteger(parseInt(this.birthDate.getValue().slice(0, 4)))
     ) {
-      this.birthDate.setIsAproved(false);
-      this.birthDate.setBorderColor('#E38686');
-      this.birthDate.setFieldLabel('Digite uma data válida!');
+      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
     }
     this.btEnabler();
   }
@@ -248,12 +255,11 @@ export class SignUpComponent {
   ): void => {
     this.receiveData(componentName, eventValue);
     componentName.getValue() == this.password.getValue()
-      ? (componentName.setIsAproved(true),
-        componentName.setBorderColor('#2C85D8'),
-        componentName.setFieldLabel('Confirme sua senha'))
-      : (componentName.setIsAproved(false),
-        componentName.setBorderColor('#E38686'),
-        componentName.setFieldLabel('As senhas devem ser idênticas'));
+      ? this.handleInpuAproved(componentName, 'Confirme sua senha')
+      : this.handleInpuNotAproved(
+          componentName,
+          'As senhas devem ser idênticas',
+        );
     this.btEnabler();
     this.passwordCheckerReload = false;
   };
