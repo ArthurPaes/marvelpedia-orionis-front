@@ -77,7 +77,8 @@ export class ChangePasswordComponent implements OnInit {
       ? ((componentName.isAproved = true),
         (componentName.borderColor = '#2C85D8'))
       : ((componentName.isAproved = false),
-        (componentName.borderColor = 'red'));
+        (componentName.borderColor = '#E38686'));
+    this.passwordMatchChecker(this.passwordConfirm, this.passwordConfirm.value);
   };
   /**
    * passwordMatchChecker
@@ -97,7 +98,7 @@ export class ChangePasswordComponent implements OnInit {
         (componentName.borderColor = '#2C85D8'))
       : ((componentName.isAproved = false),
         (componentName.fieldsetLabel = 'As senhas devem ser idênticas'),
-        (componentName.borderColor = 'red'));
+        (componentName.borderColor = '#E38686'));
   };
   /**
    * handlePasswordSubmitSuccess
