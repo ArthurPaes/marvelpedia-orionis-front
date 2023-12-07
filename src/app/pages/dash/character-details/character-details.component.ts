@@ -205,7 +205,7 @@ export class CharacterDetailsComponent implements OnInit {
       .replace('  ', ' ')
       .split(' ')
       .every((word) =>
-        category.description.toLowerCase().includes(
+        category.enTitle.toLowerCase().includes(
           word
             .normalize('NFC')
             .replace(/\p{Diacritic}/gu, '')

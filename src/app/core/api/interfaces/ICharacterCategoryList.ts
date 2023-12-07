@@ -13,5 +13,5 @@ export interface IResponseCategoryList {
 export interface IResponseStandardCategory {
   id: number;
   thumb: string;
-  description: string;
+  enTitle: string;
 }
