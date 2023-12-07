@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
-import {
-  IResponseComment,
-  EnumContentCategory,
-} from 'src/app/core/api/interfaces/IMarvelContent';
+import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
 import { IComment, IDataContent } from './interface/media-explorer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,7 +34,7 @@ export class MediaExplorerComponent implements OnInit {
     thumb: 'url do thumb do card a ser exibido',
     externalLink: 'link de detalhes',
   };
-  ngOnInit() {
+  ngOnInit(): void {
     this.getCommentList(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
@@ -151,7 +148,7 @@ export class MediaExplorerComponent implements OnInit {
    *
    * Esta função é chamada quando o usuário quando o usuário clica no botão "Comentar". Ela realiza a chamada da função `createNewComment` para enviar o novo comentário que está armazenado na variável "newComment".
    */
-  createComment() {
+  createComment(): void {
     this.createNewComment(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
@@ -164,7 +161,7 @@ export class MediaExplorerComponent implements OnInit {
    *
    * A função é chamada quando o usuário deseja visualizar a próxima página de comentários.
    */
-  nextPageComments() {
+  nextPageComments(): void {
     this.disableButtonPreviousPage = false;
     this.pageNumber++;
     this.getCommentList(
@@ -179,7 +176,7 @@ export class MediaExplorerComponent implements OnInit {
    *
    * A função é chamada quando o usuário deseja visualizar a página anterior de comentários.
    */
-  previousPageComments() {
+  previousPageComments(): void {
     this.pageNumber--;
     this.disableButtonNextPage = false;
     this.disableButtonPreviousPage = this.pageNumber === 1 ? true : false;
@@ -194,8 +191,11 @@ export class MediaExplorerComponent implements OnInit {
    * openSnackBar
    *
    * Abre um componente de Snackbar do Angular Material exibindo uma mensagem para o usuário e um botão de ação.
+   *
+   * @param message - Menssagem a ser exibida na snackbar
+   * @param action - Ação a ser executada no botão da snackbar
    */
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 3000, // Duração em milissegundos
       horizontalPosition: 'center',

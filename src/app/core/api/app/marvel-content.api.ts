@@ -6,7 +6,9 @@ import {
   IResponseContentByCategory,
   IResponseTogleFavoriteCharacter,
   EnumContentCategory,
-  IResponseComment,
+  IResponseGetCommentsByCategoryId,
+  IResponseCreateUserComment,
+  IResponseDeleteUserComment,
 } from '../interfaces/IMarvelContent';
 
 @Injectable({
@@ -86,7 +88,7 @@ export class MarvelContentApi {
     category: EnumContentCategory,
     categoryId: number,
     page: number,
-  ): Promise<IResponseComment> {
+  ): Promise<IResponseGetCommentsByCategoryId> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/comments/${category}/${categoryId}/?page=${page}`,
       'GET',
@@ -98,7 +100,9 @@ export class MarvelContentApi {
    * Deleta o comentário a partir de seu ID.
    * @param commentId -Número que identifica o comentário.
    */
-  async deleteUserComment(commentId: number): Promise<any> {
+  async deleteUserComment(
+    commentId: number,
+  ): Promise<IResponseDeleteUserComment> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/comments/${commentId}`,
       'DELETE',
@@ -109,7 +113,7 @@ export class MarvelContentApi {
     category: EnumContentCategory,
     categoryId: number,
     newComment: object,
-  ) {
+  ): Promise<IResponseCreateUserComment> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/comments/${category}/${categoryId}`,
       'POST',

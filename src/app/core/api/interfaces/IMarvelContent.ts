@@ -22,11 +22,23 @@ export interface IResponseTogleFavoriteCharacter {
   data: string;
 }
 
-export interface IResponseComment {
+export interface IResponseGetCommentsByCategoryId {
   date: string;
   status: boolean;
   data: {
     totalComments: number;
   };
   commentsWithUserComment: IComment[];
+}
+
+export interface IResponseDeleteUserComment {
+  date: string;
+  status: boolean;
+  data: string;
+}
+
+export interface IResponseCreateUserComment {
+  date: string;
+  status: boolean;
+  data: string;
 }
