@@ -6,6 +6,9 @@ import {
   IResponseContentByCategory,
   IResponseTogleFavoriteCharacter,
   EnumContentCategory,
+  IResponseGetCommentsByCategoryId,
+  IResponseCreateUserComment,
+  IResponseDeleteUserComment,
 } from '../interfaces/IMarvelContent';
 
 @Injectable({
@@ -68,6 +71,53 @@ export class MarvelContentApi {
       `${this.apiUrl}/favorite`,
       'POST',
       characterId,
+    );
+  }
+
+  /**
+   * getCommentsByCategory
+   *
+   * Obtém o conteúdo ao qual será exibido os detalhes
+   * A categoria pode ser uma das seguintes: 'characters', 'comics', 'series', 'stories', 'favorites', 'events'.
+   * @param category - A categoria do conteúdo que será exibido.
+   * @param categoryId - Id do conteúdo que será exibido.
+   * @param page - Uma string de pesquisa opcional para filtrar os resultados.
+   * @returns retorna uma Promise contendo um array objetos contendo os comentários da categoria especificada e o número total de comentários.
+   */
+  async getCommentsByCategoryId(
+    category: EnumContentCategory,
+    categoryId: number,
+    page: number,
+  ): Promise<IResponseGetCommentsByCategoryId> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${category}/${categoryId}/?page=${page}`,
+      'GET',
+    );
+  }
+  /**
+   * deleteComment
+   *
+   * Deleta o comentário a partir de seu ID.
+   * @param commentId -Número que identifica o comentário.
+   */
+  async deleteUserComment(
+    commentId: number,
+  ): Promise<IResponseDeleteUserComment> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${commentId}`,
+      'DELETE',
+    );
+  }
+
+  async createUserComment(
+    category: EnumContentCategory,
+    categoryId: number,
+    newComment: object,
+  ): Promise<IResponseCreateUserComment> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${category}/${categoryId}`,
+      'POST',
+      newComment,
     );
   }
 }
