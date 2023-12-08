@@ -1,10 +1,14 @@
 <div class="background">
   <div class="container-main">
     <app-header-details
-      ContentName="Iron man"
-      ContentDescription="Homem de Ferro é um personagem dos quadrinhos publicados pela Marvel Comics. Sua verdadeira identidade é o empresário e bilionário Tony Stark, que usa armaduras de alta tecnologia no combate ao crime. Foi criado em 1963 pelo escritor Stan Lee."
-      ContentUrlButton="http://localhost:4200/home"
-      ContentThumb="./assets/images/header-details.svg"
+      [ContentName]="characterDetailList.data.characterName"
+      [ContentDescription]="characterDetailList.data.characterDescription"
+      [ContentUrlButton]="'http://localhost:4200/home'"
+      [ContentThumb]="
+        characterDetailList.data.characterThumb
+          ? characterDetailList.data.characterThumb
+          : './assets/images/header-details.svg'
+      "
     ></app-header-details>
     <div class="search-area">
       <p>Séries</p>
@@ -27,9 +31,15 @@
           [options]="carouselOptions"
         >
           <ng-template carouselSlide *ngFor="let serie of seriesListFilter">
-            <div class="item-card">
-              <img src="{{ serie.thumb }}" class="thumbnail" />
-              <p>{{ serie.enTitle }}</p>
+            <div
+              (click)="navigateToDetails('series', 'serieCategory', serie.id)"
+              class="item-card"
+            >
+              <img
+                src="{{ serie.thumb ? serie.thumb : standardCardThumb }}"
+                class="thumbnail"
+              />
+              <p>{{ serie.enTitle ? serie.enTitle : standardCardTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -66,9 +76,15 @@
           [options]="carouselOptions"
         >
           <ng-template carouselSlide *ngFor="let comic of comicsListFilter">
-            <div class="item-card">
-              <img src="{{ comic.thumb }}" class="thumbnail" />
-              <p>{{ comic.enTitle }}</p>
+            <div
+              (click)="navigateToDetails('comics', 'comicsCategory', comic.id)"
+              class="item-card"
+            >
+              <img
+                src="{{ comic.thumb ? comic.thumb : standardCardThumb }}"
+                class="thumbnail"
+              />
+              <p>{{ comic.enTitle ? comic.enTitle : standardCardTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -105,9 +121,17 @@
           [options]="carouselOptions"
         >
           <ng-template carouselSlide *ngFor="let storie of storiesListFilter">
-            <div class="item-card">
-              <img src="{{ storie.thumb }}" class="thumbnail" />
-              <p>{{ storie.enTitle }}</p>
+            <div
+              (click)="
+                navigateToDetails('stories', 'storiesCategory', storie.id)
+              "
+              class="item-card"
+            >
+              <img
+                src="{{ storie.thumb ? storie.thumb : standardCardThumb }}"
+                class="thumbnail"
+              />
+              <p>{{ storie.enTitle ? storie.enTitle : standardCardTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -144,9 +168,15 @@
           [options]="carouselOptions"
         >
           <ng-template carouselSlide *ngFor="let event of eventsListFilter">
-            <div class="item-card">
-              <img src="{{ event.thumb }}" class="thumbnail" />
-              <p>{{ event.enTitle }}</p>
+            <div
+              (click)="navigateToDetails('events', 'eventsCategory', event.id)"
+              class="item-card"
+            >
+              <img
+                src="{{ event.thumb ? event.thumb : standardCardThumb }}"
+                class="thumbnail"
+              />
+              <p>{{ event.enTitle ? event.enTitle : standardCardTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
