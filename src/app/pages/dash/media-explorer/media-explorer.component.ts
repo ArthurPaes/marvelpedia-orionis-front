@@ -106,6 +106,8 @@ export class MediaExplorerComponent implements OnInit {
     } catch (err: any) {
       if (pageNumber > 1) {
         this.previousPageComments();
+        this.loading = false;
+        return;
       }
       if (err.error.data === 'Página não encontrada.') {
         this.showNotFoundMessage = true;
