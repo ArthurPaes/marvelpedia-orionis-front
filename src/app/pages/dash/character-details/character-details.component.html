@@ -28,8 +28,8 @@
         >
           <ng-template carouselSlide *ngFor="let serie of seriesListFilter">
             <div class="item-card">
-              <img src="{{ serie.thumbnail }}" class="thumbnail" />
-              <p>{{ serie.description }}</p>
+              <img src="{{ serie.thumb }}" class="thumbnail" />
+              <p>{{ serie.enTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -37,7 +37,7 @@
           <div class="not-found-message">
             <mat-icon>error_outline</mat-icon>
             <p class="error-description">
-              Não existem registros a serem exibidos!
+              {{ standardErrorMessage }}
             </p>
           </div>
         </ng-template>
@@ -67,8 +67,8 @@
         >
           <ng-template carouselSlide *ngFor="let comic of comicsListFilter">
             <div class="item-card">
-              <img src="{{ comic.thumbnail }}" class="thumbnail" />
-              <p>{{ comic.description }}</p>
+              <img src="{{ comic.thumb }}" class="thumbnail" />
+              <p>{{ comic.enTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -76,7 +76,7 @@
           <div class="not-found-message">
             <mat-icon>error_outline</mat-icon>
             <p class="error-description">
-              Não existem registros a serem exibidos!
+              {{ standardErrorMessage }}
             </p>
           </div>
         </ng-template>
@@ -106,8 +106,8 @@
         >
           <ng-template carouselSlide *ngFor="let storie of storiesListFilter">
             <div class="item-card">
-              <img src="{{ storie.thumbnail }}" class="thumbnail" />
-              <p>{{ storie.description }}</p>
+              <img src="{{ storie.thumb }}" class="thumbnail" />
+              <p>{{ storie.enTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -115,7 +115,7 @@
           <div class="not-found-message">
             <mat-icon>error_outline</mat-icon>
             <p class="error-description">
-              Não existem registros a serem exibidos!
+              {{ standardErrorMessage }}
             </p>
           </div>
         </ng-template>
@@ -145,8 +145,8 @@
         >
           <ng-template carouselSlide *ngFor="let event of eventsListFilter">
             <div class="item-card">
-              <img src="{{ event.thumbnail }}" class="thumbnail" />
-              <p>{{ event.description }}</p>
+              <img src="{{ event.thumb }}" class="thumbnail" />
+              <p>{{ event.enTitle }}</p>
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -154,7 +154,7 @@
           <div class="not-found-message">
             <mat-icon>error_outline</mat-icon>
             <p class="error-description">
-              Não existem registros a serem exibidos!
+              {{ standardErrorMessage }}
             </p>
           </div>
         </ng-template>
