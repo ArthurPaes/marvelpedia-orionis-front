@@ -10,6 +10,16 @@ export interface IResponseCategoryList {
   };
 }
 
+export interface IResponsegetCharacterCategoryList {
+  date: string;
+  status: boolean;
+  data: {
+    description: string;
+    title: string;
+    thumb: string;
+    link: string;
+  };
+}
 export interface IResponseStandardCategory {
   id: number;
   thumb: string;

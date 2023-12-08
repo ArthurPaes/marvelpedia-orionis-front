@@ -9,6 +9,7 @@ import {
   IResponseGetCommentsByCategoryId,
   IResponseCreateUserComment,
   IResponseDeleteUserComment,
+  IReponseGetDetailsCategory,
 } from '../interfaces/IMarvelContent';
 
 @Injectable({
@@ -46,12 +47,23 @@ export class MarvelContentApi {
    * Função que solicita dados para popular a página de detalhes dos personagens.
    *
    * @param characterId id do personagem que foi escolhido na tela de home.
+   * @param
    * @returns uma promise que em caso de sucesso traz os dados que serão inseridos na tela de detalhe dos personagens.
    */
   async getCharacterCategoryList(
-    characterId: string,
     category: string,
+    characterId: string,
   ): Promise<IResponseCategoryList> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/${category}/${characterId}`,
+      'GET',
+    );
+  }
+
+  async getDetailsCategory(
+    category: EnumContentCategory,
+    characterId: string,
+  ): Promise<IReponseGetDetailsCategory> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/${category}/${characterId}`,
       'GET',

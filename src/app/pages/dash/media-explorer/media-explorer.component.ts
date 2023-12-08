@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
-import { IComment, IDataContent } from './interface/media-explorer';
+import {
+  IComment,
+  IDataContent,
+  IHeaderDetails,
+} from './interface/media-explorer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
@@ -27,6 +31,12 @@ export class MediaExplorerComponent implements OnInit {
   newComment = { comment: '' };
   showNotFoundMessage = false;
   showNextPreviousButtons = false;
+  headerData: IHeaderDetails = {
+    description: '',
+    title: '',
+    thumb: '',
+    link: '',
+  };
 
   currentCardContent = {
     title: 'titulo do card a ser exibido',
@@ -40,6 +50,23 @@ export class MediaExplorerComponent implements OnInit {
       this.dataContent.idContent,
       this.pageNumber,
     );
+    this.getHeaderDetails();
+  }
+
+  async getHeaderDetails() {
+    try {
+      const response = await this.marvelContentApi.getCharacterCategoryList(
+        this.dataContent.categoryContent,
+        this.dataContent.idContent,
+      );
+      console.log(response.data);
+      // this.headerData = response.data;
+      console.log(this.headerData.title);
+      console.log(this.headerData);
+      console.log('teste');
+    } catch (err: any) {
+      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
+    }
   }
 
   /**

@@ -74,7 +74,8 @@ export class CharacterDetailsComponent implements OnInit {
    * Ao inicializar a página será chamado a função getCategoryList para popular os componentes da página.
    */
   ngOnInit(): void {
-    this.getCategoryList();
+    // this.getCategoryList();
+    console.log('este');
   }
 
   /**
