@@ -85,7 +85,7 @@ export class SignUpComponent {
       : (this.btRegisterState = false);
   };
   /**
-   * handleInpuAproved
+   * handleInputApproved
    * Sets the border-color, fildset label and the "isAproved" property as true.
    * @param componentName The Input element name.
    * @param fieldSetLabelMessage The feedback massage shown on fildset.
@@ -99,7 +99,7 @@ export class SignUpComponent {
     componentName.setFieldLabel(fieldSetLabelMessage);
   }
   /**
-   * handleInpuAproved
+   * handleInputNotApproved
    * Sets the border-color, fildset label and the "isAproved" property as true.
    * @param componentName The Input element name.
    * @param fieldSetLabelMessage The feedback massage shown on fildset.
@@ -282,8 +282,8 @@ export class SignUpComponent {
     this.modalConfig = {
       showModal: true,
       icon: 'check_circle_outline',
-      title: 'Cadastro finalizado!',
-      message: 'Verifique sua caixa de e-mail.',
+      title: 'Cadastro concluído!',
+      message: 'Para acessar o site, verifique seu e-mail e confirme no link',
       buttonText: 'FECHAR',
       overlayClick: false,
     };
