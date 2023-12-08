@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  @Input() textColor = 'rgb(255, 255, 255);';
+  @Input() textColor = '#fff';
 }

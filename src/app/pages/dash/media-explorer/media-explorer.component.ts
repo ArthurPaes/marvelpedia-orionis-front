@@ -48,10 +48,6 @@ export class MediaExplorerComponent implements OnInit {
     externalLink: 'link de detalhes',
   };
 
-  /**
-   * ngOnInit
-   * Lifecycle que carrega os dados de posters ao inicializar a página.
-   */
   headerData: IHeaderDetails = {
     description: '',
     title: '',
@@ -59,6 +55,10 @@ export class MediaExplorerComponent implements OnInit {
     link: '',
   };
 
+  /**
+   * ngOnInit
+   * Lifecycle que carrega os dados de posters ao inicializar a página.
+   */
   ngOnInit(): void {
     this.getCommentList(
       this.dataContent.categoryContent,
