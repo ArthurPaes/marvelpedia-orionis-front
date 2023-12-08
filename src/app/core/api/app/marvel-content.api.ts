@@ -60,16 +60,6 @@ export class MarvelContentApi {
     );
   }
 
-  async getDetailsCategory(
-    category: EnumContentCategory,
-    characterId: string,
-  ): Promise<IReponseGetDetailsCategory> {
-    return await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/${category}/${characterId}`,
-      'GET',
-    );
-  }
-
   /**
    * toggleFavoriteCharacter
    *
@@ -84,6 +74,24 @@ export class MarvelContentApi {
       `${this.apiUrl}/favorite`,
       'POST',
       characterId,
+    );
+  }
+
+  /**
+   * getDetailsCategory
+   *
+   * Obtém detalhes sobre o conteúdo Marvel para a página 'Media Explorer'.
+   * @param category A categoria do conteúdo desejado (quadrinhos, histórias, series, eventos).
+   * @param characterId id do conteúdo que foi escolhido .
+   * @returns uma promise que em caso de sucesso traz os dados que serão usados na 'Media Explorer'.
+   */
+  async getDetailsCategory(
+    category: EnumContentCategory,
+    characterId: string,
+  ): Promise<IReponseGetDetailsCategory> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/${category}/${characterId}`,
+      'GET',
     );
   }
 
@@ -107,6 +115,7 @@ export class MarvelContentApi {
       'GET',
     );
   }
+
   /**
    * deleteComment
    *
@@ -122,6 +131,14 @@ export class MarvelContentApi {
     );
   }
 
+  /**
+   * createUserComment
+   *
+   * Cria um novo comentário do usuário.
+   * @param category - A categoria do conteúdo Marvel.
+   * @param categoryId - O ID do conteúdo Marvel.
+   * @param newComment - O objeto contendo a string do novo comentário a ser enviado.
+   */
   async createUserComment(
     category: EnumContentCategory,
     categoryId: number,

@@ -47,7 +47,15 @@ export class MediaExplorerComponent implements OnInit {
     this.getHeaderDetails();
   }
 
-  async getHeaderDetails() {
+  /**
+   * getHeaderDetails
+   *
+   * Obtém os detalhes do cabeçalho para o conteúdo Marvel e aramzena na propriedade headerData.
+   * Utiliza o 'dataContent' para mandar a categoria e o id do conteúdo.
+   *
+   * @returns {Promise<void>} Uma promise que é resolvida quando a operação é concluída.
+   */
+  async getHeaderDetails(): Promise<void> {
     try {
       const response = await this.marvelContentApi.getDetailsCategory(
         this.dataContent.categoryContent,
@@ -55,7 +63,7 @@ export class MediaExplorerComponent implements OnInit {
       );
       this.headerData = response.data;
     } catch (err: any) {
-      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
+      this.openSnackBar(`Erro ao receber dados do conteúdo`, 'Fechar');
     }
   }
 
