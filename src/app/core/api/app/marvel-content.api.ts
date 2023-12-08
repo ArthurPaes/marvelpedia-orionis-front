@@ -9,6 +9,7 @@ import {
   IResponseGetCommentsByCategoryId,
   IResponseCreateUserComment,
   IResponseDeleteUserComment,
+  IReponseGetDetailsCategory,
 } from '../interfaces/IMarvelContent';
 import { IResponsePosters } from 'src/app/pages/dash/media-explorer/interface/media-explorer';
 
@@ -47,11 +48,12 @@ export class MarvelContentApi {
    * Função que solicita dados para popular a página de detalhes dos personagens.
    *
    * @param characterId id do personagem que foi escolhido na tela de home.
+   * @param
    * @returns uma promise que em caso de sucesso traz os dados que serão inseridos na tela de detalhe dos personagens.
    */
   async getCharacterCategoryList(
-    characterId: string,
     category: string,
+    characterId: string,
   ): Promise<IResponseCategoryList> {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/${category}/${characterId}`,
@@ -77,6 +79,24 @@ export class MarvelContentApi {
   }
 
   /**
+   * getDetailsCategory
+   *
+   * Obtém detalhes sobre o conteúdo Marvel para a página 'Media Explorer'.
+   * @param category A categoria do conteúdo desejado (quadrinhos, histórias, series, eventos).
+   * @param characterId id do conteúdo que foi escolhido .
+   * @returns uma promise que em caso de sucesso traz os dados que serão usados na 'Media Explorer'.
+   */
+  async getDetailsCategory(
+    category: EnumContentCategory,
+    characterId: string,
+  ): Promise<IReponseGetDetailsCategory> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/${category}/${characterId}`,
+      'GET',
+    );
+  }
+
+  /**
    * getCommentsByCategory
    *
    * Obtém o conteúdo ao qual será exibido os detalhes
@@ -96,6 +116,7 @@ export class MarvelContentApi {
       'GET',
     );
   }
+
   /**
    * deleteComment
    *
@@ -111,14 +132,14 @@ export class MarvelContentApi {
       'DELETE',
     );
   }
+
   /**
    * createUserComment
    *
-   * Cria o comentário a partir de seu ID.
-   * @param category Categoria que o usuário está comentando.
-   * @param categoryId Id da categoria que o usuário está comentando.
-   * @param newComment Novo comentário do usuário.
-   * @returns retorna uma Promise contendo com a mensagem de feedback de mensagem adicionada.
+   * Cria um novo comentário do usuário.
+   * @param category - A categoria do conteúdo Marvel.
+   * @param categoryId - O ID do conteúdo Marvel.
+   * @param newComment - O objeto contendo a string do novo comentário a ser enviado.
    */
   async createUserComment(
     category: EnumContentCategory,

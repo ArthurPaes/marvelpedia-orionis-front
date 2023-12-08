@@ -6,6 +6,7 @@ import {
   IDataContent,
   IResponsePosters,
   IResponseStandardPoster,
+  IHeaderDetails,
 } from './interface/media-explorer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,6 +25,7 @@ export class MediaExplorerComponent implements OnInit {
     this.dataContent = this?.router?.getCurrentNavigation()?.extras?.state;
   }
 
+  loading = false;
   dataContent: any;
   commentList: IComment[] = [];
   totalComments = 0;
@@ -50,6 +52,13 @@ export class MediaExplorerComponent implements OnInit {
    * ngOnInit
    * Lifecycle que carrega os dados de posters ao inicializar a página.
    */
+  headerData: IHeaderDetails = {
+    description: '',
+    title: '',
+    thumb: '',
+    link: '',
+  };
+
   ngOnInit(): void {
     this.getCommentList(
       this.dataContent.categoryContent,
@@ -61,6 +70,27 @@ export class MediaExplorerComponent implements OnInit {
       this.posters = postersResponse;
       this.postersFilter = this.posters.data;
     });
+    this.getHeaderDetails();
+  }
+
+  /**
+   * getHeaderDetails
+   *
+   * Obtém os detalhes do cabeçalho para o conteúdo Marvel e aramzena na propriedade headerData.
+   * Utiliza o 'dataContent' para mandar a categoria e o id do conteúdo.
+   *
+   * @returns {Promise<void>} Uma promise que é resolvida quando a operação é concluída.
+   */
+  async getHeaderDetails(): Promise<void> {
+    try {
+      const response = await this.marvelContentApi.getDetailsCategory(
+        this.dataContent.categoryContent,
+        this.dataContent.idContent,
+      );
+      this.headerData = response.data;
+    } catch (err: any) {
+      this.openSnackBar(`Erro ao receber dados do conteúdo.`, 'Fechar');
+    }
   }
 
   /**
@@ -93,18 +123,23 @@ export class MediaExplorerComponent implements OnInit {
       this.totalComments = response.data.totalComments;
       if (3 * pageNumber >= this.totalComments) {
         this.disableButtonNextPage = true;
+        this.loading = false;
         return;
       }
       this.disableButtonNextPage = false;
+      this.loading = false;
     } catch (err: any) {
       if (pageNumber > 1) {
         this.previousPageComments();
+        this.loading = false;
+        return;
       }
       if (err.error.data === 'Página não encontrada.') {
         this.showNotFoundMessage = true;
         this.showNextPreviousButtons = false;
         this.commentList = [];
       }
+      this.loading = false;
     }
   }
 
@@ -139,7 +174,14 @@ export class MediaExplorerComponent implements OnInit {
         this.pageNumber,
       );
     } catch (err: any) {
-      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
+      this.loading = false;
+      if (err.error.data == 'O comentário contém palavras impróprias.') {
+        this.openSnackBar(err.error.data, 'Fechar');
+        this.loading = false;
+        return;
+      }
+      this.openSnackBar(`Houve um erro ao publicar o comentário.`, 'Fechar');
+      this.loading = false;
     }
   }
 
@@ -151,6 +193,7 @@ export class MediaExplorerComponent implements OnInit {
    * @param commentId - O ID do comentário a ser excluído
    */
   async handleDeleteComment(commentId: number): Promise<void> {
+    this.loading = true;
     try {
       await this.marvelContentApi.deleteUserComment(commentId);
       this.openSnackBar(`Seu comentário foi excluído!`, 'Fechar');
@@ -161,6 +204,7 @@ export class MediaExplorerComponent implements OnInit {
       );
     } catch (err) {
       this.openSnackBar(`Não foi possível excluir o comentário!`, 'Fechar');
+      this.loading = false;
     }
   }
 
@@ -170,6 +214,7 @@ export class MediaExplorerComponent implements OnInit {
    * Esta função é chamada quando o usuário quando o usuário clica no botão "Comentar". Ela realiza a chamada da função `createNewComment` para enviar o novo comentário que está armazenado na variável "newComment".
    */
   createComment(): void {
+    this.loading = true;
     this.createNewComment(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
@@ -183,6 +228,7 @@ export class MediaExplorerComponent implements OnInit {
    * A função é chamada quando o usuário deseja visualizar a próxima página de comentários.
    */
   nextPageComments(): void {
+    this.loading = true;
     this.disableButtonPreviousPage = false;
     this.pageNumber++;
     this.getCommentList(
@@ -198,6 +244,7 @@ export class MediaExplorerComponent implements OnInit {
    * A função é chamada quando o usuário deseja visualizar a página anterior de comentários.
    */
   previousPageComments(): void {
+    this.loading = true;
     this.pageNumber--;
     this.disableButtonNextPage = false;
     this.disableButtonPreviousPage = this.pageNumber === 1 ? true : false;

@@ -16,6 +16,13 @@ export interface IDataContent {
   idContent: number;
 }
 
+export interface IHeaderDetails {
+  description: string;
+  title: string;
+  thumb: string;
+  link: string;
+}
+
 export interface IResponsePosters {
   data: Array<IResponseStandardPoster>;
 }
