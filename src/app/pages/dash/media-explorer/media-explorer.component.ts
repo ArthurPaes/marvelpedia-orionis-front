@@ -22,6 +22,7 @@ export class MediaExplorerComponent implements OnInit {
   ) {
     this.dataContent = this?.router?.getCurrentNavigation()?.extras?.state;
   }
+  loading = false;
   dataContent: any;
   commentList: IComment[] = [];
   totalComments = 0;
@@ -97,9 +98,11 @@ export class MediaExplorerComponent implements OnInit {
       this.totalComments = response.data.totalComments;
       if (3 * pageNumber >= this.totalComments) {
         this.disableButtonNextPage = true;
+        this.loading = false;
         return;
       }
       this.disableButtonNextPage = false;
+      this.loading = false;
     } catch (err: any) {
       if (pageNumber > 1) {
         this.previousPageComments();
@@ -109,6 +112,7 @@ export class MediaExplorerComponent implements OnInit {
         this.showNextPreviousButtons = false;
         this.commentList = [];
       }
+      this.loading = false;
     }
   }
 
@@ -143,12 +147,13 @@ export class MediaExplorerComponent implements OnInit {
         this.pageNumber,
       );
     } catch (err: any) {
-      console.log(err);
       if (err.error.data == 'O comentário contém palavras impróprias.') {
         this.openSnackBar(err.error.data, 'Fechar');
+        this.loading = false;
         return;
       }
       this.openSnackBar(`Houve um erro ao publicar o comentário.`, 'Fechar');
+      this.loading = false;
     }
   }
 
@@ -160,6 +165,7 @@ export class MediaExplorerComponent implements OnInit {
    * @param commentId - O ID do comentário a ser excluído
    */
   async handleDeleteComment(commentId: number): Promise<void> {
+    this.loading = true;
     try {
       await this.marvelContentApi.deleteUserComment(commentId);
       this.openSnackBar(`Seu comentário foi excluído!`, 'Fechar');
@@ -170,6 +176,7 @@ export class MediaExplorerComponent implements OnInit {
       );
     } catch (err) {
       this.openSnackBar(`Não foi possível excluir o comentário!`, 'Fechar');
+      this.loading = false;
     }
   }
 
@@ -179,6 +186,7 @@ export class MediaExplorerComponent implements OnInit {
    * Esta função é chamada quando o usuário quando o usuário clica no botão "Comentar". Ela realiza a chamada da função `createNewComment` para enviar o novo comentário que está armazenado na variável "newComment".
    */
   createComment(): void {
+    this.loading = true;
     this.createNewComment(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
