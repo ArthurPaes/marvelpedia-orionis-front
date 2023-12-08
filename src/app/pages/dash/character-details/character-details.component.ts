@@ -55,10 +55,11 @@ export class CharacterDetailsComponent implements OnInit {
     try {
       const characterDetailsDataList =
         await this.marvelContentApi.getCharacterCategoryList(
-          this.characterId,
           'characters',
+          this.characterId,
         );
       this.characterDetailList = characterDetailsDataList;
+      console.log(this.characterDetailList);
       this.seriesListFilter = this.characterDetailList.data.seriesList;
       this.comicsListFilter = this.characterDetailList.data.comicsList;
       this.eventsListFilter = this.characterDetailList.data.eventsList;

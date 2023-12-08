@@ -1,15 +1,14 @@
 <div class="background">
+  <app-header-details
+    [ContentName]="characterDetailList.data.characterName"
+    [ContentDescription]="characterDetailList.data.characterDescription"
+    [ContentThumb]="
+      characterDetailList.data.characterThumb
+        ? characterDetailList.data.characterThumb
+        : './assets/images/header-details.svg'
+    "
+  ></app-header-details>
   <div class="container-main">
-    <app-header-details
-      [ContentName]="characterDetailList.data.characterName"
-      [ContentDescription]="characterDetailList.data.characterDescription"
-      [ContentUrlButton]="'http://localhost:4200/home'"
-      [ContentThumb]="
-        characterDetailList.data.characterThumb
-          ? characterDetailList.data.characterThumb
-          : './assets/images/header-details.svg'
-      "
-    ></app-header-details>
     <div class="search-area">
       <p>Séries</p>
       <div class="input-width">
