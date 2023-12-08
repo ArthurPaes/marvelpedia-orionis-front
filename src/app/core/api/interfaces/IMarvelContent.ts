@@ -42,3 +42,14 @@ export interface IResponseCreateUserComment {
   status: boolean;
   data: string;
 }
+
+export interface IReponseGetDetailsCategory {
+  date: string;
+  status: boolean;
+  data: {
+    description: string;
+    title: string;
+    thumb: string;
+    link: string;
+  };
+}

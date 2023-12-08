@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
   ) {}
-
+  loading = false;
   pageNumber = 1;
   categoryInputValue = EnumContentCategory.Characters;
   searchInputValue = '';
@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
    * Inicializa o componente, chamando o service para carregar o conteúdo da página inicial, no caso, personagens.
    */
   ngOnInit(): void {
+    this.loading = true;
     this.serviceGetContent(
       this.category,
       this.pageNumber,
@@ -160,8 +161,10 @@ export class HomeComponent implements OnInit {
       }
 
       this.contentList = this.contentList.concat(response.data);
+      this.loading = false;
     } catch (error) {
       this.seeMoreButton = false;
+      this.loading = false;
       this.notFoundMessage = true;
     }
   }
@@ -173,6 +176,7 @@ export class HomeComponent implements OnInit {
    */
   seeMoreContent(): void {
     this.pageNumber++;
+    this.loading = true;
     this.serviceGetContent(this.category, this.pageNumber, this.search);
   }
 
@@ -183,6 +187,7 @@ export class HomeComponent implements OnInit {
    * Limpa a lista de 'contentList', reinicia a paginação e desativa o botão "CONHECER MAIS"
    */
   searchContent(): void {
+    this.loading = true;
     this.contentList = [];
     this.pageNumber = 1;
     this.seeMoreButton = false;
