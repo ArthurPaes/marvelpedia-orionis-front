@@ -6,7 +6,7 @@ header {
   object-fit: cover;
   background-size: cover;
   height: 312px;
-  width: 1205px;
+  width: 100%;
   background-color: #000;
   margin: auto;
   overflow: hidden;
@@ -33,14 +33,15 @@ header {
 
 header section {
   z-index: 1;
-  width: 100%;
+  width: 1205px;
   padding: 16px;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
 }
 
 section .content {
-  width: 80%;
+  width: 85%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -52,7 +53,7 @@ section .content {
 
 .arrow {
   position: absolute;
-  top: 5px;
+  top: 12px;
   left: -30px;
 }
 
@@ -68,10 +69,11 @@ section .content {
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
+  line-height: normal;
 }
 
 .header-description {
-  color: #979797;
+  color: #c7c7c7;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -114,7 +116,7 @@ button{
 
 @media (max-width: 649px) {
   header {
-    height: 500px;
+    height: 600px;
   }
   .header-description {
     -webkit-line-clamp: 17;
