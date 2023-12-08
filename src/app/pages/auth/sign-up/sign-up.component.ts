@@ -31,7 +31,7 @@ export class SignUpComponent {
   optionItem = this.optionList;
 
   btRegisterState = false;
-  currentYear = new Date();
+  //currentYear = new Date();
   passwordCheckerReload = false;
 
   modalConfig: IModalConfig = {
@@ -91,7 +91,7 @@ export class SignUpComponent {
    * @param componentName The Input element name.
    * @param fieldSetLabelMessage The feedback massage shown on fildset.
    */
-  handleInpuAproved(
+  handleInputApproved(
     componentName: InputElement,
     fieldSetLabelMessage: string,
   ): void {
@@ -105,7 +105,7 @@ export class SignUpComponent {
    * @param componentName The Input element name.
    * @param fieldSetLabelMessage The feedback massage shown on fildset.
    */
-  handleInpuNotAproved(
+  handleInputNotApproved(
     componentName: InputElement,
     fieldSetLabelMessage: string,
   ): void {
@@ -146,24 +146,24 @@ export class SignUpComponent {
     switch (componentName.getType()) {
       case 'firstname':
         this.regexList.name.test(componentName.getValue())
-          ? this.handleInpuAproved(componentName, 'Nome TEste')
-          : this.handleInpuNotAproved(
+          ? this.handleInputApproved(componentName, 'Nome')
+          : this.handleInputNotApproved(
               componentName,
               'Seu nome pode conter apenas letras e somente 2 nomes.',
             );
         break;
       case 'lastname':
         this.regexList.lastName.test(this.lastName.getValue())
-          ? this.handleInpuAproved(componentName, 'Sobrenome')
-          : this.handleInpuNotAproved(
+          ? this.handleInputApproved(componentName, 'Sobrenome')
+          : this.handleInputNotApproved(
               componentName,
               'Seu sobrenome pode conter apenas letras',
             );
         break;
       case 'email':
         this.regexList.email.test(componentName.getValue())
-          ? this.handleInpuAproved(componentName, 'E-mail')
-          : this.handleInpuNotAproved(componentName, 'E-mail inválido');
+          ? this.handleInputApproved(componentName, 'E-mail')
+          : this.handleInputNotApproved(componentName, 'E-mail inválido');
         break;
     }
     this.btEnabler();
@@ -203,31 +203,27 @@ export class SignUpComponent {
    * Handles the 10 years minimum age, 100 years maximum requirements verification.
    * @param eventValue The event data ($event).
    */
+
   birthYearChecker = (eventValue: string): void => {
     this.receiveData(this.birthDate, eventValue);
-    const userAge =
-      this.currentYear.getFullYear() -
-      parseInt(this.birthDate.getValue().slice(0, 4));
+    const birthDate = new Date(eventValue);
+    const userAge = new Date().getFullYear() - birthDate.getFullYear();
+    const isFirstCharNotZero = this.birthDate.getValue().charAt(0) !== '0';
 
-    if (userAge <= 0) {
-      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
-    } else if (!Number.isInteger(userAge)) {
-      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
+    if (birthDate >= new Date() || !Number.isInteger(userAge)) {
+      this.handleInputNotApproved(this.birthDate, 'Digite uma data válida!');
     } else if (userAge > 100) {
-      if (this.birthDate.getValue().slice(0, 4).split('')[0] != '0') {
-        this.handleInpuNotAproved(
+      if (isFirstCharNotZero) {
+        this.handleInputNotApproved(
           this.birthDate,
           `${userAge} anos parece demais, não?`,
         );
-      } else {
-        this.handleInpuAproved(this.birthDate, 'Data de Nascimento');
       }
     } else if (userAge < 10) {
-      this.handleInpuNotAproved(this.birthDate, 'Deve ser MAIOR de 10 anos!');
+      this.handleInputNotApproved(this.birthDate, 'Deve ser MAIOR de 10 anos!');
     } else {
-      this.handleInpuAproved(this.birthDate, 'Data de Nascimento');
+      this.handleInputApproved(this.birthDate, 'Data de Nascimento');
     }
-    this.btEnabler();
   };
   /**
    * handleFocusOutCheck
@@ -235,11 +231,11 @@ export class SignUpComponent {
    */
   handleFocusOutCheck(): void {
     if (parseInt(this.birthDate.getValue().slice(0, 4)) < 1923) {
-      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
+      this.handleInputNotApproved(this.birthDate, 'Digite uma data válida!');
     } else if (
       !Number.isInteger(parseInt(this.birthDate.getValue().slice(0, 4)))
     ) {
-      this.handleInpuNotAproved(this.birthDate, 'Digite uma data válida!');
+      this.handleInputNotApproved(this.birthDate, 'Digite uma data válida!');
     }
     this.btEnabler();
   }
@@ -255,8 +251,8 @@ export class SignUpComponent {
   ): void => {
     this.receiveData(componentName, eventValue);
     componentName.getValue() == this.password.getValue()
-      ? this.handleInpuAproved(componentName, 'Confirme sua senha')
-      : this.handleInpuNotAproved(
+      ? this.handleInputApproved(componentName, 'Confirme sua senha')
+      : this.handleInputNotApproved(
           componentName,
           'As senhas devem ser idênticas',
         );
