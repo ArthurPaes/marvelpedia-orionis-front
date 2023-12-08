@@ -38,12 +38,6 @@ export class MediaExplorerComponent implements OnInit {
     link: '',
   };
 
-  currentCardContent = {
-    title: 'titulo do card a ser exibido',
-    description: 'Descrição do card a ser exibido',
-    thumb: 'url do thumb do card a ser exibido',
-    externalLink: 'link de detalhes',
-  };
   ngOnInit(): void {
     this.getCommentList(
       this.dataContent.categoryContent,
@@ -55,15 +49,11 @@ export class MediaExplorerComponent implements OnInit {
 
   async getHeaderDetails() {
     try {
-      const response = await this.marvelContentApi.getCharacterCategoryList(
+      const response = await this.marvelContentApi.getDetailsCategory(
         this.dataContent.categoryContent,
         this.dataContent.idContent,
       );
-      console.log(response.data);
-      // this.headerData = response.data;
-      console.log(this.headerData.title);
-      console.log(this.headerData);
-      console.log('teste');
+      this.headerData = response.data;
     } catch (err: any) {
       this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
     }
