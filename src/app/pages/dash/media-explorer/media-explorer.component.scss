@@ -187,20 +187,19 @@ footer {
     align-items: center;
     width: 100%;
     padding: 60px 12px;
-    color: #fff;
+    color: #ede2e2;
+    border-radius: 8px;
 }
 footer h1{
     font-weight: bold;
-    font-size: 3rem;
-    letter-spacing: 1.5px;
-    line-height: 60px;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
 }
 footer div h2 {
     margin: 0;
     width: 100%;
     min-width: 125px;
-    line-height: 30px;
-    margin-bottom: 20px;
 }
 footer span {
     color: rgb(255, 255, 255);
@@ -213,9 +212,7 @@ footer span {
 }
 .footer-content-container{
     width: 82%;
-    display: grid;
-    grid-template-columns: 42% 35%;
-    grid-gap: 60px;
+    display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
     margin-top: 40px;
@@ -223,6 +220,11 @@ footer span {
     & h2 {
         color: #fff;
     }
+
+.title-wrapper {
+    margin-right: 3rem;
+}
+
 }
 .poster-container {
     display: flex;
@@ -238,10 +240,30 @@ footer span {
     align-items: center;
     gap: 10px;
 }
+.poster-item p {
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: -10.1px;
+    font-weight: 500;
+    width: 100%;
+    background-color: #FFF;
+    height: 35px;
+    color: black;
+}
+.poster-item img { 
+    border-radius: 0 0 8px 8px;
+}
+.poster-item:first-child { 
+    margin-right: 2rem;
+}
 .poster {
     border-radius: 4px;
-    width: 227px;
-    height: 300px;
+    width: 330px;
+    height: 411px;
 }
 .partners {
     display: flex;
@@ -252,6 +274,21 @@ footer span {
     & h2 {
         color: #fff;
         text-align: center;
+    }
+}
+
+.btn-wrapper {
+    width: 400px;
+} 
+
+@media screen and (max-width: 1153px) {
+    .footer-content-container{
+        margin-top: 2rem;
+        flex-direction: column;
+    }
+    .btn-wrapper {
+        margin-top: 2rem;
+        width: 100%;
     }
 }
 
@@ -323,30 +360,16 @@ footer span {
     }
 }
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 800px) {
     .footer-content-container{
-        width: 96%;
-        grid-template-columns: none;
         margin-bottom: 40px;
     }
-    footer div h2 {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 540px) {
     .poster-container {
         display: flex;
         flex-direction: column;
         overflow: auto;
     }
-}
-
-@media screen and (max-width: 420px) {
-    .footer-content-container{
-        & h1 {
-            font-size: 2.2rem;
-            line-height: 58px;
-        } 
+    .poster-item {
+        margin-right: 0 !important;
     }
 }

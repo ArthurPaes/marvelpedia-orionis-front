@@ -89,12 +89,14 @@
 
     <footer>
       <div class="footer-content-container">
-        <h1>Quer ter acesso a <span>POSTERS EXCLUSIVOS?</span></h1>
-        <div>
+        <div class="title-wrapper">
+          <h1>Nossos parceiros</h1>
           <h2>
-            Por apenas <span>R$15,00</span> você recebe um poster criado por um
-            dos artistas da nossa comunidade.
+            Para ter acesso a artes personalizadas, contribua com a nossa
+            comunidade artística por um investimento de apenas R$20
           </h2>
+        </div>
+        <div class="btn-wrapper">
           <app-button
             [buttonType]="'large'"
             [label]="'Quero meu poster exclusivo'"
@@ -102,11 +104,10 @@
         </div>
       </div>
       <div class="partners">
-        <h2>Conheça nossos parceiros</h2>
         <div class="poster-container">
           <div *ngFor="let poster of postersFilter" class="poster-item">
-            <img class="poster" src="{{ poster.artSampleURL }}" alt="auto" />
             <p>{{ poster.fullName }}</p>
+            <img class="poster" src="{{ poster.artSampleURL }}" alt="auto" />
           </div>
         </div>
       </div>
