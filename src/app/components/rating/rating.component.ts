@@ -44,7 +44,7 @@ export class RatingComponent {
   /**
    * selectStarPosition
    *
-   * Função que registra estrela selecionada e o valor a ser enviado para o backend.
+   * Função que registra a estrela selecionada e o valor a ser enviado para o backend.
    *
    * @param index Posição do array das estrelas
    */
