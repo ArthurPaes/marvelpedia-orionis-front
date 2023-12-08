@@ -59,7 +59,6 @@ export class CharacterDetailsComponent implements OnInit {
           this.characterId,
         );
       this.characterDetailList = characterDetailsDataList;
-      console.log(this.characterDetailList);
       this.seriesListFilter = this.characterDetailList.data.seriesList;
       this.comicsListFilter = this.characterDetailList.data.comicsList;
       this.eventsListFilter = this.characterDetailList.data.eventsList;

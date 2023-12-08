@@ -11,6 +11,7 @@ import {
   IResponseDeleteUserComment,
   IReponseGetDetailsCategory,
 } from '../interfaces/IMarvelContent';
+import { IResponsePosters } from 'src/app/pages/dash/media-explorer/interface/media-explorer';
 
 @Injectable({
   providedIn: 'root',
@@ -121,6 +122,7 @@ export class MarvelContentApi {
    *
    * Deleta o comentário a partir de seu ID.
    * @param commentId -Número que identifica o comentário.
+   * @returns retorna uma Promise contendo com a mensagem de feedback de deletado.
    */
   async deleteUserComment(
     commentId: number,
@@ -148,6 +150,20 @@ export class MarvelContentApi {
       `${this.apiUrl}/comments/${category}/${categoryId}`,
       'POST',
       newComment,
+    );
+  }
+
+  /**
+   * getNumberOfPosters
+   *
+   * Função que pega o números de posters de artistas
+   * @param postersQty - Quantidade de posters de artistas.
+   * @returns retorna uma Promise contendo um array objetos contendo o nome completo e a arte.
+   */
+  async getNumberOfPosters(postersQty: number): Promise<IResponsePosters> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/posters?amount=${postersQty}`,
+      'GET',
     );
   }
 }

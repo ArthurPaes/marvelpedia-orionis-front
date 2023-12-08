@@ -7,6 +7,7 @@
         ? headerData.thumb
         : '../../../../assets/images/header-details.svg'
     "
+    [ContentUrlButton]="headerData.link"
   ></app-header-details>
 
   <div class="container-main">
@@ -100,12 +101,14 @@
 
     <footer>
       <div class="footer-content-container">
-        <h1>Quer ter acesso a <span>POSTERS EXCLUSIVOS?</span></h1>
-        <div>
+        <div class="title-wrapper">
+          <h1>Nossos parceiros</h1>
           <h2>
-            Por apenas <span>R$20,00</span> você recebe um poster criado por um
-            dos artistas da nossa comunidade.
+            Para ter acesso a artes personalizadas, contribua com a nossa
+            comunidade artística por um investimento de apenas R$20
           </h2>
+        </div>
+        <div class="btn-wrapper">
           <app-button
             [buttonType]="'large'"
             [label]="'Quero meu poster exclusivo'"
@@ -113,27 +116,14 @@
         </div>
       </div>
       <div class="partners">
-        <h2>Conheça nossos parceiros</h2>
         <div class="poster-container">
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
-          </div>
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
-          </div>
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
-          </div>
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
+          <div *ngFor="let poster of postersFilter" class="poster-item">
+            <img class="poster" src="{{ poster.artSampleURL }}" alt="auto" />
+            <p>{{ poster.fullName }}</p>
           </div>
         </div>
       </div>
-      <app-footer></app-footer>
     </footer>
   </div>
+  <app-footer [textColor]="'#000000'"></app-footer>
 </div>

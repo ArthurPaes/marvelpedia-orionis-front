@@ -13,6 +13,9 @@
       <p *ngIf="ContentDescription" class="header-description">
         {{ ContentDescription }}
       </p>
+      <a *ngIf="ContentUrlButton" href="{{ ContentUrlButton }}" target="_blank">
+        <app-button buttonType="bt-char" label="conhecer mais"></app-button>
+      </a>
     </div>
   </section>
 </header>
