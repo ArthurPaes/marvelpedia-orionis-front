@@ -6,6 +6,10 @@ import {
   IResponseContentByCategory,
   IResponseTogleFavoriteCharacter,
   EnumContentCategory,
+  IResponseGetCommentsByCategoryId,
+  IResponseCreateUserComment,
+  IResponseDeleteUserComment,
+  IReponseGetDetailsCategory,
 } from '../interfaces/IMarvelContent';
 
 @Injectable({
@@ -43,13 +47,15 @@ export class MarvelContentApi {
    * Função que solicita dados para popular a página de detalhes dos personagens.
    *
    * @param characterId id do personagem que foi escolhido na tela de home.
+   * @param
    * @returns uma promise que em caso de sucesso traz os dados que serão inseridos na tela de detalhe dos personagens.
    */
   async getCharacterCategoryList(
+    category: string,
     characterId: string,
   ): Promise<IResponseCategoryList> {
     return await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/characters/${characterId}`,
+      `${this.apiUrl}/${category}/${characterId}`,
       'GET',
     );
   }
@@ -68,6 +74,80 @@ export class MarvelContentApi {
       `${this.apiUrl}/favorite`,
       'POST',
       characterId,
+    );
+  }
+
+  /**
+   * getDetailsCategory
+   *
+   * Obtém detalhes sobre o conteúdo Marvel para a página 'Media Explorer'.
+   * @param category A categoria do conteúdo desejado (quadrinhos, histórias, series, eventos).
+   * @param characterId id do conteúdo que foi escolhido .
+   * @returns uma promise que em caso de sucesso traz os dados que serão usados na 'Media Explorer'.
+   */
+  async getDetailsCategory(
+    category: EnumContentCategory,
+    characterId: string,
+  ): Promise<IReponseGetDetailsCategory> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/${category}/${characterId}`,
+      'GET',
+    );
+  }
+
+  /**
+   * getCommentsByCategory
+   *
+   * Obtém o conteúdo ao qual será exibido os detalhes
+   * A categoria pode ser uma das seguintes: 'characters', 'comics', 'series', 'stories', 'favorites', 'events'.
+   * @param category - A categoria do conteúdo que será exibido.
+   * @param categoryId - Id do conteúdo que será exibido.
+   * @param page - Uma string de pesquisa opcional para filtrar os resultados.
+   * @returns retorna uma Promise contendo um array objetos contendo os comentários da categoria especificada e o número total de comentários.
+   */
+  async getCommentsByCategoryId(
+    category: EnumContentCategory,
+    categoryId: number,
+    page: number,
+  ): Promise<IResponseGetCommentsByCategoryId> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${category}/${categoryId}/?page=${page}`,
+      'GET',
+    );
+  }
+
+  /**
+   * deleteComment
+   *
+   * Deleta o comentário a partir de seu ID.
+   * @param commentId -Número que identifica o comentário.
+   */
+  async deleteUserComment(
+    commentId: number,
+  ): Promise<IResponseDeleteUserComment> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${commentId}`,
+      'DELETE',
+    );
+  }
+
+  /**
+   * createUserComment
+   *
+   * Cria um novo comentário do usuário.
+   * @param category - A categoria do conteúdo Marvel.
+   * @param categoryId - O ID do conteúdo Marvel.
+   * @param newComment - O objeto contendo a string do novo comentário a ser enviado.
+   */
+  async createUserComment(
+    category: EnumContentCategory,
+    categoryId: number,
+    newComment: object,
+  ): Promise<IResponseCreateUserComment> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/comments/${category}/${categoryId}`,
+      'POST',
+      newComment,
     );
   }
 }

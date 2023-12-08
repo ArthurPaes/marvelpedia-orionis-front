@@ -9,6 +9,7 @@ import { SurveyComponent } from './pages/dash/survey/survey.component';
 import { ResetPasswordComponent } from './pages/auth/password-redefinition/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './pages/auth/password-redefinition/change-password/change-password.component';
 import { CharacterDetailsComponent } from './pages/dash/character-details/character-details.component';
+import { MediaExplorerComponent } from './pages/dash/media-explorer/media-explorer.component';
 
 const routes: Routes = [
   {
@@ -16,10 +17,9 @@ const routes: Routes = [
     component: CharacterDetailsComponent,
     canActivate: [AuthGuard],
   },
-  // TODO: Trocar SurveyComponent por "OtherDetails".
   {
     path: ':category/:id',
-    component: SurveyComponent,
+    component: MediaExplorerComponent,
     canActivate: [AuthGuard],
   },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
