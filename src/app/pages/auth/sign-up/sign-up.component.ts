@@ -31,7 +31,6 @@ export class SignUpComponent {
   optionItem = this.optionList;
 
   btRegisterState = false;
-  //currentYear = new Date();
   passwordCheckerReload = false;
 
   modalConfig: IModalConfig = {
