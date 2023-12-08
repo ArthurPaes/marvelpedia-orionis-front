@@ -147,6 +147,7 @@ export class MediaExplorerComponent implements OnInit {
         this.pageNumber,
       );
     } catch (err: any) {
+      this.loading = false;
       if (err.error.data == 'O comentário contém palavras impróprias.') {
         this.openSnackBar(err.error.data, 'Fechar');
         this.loading = false;
@@ -200,6 +201,7 @@ export class MediaExplorerComponent implements OnInit {
    * A função é chamada quando o usuário deseja visualizar a próxima página de comentários.
    */
   nextPageComments(): void {
+    this.loading = true;
     this.disableButtonPreviousPage = false;
     this.pageNumber++;
     this.getCommentList(
@@ -215,6 +217,7 @@ export class MediaExplorerComponent implements OnInit {
    * A função é chamada quando o usuário deseja visualizar a página anterior de comentários.
    */
   previousPageComments(): void {
+    this.loading = true;
     this.pageNumber--;
     this.disableButtonNextPage = false;
     this.disableButtonPreviousPage = this.pageNumber === 1 ? true : false;

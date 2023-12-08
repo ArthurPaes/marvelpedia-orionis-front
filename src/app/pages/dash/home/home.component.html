@@ -93,10 +93,6 @@
       </div>
     </div>
     <div class="grid-container">
-      <div *ngIf="notFoundMessage" class="not-found-message">
-        <mat-icon>error_outline</mat-icon>
-        <p class="error-description">Não existem registros a serem exibidos!</p>
-      </div>
       <app-character-card
         class="grid-item"
         *ngFor="let content of contentList"
@@ -127,6 +123,16 @@
       label="Conhecer mais"
       (click)="seeMoreContent()"
     ></app-button>
+    <div class="lds-ring" *ngIf="loading">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div *ngIf="notFoundMessage" class="not-found-message">
+      <mat-icon>error_outline</mat-icon>
+      <p class="error-description">Não existem registros a serem exibidos!</p>
+    </div>
   </div>
   <app-footer></app-footer>
 </div>

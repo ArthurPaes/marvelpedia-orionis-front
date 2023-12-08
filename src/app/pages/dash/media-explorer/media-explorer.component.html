@@ -42,17 +42,22 @@
     </div>
     <div class="coment-list">
       <h2 class="title-comment-list">Comentários</h2>
+      <div class="loading-wrapper" *ngIf="loading">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <p *ngIf="showNotFoundMessage" class="not-found-message">
+        Seja o primeiro a comentar sobre esse conteúdo!
+      </p>
       <div class="comments-wrapper">
-        <p *ngIf="showNotFoundMessage" class="not-found-message">
-          Seja o primeiro a comentar sobre esse conteúdo!
-        </p>
         <div class="comment-area" *ngIf="!showNotFoundMessage">
           <div class="coment-item" *ngFor="let userComment of commentList">
             <div class="comment-header">
-              <h2
-                class="comment-author"
-                [ngStyle]="{ color: userComment.userComment ? '#0098EE' : '' }"
-              >
+              <h2 class="comment-author">
                 {{ userComment.userName }}
                 {{ userComment.userLastName.split(" ").pop() }}
               </h2>
