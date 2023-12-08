@@ -2,13 +2,13 @@
   "name": "boilerplate-frontend-orion-bootcamp",
   "version": "0.0.0",
   "scripts": {
-    "ng": "node -r dotenv/config ./node_modules/.bin/ng",
-    "start": "node -r dotenv/config ./node_modules/.bin/ng serve --host 0.0.0.0",
-    "build": "node -r dotenv/config ./node_modules/.bin/ng build",
-    "watch": "node -r dotenv/config ./node_modules/.bin/ng build --watch --configuration development",
-    "test": "node -r dotenv/config ./node_modules/.bin/ng test",
-    "lint": "node -r dotenv/config ./node_modules/.bin/ng lint",
-    "lint:fix": "node -r dotenv/config ./node_modules/.bin/ng lint --fix",
+    "ng": "ng",
+    "start": "ng serve --host 0.0.0.0",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
     "prettier": "npx prettier --write",
     "prepare": "husky install"
   },
@@ -27,6 +27,7 @@
     "@ngx-env/builder": "^17.0.1-alpha.0",
     "bootstrap": "^5.3.2",
     "dotenv": "^16.3.1",
+    "ngx-owl-carousel-o": "^16.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

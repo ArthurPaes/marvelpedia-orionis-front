@@ -16,13 +16,28 @@ import {
   styleUrls: ['./password-checker.component.scss'],
 })
 export class PasswordCheckerComponent implements OnChanges {
+  @Input() setInicialStyle = false;
+  @Input() passwordInput = '';
+  @Output() sendStatus = new EventEmitter<boolean>();
+  currentStatus: IPasswordChecker = <IPasswordChecker>{
+    eightChars: false,
+    oneLetter: false,
+    oneNumber: false,
+    oneSpecialChar: false,
+  };
+  ruleList: IRules = {
+    eightChars: 'aproved',
+    oneLetter: 'aproved',
+    oneNumber: 'aproved',
+    oneSpecialChar: 'aproved',
+  };
   /**
    * setStatus
    * Sets the status to a given rule.
    * @param rule: A rule from password rule list: eightChars | oneLetter | oneNumber | oneSpecialChar.
-   * @param status: Set the rule status: True | False | Null.
+   * @param status: Set the rule status: True | False.
    */
-  setStatus = (rule: keyof IRules, status: boolean | null): void => {
+  setStatus = (rule: keyof IRules, status: boolean): void => {
     switch (status) {
       case true:
         this.ruleList[rule] = 'aproved';
@@ -32,12 +47,18 @@ export class PasswordCheckerComponent implements OnChanges {
         this.ruleList[rule] = 'notAproved';
         this.currentStatus[rule] = false;
         break;
-      case null:
-        this.ruleList[rule] = 'waitingTest';
-        this.currentStatus[rule] = null;
-        break;
     }
   };
+  /**
+   * handleResetComponent
+   * Resets the component style propety.
+   */
+  handleResetComponent(): void {
+    this.setStatus('eightChars', false);
+    this.setStatus('oneLetter', false);
+    this.setStatus('oneNumber', false);
+    this.setStatus('oneSpecialChar', false);
+  }
   /**
    * passwordChecker
    * Recives the password input from parent component and check it against the regex rules.
@@ -52,41 +73,28 @@ export class PasswordCheckerComponent implements OnChanges {
       passwordInput.match(/\d/)
         ? this.setStatus('oneNumber', true)
         : this.setStatus('oneNumber', false);
-      passwordInput.match(/[!@#]/)
+      passwordInput.match(/[\W+]/)
         ? this.setStatus('oneSpecialChar', true)
         : this.setStatus('oneSpecialChar', false);
     } else {
       this.setStatus('eightChars', false);
-      this.setStatus('oneLetter', null);
-      this.setStatus('oneNumber', null);
-      this.setStatus('oneSpecialChar', null);
+      this.setStatus('oneLetter', false);
+      this.setStatus('oneNumber', false);
+      this.setStatus('oneSpecialChar', false);
     }
-  };
-  @Input() passwordInput = '';
-  @Output() sendStatus = new EventEmitter<boolean>();
-  currentStatus: IPasswordChecker = <IPasswordChecker>{
-    eightChars: false,
-    oneLetter: false,
-    oneNumber: false,
-    oneSpecialChar: false,
-  };
-  ruleList: IRules = {
-    eightChars: 'waitingTest',
-    oneLetter: 'waitingTest',
-    oneNumber: 'waitingTest',
-    oneSpecialChar: 'waitingTest',
+    this.sendStatus.emit(
+      Object.values(this.currentStatus).reduce((a, c) => a && c),
+    );
   };
   /**
    * ngOnChanges
    * Checks the passwordInput and emits the current status of overall rules trigged by passwordInput change.
    * @param passwordInput:
    */
-  ngOnChanges() {
-    this.sendStatus.emit(
-      Object.values(this.currentStatus).reduce((a, c) => a && c),
-    );
-    this.passwordInput != undefined
-      ? this.passwordChecker(this.passwordInput)
-      : this.setStatus('eightChars', null);
+  ngOnChanges(): void {
+    this.passwordChecker(this.passwordInput);
+    if (this.setInicialStyle) {
+      this.handleResetComponent();
+    }
   }
 }

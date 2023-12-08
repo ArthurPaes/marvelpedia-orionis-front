@@ -8,7 +8,7 @@ export interface IResponseCategoryList {
 }
 
 export interface IResponseStandardCategory {
-  id: string;
+  id: number;
   thumbnail: string;
   description: string;
 }

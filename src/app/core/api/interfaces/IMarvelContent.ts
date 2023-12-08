@@ -1,4 +1,5 @@
 import { IContentCard } from 'src/app/pages/dash/home/interface/home.interface';
+import { IComment } from 'src/app/pages/dash/media-explorer/interface/media-explorer';
 
 export interface IResponseContentByCategory {
   date: string;
@@ -16,6 +17,27 @@ export enum EnumContentCategory {
 }
 
 export interface IResponseTogleFavoriteCharacter {
+  date: string;
+  status: boolean;
+  data: string;
+}
+
+export interface IResponseGetCommentsByCategoryId {
+  date: string;
+  status: boolean;
+  data: {
+    totalComments: number;
+  };
+  commentsWithUserComment: IComment[];
+}
+
+export interface IResponseDeleteUserComment {
+  date: string;
+  status: boolean;
+  data: string;
+}
+
+export interface IResponseCreateUserComment {
   date: string;
   status: boolean;
   data: string;

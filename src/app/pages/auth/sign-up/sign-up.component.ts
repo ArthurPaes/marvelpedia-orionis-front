@@ -32,6 +32,7 @@ export class SignUpComponent {
 
   btRegisterState = false;
   currentYear = new Date();
+  passwordCheckerReload = false;
 
   modalConfig: IModalConfig = {
     showModal: false,
@@ -56,7 +57,8 @@ export class SignUpComponent {
   checkbox = new InputElement('checkbox');
 
   regexList: IFormatter = {
-    name: /^[a-zàâãéêíïóôõöúçñ]+[\s]?[a-zàâãéêíïóôõöúçñ]+$/i,
+    name: /^[a-zàáâãéêíïóôõöúçñ]+[\s]?[a-zàáâãéêíïóôõöúçñ]+$/i,
+    lastName: /^[a-zA-ZÀ-Úàáâãéêíïóôõöúçñ ]+$/,
     email:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   };
@@ -122,18 +124,18 @@ export class SignUpComponent {
           : (componentName.setIsAproved(false),
             componentName.setBorderColor('#E38686'),
             componentName.setFieldLabel(
-              'Seu nome pode ter 2 ou mais letras e apenas 1 espaço',
+              'Seu nome pode conter apenas letras e somente 2 nomes.',
             ));
         break;
       case 'lastname':
-        this.regexList.name.test(componentName.getValue())
+        this.regexList.lastName.test(this.lastName.getValue())
           ? (componentName.setIsAproved(true),
             componentName.setBorderColor('#2C85D8'),
             componentName.setFieldLabel('Sobrenome'))
           : (componentName.setIsAproved(false),
             componentName.setBorderColor('#E38686'),
             componentName.setFieldLabel(
-              'Seu sobrenome pode ter 2 ou mais letras e apenas 1 espaço',
+              'Seu sobrenome pode conter apenas letras',
             ));
         break;
       case 'email':
@@ -149,20 +151,31 @@ export class SignUpComponent {
     this.btEnabler();
   };
   /**
-   * isfilledChecker
+   * passwordChecker
    * Checks if the input value isn't empty.
-   * @param componentName The Input element name.
    * @param eventValue The event data ($event).
    */
-  isfilledChecker = (componentName: InputElement, eventValue: string): void => {
-    this.receiveData(componentName, eventValue);
-    componentName.getValue().length != 0
-      ? componentName.setIsAproved(true)
-      : componentName.setIsAproved(false);
+  passwordChecker = (eventValue: string): void => {
+    this.receiveData(this.password, eventValue);
+    this.password.getValue().length != 0
+      ? this.password.setIsAproved(true)
+      : this.password.setIsAproved(false);
     this.passwordMatchChecker(
       this.passwordConfirmation,
       this.passwordConfirmation.dataValue,
     );
+    this.btEnabler();
+  };
+  /**
+   * genreChecker
+   * Checks if the input value isn't empty.
+   * @param eventValue The event data ($event).
+   */
+  genreChecker = (eventValue: string): void => {
+    this.receiveData(this.gender, eventValue);
+    this.gender.getValue().length != 0
+      ? this.gender.setIsAproved(true)
+      : this.gender.setIsAproved(false);
     this.btEnabler();
   };
   /**
@@ -207,7 +220,22 @@ export class SignUpComponent {
         componentName.setBorderColor('#E38686'),
         componentName.setFieldLabel('As senhas devem ser idênticas'));
     this.btEnabler();
+    this.passwordCheckerReload = false;
   };
+  /**
+   * handleFormRefresh
+   *
+   * Sets all inputs aproved property to orinial state (false).
+   */
+  handleFormRefresh(): void {
+    this.firstName.setIsAproved(false);
+    this.lastName.setIsAproved(false);
+    this.gender.setIsAproved(false);
+    this.birthDate.setIsAproved(false);
+    this.email.setIsAproved(false);
+    this.password.setIsAproved(false);
+    this.passwordConfirmation.setIsAproved(false);
+  }
   /**
    * handleSignUpSuccess
    *
@@ -282,10 +310,12 @@ export class SignUpComponent {
    * Reset form inputs value.
    */
   cleanForm(): void {
+    this.passwordCheckerReload = true;
     this.inputComponents?.forEach((input) => {
       input.cleanInputValue();
     });
     this.selectComponent?.cleanSelectValue();
+    this.handleFormRefresh();
   }
   // fim da solução
 }

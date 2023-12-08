@@ -8,7 +8,7 @@ button {
     align-items: center;
     flex-shrink: 0;
     font-style: normal;
-    font-size: 0.875 rem;
+    font-size: 14px;
     font-weight: 700;
     line-height: 16px;
     letter-spacing: 1.25px;
@@ -29,7 +29,7 @@ button {
     }
 }
 .small{
-    width: 96px;
+    width: 100%;
     padding: 10px 8px;
     background-color: var(--color-primary);
     &:hover {background-color: var(--color-primary-hover)};
@@ -40,7 +40,7 @@ button {
     }
 }
 .large {
-    width: 522px;
+    width: 100%;
     background-color: var(--color-primary);
     &:hover {background-color: var(--color-primary-hover)};
     &:disabled{
@@ -50,7 +50,7 @@ button {
     }
 }
 .cancel {
-    width: 522px;
+    width: 100%;
     background-color:transparent;
     color: var(--color-white);
     border: 1px solid var(--color-gray);
@@ -59,10 +59,11 @@ button {
     background: rgba(0, 152, 238, 0.25);
     width: 204px;
     height: 36px;
+    padding: 0;
 }
 .bt-card {
     color: #0098EE;
-    width: 349px;
+    width: 100%;
     padding: 6px 6px 6px 8px;
     background-color: transparent;
     font-weight: 500;

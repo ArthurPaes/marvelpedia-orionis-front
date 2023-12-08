@@ -17,7 +17,7 @@
       class="icon-star"
       [ngStyle]="{ width: spaceBetweenStars, color: textColor }"
     >
-      {{ star < ratingValue.chosenRate ? "star" : "star_border" }}</mat-icon
+      {{ star < ratingValue.grade ? "star" : "star_border" }}</mat-icon
     >
   </div>
 </div>
@@ -25,7 +25,7 @@
   *ngIf="showTextarea"
   [ngClass]="placeHolderColor"
   (input)="registerTextareaData($event)"
-  [(ngModel)]="ratingValue.textboxValue"
+  [(ngModel)]="ratingValue.comment"
   [placeholder]="textareaPlaceholder"
   [ngStyle]="{
     height: textareaHeight,
@@ -43,7 +43,11 @@
   buttonType="large"
 ></app-button>
 <app-modal
-  [isModalActive]="isModalActive"
-  message="modalMessage"
   (emitEventClose)="closeModal($event)"
+  [isModalActive]="modalConfig.showModal"
+  [iconName]="modalConfig.icon"
+  [title]="modalConfig.title"
+  [message]="modalConfig.message"
+  [btText]="modalConfig.buttonText"
+  [closeOnOverlayClick]="modalConfig.overlayClick"
 ></app-modal>

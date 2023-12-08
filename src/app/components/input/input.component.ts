@@ -8,16 +8,20 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class InputComponent {
   @Output() valueChange = new EventEmitter<string>();
   @Output() valueChangeLogin = new EventEmitter<string>();
+  @Output() emitCleanValue = new EventEmitter<boolean>();
   @Input() placeHolder = '';
   @Input() inputType = '';
   @Input() fieldsetLabel = '';
-  @Input() inputWidth = '';
+  @Input() inputWidth = '522px';
+  @Input() inputMaxWidth = '';
   @Input() inputBorderColor = '#FFFFFF';
   @Input() color = '';
   @Input() backgroundColorTag = '';
   @Input() cleanValue = '';
   @Input() inputSearchClass = 'inputSearchDetails';
   @Input() height = '';
+  @Input() inputMarginTop = '';
+  @Input() inputMarginBottom = '';
 
   public value = '';
   public showPassword = false;
@@ -50,6 +54,7 @@ export class InputComponent {
     }
     this.showTagLabel = false;
     this.showCloseBtn = false;
+    this.emitCleanValue.emit(true);
   }
 
   /**
@@ -59,7 +64,6 @@ export class InputComponent {
    */
   changeInputFocus(): void {
     this.showIconDate = true;
-    this.inputWidth = '100%';
   }
 
   /**

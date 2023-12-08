@@ -1,6 +1,6 @@
 <div
   *ngIf="inputType === 'inputEmailLogin'"
-  [ngStyle]="{ width: inputWidth }"
+  [ngStyle]="{ 'max-width': inputMaxWidth, width: inputWidth }"
   class="container-input"
 >
   <span
@@ -13,14 +13,18 @@
     [placeholder]="placeHolder"
     class="input-position"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      'max-width': inputMaxWidth,
+      width: inputWidth
+    }"
     (input)="sendDataLogin($event)"
   />
 </div>
 
 <div
   *ngIf="inputType === 'inputEmail'"
-  [ngStyle]="{ width: inputWidth }"
+  [ngStyle]="{ 'max-width': inputMaxWidth, width: inputWidth }"
   class="container-input"
 >
   <span
@@ -33,7 +37,11 @@
     [placeholder]="placeHolder"
     class="input-position"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      'max-width': inputMaxWidth,
+      width: inputWidth
+    }"
     (input)="sendData($event)"
   />
 </div>
@@ -42,7 +50,7 @@
 
 <div
   *ngIf="inputType === 'inputPassword'"
-  [ngStyle]="{ width: inputWidth }"
+  [ngStyle]="{ 'max-width': inputMaxWidth, width: inputWidth }"
   class="container-input"
 >
   <mat-icon (click)="showPassword = !showPassword" class="icon-position">{{
@@ -60,14 +68,18 @@
     [placeholder]="placeHolder"
     class="input-position"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      'max-width': inputMaxWidth,
+      width: inputWidth
+    }"
     (input)="sendData($event)"
   />
 </div>
 
 <div
   *ngIf="inputType === 'inputPasswordLogin'"
-  [ngStyle]="{ width: inputWidth }"
+  [ngStyle]="{ 'max-width': inputMaxWidth, width: inputWidth }"
   class="container-input"
 >
   <mat-icon (click)="showPassword = !showPassword" class="icon-position">{{
@@ -85,7 +97,11 @@
     [placeholder]="placeHolder"
     class="input-position"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      'max-width': inputMaxWidth,
+      width: inputWidth
+    }"
     (input)="sendDataLogin($event)"
   />
 </div>
@@ -94,7 +110,7 @@
 
 <div
   *ngIf="inputType === 'inputSearch'"
-  [ngStyle]="{ width: inputWidth }"
+  [ngStyle]="{ 'max-width': inputMaxWidth, width: inputWidth }"
   class="container-input"
 >
   <mat-icon
@@ -118,7 +134,9 @@
     [ngStyle]="{
       'border-color': inputBorderColor,
       color: color,
-      height: height
+      height: height,
+      'max-width': inputMaxWidth,
+      width: inputWidth
     }"
     (input)="sendDataLogin($event)"
   />
@@ -128,7 +146,12 @@
 
 <div
   *ngIf="inputType === 'inputDate'"
-  [ngStyle]="{ width: inputWidth }"
+  [ngStyle]="{
+    'max-width': inputMaxWidth,
+    width: inputWidth,
+    'margin-top': inputMarginTop,
+    'margin-bottom': inputMarginBottom
+  }"
   class="container-input"
 >
   <mat-icon *ngIf="showIconDate" class="icon-position-date"
@@ -143,12 +166,17 @@
   <input
     type="text"
     (focus)="changeInputFocus()"
+    max="9999-12-31"
     [ngStyle]="{ 'border-color': inputBorderColor }"
     [placeholder]="placeHolder"
     onfocus="this.type='date'"
     class="input-position-date"
     [(ngModel)]="value"
-    [ngStyle]="{ 'border-color': inputBorderColor }"
+    [ngStyle]="{
+      'border-color': inputBorderColor,
+      'max-width': inputMaxWidth,
+      width: inputWidth
+    }"
     (input)="sendData($event)"
   />
 </div>
