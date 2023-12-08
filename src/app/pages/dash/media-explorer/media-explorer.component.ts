@@ -63,7 +63,7 @@ export class MediaExplorerComponent implements OnInit {
       );
       this.headerData = response.data;
     } catch (err: any) {
-      this.openSnackBar(`Erro ao receber dados do conteúdo`, 'Fechar');
+      this.openSnackBar(`Erro ao receber dados do conteúdo.`, 'Fechar');
     }
   }
 
@@ -143,7 +143,12 @@ export class MediaExplorerComponent implements OnInit {
         this.pageNumber,
       );
     } catch (err: any) {
-      this.openSnackBar(`Houve um erro ao publicar o comentário`, 'Fechar');
+      console.log(err);
+      if (err.error.data == 'O comentário contém palavras impróprias.') {
+        this.openSnackBar(err.error.data, 'Fechar');
+        return;
+      }
+      this.openSnackBar(`Houve um erro ao publicar o comentário.`, 'Fechar');
     }
   }
 
