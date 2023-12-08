@@ -112,13 +112,13 @@
       </div>
     </div>
   </div>
-  <app-modal
-    (emitEventClose)="closeModal($event)"
-    [isModalActive]="modalConfig.showModal"
-    [iconName]="modalConfig.icon"
-    [title]="modalConfig.title"
-    [message]="modalConfig.message"
-    [btText]="modalConfig.buttonText"
-    [closeOnOverlayClick]="modalConfig.overlayClick"
-  ></app-modal>
 </div>
+<app-modal
+  (emitEventClose)="closeModal($event)"
+  [isModalActive]="modalConfig.showModal"
+  [iconName]="modalConfig.icon"
+  [title]="modalConfig.title"
+  [message]="modalConfig.message"
+  [btText]="modalConfig.buttonText"
+  [closeOnOverlayClick]="modalConfig.overlayClick"
+></app-modal>
