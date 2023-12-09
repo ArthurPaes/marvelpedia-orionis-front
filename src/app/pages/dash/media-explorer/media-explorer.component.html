@@ -114,6 +114,7 @@
         </div>
         <div class="btn-wrapper">
           <app-button
+            (click)="openModalPayment()"
             [buttonType]="'large'"
             [label]="'Quero meu poster exclusivo'"
           ></app-button>
@@ -131,3 +132,21 @@
   </div>
   <app-footer [textColor]="'#000000'"></app-footer>
 </div>
+<app-modal-payment
+  [iconName]="'shopping_cart'"
+  [isModalActive]="showModalPayment"
+  [title]="'Poster Surpresa!'"
+  [message]="
+    'Temos parcerias com artistas incríveis e você terá a oportunidade de adquirir um poster exclusivo, selecionado por nossa equipe dentre as artes dos parceiros. Deseja prosseguir com a compra?'
+  "
+  (buttonClickProceed)="createEmailPayment()"
+  (emitEventClose)="closeModalPayment($event)"
+></app-modal-payment>
+<app-modal
+  [isModalActive]="showModal"
+  [iconName]="modalConfig.icon"
+  [title]="modalConfig.title"
+  [message]="modalConfig.message"
+  [btText]="modalConfig.buttonText"
+  (emitEventClose)="closeModal($event)"
+></app-modal>
