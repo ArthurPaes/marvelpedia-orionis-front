@@ -10,6 +10,7 @@ import {
   IResponseCreateUserComment,
   IResponseDeleteUserComment,
   IReponseGetDetailsCategory,
+  IResponseSendEmailPayment,
 } from '../interfaces/IMarvelContent';
 import { IResponsePosters } from 'src/app/pages/dash/media-explorer/interface/media-explorer';
 
@@ -164,6 +165,19 @@ export class MarvelContentApi {
     return await this.httpRequestService.sendHttpRequest(
       `${this.apiUrl}/posters?amount=${postersQty}`,
       'GET',
+    );
+  }
+
+  /**
+   * sendEmailPayment
+   *
+   * Função que envia um email com o link de pagamento para o do usuário.
+   * @returns retorna o paymentId da transação.
+   */
+  async sendEmailPayment(): Promise<IResponseSendEmailPayment> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/createpayment`,
+      'POST',
     );
   }
 }

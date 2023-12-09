@@ -31,3 +31,11 @@ export interface IResponseStandardPoster {
   fullName: string;
   artSampleURL: string;
 }
+
+export interface IModalConfig {
+  showModal: boolean;
+  icon: string;
+  title: string;
+  message: string;
+  buttonText: string;
+}

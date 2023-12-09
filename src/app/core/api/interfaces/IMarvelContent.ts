@@ -53,3 +53,9 @@ export interface IReponseGetDetailsCategory {
     link: string;
   };
 }
+
+export interface IResponseSendEmailPayment {
+  date: string;
+  status: boolean;
+  data: number;
+}

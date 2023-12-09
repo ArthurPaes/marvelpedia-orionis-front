@@ -1,0 +1,104 @@
+$words-color: #000000;
+
+.modal{
+  overflow: hidden;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 400px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid $words-color;
+    background-color: #FFFFFF;
+    z-index: 100;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+}
+
+#btn-close {
+    color: $words-color;
+    position: absolute;
+    top: 0.6rem;
+    right: 0.2rem;
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+}
+
+.inner-container {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    margin: 46px 52.5px;
+}
+
+.inner-container mat-icon {
+    color: $words-color;
+    width: 100%;
+    height: 30%;
+    font-weight: 400;
+    font-size: 72px;
+}
+
+.inner-container h1 {
+    color: $words-color;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28.13px;
+    letter-spacing: 0.5%;
+    margin-top: 1rem;
+}
+
+.inner-container p {
+    color: $words-color;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14.06px;
+}
+
+#btn-finalizar {
+    cursor: pointer;
+    margin-top: 0.4rem;
+    width: 100%;
+    height: 56px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    a{
+        text-decoration: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main-container {
+        width: 90% !important;
+    }
+    .inner-container {
+        width: 90%;
+        margin: 46px 10px;
+    }
+
+    #btn-finalizar {
+        width: 90%;
+    }
+}
