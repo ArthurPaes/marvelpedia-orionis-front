@@ -23,7 +23,7 @@
       <div class="card-text">
         <h2 class="card-title">{{ headerData.title }}</h2>
         <p class="card-description">{{ headerData.description }}</p>
-        <a href="{{ headerData.link }}" target="_blank">
+        <a *ngIf="headerData.link" href="{{ headerData.link }}" target="_blank">
           <button class="bt-conhecer-mais">Conhecer mais</button>
         </a>
       </div>
