@@ -14,6 +14,7 @@ import { RatingApi } from '../core/api/app/rating.api';
 import { PasswordCheckerComponent } from './password-checker/password-checker.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderDetailsComponent } from './header-details/header-details.component';
+import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HeaderDetailsComponent } from './header-details/header-details.componen
     PasswordCheckerComponent,
     FooterComponent,
     HeaderDetailsComponent,
+    ModalPaymentComponent,
   ],
   imports: [CommonModule, MatIconModule, FormsModule],
   exports: [
@@ -40,6 +42,7 @@ import { HeaderDetailsComponent } from './header-details/header-details.componen
     PasswordCheckerComponent,
     FooterComponent,
     HeaderDetailsComponent,
+    ModalPaymentComponent,
   ],
   providers: [RatingApi],
 })
