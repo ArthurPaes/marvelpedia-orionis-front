@@ -73,7 +73,8 @@ export class ResetPasswordComponent {
       showModal: true,
       icon: 'check_circle_outline',
       title: 'Sucesso!',
-      message: 'Verifique sua caixa de e-mail.',
+      message:
+        'Se esse e-mail estiver valido, você receberá uma mensagem para recuperar sua senha!',
       buttonText: 'FECHAR',
       overlayClick: false,
     };
