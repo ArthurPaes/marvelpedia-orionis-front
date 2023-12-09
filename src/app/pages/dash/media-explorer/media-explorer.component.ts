@@ -1,12 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
-import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
+import {
+  EnumContentCategory,
+  IResponseSendEmailPayment,
+} from 'src/app/core/api/interfaces/IMarvelContent';
 import {
   IComment,
   IDataContent,
   IResponsePosters,
   IResponseStandardPoster,
   IHeaderDetails,
+  IModalConfig,
 } from './interface/media-explorer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,7 +28,8 @@ export class MediaExplorerComponent implements OnInit {
   ) {
     this.dataContent = this?.router?.getCurrentNavigation()?.extras?.state;
   }
-
+  showModal = false;
+  showModalPayment = false;
   loading = false;
   dataContent: any;
   commentList: IComment[] = [];
@@ -36,6 +41,13 @@ export class MediaExplorerComponent implements OnInit {
   showNotFoundMessage = false;
   showNextPreviousButtons = false;
   postersFilter: Array<IResponseStandardPoster> = [];
+  modalConfig: IModalConfig = {
+    showModal: false,
+    icon: '',
+    title: '',
+    message: '',
+    buttonText: '',
+  };
 
   posters: IResponsePosters = {
     data: [],
@@ -270,5 +282,82 @@ export class MediaExplorerComponent implements OnInit {
       verticalPosition: 'bottom',
       panelClass: ['snackbar-1'],
     });
+  }
+
+  /**
+   * openModalPayment
+   *
+   * Abre o modal de pagamento.
+   * A função exibe um modal que solicita ao usuário que confirme a intenção de prosseguir com a compra ou cancelar a ação.
+   */
+  openModalPayment(): void {
+    this.showModalPayment = true;
+  }
+
+  /**
+   * openModalPayment
+   *
+   *
+   * Fecha o modal de pagamento.
+   * A função fecha o modal que solicita ao usuário que confirme a intenção de prosseguir com a compra ou cancelar a ação.
+   */
+  closeModalPayment(event: boolean): void {
+    this.showModalPayment = event;
+  }
+
+  closeModal(event: boolean): void {
+    this.showModal = event;
+  }
+
+  /**
+   * sendEmailPix
+   *
+   * Envia um e-mail para o usuário contendo informações sobre o pagamento via Pix
+   * Essa função é chamada caso o usuário confirme a sua inteção de compra no botão 'Prosseguir' do 'ModalPayment'.
+   */
+  async createEmailPayment(): Promise<any> {
+    try {
+      const response = await this.marvelContentApi.sendEmailPayment();
+      console.log(response);
+      this.showModalPayment = false;
+      this.showModal = true;
+      this.handleEmailPaymentSucess();
+    } catch (err: any) {
+      this.showModalPayment = false;
+      this.showModal = true;
+      this.handleEmailPaymentError(err.error.data);
+    }
+  }
+
+  /**
+   * handleEmailPaymentError
+   *
+   * Manipula o erro no envio do email sobre o pagamento via Pix.
+   * Exibe a mensagem de erro em um modal.
+   */
+  handleEmailPaymentError(errorMessage: string): void {
+    this.modalConfig = {
+      showModal: true,
+      icon: 'error_outline',
+      title: 'Erro!',
+      message: errorMessage,
+      buttonText: 'FECHAR',
+    };
+  }
+
+  /**
+   * handleEmailPaymentSucess
+   *
+   * Manipula o sucesso no envio do e-mail sobre o pagamento via Pix e exibe uma mensagem de sucesso em um modal.
+   */
+  handleEmailPaymentSucess(): void {
+    this.modalConfig = {
+      showModal: true,
+      icon: 'check_circle_outline',
+      title: 'Pix Gerado!',
+      message:
+        'Um e-mail foi enviado para sua caixa de entrada, verifique para prosseguir com o pagamento.',
+      buttonText: 'FECHAR',
+    };
   }
 }
