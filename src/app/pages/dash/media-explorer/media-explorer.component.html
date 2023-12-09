@@ -1,33 +1,36 @@
 <div class="component-body">
-  <div class="container">
-    <header>
-      <section>
-        <button>
-          <mat-icon>arrow_back_ios</mat-icon>
-        </button>
-        <div class="content">
-          <h1>Homem de Ferro</h1>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias optio
-            rem tempora quaerat saepe ad laboriosam, dolores, repudiandae atque
-            consectetur nam aperiam? Ullam sapiente ad hic accusantium, ratione
-            tenetur ipsum?
-          </h4>
-        </div>
-        <app-button
-          class="app-button"
-          [buttonType]="'cancel'"
-          [label]="'home'"
-          [custonStyle]="'width: 55px'"
-        ></app-button>
-      </section>
-      <img src="../../../../assets/images/characters-banner.svg" />
-    </header>
+  <app-header-details
+    [ContentName]="headerData.title"
+    [ContentThumb]="
+      headerData.thumb
+        ? headerData.thumb
+        : '../../../../assets/images/header-details.svg'
+    "
+  ></app-header-details>
 
+  <div class="container-main">
     <div class="product-view">
-      <div class="product-card"></div>
-      <div class="content-container">
-        <h2>Deixe seu comentário</h2>
+      <div class="product-card">
+        <img
+          src="{{
+            headerData.thumb
+              ? headerData.thumb
+              : '../../../../assets/images/personagem-sem-imagem.jpg'
+          }}"
+          alt=""
+        />
+      </div>
+      <div class="card-text">
+        <h2 class="card-title">{{ headerData.title }}</h2>
+        <p class="card-description">{{ headerData.description }}</p>
+        <a *ngIf="headerData.link" href="{{ headerData.link }}" target="_blank">
+          <button class="bt-conhecer-mais">Conhecer mais</button>
+        </a>
+      </div>
+    </div>
+    <div class="coment-list">
+      <h2 class="title-comment-list">Comentários</h2>
+      <div class="write-text-area">
         <textarea
           [(ngModel)]="newComment.comment"
           type="textarea"
@@ -37,64 +40,79 @@
           id="comment"
         ></textarea>
         <app-button
-          class="bt-comentar"
-          [buttonType]="'large'"
-          [label]="'comentar'"
+          class="bt-comment"
+          buttonType="bt-char-large"
+          label="Comentar"
           [isDisabled]="this.newComment.comment.trim() !== '' ? false : true"
           (click)="createComment()"
         ></app-button>
       </div>
-    </div>
-
-    <div class="coment-list">
-      <h2>Comentários</h2>
-      <p *ngIf="showNotFoundMessage">
+      <div class="loading-wrapper" *ngIf="loading">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <p *ngIf="showNotFoundMessage" class="not-found-message">
         Seja o primeiro a comentar sobre esse conteúdo!
       </p>
-      <ol *ngFor="let comment of commentList">
-        <li class="coment-item">
-          <h3>
-            {{ comment.userName }} {{ comment.userLastName.split(" ").pop() }}
-            <span>{{ comment.createdAt | date }}</span>
-          </h3>
-          <h4>{{ comment.comment }}</h4>
-          <mat-icon
-            *ngIf="comment.userComment"
-            class="bt-delete"
-            (click)="handleDeleteComment(comment.id)"
-            >delete</mat-icon
+      <div class="comments-wrapper">
+        <div class="comment-area" *ngIf="!showNotFoundMessage">
+          <div class="coment-item" *ngFor="let userComment of commentList">
+            <div class="comment-header">
+              <h2 class="comment-author">
+                {{ userComment.userName }}
+                {{ userComment.userLastName.split(" ").pop() }}
+              </h2>
+              <span class="date-comment">{{
+                userComment.createdAt | date
+              }}</span>
+            </div>
+            <p class="comment-text">
+              {{ userComment.comment }}
+            </p>
+            <mat-icon
+              *ngIf="userComment.userComment"
+              class="bt-delete"
+              (click)="handleDeleteComment(userComment.id)"
+              >delete</mat-icon
+            >
+          </div>
+        </div>
+        <div *ngIf="showNextPreviousButtons" class="wrapper-buttons">
+          <app-button
+            [buttonType]="'large'"
+            (click)="previousPageComments()"
+            class="btn-see-less"
+            custonStyle="padding: 8px"
+            [isDisabled]="disableButtonPreviousPage"
           >
-        </li>
-      </ol>
-      <div *ngIf="showNextPreviousButtons" class="wrapper-buttons">
-        <app-button
-          [buttonType]="'large'"
-          (click)="previousPageComments()"
-          class="btn-see-less"
-          custonStyle="padding: 8px"
-          [isDisabled]="disableButtonPreviousPage"
-        >
-          <mat-icon>keyboard_arrow_left</mat-icon></app-button
-        ><span>{{ pageNumber }}</span>
-        <app-button
-          [buttonType]="'large'"
-          (click)="nextPageComments()"
-          custonStyle="padding: 8px"
-          [isDisabled]="disableButtonNextPage"
-        >
-          <mat-icon>keyboard_arrow_right</mat-icon>
-        </app-button>
+            <mat-icon>keyboard_arrow_left</mat-icon></app-button
+          ><span>{{ pageNumber }}</span>
+          <app-button
+            [buttonType]="'large'"
+            (click)="nextPageComments()"
+            custonStyle="padding: 8px"
+            [isDisabled]="disableButtonNextPage"
+          >
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </app-button>
+        </div>
       </div>
     </div>
 
     <footer>
       <div class="footer-content-container">
-        <h1>Quer ter acesso a <span>POSTERS EXCLUSIVOS?</span></h1>
-        <div>
+        <div class="title-wrapper">
+          <h1>Nossos parceiros</h1>
           <h2>
-            Por apenas <span>R$15,00</span> você recebe um poster criado por um
-            dos artistas da nossa comunidade.
+            Para ter acesso a artes personalizadas, contribua com a nossa
+            comunidade artística por um investimento de apenas R$20,00.
           </h2>
+        </div>
+        <div class="btn-wrapper">
           <app-button
             [buttonType]="'large'"
             [label]="'Quero meu poster exclusivo'"
@@ -102,27 +120,14 @@
         </div>
       </div>
       <div class="partners">
-        <h2>Conheça nossos parceiros</h2>
         <div class="poster-container">
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
-          </div>
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
-          </div>
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
-          </div>
-          <div class="poster-item">
-            <div class="poster"></div>
-            <p>Nome do artista</p>
+          <div *ngFor="let poster of postersFilter" class="poster-item">
+            <img class="poster" src="{{ poster.artSampleURL }}" alt="auto" />
+            <p>{{ poster.fullName }}</p>
           </div>
         </div>
       </div>
-      <app-footer></app-footer>
     </footer>
   </div>
+  <app-footer [textColor]="'#000000'"></app-footer>
 </div>

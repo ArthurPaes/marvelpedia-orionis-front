@@ -1,9 +1,9 @@
 .background {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 24px);
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("../../../../assets/images/marvel-space-homepage.jpg");
+    background-image: url(#fff);
     background-position: top;
     justify-content: center;
     overflow: auto;
@@ -29,6 +29,10 @@
 .input-width {
     width: 97.7%;
     margin-left: 11px;
+}
+
+.item-card {
+    cursor: pointer;
 }
 
 .carrosel-area, .carrosel-area-series {

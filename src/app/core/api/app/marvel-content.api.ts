@@ -9,7 +9,9 @@ import {
   IResponseGetCommentsByCategoryId,
   IResponseCreateUserComment,
   IResponseDeleteUserComment,
+  IReponseGetDetailsCategory,
 } from '../interfaces/IMarvelContent';
+import { IResponsePosters } from 'src/app/pages/dash/media-explorer/interface/media-explorer';
 
 @Injectable({
   providedIn: 'root',
@@ -46,13 +48,15 @@ export class MarvelContentApi {
    * Função que solicita dados para popular a página de detalhes dos personagens.
    *
    * @param characterId id do personagem que foi escolhido na tela de home.
+   * @param
    * @returns uma promise que em caso de sucesso traz os dados que serão inseridos na tela de detalhe dos personagens.
    */
   async getCharacterCategoryList(
+    category: string,
     characterId: string,
   ): Promise<IResponseCategoryList> {
     return await this.httpRequestService.sendHttpRequest(
-      `${this.apiUrl}/characters/${characterId}`,
+      `${this.apiUrl}/${category}/${characterId}`,
       'GET',
     );
   }
@@ -71,6 +75,24 @@ export class MarvelContentApi {
       `${this.apiUrl}/favorite`,
       'POST',
       characterId,
+    );
+  }
+
+  /**
+   * getDetailsCategory
+   *
+   * Obtém detalhes sobre o conteúdo Marvel para a página 'Media Explorer'.
+   * @param category A categoria do conteúdo desejado (quadrinhos, histórias, series, eventos).
+   * @param characterId id do conteúdo que foi escolhido .
+   * @returns uma promise que em caso de sucesso traz os dados que serão usados na 'Media Explorer'.
+   */
+  async getDetailsCategory(
+    category: EnumContentCategory,
+    characterId: string,
+  ): Promise<IReponseGetDetailsCategory> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/${category}/${characterId}`,
+      'GET',
     );
   }
 
@@ -94,11 +116,13 @@ export class MarvelContentApi {
       'GET',
     );
   }
+
   /**
    * deleteComment
    *
    * Deleta o comentário a partir de seu ID.
    * @param commentId -Número que identifica o comentário.
+   * @returns retorna uma Promise contendo com a mensagem de feedback de deletado.
    */
   async deleteUserComment(
     commentId: number,
@@ -109,6 +133,14 @@ export class MarvelContentApi {
     );
   }
 
+  /**
+   * createUserComment
+   *
+   * Cria um novo comentário do usuário.
+   * @param category - A categoria do conteúdo Marvel.
+   * @param categoryId - O ID do conteúdo Marvel.
+   * @param newComment - O objeto contendo a string do novo comentário a ser enviado.
+   */
   async createUserComment(
     category: EnumContentCategory,
     categoryId: number,
@@ -118,6 +150,20 @@ export class MarvelContentApi {
       `${this.apiUrl}/comments/${category}/${categoryId}`,
       'POST',
       newComment,
+    );
+  }
+
+  /**
+   * getNumberOfPosters
+   *
+   * Função que pega o números de posters de artistas
+   * @param postersQty - Quantidade de posters de artistas.
+   * @returns retorna uma Promise contendo um array objetos contendo o nome completo e a arte.
+   */
+  async getNumberOfPosters(postersQty: number): Promise<IResponsePosters> {
+    return await this.httpRequestService.sendHttpRequest(
+      `${this.apiUrl}/posters?amount=${postersQty}`,
+      'GET',
     );
   }
 }

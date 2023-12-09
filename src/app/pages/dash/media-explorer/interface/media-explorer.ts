@@ -15,3 +15,19 @@ export interface IDataContent {
   categoryContent: EnumContentCategory;
   idContent: number;
 }
+
+export interface IHeaderDetails {
+  description: string;
+  title: string;
+  thumb: string;
+  link: string;
+}
+
+export interface IResponsePosters {
+  data: Array<IResponseStandardPoster>;
+}
+
+export interface IResponseStandardPoster {
+  fullName: string;
+  artSampleURL: string;
+}

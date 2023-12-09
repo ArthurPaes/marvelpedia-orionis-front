@@ -31,6 +31,7 @@ export class ResetPasswordComponent {
   };
   borderColor = '';
   isAproved = false;
+  fieldsetLabel = 'E-mail';
   emailRegex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   /**
@@ -50,7 +51,9 @@ export class ResetPasswordComponent {
     this.receiveData(eventValue);
     this.emailRegex.test(eventValue)
       ? ((this.isAproved = true), (this.borderColor = '#2C85D8'))
-      : ((this.isAproved = false), (this.borderColor = '#E38686'));
+      : ((this.isAproved = false),
+        (this.fieldsetLabel = 'E-mail inválido'),
+        (this.borderColor = '#E38686'));
   };
   /**
    * handleBackButton
@@ -70,7 +73,8 @@ export class ResetPasswordComponent {
       showModal: true,
       icon: 'check_circle_outline',
       title: 'Sucesso!',
-      message: 'Verifique sua caixa de e-mail.',
+      message:
+        'Se esse e-mail estiver valido, você receberá uma mensagem para recuperar sua senha!',
       buttonText: 'FECHAR',
       overlayClick: false,
     };
