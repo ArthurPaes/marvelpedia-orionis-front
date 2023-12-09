@@ -1,13 +1,11 @@
 <div class="component-body">
   <app-header-details
     [ContentName]="headerData.title"
-    [ContentDescription]="headerData.description"
     [ContentThumb]="
       headerData.thumb
         ? headerData.thumb
         : '../../../../assets/images/header-details.svg'
     "
-    [ContentUrlButton]="headerData.link"
   ></app-header-details>
 
   <div class="container-main">
@@ -22,8 +20,17 @@
           alt=""
         />
       </div>
-      <div class="card-create-comment">
-        <h2 class="product-view-title">Deixe seu comentário</h2>
+      <div class="card-text">
+        <h2 class="card-title">{{ headerData.title }}</h2>
+        <p class="card-description">{{ headerData.description }}</p>
+        <a *ngIf="headerData.link" href="{{ headerData.link }}" target="_blank">
+          <button class="bt-conhecer-mais">Conhecer mais</button>
+        </a>
+      </div>
+    </div>
+    <div class="coment-list">
+      <h2 class="title-comment-list">Comentários</h2>
+      <div class="write-text-area">
         <textarea
           [(ngModel)]="newComment.comment"
           type="textarea"
@@ -33,16 +40,13 @@
           id="comment"
         ></textarea>
         <app-button
-          class="bt-comentar"
-          [buttonType]="'large'"
-          [label]="'comentar'"
+          class="bt-comment"
+          buttonType="bt-char-large"
+          label="Comentar"
           [isDisabled]="this.newComment.comment.trim() !== '' ? false : true"
           (click)="createComment()"
         ></app-button>
       </div>
-    </div>
-    <div class="coment-list">
-      <h2 class="title-comment-list">Comentários</h2>
       <div class="loading-wrapper" *ngIf="loading">
         <div class="lds-ring">
           <div></div>
@@ -105,7 +109,7 @@
           <h1>Nossos parceiros</h1>
           <h2>
             Para ter acesso a artes personalizadas, contribua com a nossa
-            comunidade artística por um investimento de apenas R$20
+            comunidade artística por um investimento de apenas R$20,00.
           </h2>
         </div>
         <div class="btn-wrapper">
