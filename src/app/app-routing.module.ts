@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './pages/auth/password-redefinition/reset
 import { ChangePasswordComponent } from './pages/auth/password-redefinition/change-password/change-password.component';
 import { CharacterDetailsComponent } from './pages/dash/character-details/character-details.component';
 import { MediaExplorerComponent } from './pages/dash/media-explorer/media-explorer.component';
+import { QRcodePayComponent } from './pages/payment/qrcode-pay/qrcode-pay.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard] },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'payments', component: QRcodePayComponent },
   { path: '**', component: LoginComponent },
 ];
 

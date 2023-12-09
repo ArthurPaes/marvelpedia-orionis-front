@@ -1,0 +1,22 @@
+<div class="background">
+  <img class="logo" src="../../../../assets/images/marvel-logo.png" alt="" />
+  <div class="main-container">
+    <div class="titulo">
+      <h1>
+        {{ userName }}<span>, agora falta pouco para sua surpresa chegar.</span>
+      </h1>
+    </div>
+    <div class="content">
+      <img class="qrCode" src="{{ qrCodeImage }}" alt="QRcode" />
+      <div class="id-container">
+        <p>{{ qrCodeKey }}</p>
+        <app-button
+          (click)="handleClipBoard()"
+          [buttonType]="'default'"
+          [label]="'pix copia e cola'"
+          ><mat-icon>file_copy</mat-icon></app-button
+        >
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { DashModule } from './pages/dash/dash.module';
 import { AuthGuard } from './guards/auth.guard';
-
+import { PaymentModule } from './pages/payment/payment.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -17,6 +17,7 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     AuthModule,
     DashModule,
+    PaymentModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
