@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard] },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },
-  { path: 'payments', component: QRcodePayComponent },
+  { path: 'payment', component: QRcodePayComponent },
   { path: '**', component: LoginComponent },
 ];
 
