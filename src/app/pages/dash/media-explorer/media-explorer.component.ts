@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MarvelContentApi } from 'src/app/core/api/app/marvel-content.api';
 import { EnumContentCategory } from 'src/app/core/api/interfaces/IMarvelContent';
 import {
   IComment,
   IDataContent,
+  IResponsePosters,
+  IResponseStandardPoster,
   IHeaderDetails,
 } from './interface/media-explorer';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +24,7 @@ export class MediaExplorerComponent implements OnInit {
   ) {
     this.dataContent = this?.router?.getCurrentNavigation()?.extras?.state;
   }
+
   loading = false;
   dataContent: any;
   commentList: IComment[] = [];
@@ -32,6 +35,19 @@ export class MediaExplorerComponent implements OnInit {
   newComment = { comment: '' };
   showNotFoundMessage = false;
   showNextPreviousButtons = false;
+  postersFilter: Array<IResponseStandardPoster> = [];
+
+  posters: IResponsePosters = {
+    data: [],
+  };
+
+  currentCardContent = {
+    title: 'titulo do card a ser exibido',
+    description: 'Descrição do card a ser exibido',
+    thumb: 'url do thumb do card a ser exibido',
+    externalLink: 'link de detalhes',
+  };
+
   headerData: IHeaderDetails = {
     description: '',
     title: '',
@@ -39,12 +55,21 @@ export class MediaExplorerComponent implements OnInit {
     link: '',
   };
 
+  /**
+   * ngOnInit
+   * Lifecycle que carrega os dados de posters ao inicializar a página.
+   */
   ngOnInit(): void {
     this.getCommentList(
       this.dataContent.categoryContent,
       this.dataContent.idContent,
       this.pageNumber,
     );
+
+    this.marvelContentApi.getNumberOfPosters(4).then((postersResponse) => {
+      this.posters = postersResponse;
+      this.postersFilter = this.posters.data;
+    });
     this.getHeaderDetails();
   }
 

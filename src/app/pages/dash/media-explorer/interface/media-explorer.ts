@@ -22,3 +22,12 @@ export interface IHeaderDetails {
   thumb: string;
   link: string;
 }
+
+export interface IResponsePosters {
+  data: Array<IResponseStandardPoster>;
+}
+
+export interface IResponseStandardPoster {
+  fullName: string;
+  artSampleURL: string;
+}

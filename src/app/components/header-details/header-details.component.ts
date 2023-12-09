@@ -12,6 +12,7 @@ export class HeaderDetailsComponent {
   @Input() ContentName = '';
   @Input() ContentDescription = '';
   @Input() ContentThumb = '';
+  @Input() ContentUrlButton = '';
 
   /**
    * goBack

@@ -46,8 +46,9 @@
           [fieldsetLabel]="birthDate.getFieldLabel()"
           [placeHolder]="'Data de Nascimento'"
           [inputBorderColor]="birthDate.getBorderColor()"
-          (valueChange)="birthYearChecker(birthDate, $event)"
+          (valueChange)="birthYearChecker($event)"
           [backgroundColorTag]="birthDate.getBorderColor()"
+          (focusout)="handleFocusOutCheck()"
         ></app-input>
       </div>
 
@@ -65,6 +66,7 @@
         [inputType]="'inputPassword'"
         [inputWidth]="'100%'"
         [fieldsetLabel]="password.getFieldLabel()"
+        [inputBorderColor]="password.getBorderColor()"
         [placeHolder]="'Digite sua senha'"
         (valueChange)="passwordChecker($event)"
       ></app-input>
@@ -112,13 +114,13 @@
       </div>
     </div>
   </div>
-  <app-modal
-    (emitEventClose)="closeModal($event)"
-    [isModalActive]="modalConfig.showModal"
-    [iconName]="modalConfig.icon"
-    [title]="modalConfig.title"
-    [message]="modalConfig.message"
-    [btText]="modalConfig.buttonText"
-    [closeOnOverlayClick]="modalConfig.overlayClick"
-  ></app-modal>
 </div>
+<app-modal
+  (emitEventClose)="closeModal($event)"
+  [isModalActive]="modalConfig.showModal"
+  [iconName]="modalConfig.icon"
+  [title]="modalConfig.title"
+  [message]="modalConfig.message"
+  [btText]="modalConfig.buttonText"
+  [closeOnOverlayClick]="modalConfig.overlayClick"
+></app-modal>

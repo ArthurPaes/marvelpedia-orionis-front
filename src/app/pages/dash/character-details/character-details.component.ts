@@ -51,12 +51,12 @@ export class CharacterDetailsComponent implements OnInit {
    * Quando o usuário vier da página home ao clicar no card, essa função irá receber o id do personagem como parâmetro da URL ao inicializar a página, e irá solicitar ao backend informações que irão compor a página de detalhes como dados do cabeçalho e arrays de quadrinhos, histórias, séres e eventos.
    */
   async getCategoryList(): Promise<void> {
-    this.characterId = this.dataContent.data.id;
+    this.characterId = this.dataContent.idContent;
     try {
       const characterDetailsDataList =
         await this.marvelContentApi.getCharacterCategoryList(
-          this.characterId,
           'characters',
+          this.characterId,
         );
       this.characterDetailList = characterDetailsDataList;
       this.seriesListFilter = this.characterDetailList.data.seriesList;
@@ -93,13 +93,14 @@ export class CharacterDetailsComponent implements OnInit {
     nameContent: string,
     idContent: number,
   ): void {
+    if (categoryContent === 'favorites') {
+      categoryContent = 'characters';
+    }
+
     const dataToTransfer = {
       state: {
-        data: {
-          id: idContent,
-          category: categoryContent,
-          name: nameContent,
-        },
+        idContent: idContent,
+        categoryContent: categoryContent,
       },
     };
 

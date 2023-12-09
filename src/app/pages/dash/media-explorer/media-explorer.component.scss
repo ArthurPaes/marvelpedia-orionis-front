@@ -138,6 +138,10 @@ span{
   border-radius: 10px;
 }
 
+.card-text a{
+  text-decoration: none;
+}
+
 .product-view{
     width: 100%;
     display: flex;
@@ -205,11 +209,11 @@ textarea::-webkit-input-placeholder {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 24px;
-  color: #000;
+  color: black;
 }
 
 .date-comment {
-  color: #c7c7c7;
+  color: black;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
@@ -230,8 +234,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .not-found-message {
-  color: #000;
-  font-family: Roboto;
+  color: black;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -240,9 +243,8 @@ textarea::-webkit-input-placeholder {
 }
 
 .coment-item{
+  border: 1.5px solid black;
   border-radius: 4px;
-  background: transparent;
-  border: 1px solid black;
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
   margin-bottom: 20px;
@@ -276,7 +278,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .comment-author {
-  color: #000;
+  color: black;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -292,7 +294,7 @@ textarea::-webkit-input-placeholder {
 .comment-text {
   text-wrap: wrap;
   overflow-wrap: break-word;
-  color: #000;
+  color: black;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -322,7 +324,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .wrapper-buttons span{
-  color: #fff;
+  color: black;
   font-size: 18px;
   font-weight: 500;
 }
@@ -345,24 +347,20 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(140, 190, 240);
     width: 100%;
-    padding: 60px 12px;
+    padding: 25px 0;
+    border-radius: 8px;
 }
 footer h1{
-    color: #000000;
     font-weight: bold;
-    font-size: 3rem;
-    letter-spacing: 1.5px;
-    line-height: 58px;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
 }
 footer div h2 {
-    color: #000000;
     margin: 0;
-    width: 360px;
+    width: 100%;
     min-width: 125px;
-    line-height: 30px;
-    margin-bottom: 20px;
 }
 footer span {
     color: rgb(255, 255, 255);
@@ -370,22 +368,24 @@ footer span {
     padding: 0 5px;
     font-weight: bolder;
     letter-spacing: 4px;
-    line-height: 1.2;
+    line-height: 1.7;
     margin-top: 27px;
 }
 .footer-content-container{
-    width: 82%;
-    display: grid;
-    grid-template-columns: 42% 35%;
-    grid-gap: 60px;
+    width: 100%;
+    display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
     margin-top: 40px;
-    align-items: center;
+    align-items: flex-end;
+
+.title-wrapper {
+    margin-right: 3rem;
+}
+
 }
 .poster-container {
     display: flex;
-    gap: 10%;
 }
 .poster-item {
     display: flex;
@@ -393,15 +393,56 @@ footer span {
     align-items: center;
     gap: 10px;
 }
+.poster-item p {
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    width: 100%;
+    background-color: #FFF;
+    height: 35px;
+    color: black;
+}
+.poster-item img {
+    border-radius: 8px;
+    object-fit: cover;
+}
+.poster-item:first-child {
+    margin-right: 2rem;
+}
 .poster {
-    border-radius: 4px;
-    background-color: rgb(19, 55, 138);
+    border-radius: 8px;
+    width: 330px;
+    height: 411px;
 }
 .partners {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 20px 20px;
+    & h2 {
+        color: #fff;
+        text-align: center;
+    }
 }
-.app-footer {
-    color: #000000;
+
+.btn-wrapper {
+    width: 450px;
+}
+
+@media screen and (max-width: 1153px) {
+    .footer-content-container{
+        margin-top: 2rem;
+        flex-direction: column;
+    }
+    .btn-wrapper {
+        margin-top: 2rem;
+        width: 100%;
+    }
 }
 @media (max-width: 920px) {
     .product-view{
@@ -478,3 +519,17 @@ footer span {
       width: 100%;
     }
   }
+
+@media screen and (max-width: 800px) {
+    .footer-content-container{
+        margin-bottom: 40px;
+    }
+    .poster-container {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+    }
+    .poster-item {
+        margin-right: 0 !important;
+    }
+}
