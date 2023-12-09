@@ -1,0 +1,26 @@
+<div class="background">
+  <img class="logo" src="../../../../assets/images/marvel-logo.png" alt="" />
+  <div class="main-container">
+    <div class="titulo">
+      <div class="returnPaymentError" *ngIf="returnPaymentError">
+        <mat-icon>error_outline</mat-icon>
+        <h1>Pagamento não encontrado</h1>
+      </div>
+      <h1 *ngIf="!returnPaymentError">
+        {{ userName }}<span>, agora falta pouco para sua surpresa chegar.</span>
+      </h1>
+    </div>
+    <div class="content" *ngIf="!returnPaymentError">
+      <img class="qrCode" src="{{ qrCodeImage }}" alt="QRcode" />
+      <div class="id-container">
+        <p>{{ qrCodeKey }}</p>
+        <app-button
+          (click)="handleClipBoard()"
+          [buttonType]="'default'"
+          [label]="'pix copia e cola'"
+          ><mat-icon>{{ iconStatus }}</mat-icon></app-button
+        >
+      </div>
+    </div>
+  </div>
+</div>

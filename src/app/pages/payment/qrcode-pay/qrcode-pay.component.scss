@@ -1,0 +1,92 @@
+.background {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-image: url("../../../../assets/images/marvel-space.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+
+    .logo {
+      //position: absolute;
+      left: 80px;
+      top: 80px;
+      width: 80px;
+    }
+}
+.returnPaymentError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.returnPaymentError h1 {
+  margin:0;
+}
+.returnPaymentError mat-icon {
+  margin:0;
+  height: 40px;
+  width: 40px;
+  font-size: 40px ;
+}
+
+.main-container{
+  min-width: 300px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px;
+  margin: 10px;
+}
+.content{
+  display: flex;
+  flex-direction: row;
+}
+.id-container{
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  align-items: center;
+  gap: 20px;
+}
+h1{
+  font-weight: 500;
+  font-size: 18px;
+}
+span{
+  font-weight: 300;
+  font-size: 18px;
+}
+p{
+  width: 260px;
+}
+.titulo{
+  margin: 0 20px;
+}
+.qrCode{
+  width: 250px;
+  height: 250px;
+}
+mat-icon {
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 620px){
+  .content{
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-container{
+    padding: 20px;
+  }
+}
