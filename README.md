@@ -1,6 +1,6 @@
 # Marvelpedia-Orionis-Front
 
-## Este projeto foi desenvolvido durante o [Orion Bootcamp]([https://github.com/angular/angular-cli](https://newrizon.global/bootcamp-new-rizon/)) pelos participantes sob minha [Supervisão]([https://github.com/angular/angular-cli](https://drive.google.com/file/d/1_CiVTruqsjSc2VHD_ftVLkXesNLoAH0C/view))
+## Este projeto foi desenvolvido durante o [Orion Bootcamp](https://newrizon.global/bootcamp-new-rizon/) pelos participantes sob minha [Supervisão](https://drive.google.com/file/d/1_CiVTruqsjSc2VHD_ftVLkXesNLoAH0C/view)
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.2.6.
 
