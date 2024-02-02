@@ -1,35 +1,35 @@
 # Marvelpedia-Orionis-Front
 
-## Este projeto foi desenvolvido durante o [Orion Bootcamp](https://newrizon.global/bootcamp-new-rizon/) pelos participantes sob minha [Supervisão](https://drive.google.com/file/d/1_CiVTruqsjSc2VHD_ftVLkXesNLoAH0C/view)
+## This project was developed during the [Orion Bootcamp](https://newrizon.global/bootcamp-new-rizon/) by the students under my direct [Supervision](https://drive.google.com/file/d/1_CiVTruqsjSc2VHD_ftVLkXesNLoAH0C/view)
 
-Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.2.6.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
 
-## Servidor de desenvolvimento
+## Development server
 
-Este projeto está configurado com o `docker`. Para roda-lo é necessário ter instalado o docker
+This project is configured with `docker`. To run it you need to have Docker installed.
 
-Execute `npm install` para instalar todas as dependências necessárias.
+Run `npm install` to install all necessary dependencies.
 
-Execute `docker-compose -f docker-compose.yml up` e espere pela mensagem `** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **`
+Run `docker-compose -f docker-compose.yml up` and wait for the message `** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **`
 
-Navegue até `http://localhost:4200/`. A aplicação será recarregada automaticamente se você alterar qualquer um dos arquivos de origem.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Geração de código
+## Code generation
 
-Execute `ng generate component component-name` para gerar um novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-
-## Ajuda adicional
-
-Para obter mais ajuda sobre o Angular CLI, use `ng help` ou consulte a página [Angular CLI Overview and Command Reference](https://angular.io/cli).
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 
-## Essa Aplicação conta com o uso de bibliotecas adicionais
+## Additional help
 
-### Bootstrap 
-- Para uso dos grids preferencialmente
-- [Veja a Documentação aqui](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+For more help on Angular CLI, use `ng help` or see the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-### Angular Material 
-- Uso de componentes pré existentes que podem facilitar o andamento do desenvolvimento do projeto
-- [Veja a Documentação Aqui](https://material.angular.io/components/categories)
+
+## This Application relies on the use of additional libraries
+
+###Bootstrap
+- For use of grids preferably
+- [See Documentation here](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+
+### AngularMaterial
+- Use of pre-existing components that can facilitate the progress of project development
+- [See Documentation Here](https://material.angular.io/components/categories)
